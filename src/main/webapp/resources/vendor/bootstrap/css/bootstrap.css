@@ -4816,7 +4816,7 @@ input[type="button"].btn-block {
 }
 
 .card-header + .list-group .list-group-item:first-child {
-  border-top: 0;
+  border-top: 0; height:15px;
 }
 
 .card-footer {
@@ -6454,7 +6454,7 @@ a.close.disabled {
   position: relative;
   display: none;
   float: left;
-  width: 100%;
+  width: 500px;
   margin-right: -100%;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;

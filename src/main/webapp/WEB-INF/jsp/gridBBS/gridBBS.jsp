@@ -8,7 +8,6 @@
   <meta name="description" content="">
   <meta name="author" content="">
 	
-
   <!-- Bootstrap core CSS -->
   <link href="<%=request.getContextPath()%>/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom styles for this template -->

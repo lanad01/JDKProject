@@ -36,6 +36,8 @@ font-weight: normal; font-style: normal;
 
 
 </style>
+<script type="text/javascript">
+</script>
 <body>             
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -74,7 +76,7 @@ font-weight: normal; font-style: normal;
 		<li class="vline"></li>
 				<li><font face='BMDOHYEON'><a href="#" target=""><span>개념글</span></a></font></li>
 		<li class="vline"></li>
-				<li><font face='BMDOHYEON'><a href="#" target=""><span>자유게시판</span></a></font>	</li>
+				<li><font face='BMDOHYEON'><a href="../freebbs/freebbs.html" target=""><span>자유게시판</span></a></font>	</li>
 		<li class="vline"></li>
 				<li><font face='BMDOHYEON'><a href="#" target=""><span>경험담&썰</span></a></font></li>
 		<li class="vline"></li>
@@ -106,7 +108,7 @@ font-weight: normal; font-style: normal;
     <div class="row">
       <div class="col-lg-3" style="margin-top:25px;" >
         <div style="border:1px solid; padding:0px;  background-color:#dcdcdc">
-        	<font face='BMDOHYEON'>&nbsp 회원로그인</font> 
+        	<font face='BMDOHYEON'>&nbsp; 회원로그인</font> 
         </div>
         <div style="border:1px solid; padding-left:10px;">
         	<form action="login.html"  method="post">
@@ -120,7 +122,8 @@ font-weight: normal; font-style: normal;
 			</tr>
 			</table>
 			<table class="login">
-			<tr><td align="center"><input type="submit"  style="font-family:'BMDOHYEON';" value="로그인"/></td>
+			<tr>
+				<td><input type="submit"  style="font-family:'BMDOHYEON'; margin-left:20px;" value="로그인"/></td>
 				<td align="center"><input type="reset" style="font-family:'BMDOHYEON';" value="취소"/></td>
 				<td><input type="button" onclick="window.location.href='https://www.w3docs.com';" style="font-family:'BMDOHYEON';" value="회원가입" /></td>
 			</tr>
@@ -129,7 +132,8 @@ font-weight: normal; font-style: normal;
         </div>
         <div style="border:1px solid; padding-left:10px;">
         	<table>
-        		<tr><th><a href="#" class="list-group-item"><font face='BMDOHYEON' size="2em" color="red">많이 본 글</font></a></th>
+        		<tr><th>&nbsp;</th>
+        			<th><a href="#" class="list-group-item"><font face='BMDOHYEON' size="2em" color="red">많이 본 글</font></a></th>
           			<th><a href="#" class="list-group-item"><font face='BMDOHYEON' size="2em" color="red">댓글 많은 글</font></a></th></tr>
          		<tr><td>&#9312;</td></tr><tr><td>&#9313;</td></tr><tr><td>&#9314;</td></tr><tr><td>&#9315;</td></tr><tr><td>&#9316;</td></tr>
 				<tr><td>&#9317;</td></tr><tr><td>&#9318;</td></tr><tr><td>&#9319;</td></tr><tr><td>&#9320;</td></tr><tr><td>&#9321;</td></tr>
@@ -140,8 +144,9 @@ font-weight: normal; font-style: normal;
 	
 	  <!--  메인 콘텐츠창 include형식으로 합시다  -->
       <div class="col-lg-9">
+     
       <%@ include file="/WEB-INF/jsp/gridBBS/gridBBS.jsp" %>
-      
+     
       </div>
       <!-- /.col-lg-9 -->
 
