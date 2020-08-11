@@ -113,17 +113,17 @@ font-weight: normal; font-style: normal;
         <div style="border:1px solid; padding-left:10px;">
         	<form action="login.html"  method="post">
 			<table>
-			<tr height="30px"><td align="center"><font face='BMDOHYEON' size="2em">ID</font></td>
-				<td><input type="text" name="id" style="width:150px; margin-left:20px;"/></td>
+			<tr height="16px">
+				<td><input type="text" name="id" style="width:120px; hegiht:10px; margin-left:20px;"/>
+				<input type="submit" style="font-family:'BMDOHYEON'; margin-left:20px;" value="로그인"/></td>
 			</tr>
-			<tr height="30px"><td align="center"><font face='BMDOHYEON' size="2em">Password</font></td>
-				<td><input type="password" name="password" style="width:150px; margin-left:20px; " />
+			<tr height="16px">
+				<td><input type="password" name="password" style="width:120px; hegiht:10px; margin-left:20px; " />
 				</td>
 			</tr>
 			</table>
 			<table class="login">
 			<tr>
-				<td><input type="submit"  style="font-family:'BMDOHYEON'; margin-left:20px;" value="로그인"/></td>
 				<td align="center"><input type="reset" style="font-family:'BMDOHYEON';" value="취소"/></td>
 				<td><input type="button" onclick="window.location.href='https://www.w3docs.com';" style="font-family:'BMDOHYEON';" value="회원가입" /></td>
 			</tr>
@@ -145,7 +145,7 @@ font-weight: normal; font-style: normal;
 	  <!--  메인 콘텐츠창 include형식으로 합시다  -->
       <div class="col-lg-9">
      
-      <%@ include file="/WEB-INF/jsp/gridBBS/gridBBS.jsp" %>
+      <%@ include file="/WEB-INF/jsp/freebbs/freebbs.jsp" %>
      
       </div>
       <!-- /.col-lg-9 -->
