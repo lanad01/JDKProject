@@ -1370,6 +1370,8 @@ pre code {
     max-width: 66.666667%;
   }
   .col-lg-9 {
+  	width:750px;
+  	height:1000px;
   	padding-top:20px;
     -ms-flex: 0 0 75%;
     flex: 0 0 75%;

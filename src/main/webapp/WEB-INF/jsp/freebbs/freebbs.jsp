@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,28 +11,25 @@
 	rel='stylesheet' type='text/css'>
 </head>
 <style type="text/css">
+@font-face {
+font-family: 'BMDOHYEON';
+src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff') format('woff');
+font-weight: normal; font-style: normal;
+}
 .upper {
 	border: 1px solid silver;
 	width: 726px;
 	height: 40px;
 	table-layout: fixed;
 }
-.hit, .sdate, .score{ font-size: 0.8em; font-family:'BMJUA'; text-align:center; }
-.upper td {
-	padding-left: 20px;
-}
+.hit, .sdate, .score, .name{ font-size: 0.6em; font-family:'BMDOHYEON'; text-align: center; }
+.upper td {padding-left: 20px;}
 
-.trborder {
-	border: 1px solid silver;
-}
+.trborder {	border: 1px solid silver;}
 
-.noticetr {
-	background-color: #f0f8ff;
-}
+.noticetr {	background-color: #f0f8ff;}
 
-.text-center, n_nick {
-	text-align: center;
-}
+.text-center {	text-align:center; }
 
 #bbsBottomBorder {
 	border-bottom: 1px solid silver;
@@ -42,18 +40,21 @@
     width: 130px;
     text-align: right;
 }
+.bottom { padding-left:80px;}
+.searchform { padding-left:70px; padding-top:10px;}
 </style>
 <body>
 	<div class="upperdiv">
 		<img alt="" src="img/total.jpg" width=50 height=20>
 		<table class="upper">
+			<tr style="width:400px;"> <%@ include file="/WEB-INF/jsp/gridBBS/ad.jsp" %></tr>
 			<tr>
 				<td><img alt="" src="../img/total.jpg">&nbsp;&nbsp; <font
 					face='BMDOHYEON'>자유게시판 / Total ${totalPost } </font> ${totalwriting }</td>
 			</tr>
 		</table>
 		<div class="mainbbs">
-			<table summary="전체 게시물리스트 입니다.">
+			<table style="width:730px;">
 				<colgroup>
 					<col width="50">
 					<col>
@@ -77,17 +78,7 @@
 						<td><img src="../img/notice.gif" alt="공지" class="notice" /></td>
 						<td class="b"><a href="#">레벨업 필요 글, 댓글 개수 안내</a><span
 							class="comment">(141+1)</span></td>
-						<td class="name">
-							<div class="name_box">
-								<table cellspacing="0" summary="닉네임 박스">
-									<tbody>
-										<tr class="text-center">
-											<td>브릴</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</td>
+						<td class="name" align="center">브릴</td>
 						<td class="hit">86193</td>
 						<td class="sdate">03.05</td>
 						<td class="score">11</td>
@@ -96,18 +87,7 @@
 						<td><img src="../img/notice.gif" alt="공지" class="notice" /></td>
 						<td class="b"><a href="#">호주생활, 워홀, 영어 관련 질문만 여기에 해주세요.</a> <span
 							class="comment">(10+2)</span></td>
-						<td class="name">
-							<div class="name_box">
-								<table cellspacing="0" summary="닉네임 박스">
-									<tbody>
-										<tr class="text-center">
-											<td class="n_nick"><span class="hand"
-												onclick="getMemberLayer('1',event);">브릴</span></td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</td>
+						<td class="name" align="center">브릴</td>
 						<td class="hit">96861</td>
 						<td class="sdate">12.31</td>
 						<td class="score">6</td>
@@ -117,18 +97,7 @@
 						<td><img src="../img/notice.gif" alt="공지" class="notice" /></td>
 						<td class="b"><a href="#">호주 워홀 생활기 연재하실 분
 								모집합니다.</a> <span class="comment">(85+9)</span></td>
-						<td class="name">
-							<div class="name_box">
-								<table cellspacing="0" summary="닉네임 박스">
-									<tbody>
-										<tr>
-											<td class="n_nick"><span class="hand"
-												onclick="getMemberLayer('1',event);">브릴</span></td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</td>
+						<td class="name" align="center">브릴</td>
 						<td class="hit">176460</td>
 						<td class="sdate">12.22</td>
 						<td class="score">4</td>
@@ -138,18 +107,7 @@
 						<td><img src="../img/notice.gif" alt="공지" class="notice" /></td>
 						<td class="b"><a href="#">2012년 12월 17일 공식 오픈</a><span
 							class="comment">(41+2)</span></td>
-						<td class="name">
-							<div class="name_box">
-								<table cellspacing="0" summary="닉네임 박스">
-									<tbody>
-										<tr>
-											<td align="center" class="n_nick"><span class="hand"
-												onclick="getMemberLayer('1',event);">브릴</span></td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</td>
+						<td class="name" align="center">브릴</td>
 						<td class="hit">167536</td>
 						<td class="sdate">12.17</td>
 						<td class="score">21</td>
@@ -158,18 +116,7 @@
 					<tr id="bbsBottomBorder">
 						<td class="snum">80182</td>
 						<td class="b"><a href="/?m=bbs&amp;uid=103180">워홀 성공 팁</a></td>
-						<td class="name">
-							<div class="name_box">
-								<table cellspacing="0" summary="닉네임 박스">
-									<tbody>
-										<tr>
-											<td class="n_nick"><span class="hand"
-												onclick="getMemberLayer('0',event);">돌아온원써니</span></td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</td>
+						<td class="name" align="center"><a href="#">돌아온원써니</a></td>
 						<td class="hit">60</td>
 						<td class="sdate">14:02</td>
 						<td class="score">0</td>
@@ -178,18 +125,7 @@
 						<td class="snum">80181</td>
 						<td class="b"><a href="/?m=bbs&amp;uid=103178">ㄴㅇㄹ</a> <span
 							class="new"></span></td>
-						<td class="name">
-							<div class="name_box">
-								<table cellspacing="0" summary="닉네임 박스">
-									<tbody>
-										<tr>
-											<td class="n_nick"><span class="hand"
-												onclick="getMemberLayer('0',event);">ㅇㄹㄴㅇ</span></td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</td>
+						<td class="name" align="center"><a href="#">ㅇㄹ내</a></td>
 						<td class="hit">32</td>
 						<td class="sdate">11:32</td>
 						<td class="score">0</td>
@@ -198,18 +134,7 @@
 						<td class="snum">80180</td>
 						<td class="b"><a href="/?m=bbs&amp;uid=103177">Grain이
 								익어간다</a></td>
-						<td class="name">
-							<div class="name_box">
-								<table cellspacing="0" summary="닉네임 박스">
-									<tbody>
-										<tr>
-											<td class="n_nick"><span class="hand"
-												onclick="getMemberLayer('14245',event);">참치김치찌개</span></td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</td>
+						<td class="name" align="center"><a href="#">참치김치찌개</a></td>
 						<td class="hit">68</td>
 						<td class="sdate">09:30</td>
 						<td class="score">0</td>
@@ -218,18 +143,7 @@
 						<td class="snum">80179</td>
 						<td class="b"><a href="/?m=bbs&amp;uid=103176">안녕하세요 호주
 								갈 수 있을까여</a> <span class="comment">(3+3)</span></td>
-						<td class="name">
-							<div class="name_box">
-								<table cellspacing="0" summary="닉네임 박스">
-									<tbody>
-										<tr>
-											<td class="n_nick"><span class="hand"
-												onclick="getMemberLayer('14302',event);">워홀처음가는사람</span></td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</td>
+						<td class="name" align="center"><a href="#">워홀처음오는</a></td>
 						<td class="hit">185</td>
 						<td class="sdate">00:18</td>
 						<td class="score">0</td>
@@ -238,18 +152,7 @@
 						<td class="snum">80178</td>
 						<td class="b"><a href="#">텍스레비면제에관해서</a> <span
 							class="comment">(3)</span></td>
-						<td class="name">
-							<div class="name_box">
-								<table cellspacing="0" summary="닉네임 박스">
-									<tbody>
-										<tr>
-											<td class="n_nick"><span class="hand"
-												onclick="getMemberLayer('14003',event);">블번덩이</span></td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</td>
+						<td class="name" align="center"><a href="#">블번덩이</a></td>
 						<td class="hit">161</td>
 						<td class="sdate">08.10</td>
 						<td class="score">0</td>
@@ -258,18 +161,7 @@
 						<td class="snum">80177</td>
 						<td class="b"><a href="#">인종차별은 우리만 당하는게 아니구나</a> <span
 							class="comment">(1)</span></td>
-						<td class="name">
-							<div class="name_box">
-								<table cellspacing="0" summary="닉네임 박스">
-									<tbody>
-										<tr>
-											<td class="n_nick"><span class="hand"
-												onclick="getMemberLayer('14303',event);">거렁배이이이</span></td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</td>
+						<td class="name" align="center"><a href="#">거렁뱅</a></td>
 						<td class="hit">236</td>
 						<td class="sdate">08.10</td>
 						<td class="score">0</td>
@@ -278,58 +170,69 @@
 						<td class="snum">80176</td>
 						<td class="b"><a href="#">택스리턴 신청하니 돈내라는데</a> <span
 							class="comment">(2)</span></td>
-						<td class="name">
-							<div class="name_box">
-								<table cellspacing="0" summary="닉네임 박스">
-									<tbody>
-										<tr>
-											<td class="n_nick"><span class="hand"
-												onclick="getMemberLayer('12870',event);">씨리얼지겹다</span></td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</td>
+						<td class="name" align="center"><a href="#">시봉새</a></td>
+						<td class="hit">236</td>
+						<td class="sdate">08.10</td>
+						<td class="score">0</td>
 					</tr>
 					<tr id="bbsBottomBorder">
 						<td class="snum">80176</td>
 						<td class="b"><a href="#">택스리턴 신청하니 돈내라는데</a> <span
 							class="comment">(2)</span></td>
-						<td class="name">
-							<div class="name_box">
-								<table cellspacing="0" summary="닉네임 박스">
-									<tbody>
-										<tr>
-											<td class="n_nick"><span class="hand"
-												onclick="getMemberLayer('12870',event);">씨리얼지겹다</span></td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</td>
+						<td class="name" align="center"><a href="#">프레임</a></td>
+						<td class="hit">236</td>
+						<td class="sdate">08.10</td>
+						<td class="score">0</td>
 					</tr>
 					<tr id="bbsBottomBorder">
-						<td class="snum">80176</td>
-						<td class="b"><a href="#">택스리턴 신청하니 돈내라는데</a> <span
+						<td class="snum">35231</td>
+						<td class="b"><a href="#">청소 주급 꿀 잡 ㅇㅈ</a> <span
 							class="comment">(2)</span></td>
-						<td class="name">
-							<div class="name_box">
-								<table cellspacing="0" summary="닉네임 박스">
-									<tbody>
-										<tr>
-											<td class="n_nick"><span class="hand"
-												onclick="getMemberLayer('12870',event);">씨리얼지겹다</span></td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</td>
+						<td class="name" align="center"><a href="#">덴데</a></td>
+						<td class="hit">236</td>
+						<td class="sdate">08.10</td>
+						<td class="score">0</td>
+					</tr>
+					<tr id="bbsBottomBorder">
+						<td class="snum">35231</td>
+						<td class="b"><a href="#">벌금내야하는데 ㅠㅠ</a> <span
+							class="comment">(2)</span></td>
+						<td class="name" align="center"><a href="#">아소크림</a></td>
+						<td class="hit">136</td>
+						<td class="sdate">08.10</td>
+						<td class="score">1</td>
+					</tr>
+					<tr id="bbsBottomBorder">
+						<td class="snum">80175</td>
+						<td class="b"><a href="#">퇴근 후 맥주 세잔</a> <span
+							class="comment">(2)</span></td>
+						<td class="name" align="center"><a href="#">jasper</a></td>
+						<td class="hit">236</td>
+						<td class="sdate">08.10</td>
+						<td class="score">0</td>
+					</tr>
+					<tr id="bbsBottomBorder">
+						<td class="snum">35231</td>
+						<td class="b"><a href="#">두드리면 광명이 온다</a> <span
+							class="comment">(2)</span></td>
+						<td class="name" align="center"><a href="#">파이썬개발자</a></td>
+						<td class="hit">146</td>
+						<td class="sdate">08.10</td>
+						<td class="score">1</td>
+					</tr>
+					<tr id="bbsBottomBorder">
+						<td class="snum">35231</td>
+						<td class="b"><a href="#">질문충이 문제다 항상</a> <span
+							class="comment">(2)</span></td>
+						<td class="name" align="center"><a href="#">JAPJAP</a></td>
+						<td class="hit">123</td>
+						<td class="sdate">08.10</td>
+						<td class="score">0</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
-	</div>
-	<div class="bottom">
+		<div class="bottom">
 		<div class="pagebox01">
 			<img src="../img/처음페이지.gif" alt="처음페이지" /> 
 			<img src="../img/이전10페이지.gif"alt="이전 10 페이지" />
@@ -355,12 +258,11 @@
 			<a href="/?m=bbs&amp;p=10" class="notselected" title="10 페이지">10</a> 
 			<img src="../img/split.gif" class="split" alt="" /> 
 			<a href="#"><img src="../img/이후10페이지.gif" alt="다음 10 페이지" /></a>
-			<a href="#"><img src="마지막페이지.gif" alt="마지막페이지" /></a>
+			<a href="#"><img src="../img/마지막페이지.gif" alt="마지막페이지" /></a>
 		</div>
-	</div>
-
+	</div> <!--  게시판 페이징 -->
 	<div class="searchform">
-		<form name="bbssearchf" action="/">
+		<form:form name="bbssearchf" action="/">
 			<input type="hidden" name="r" value="home" /> <input type="hidden"
 				name="c" value="" /> <input type="hidden" name="m" value="bbs" />
 			<input type="hidden" name="bid" value="" /> <input type="hidden"
@@ -368,26 +270,26 @@
 			<input type="hidden" name="orderby" value="asc" /> <input
 				type="hidden" name="recnum" value="20" /> <input type="hidden"
 				name="type" value="" /> <input type="hidden" name="iframe" value="" />
-			<input type="hidden" name="skin" value="" /> <select name="where">
+			<input type="hidden" name="skin" value="" />
+			<div style="float:left; width:60%"> 
+			<select name="where">
 				<option value="subject|content">제목+내용</option>
-				<option value="subject|tag">제목+태그</option>
 				<option value="content">내용</option>
 				<option value="nic">닉네임</option>
-			</select> <input type="text" name="keyword" size="25" value="" class="input" />
+			</select> 
+			
+			<input type="text" name="keyword" class="input" style="height:25px;" />
 			<input type="submit" value=" 검색 " class="btnblue" />
-		</form>
+			</div>
+			<div style="float:left; width:40%">
+			<input type="button" name="bbsList" value="목록으로 " />
+			<input type="button" onclick="window.location.href='../post/freebbs.html';" value="글쓰기" />
+			</div>
+		</form:form>
+	</div><!--  searchForm -->
+	</div> <!--  upperdiv 게시판 본체 -->
 
-		<div class="btnbox">
-			<span class="sp_btn00"><a href="/?m=bbs">목록으로</a></span>
-		</div>
-	</div>
-	</div>
+	<div class="clear" style="margin-bottom:80px;"></div>
 
-	</div>
-	<div class="clear"></div>
-
-	</div>
-	</div>
-	<div class="wrap"></div>
 </body>
 </html>

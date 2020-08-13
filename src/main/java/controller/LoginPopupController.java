@@ -9,10 +9,9 @@ import org.springframework.web.servlet.ModelAndView;
 public class LoginPopupController {
 	@RequestMapping(value="/loginpopup/loginpopup.html") // sign.in
 	public ModelAndView loginPopup(HttpSession session) {
-		System.out.println("dddd");
 		String str="ddd";
 //		ModelAndView mav=new ModelAndView("loginpopup/loginpopup");
-		ModelAndView mav=new ModelAndView("gridBBS/gridBBS");
+		ModelAndView mav=new ModelAndView("gridBBS/ad");
 		return mav;
 	}
 }

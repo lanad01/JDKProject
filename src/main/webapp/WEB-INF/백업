@@ -1,0 +1,33 @@
+메인메뉴시작
+<div id="topmenu">
+	<div class="wrap">
+		<ul style="list-style:none;">
+				<li><font face='BMDOHYEON'><a href="#" target=""><span>전체글보기</span></a></font>	</li>
+		<li class="vline"></li>
+				<li><font face='BMDOHYEON'><a href="#" target=""><span>개념글</span></a></font></li>
+		<li class="vline"></li>
+				<li><font face='BMDOHYEON'><a href="../freebbs/freebbs.html" target=""><span>자유게시판</span></a></font>	</li>
+		<li class="vline"></li>
+				<li><font face='BMDOHYEON'><a href="#" target=""><span>경험담&썰</span></a></font></li>
+		<li class="vline"></li>
+				<li><font face='BMDOHYEON'><a href="#" target=""><span>정보&팁</span></a></font></li>
+		<li class="vline"></li>
+				<li><font face='BMDOHYEON'><a href="#" target=""><span>질문 답변</span></a></font></li>
+		<li class="vline"></li>
+				<li><font face='BMDOHYEON'><a href="#">생활기</a></font>
+			<nav role="navigation" class="drop">
+  				<ul id="main-menu">
+  	  				<li>
+     						<ul id="sub-menu">
+       						<li><a href="#" aria-label="subemnu">submenu</a></li>
+       						<li><a href="#" aria-label="subemnu">submenu</a></li>
+       						<li><a href="#" aria-label="subemnu">submenu</a></li>        						
+       						<li><a href="#" aria-label="subemnu">submenu</a></li>
+      						</ul>
+    				</li>
+    			</ul>
+   			</nav>
+  		</li>
+		</ul>
+	</div>
+</div>
