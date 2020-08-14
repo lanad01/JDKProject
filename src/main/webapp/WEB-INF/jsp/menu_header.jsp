@@ -20,7 +20,7 @@
   <!--  폰트   -->
   <link href='https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff' rel='stylesheet' type='text/css'>
 </head>
-
+<link href="<%=request.getContextPath()%>/WEB-INF/css/menuHeader.css" type="text/css" rel="stylesheet" />
 <style type="text/css">
 @font-face {
 font-family: 'BMDOHYEON'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff') format('woff');
@@ -31,15 +31,15 @@ font-weight: normal; font-style: normal; }
 #topmenu .wrap {   height: 50px;  border-bottom: #000000 double 3px; border-top: #000000 double 3px; }
 .wrap a { color: black; text-decoration: none; }
 .wrap a:hover { background-color:#dcdcdc; }
+.wrap li{ font-family: 'BMDOHYEON';}
+.keyword{ margin-top:7px;}
 .bottom{ margin-left:100px;}
-
+#navbarResponsive{ padding-right:70px;}
 /* 드롭메뉴 스타일 */
  .drop { /* nav */
    width: 100%;   display: flex;    justify-content: center; 
   position: relative;   z-index:1 
  } 
-
-
 #main-menu > li {
   margin: -12px 60px 16px -27px	;
   position: relative;
@@ -81,12 +81,43 @@ font-weight: normal; font-style: normal; }
 #sub-menu > li >  a:hover {
  text-decoration: none;
 }
-
 .loginborder{ padding:10px 10px 10px 10px;}
+
+/* The Modal (background) */
+.searchModal {
+display: none; /* Hidden by default */
+position: fixed; /* Stay in place */
+z-index: 10; /* Sit on top */
+left: 0;
+top: 0;
+width: 100%; /* Full width */
+height: 100%; /* Full height */
+overflow: auto; /* Enable scroll if needed */
+background-color: rgb(0,0,0); /* Fallback color */
+background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+/* Modal Content/Box */
+.search-modal-content {
+background-color: #dcdcdc;
+border:5px double black;
+margin: 15% auto; /* 15% from the top and centered */
+padding: 20px;
+width: 30%; /* Could be more or less, depending on screen size */
+height:40%;
+}
+.searchModal a{font-family:'BMDOHYEON'; size:1.3em; }
+.search-modal-content table{ border-top:2px solid black; }
+#social { padding-bottom:13px;}
 </style>
 
+<script src="../resources/vendor/jquery/jquery.min.js"></script>
 <script type="text/javascript">
-
+function loginpopup() {
+$("#modal").show();
+};
+function closeModal() {
+$('.searchModal').hide();
+};
 </script>
 
 <body>        
@@ -101,20 +132,18 @@ font-weight: normal; font-style: normal; }
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="../loginpopup/loginpopup.html">Sign In
+            <a class="nav-link" href="#" onclick="loginpopup()">Sign In
               <span class="sr-only">(current)</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../loginpopup/test.html">Register</a>
+            <a class="nav-link" href="../register/register.html">Register</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Ranking</a>
           </li>
           <li class="nav-item">
-            <input type="text" name="keyword" placeholder="통합검색" class="keyword" value="" />
-            <a href="#"><img src="../img/searchbutton.png" alt="" width=20 height=30 ></a>
-          </li>
+          	<input type="text" name="keyword" placeholder="통합검색" class="keyword" style="width:130px;" ></li> 
         </ul>
       </div>
     </div>
@@ -125,21 +154,21 @@ font-weight: normal; font-style: normal; }
   <div id="topmenu">
 	<div class="wrap">
 		<ul style="list-style:none;">
-				<li><font face='BMDOHYEON'><a href="#" target=""><span>전체글보기</span></a></font>	</li>
+				<li><a href="#"><span>전체글보기</span></a>	</li>
 		<li class="vline"></li>
-				<li><font face='BMDOHYEON'><a href="#" target=""><span>개념글</span></a></font></li>
+				<li><a href="#"><span>개념글</span></a></li>
 		<li class="vline"></li>
-				<li><font face='BMDOHYEON'><a href="../freebbs/freebbs.html" target=""><span>자유게시판</span></a></font>	</li>
+				<li><a href="../freebbs/freebbs.html" target=""><span>자유게시판</span></a>	</li>
 		<li class="vline"></li>
-				<li><font face='BMDOHYEON'><a href="#" target=""><span>경험담&썰</span></a></font></li>
+				<li><a href="#" ><span>경험담&썰</span></a></li>
 		<li class="vline"></li>
-				<li><font face='BMDOHYEON'><a href="#" target=""><span>정보&팁</span></a></font></li>
+				<li><a href="#"><span>정보&팁</span></a></li>
 		<li class="vline"></li>
-				<li><font face='BMDOHYEON'><a href="#" target=""><span>질문 답변</span></a></font></li>
+				<li><a href="#"><span>질문 답변</span></a></li>
 		<li>
 			<nav role="navigation" class="drop">
   				<ul id="main-menu">
-  	  				<li><font face='BMDOHYEON'><a href="#">생활기</a></font>
+  	  				<li><font face='BMDOHYEON'><a href="../lifestory/lifestorymain.html">생활기</a></font>
      					<ul id="sub-menu">
        						<li><font face='BMDOHYEON' size="1.3"; ><a href="#" aria-label="subemnu"><span>▶&nbsp;별달고 꺼드럭거리 싶어서 쓰는 생활기</span></a></font></li>
        						<li><font face='BMDOHYEON' size="1.3"; ><a href="#" aria-label="subemnu">▶&nbsp;에스컬레이터 생활기</a></font></li>			
@@ -167,13 +196,13 @@ font-weight: normal; font-style: normal; }
 				<tr>
 					<td><input type="text" name="id" style="width:120px; height:20px; border-spacing:2px;"> 
 					<input type="text" name="id" style="width:120px; height:20px; border-spacing:2px;"></td>
-					<td><input type="submit" style="font-family:'BMDOHYEON'; font-size:1em; margin-left:20px;" value="로그인"/>
-					<input type="submit" style="font-family:'BMDOHYEON'; font-size:1em; margin-left:20px;" value="회원가입"/></td>
+					<td><input type="submit" style="font-family:'BMDOHYEON'; font-size:0.8em;"  value="로그인"/>
+					<input type="submit" style="font-family:'BMDOHYEON'; font-size:0.8em;" value="회원가입"/></td>
 				</tr>
 			</table>
 			</form>
         </div>
-        <div style="border:1px solid; padding:10px 0 15px 20px;">
+        <div  style="border:1px solid; padding:10px 0 15px 20px;">
         	<table>
         		<tr style="margin-left:5px;">
         			<th><a href="#" class="list-group-item"><font face='BMDOHYEON' size="2em" color="red">많이 본 글</font></a></th>
@@ -183,9 +212,10 @@ font-weight: normal; font-style: normal; }
 			</table>
         </div>
       </div>
-      <div>
+      <div id="changejsp">
 		<!--  메인 콘텐츠창 include형식으로 합시다  -->
-		<%@ include file="/WEB-INF/jsp/freebbs/freebbs.jsp" %>
+		
+		<%@ include file="/WEB-INF/jsp/register/register.jsp" %>
 		</div>
      </div>
 	
@@ -196,14 +226,45 @@ font-weight: normal; font-style: normal; }
   <footer class="py-5 bg-dark" style="margin-top:100px;">
     <div class="container">
       <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
+      
     </div>
     <!-- /.container -->
   </footer>
 
-  <!-- Bootstrap core JavaScript -->
+  <!-- 로그인 모달창 -->
 	<script src="../resources/vendor/jquery/jquery.min.js"></script>
 	<script src="../resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<!--  Classname으로 찾는거니까.. ../ 붙여서 상위 폴더를 가줘야한다 상우야 -->
+	<div id="modal" class="searchModal">
+		<div class="search-modal-content">
+			<a>로그인</a>
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="row">
+						<div class="col-sm-12"><!-- 내가 건들 수 있는 곳.. -->
+							<form action="../loginform/modallogin.html">
+							<table style="">
+								<tr><td><a>아이디</a></td>
+									
+								<tr><td><input type="text" name="id" maxlength="20"></td>
+									<td id="social" rowspan="2" style="padding-left:10px;" ><img alt="" src="../img/social1.gif" width=35 height=35></td>
+									<td id="social" rowspan="2"><img alt="" src="../img/social2.gif" width=35 height=35></td>
+									<td id="social" rowspan="2"><img alt="" src="../img/social3.gif" width=35 height=35></td>
+									<td id="social" rowspan="2"><img alt="" src="../img/social4.gif" width=35 height=35></td>
+								<tr><td><a>비밀번호</a></td>
+								<tr><td><input type="password" name="pwd" maxlength="20"></td>
+							</table>					
+							</form>
+						</div><!--  내가 건들 수 있는 곳 -->
+					</div>
+				</div>
+			</div>
+			<hr>
+			<div style="cursor: pointer; background-color: #faf0e6; text-align: center; margin-bottom:15px;" onClick="closeModal();">
+				<span class="pop_bt modalCloseBtn" style="font-size: 13pt;"><a>로그인하기</a></span>
+			</div>
+		</div>
+	</div>
 </body>
 
 </html>

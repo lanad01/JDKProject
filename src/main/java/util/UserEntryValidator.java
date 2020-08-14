@@ -16,7 +16,7 @@ public class UserEntryValidator implements Validator {
 		if(!StringUtils.hasLength(user.getId())) {
 			errors.rejectValue("id", "error.required.user");
 		}
-		if(!StringUtils.hasLength(user.getPwd())) {
+		if(!StringUtils.hasLength(user.getPassword())) {
 			errors.rejectValue("pwd", "error.required.user");
 		}
 		if(!StringUtils.hasLength(user.getName())) {
@@ -27,12 +27,6 @@ public class UserEntryValidator implements Validator {
 		}
 		if(!StringUtils.hasLength(user.getEmail())) {
 			errors.rejectValue("email", "error.required.user");
-		}
-		if(!StringUtils.hasLength(user.getJob())) {
-			errors.rejectValue("job", "error.required.user");
-		}
-		if(!StringUtils.hasLength(user.getAddress())) {
-			errors.rejectValue("address", "error.required.user");
 		}
 		if(errors.hasErrors()) {
 			errors.reject("error.input.user");

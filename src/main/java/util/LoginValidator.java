@@ -22,7 +22,7 @@ public class LoginValidator implements Validator {//Validator를 Controller에�
 			errors.rejectValue("id", "error.required"); //메시지 출력
 			//properties파일에서 에러메시지를 불러오자
 		}
-		if(!StringUtils.hasLength(user.getPwd())) { //암호가 없는 경우
+		if(!StringUtils.hasLength(user.getPassword())) { //암호가 없는 경우
 			errors.rejectValue("pwd", "error.required"); //메시지 출력
 		}
 		if(errors.hasErrors()) {//전체 항목에 문제가 있는 경우

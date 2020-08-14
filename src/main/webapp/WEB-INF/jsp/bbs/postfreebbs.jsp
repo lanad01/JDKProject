@@ -4,7 +4,7 @@
 	<title>http://www.blueb.co.kr</title>
 	<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
 
-<style>@import url('https://fonts.googleapis.com/css?family=Roboto');
+<style>
 
 /*body 초기화*/
 body {
