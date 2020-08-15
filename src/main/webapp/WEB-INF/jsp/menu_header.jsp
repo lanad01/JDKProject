@@ -140,7 +140,7 @@ $('.searchModal').hide();
             <a class="nav-link" href="../register/register.html">Register</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Ranking</a>
+            <a class="nav-link" href="../myaccount/mypage.html">Account</a>
           </li>
           <li class="nav-item">
           	<input type="text" name="keyword" placeholder="통합검색" class="keyword" style="width:130px;" ></li> 
@@ -215,7 +215,7 @@ $('.searchModal').hide();
       <div id="changejsp">
 		<!--  메인 콘텐츠창 include형식으로 합시다  -->
 		
-		<%@ include file="/WEB-INF/jsp/register/register.jsp" %>
+		<%@ include file="/WEB-INF/jsp/mypage/mypage.jsp" %>
 		</div>
      </div>
 	
