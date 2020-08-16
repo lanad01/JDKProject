@@ -260,9 +260,12 @@ $('.searchModal').hide();
 				</div>
 			</div>
 			<hr>
-			<div style="cursor: pointer; background-color: #faf0e6; text-align: center; margin-bottom:15px;" onClick="closeModal();">
-				<span class="pop_bt modalCloseBtn" style="font-size: 13pt;"><a>로그인하기</a></span>
-			</div>
+			<div style="float:left; text-align:center;">
+			<div style="float:left; cursor: pointer; background-color: #faf0e6; text-align: center; margin-bottom:15px; width:100px; " onClick="alert('로그인기능구현')">
+				<span class="pop_bt modalCloseBtn" style="font-size: 13pt;"><a>로그인하기</a></span></div>
+			<div style="float:left;  cursor: pointer; background-color: #faf0e6; text-align: center; margin-bottom:15px; width:100px; margin-left:50px;" onClick="closeModal()">
+				<span class="pop_bt modalCloseBtn" style="font-size: 13pt;"><a>나가기</a></span></div>
+		
 		</div>
 	</div>
 </body>
