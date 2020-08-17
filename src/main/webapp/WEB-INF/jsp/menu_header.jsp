@@ -215,7 +215,7 @@ $('.searchModal').hide();
       <div id="changejsp">
 		<!--  메인 콘텐츠창 include형식으로 합시다  -->
 		
-		<%@ include file="/WEB-INF/jsp/mypage/mypage.jsp" %>
+		<%@ include file="/WEB-INF/jsp/freebbs/bbsmain.jsp" %>
 		</div>
      </div>
 	

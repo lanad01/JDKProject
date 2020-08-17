@@ -76,7 +76,7 @@ font-weight: normal; font-style: normal;
 				<tbody>
 					<tr class="noticetr" id="bbsBottomBorder">
 						<td><img src="../img/notice.gif" alt="공지" class="notice" /></td>
-						<td class="b"><a href="#">레벨업 필요 글, 댓글 개수 안내</a><span
+						<td class="b"><a href="../post/bbsview.html?num=10">레벨업 필요 글, 댓글 개수 안내</a><span
 							class="comment">(141+1)</span></td>
 						<td class="name" align="center">브릴</td>
 						<td class="hit">86193</td>
