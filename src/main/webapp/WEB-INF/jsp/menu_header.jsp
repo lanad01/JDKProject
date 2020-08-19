@@ -82,7 +82,6 @@ font-weight: normal; font-style: normal; }
 #sub-menu > li >  a:hover {
  text-decoration: none;
 }
-.loginborder{ padding:10px 10px 10px 10px;}
 
 /* The Modal (background) */
 .searchModal {
@@ -109,6 +108,8 @@ height:40%;
 .searchModal a{font-family:'BMDOHYEON'; size:1.3em; }
 .search-modal-content table{ border-top:2px solid black; }
 #social { padding-bottom:13px;}
+
+.register {font-family:'BMDOHYEON'; font-size:0.8em; color:black; background:#f5f5f5; border:1px solid black; }
 </style>
 
 <script src="../resources/vendor/jquery/jquery.min.js"></script>
@@ -193,18 +194,12 @@ $('.searchModal').hide();
         <div style="border:1px solid; padding:0px;  background-color:#dcdcdc">
         	<font face='BMDOHYEON'>&nbsp; 회원로그인</font> 
         </div>
-        <div class="loginborder" style="border:1px solid; padding-left:10px;">
-        	<form action="login.html"  method="post">
-			<table>
-				<tr>
-					<td><input type="text" name="id" style="width:120px; height:20px; border-spacing:2px;"> 
-					<input type="text" name="id" style="width:120px; height:20px; border-spacing:2px;"></td>
-					<td><input type="submit" style="font-family:'BMDOHYEON'; font-size:0.8em;"  value="로그인"/>
-					<input type="submit" style="font-family:'BMDOHYEON'; font-size:0.8em;" value="회원가입"/></td>
-				</tr>
-			</table>
-			</form>
-        </div>
+        <c:choose>
+        <c:when test="${sessionScope.loginUser == null}"><!--  비로그인 상태일 시 indexController에서 보낸다 세션 정보는 -->
+        	<jsp:include page="../login/login.html"/>
+        </c:when>
+        
+        </c:choose>
         <div  style="border:1px solid; padding:10px 0 15px 20px;">
         	<table>
         		<tr style="margin-left:5px;">
@@ -218,7 +213,7 @@ $('.searchModal').hide();
       <div id="changejsp">
 		<!--  메인 콘텐츠창 include형식으로 합시다  -->
 		
-		<jsp:include page="/WEB-INF/jsp/${BODY }.jsp" flush="false"></jsp:include>
+		<jsp:include page="/WEB-INF/jsp/${BODY }.jsp" flush="false"/>
 		</div>
      </div>
 	
@@ -228,9 +223,9 @@ $('.searchModal').hide();
   <!-- Footer -->
   <footer class="py-5 bg-dark" style="margin-top:100px;">
     <div class="container" >
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
-   	 <p><font color="white" style="font-family: 'BMDOHYEON';" >홈페이지 이용약관 | 개인정보 취급방침 | 게시물 게재원칙 <br>
-		Copyright 2020 JDKProject.co.kr All rights reserved.<br>
+      <p class="m-0 text-center text-white" style="font-family: 'BMDOHYEON';">Copyright &copy; Your Website 2020</p>
+   	  <p style="text-align:center;"><font color="white" style="font-family: 'BMDOHYEON';" >홈페이지 이용약관 | 개인정보 취급방침 | 게시물 게재원칙 <br>
+		Copyright 2020 JDKProject.co.kr All rights reserved.<br><br>
 		Runtime 0.298
       </font><p>
     </div>

@@ -7,7 +7,7 @@
 	#{job},#{address})
 </insert>
 <select id="getUser" parameterType="model.User" resultType="model.User">
-	select * from custom_info where id=#{id} and pwd=#{pwd}
+	select * from user_info where id=#{id} and pwd=#{pwd}
 </select>
 <select id="getItem" parameterType="Integer" resultType="model.Item">
 		select * from my_fruits where item_id=#{id}
