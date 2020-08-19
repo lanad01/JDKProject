@@ -227,9 +227,12 @@ $('.searchModal').hide();
 </div>	
   <!-- Footer -->
   <footer class="py-5 bg-dark" style="margin-top:100px;">
-    <div class="container">
+    <div class="container" >
       <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
-      
+   	 <p><font color="white" style="font-family: 'BMDOHYEON';" >홈페이지 이용약관 | 개인정보 취급방침 | 게시물 게재원칙 <br>
+		Copyright 2020 JDKProject.co.kr All rights reserved.<br>
+		Runtime 0.298
+      </font><p>
     </div>
     <!-- /.container -->
   </footer>

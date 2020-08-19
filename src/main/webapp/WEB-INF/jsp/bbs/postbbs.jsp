@@ -9,12 +9,44 @@
 <meta charset="UTF-8">
 <title>글쓰기</title>
 <!-- css -->
+<style type="text/css">
+.header { padding:20px 0 0 0px; margin-left:20px; }
+.msg {  font-size: 1em; font-family:'BMDOHYEON'; font-color:red; border-top:3px solid black; padding:20px 0 0 20px; width:700px; margin-left:20px; }
+.msg table { margin-left:-20px;}
+.msg input { margin-left:10px;}
+.titlebg { background:#e6e6fa;}
+
+.submitbox {text-align:center; margin-top:15px;}
+.btngray { font-family:'BMDOHYEON';
+    cursor: pointer;
+    border: #666666 solid 1px;
+    background: #B3B3B3 left bottom repeat-x;
+    color: #ffffff;
+    height: 21px;
+}
+.btnblue { font-family:'BMDOHYEON';
+    cursor: pointer;
+    border: #3399DD solid 1px;
+    background: #33C9FD left bottom repeat-x;
+    color: #ffffff;
+    height: 21px;
+}
+</style>
 </head>
 <body>
-	<div class="col-sm-12" id="contentDiv" style="margin-top:20px;">
-		<label class="contentlabel contact" style="width:400px; min-height:0px; float:left;
-		text-align:center;"></label>
+	<h2 class="header"><font face='BMDOHYEON'>글쓰기</font></h2>
+	<div class="msg">
+		<table>
+			<tr><td class="titlebg">제목</td><td><input type="text" size="50px" name="title"></td>
+		</table>
+	</div>
+	<div class="col-sm-12" id="contentDiv" style="margin-top:5px;">
+		<label class="contentlabel contact" style="width:400px; min-height:0px; float:left;	text-align:center;"></label>
 		<textarea style="width:100%; height:450px;" name="smartEditor" id="smartEditor" rows="150" cols="300"></textarea>
+	</div>
+	<div class="submitbox">
+			<input type="button" value="글등록" class="btnblue" onclick="goHref('./');" />
+			<input type="submit" value="취소" class="btngray" />
 	</div>
 </body>
 <script type="text/javascript" src="../se2/js/HuskyEZCreator.js" charset="utf-8"></script>
