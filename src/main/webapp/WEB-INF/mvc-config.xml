@@ -12,8 +12,6 @@
     <!-- Uncomment and your base-package here:
          <context:component-scan
             base-package="org.springframework.samples.web"/>  -->
-
-
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 	        <!-- Example: a logical view name of 'showMessage' is mapped to '/WEB-INF/jsp/showMessage.jsp' -->
 	        <property name="prefix" value="/WEB-INF/jsp/"/>
@@ -49,6 +47,5 @@
 		</property>
 	</bean>
  <!-- order 속성을 사용하는 다른 부분은 2번을 지정해야함 -->
-
 
 </beans>

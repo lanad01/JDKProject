@@ -27,21 +27,28 @@ font-weight: normal; font-style: normal;
 
 .trborder {	border: 1px solid silver;}
 
-.noticetr {	background-color: #f0f8ff;}
+.noticetr {	background-color: #f0f8ff; }
 
 .text-center {	text-align:center; }
 
 #bbsBottomBorder {
-	border-bottom: 1px solid silver;
+	border-bottom: 1px solid silver; height:50px;
 }
-.b{ font-size:0.8em;}  /*제목 폰트 */
+#bbsBottomBorder .name, .hit, .sdate, .score { font-size:0.7em;}
+#bbsBottomBorder .snum{ font-size:0.7em; text-align:center;}
+#bbsBottomBorder .b{font-size:0.85em;}
+#bbsBottomBorder:hover{background:#e6e6fa;}
 #bbslist .btnbox {
     float: right;
     width: 130px;
     text-align: right;
 }
-.bottom { padding-left:80px;}
-.searchform { padding-left:70px; padding-top:10px;}
+.freebbs{ font-family:'BMDOHYEON'; }
+.freebbs a{ text-decoration:none; color:black;}
+.bottom { text-align:center; padding-right:30px;}
+
+.searchform { padding-left:70px; padding-top:10px;  font-family:'BMDOHYEON';}
+.searchform_right{ padding-left:90px;}
 </style>
 <body>
 	<div class="upperdiv">
@@ -54,7 +61,7 @@ font-weight: normal; font-style: normal;
 			</tr>
 		</table>
 		<div class="mainbbs">
-			<table style="width:730px;">
+			<table class="freebbs" style="width:730px;">
 				<colgroup>
 					<col width="50">
 					<col>
@@ -74,9 +81,9 @@ font-weight: normal; font-style: normal;
 					</tr>
 				</thead>
 				<tbody>
-					<tr class="noticetr" id="bbsBottomBorder">
+					<tr class="noticetr" id="bbsBottomBorder" >
 						<td><img src="../img/notice.gif" alt="공지" class="notice" /></td>
-						<td class="b"><a href="../post/bbsview.html?num=10">레벨업 필요 글, 댓글 개수 안내</a><span
+						<td class="b"><a href="../post/bbsview.html?BODY=freebbs/bbsmain">레벨업 필요 글, 댓글 개수 안내</a><span
 							class="comment">(141+1)</span></td>
 						<td class="name" align="center">브릴</td>
 						<td class="hit">86193</td>
@@ -233,32 +240,32 @@ font-weight: normal; font-style: normal;
 			</table>
 		</div>
 		<div class="bottom">
-		<div class="pagebox01">
-			<img src="../img/처음페이지.gif" alt="처음페이지" /> 
-			<img src="../img/이전10페이지.gif"alt="이전 10 페이지" />
+			<div class="pagebox01">
+			<img src="../img/firstpage.gif" alt="처음페이지" /> 
+			<img src="../img/before.gif"alt="이전 10 페이지" />
 			<img src="../img/split.gif" class="split" alt=""/> 
 			<span class="selected" title="1 페이지">1</span> 
 			<img src="../img/split.gif" class="split" alt="" /> 
-			<a href="/?m=bbs&amp;p=2" class="notselected" title="2 페이지">2</a>
+			<a href="" class="notselected" title="2 페이지">2</a>
 			<img src="../img/split.gif" class="split" alt="" />
-			<a href="/?m=bbs&amp;p=3" class="notselected" title="3 페이지">3</a>
+			<a href="" class="notselected" title="3 페이지">3</a>
 			<img src="../img/split.gif" class="split" alt="" />
-			<a href="/?m=bbs&amp;p=4" class="notselected" title="4 페이지">4</a>
+			<a href="" class="notselected" title="4 페이지">4</a>
 			<img src="../img/split.gif" class="split" alt="" />
-			<a href="/?m=bbs&amp;p=5" class="notselected" title="5 페이지">5</a> 
+			<a href="" class="notselected" title="5 페이지">5</a> 
 			<img src="../img/split.gif" class="split" alt="" /> 
-			<a href="/?m=bbs&amp;p=6" class="notselected" title="6 페이지">6</a> 
+			<a href="" class="notselected" title="6 페이지">6</a> 
 			<img src="../img/split.gif" class="split" alt="" /> 
-			<a href="/?m=bbs&amp;p=7" class="notselected" title="7 페이지">7</a> 
+			<a href="" class="notselected" title="7 페이지">7</a> 
 			<img src="../img/split.gif" class="split" alt="" /> 
-			<a href="/?m=bbs&amp;p=8" class="notselected" title="8 페이지">8</a>
+			<a href="" class="notselected" title="8 페이지">8</a>
 			<img src="../img/split.gif" class="split" alt="" />
-			<a href="/?m=bbs&amp;p=9" class="notselected" title="9 페이지">9</a> 
+			<a href="" class="notselected" title="9 페이지">9</a> 
 			<img src="../img/split.gif" class="split" alt="" /> 
-			<a href="/?m=bbs&amp;p=10" class="notselected" title="10 페이지">10</a> 
+			<a href="" class="notselected" title="10 페이지">10</a> 
 			<img src="../img/split.gif" class="split" alt="" /> 
-			<a href="#"><img src="../img/이후10페이지.gif" alt="다음 10 페이지" /></a>
-			<a href="#"><img src="../img/마지막페이지.gif" alt="마지막페이지" /></a>
+			<a href="#"><img src="../img/behind.gif" alt="다음 10 페이지" /></a>
+			<a href="#"><img src="../img/lastpage.gif" alt="마지막페이지" /></a>
 		</div>
 	</div> <!--  게시판 페이징 -->
 	<div class="searchform">
@@ -281,9 +288,9 @@ font-weight: normal; font-style: normal;
 			<input type="text" name="keyword" class="input" style="height:25px;" />
 			<input type="submit" value=" 검색 " class="btnblue" />
 			</div>
-			<div style="float:left; width:40%">
-			<input type="button" name="bbsList" value="목록으로 " />
-			<input type="button" onclick="window.location.href='../post/freebbs.html';" value="글쓰기" />
+			<div class="searchform_right" style="float:left;">
+			<a href="../freebbs/freebbs.html?BODY=freebbs/freebbs"><input type="button" name="bbsList" value="목록으로 " /></a>
+			<input type="button" onclick="window.location.href='../write/freebbs.html?BODY=bbs/postbbs';" value="글쓰기" />
 			</div>
 		</form:form>
 	</div><!--  searchForm -->

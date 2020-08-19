@@ -1,5 +1,6 @@
 package controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +25,10 @@ public class RegisterController {
 		private MessageSource messageSource;
 		
 	@RequestMapping(value="/register/register.html") // 자유게시판에서 글쓰기
-	public ModelAndView test(HttpSession session) {
-		System.out.println("Register수신");
-		ModelAndView mav=new ModelAndView("register/register");
+	public ModelAndView test(HttpSession session,HttpServletRequest request) {
+		String body=request.getParameter("BODY");
+		ModelAndView mav=new ModelAndView("menu_header");
+		mav.addObject("BODY",body);
 		return mav;
 	}
 }

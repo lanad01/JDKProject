@@ -91,7 +91,7 @@ display: inline-block; white-space: pre-line; overflow: visible;
 		<div class="topbox">
 			<span class="sp_btn00" style="margin-left:-8px;"><a href="">이전글</a></span>
 			<span class="sp_btn00"><a href="" onclick="alert('다음글이 없습니다.')">다음글</a></span>
-		<div class="topside" style="margin-right:10px;"><span class="sp_btn00"><a href="">목록으로</a></span></div>
+		<div class="topside" style="margin-right:10px;"><span class="sp_btn00"><a href="../freebbs/freebbs.html?BODY=freebbs/freebbs">목록으로</a></span></div>
 		</div>
 	</div>
 	<div class="sbjbox" style="width:730px;">
@@ -123,10 +123,10 @@ display: inline-block; white-space: pre-line; overflow: visible;
 		<span class="sp_btn00" style="margin-left:-100px;"><a href="">이전글</a></span>
 		<span class="sp_btn00" ><a href="" onclick="alert('다음글이 없습니다.')">다음글</a></span>
 	<div class="bottomside">
-		<span class="sp_btn00"><a href="../write/freebbs.html?bbstype=free">글쓰기</a></span>
+		<span class="sp_btn00"><a href="../write/freebbs.html?BODY=bbs/postbbs">글쓰기</a></span>
 		<span class="sp_btn00"><a href="">수정</a></span>
 		<span class="sp_btn00"><a href="" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a></span>
-		<span class="sp_btn00"><a href="">목록으로</a></span>
+		<span class="sp_btn00"><a href="../freebbs/freebbs.html?BODY=freebbs/freebbs">목록으로</a></span>
 	</div>
 	
 </div>

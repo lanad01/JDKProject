@@ -25,7 +25,8 @@
 @font-face {
 font-family: 'BMDOHYEON'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff') format('woff');
 font-weight: normal; font-style: normal; }
-#topmenu {padding-left:140px; padding-right:250px;}
+.navbar-brand { font-family: 'BMDOHYEON'; font-size:2.5em;}
+#topmenu {padding-left:140px; padding-right:250px; padding-top:30px;}
 #topmenu li{ float: left;    padding: 12px 4px 4px 4px;    margin-left: 22px;    height: 40px;}
 #topmenu dt{ display:none;}
 #topmenu .wrap {   height: 50px;  border-bottom: #000000 double 3px; border-top: #000000 double 3px; }
@@ -129,7 +130,7 @@ $('.searchModal').hide();
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
+      <div class="collapse navbar-collapse" id="navbarResponsive" style="margin-right:40px;">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
             <a class="nav-link" href="#" onclick="loginpopup()">Sign In
@@ -137,13 +138,15 @@ $('.searchModal').hide();
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../register/register.html">Register</a>
+            <a class="nav-link" href="../register/register.html?BODY=register/register">Register</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../myaccount/mypage.html">Account</a>
+            <a class="nav-link" href="../myaccount/mypage.html?BODY=mypage/mypage">Account</a>
           </li>
           <li class="nav-item">
           	<input type="text" name="keyword" placeholder="통합검색" class="keyword" style="width:130px;" ></li> 
+          <li class="nav-item">
+          	<input type="button" name="keyword" class="searchButton" value="검색" style="width:60px; margin-left:10px; margin-top:7px;" ></li> 
         </ul>
       </div>
     </div>
@@ -158,7 +161,7 @@ $('.searchModal').hide();
 		<li class="vline"></li>
 				<li><a href="#"><span>개념글</span></a></li>
 		<li class="vline"></li>
-				<li><a href="../freebbs/freebbs.html" target=""><span>자유게시판</span></a>	</li>
+				<li><a href="../freebbs/freebbs.html?BODY=freebbs/freebbs" target=""><span>자유게시판</span></a>	</li>
 		<li class="vline"></li>
 				<li><a href="#" ><span>경험담&썰</span></a></li>
 		<li class="vline"></li>
@@ -168,7 +171,7 @@ $('.searchModal').hide();
 		<li>
 			<nav role="navigation" class="drop">
   				<ul id="main-menu">
-  	  				<li><font face='BMDOHYEON'><a href="../lifestory/lifestorymain.html">생활기</a></font>
+  	  				<li><font face='BMDOHYEON'><a href="../lifestory/lifestorymain.html?BODY=lifestory/lifestorymain">생활기</a></font>
      					<ul id="sub-menu">
        						<li><font face='BMDOHYEON' size="1.3"; ><a href="#" aria-label="subemnu"><span>▶&nbsp;별달고 꺼드럭거리 싶어서 쓰는 생활기</span></a></font></li>
        						<li><font face='BMDOHYEON' size="1.3"; ><a href="#" aria-label="subemnu">▶&nbsp;에스컬레이터 생활기</a></font></li>			
@@ -215,7 +218,7 @@ $('.searchModal').hide();
       <div id="changejsp">
 		<!--  메인 콘텐츠창 include형식으로 합시다  -->
 		
-		<%@ include file="/WEB-INF/jsp/freebbs/bbsmain.jsp" %>
+		<jsp:include page="/WEB-INF/jsp/${BODY }.jsp" flush="false"></jsp:include>
 		</div>
      </div>
 	
@@ -265,9 +268,9 @@ $('.searchModal').hide();
 				<span class="pop_bt modalCloseBtn" style="font-size: 13pt;"><a>로그인하기</a></span></div>
 			<div style="float:left;  cursor: pointer; background-color: #faf0e6; text-align: center; margin-bottom:15px; width:100px; margin-left:50px;" onClick="closeModal()">
 				<span class="pop_bt modalCloseBtn" style="font-size: 13pt;"><a>나가기</a></span></div>
-		
 		</div>
 	</div>
+</div>
 </body>
 
 </html>
