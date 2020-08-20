@@ -3,11 +3,11 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="user">
 <insert id="putUser" parameterType="model.User">
-	insert into custom_info values(#{id},#{pwd},#{name},#{gender},#{email},
-	#{job},#{address})
+	insert into user_info values(#{name},#{nick},#{birth_date},#{gender},#{id},
+	#{password},#{pwdCheck},#{quiz},#{answer},#{email},#{area},#{picture})
 </insert>
 <select id="getUser" parameterType="model.User" resultType="model.User">
-	select * from user_info where id=#{id} and pwd=#{pwd}
+	select * from user_info where id=#{id} and password=#{password}
 </select>
 <select id="getItem" parameterType="Integer" resultType="model.Item">
 		select * from my_fruits where item_id=#{id}

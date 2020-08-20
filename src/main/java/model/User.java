@@ -20,9 +20,9 @@ public class User {
 	@NotNull(message="비밀번호 확인은 필수입니다.")
 	private String pwdCheck;
 	@NotNull(message="비밀번호 확인질문은 필수입니다.")
-	private String Quiz;
+	private String quiz;
 	@NotNull(message="비밀번호 확인답변은 필수입니다.")
-	private String Answer;
+	private String answer;
 	@Email(message="유효하지 않은 이메일 방식입니다.")
 	private String email;
 	private String area;
@@ -70,16 +70,16 @@ public class User {
 		this.pwdCheck = pwdCheck;
 	}
 	public String getQuiz() {
-		return Quiz;
+		return quiz;
 	}
 	public void setQuiz(String quiz) {
-		Quiz = quiz;
+		this.quiz = quiz;
 	}
 	public String getAnswer() {
-		return Answer;
+		return answer;
 	}
 	public void setAnswer(String answer) {
-		Answer = answer;
+		this.answer = answer;
 	}
 	public String getEmail() {
 		return email;

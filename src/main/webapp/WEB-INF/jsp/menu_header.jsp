@@ -63,7 +63,6 @@ font-weight: normal; font-style: normal; }
   transition: all 0.15s ease-in;
   margin: 0px -40px 30px 0px;
 }
-
 #sub-menu > li { /* 서브메뉴 배경ㅇ */
   text-decoration: none;
   list-style: none;
@@ -82,7 +81,6 @@ font-weight: normal; font-style: normal; }
 #sub-menu > li >  a:hover {
  text-decoration: none;
 }
-
 /* The Modal (background) */
 .searchModal {
 display: none; /* Hidden by default */
@@ -108,7 +106,6 @@ height:40%;
 .searchModal a{font-family:'BMDOHYEON'; size:1.3em; }
 .search-modal-content table{ border-top:2px solid black; }
 #social { padding-bottom:13px;}
-
 .register {font-family:'BMDOHYEON'; font-size:0.8em; color:black; background:#f5f5f5; border:1px solid black; }
 </style>
 
@@ -196,9 +193,11 @@ $('.searchModal').hide();
         </div>
         <c:choose>
         <c:when test="${sessionScope.loginUser == null}"><!--  비로그인 상태일 시 indexController에서 보낸다 세션 정보는 -->
-        	<jsp:include page="../login/login.html"/>
+        	<jsp:include page="/login/login.html"/>
         </c:when>
-        
+        <c:otherwise>
+        	<jsp:include page="/WEB-INF/jsp/logout/logout.jsp"/>
+        </c:otherwise>
         </c:choose>
         <div  style="border:1px solid; padding:10px 0 15px 20px;">
         	<table>
@@ -272,4 +271,3 @@ $('.searchModal').hide();
 </body>
 
 </html>
-

@@ -41,14 +41,7 @@ input{ height:25px;}
 </head>
 <body>
 <div style="padding:30px 0 0 15px;">
-<form action="../register/register.html">
-<spring:hasBindErrors name="user">
-	<font color="red">
-		<c:forEach items="${errors.globalErrors}" var="error">
-			<spring:message code="${error.code }"/>
-		</c:forEach>
-	</font>
-</spring:hasBindErrors><!--  잠시 확인 -->
+<form:form action="../register/registerpost.html" modelAttribute="user" method="post" enctype="multipart/form-data">
 	<h2><font face='BMDOHYEON'>회원가입</font></h2>
 	<div class="msg">
 		<span>(*)</span> 표시가 있는 항목은 반드시 입력해야 합니다.<br />
@@ -68,14 +61,15 @@ input{ height:25px;}
 <tbody> <!--  가입폼 작성 시작 -->
 <tr>
 	<td class="key">이름(실명)<h5>*</h5></td>
-		<td><input type="text" name="name" value="" maxlength="10" class="input" />
+		<td><form:input type="text" path="name" maxlength="10" class="input" />
+		<font color="red"><form:errors path="name"></form:errors></font>
 		<div>이름은 반드시 적어주셔야 합니다.</div>
 		</td>
-		
 	</tr>
 	<tr>
 		<td class="key">닉네임<h5>*</h5></td>
-		<td><input type="text" name="nic" value="" maxlength="20" class="input" onblur="sameCheck(this,'hLayernic');" />
+		<td><form:input type="text" path="nick" value="" maxlength="20" class="input" onblur="location.href='../register/duplicationcheck.html'"/>
+		<font color="red"><form:errors path="name"></form:errors></font>
 	    <!--  onblur : 마우스 커서가 빠져나가는 순간 이벤트 -->
 		<span class="hmsg" id="hLayernic"></span>
 		<div>닉네임은 자신을 표현할 수 있는 단어로 20자까지 자유롭게 사용할 수 있습니다.</div>
@@ -84,32 +78,32 @@ input{ height:25px;}
 	<tr>
 		<td class="key">생년월일</td>
 		<td>
-		<select name="birth_1">
+		<form:select path="birth_date">
 		<c:forEach var="i" begin="0" end="${2016-1930}">
   		  <c:set var="yearOption" value="${2016-i}" />
-    		<option value="${yearOption}">${yearOption}</option>
+    		<option value="${yearOption}">${yearOption}
 		</c:forEach>
-		</select>
+		</form:select>
 		<select name="birth_2">
-		<option value="">월</option>
-			<option value="01">1</option>
-			<option value="02">2</option>
-			<option value="03">3</option>
-			<option value="04">4</option>
-			<option value="05">5</option>
-			<option value="06">6</option>
-			<option value="07">7</option>
-			<option value="08">8</option>
-			<option value="09">9</option>
-			<option value="10">10</option>
-			<option value="11">11</option>
-			<option value="12">12</option>
+		<option value="">월
+			<option value="01">1
+			<option value="02">2
+			<option value="03">3
+			<option value="04">4
+			<option value="05">5
+			<option value="06">6
+			<option value="07">7
+			<option value="08">8
+			<option value="09">9
+			<option value="10">10
+			<option value="11">11
+			<option value="12">12
 		</select>
 		<select name="birth_3">
-		<option value="">일</option>
+		<option value="">일
 		<c:forEach var="i" begin="1" end="31">
   		  <c:set var="day" value="${i}" />
-    		<option value="${day}">${day}</option>
+    		<option value="${day}">${day}
 		</c:forEach>
 		</select>
 		</td>
@@ -117,61 +111,61 @@ input{ height:25px;}
 	<tr>
 		<td class="key">성별</td>
 		<td class="shift">
-			<input type="radio" name="sex" value="1" /><font face='BMDOHYEON' size="0.9em">남성</font>
-			<input type="radio" name="sex" value="2" /><font face='BMDOHYEON' size="0.9em">여성</font>
+			<form:radiobutton path="sex" value="M" /><font face='BMDOHYEON' size="0.9em">남성</font>
+			<form:radiobutton path="sex" value="F" /><font face='BMDOHYEON' size="0.9em">여성</font>
 		</td>
 	</tr>	
 	<tr>
 	<td class="key">아이디<h5>*</h5></td>
 		<td>
-			<input type="text" name="id" value="" maxlength="12" class="input" onblur="sameCheck(this,'hLayerid');" />
+			<form:input path="id" maxlength="12" class="input" onblur="location.href='../register/duplicationcheck.html'"/>
+			<font color="red"><form:errors path="id"></form:errors></font>
 			<span class="hmsg" id="hLayerid"></span>
 			<div>4~12자의 영문(소문자)과 숫자만 사용할 수 있습니다.</div>
 		</td>
 	</tr>
 	<tr>
 		<td class="key">비밀번호<h5>*</h5></td>
-		<td><input type="password" name="pw1" value="" maxlength="20" class="input" />
+		<td><form:password path="password" maxlength="20" class="input" />
+		<font color="red"><form:errors path="password"></form:errors></font>
 			<div>4~12자의 영문과 숫자만 사용할 수 있습니다.</div>
 		</td>
 	</tr>
 	<tr>
 		<td class="key">비밀번호 확인<h5>*</h5></td>
 		<td>
-		<input type="password" name="pw2" value="" maxlength="20" class="input" />
+		<form:password path="pwdCheck"  maxlength="20" class="input" />
+		<font color="red"><form:errors path="pwdCheck"></form:errors></font>
 		<div>비밀번호를 한번 더 입력하세요. 비밀번호는 잊지 않도록 주의하시기 바랍니다.</div>
 		</td>
 	</tr>
 	<tr>
 		<td class="key">비번찾기 질문<h5>*</h5></td>
 		<td>
-		<select name="_pw_q" class="pw_q1">
-		<option value="">&nbsp;+ 선택하십시오.</option>
-		<option value="">-----------------------------------------------------------------------------</option>
-				<option>ㆍ내가 좋아하는 캐릭터는?</option>
-				<option>ㆍ타인이 모르는 자신만의 신체비밀이 있다면?</option>
-				<option>ㆍ자신의 인생 좌우명은?</option>
-				<option>ㆍ초등학교 때 기억에 남는 짝꿍 이름은?</option>
-				<option>ㆍ유년시절 가장 생각나는 친구 이름은?</option>
-				<option>ㆍ가장 기억에 남는 선생님 성함은?</option>
-				<option>ㆍ친구들에게 공개하지 않은 어릴 적 별명이 있다면?</option>
-				<option>ㆍ다시 태어나면 되고 싶은 것은?</option>
-				<option>ㆍ가장 감명깊게 본 영화는?</option>
-				<option>ㆍ읽은 책 중에서 좋아하는 구절이 있다면?</option>
-				<option>ㆍ기억에 남는 추억의 장소는?</option>
-				<option>ㆍ인상 깊게 읽은 책 이름은?</option>
-				<option>ㆍ자신의 보물 제1호는?</option>
-				<option>ㆍ받았던 선물 중 기억에 남는 독특한 선물은?</option>
-				<option>ㆍ자신이 두번째로 존경하는 인물은?</option>
-				<option>ㆍ아버지의 성함은?</option>
-				<option>ㆍ어머니의 성함은?</option>
-				</select><br />
-		<div><input type="text" name="pw_q" value="" class="input pw_q2" /></div>
+		<form:select path="quiz" class="pw_q1">
+			<form:option value="선택하십시오" label="선택하십시오"/>
+			<form:option value="-------------------------------"/>
+				<form:option value="내가 좋아하는 캐릭터는?" label="내가 좋아하는 캐릭터는?"/>
+				<form:option value="타인이 모르는 자신만의 신체비밀이 있다면?" label="타인이 모르는 자신만의 신체비밀이 있다면?"/>
+				<form:option value="자신의 인생 좌우명은?" label="자신의 인생 좌우명은?"/>
+				<form:option value="초등학교 때 기억에 남는 짝꿍 이름은?" label="초등학교 때 기억에 남는 짝꿍 이름은?"/>
+				<form:option value="유년시절 가장 생각나는 친구 이름은?" label="유년시절 가장 생각나는 친구 이름은?"/>
+				<form:option value="가장 기억에 남는 선생님 성함은?" label="가장 기억에 남는 선생님 성함은?"/>
+				<form:option value="어릴 적 별명이 있다면?" label="어릴 적 별명이 있다면?"/>
+				<form:option value="가장 감명깊게 본 영화는?" label="가장 감명깊게 본 영화는?"/>
+				<form:option value="기억에 남는 추억의 장소는?" label="기억에 남는 추억의 장소는?"/>
+				<form:option value="내가 좋아하는 캐릭터는?" label="내가 좋아하는 캐릭터는?"/>
+				<form:option value="아버지의 이름은?" label="아버지의 이름은?"/>
+				<form:option value="어머니의 이름은?" label="어머니의 이름은?"/>
+				</form:select><br/>
+		<div><form:input path="quiz" class="input pw_q2" /></div>
+		<font color="red"><form:errors path="quiz"></form:errors></font>
 		</td>
 	</tr>
 	<tr>
 		<td class="key">비번찾기 답변<h5>*</h5></td>
-		<td><input type="text" name="pw_a" value="" class="input" />
+		<td><form:input path="answer" class="input" />
+		<font color="red"><form:errors path="answer"></form:errors></font>
 		<div>
 		비밀번호찾기 질문에 대한 답변을 혼자만 알 수 있는 단어나 기호로 입력해 주세요.<br />
 		비밀번호를 찾을 때 필요하므로 반드시 기억해 주세요.
@@ -180,24 +174,25 @@ input{ height:25px;}
 	</tr>
 	<tr>
 		<td class="key">이메일</td>
-		<td><input type="text" name="email" value="" size="35" class="input" onblur="sameCheck(this,'hLayeremail');" />
+		<td><form:input path="email" size="35" class="input" />
+		<font color="red"><form:errors path="email"></form:errors></font>
 		<span class="hmsg" id="hLayeremail"></span></td>
 	</tr>
 	<tr>
 		<td class="key">지역</td>
-		<td><input type="text" name="area" value="" size="15" class="input" />
+		<td><form:input path="area" size="15" class="input" />
 		
 		</td>
 	</tr>
 	<tr>
 		<td></td>
 		<td><div class="submitbox">
-			<input type="button" value="가입취소" class="btngray" onclick="goHref('./');" />
+			<input type="button" value="가입취소" class="btngray" onclick="location.href='../index/index.html?BODY=freebbs/freebbs'"/>
 			<input type="submit" value="회원가입" class="btnblue" />
 		</div></td>
 	</tbody>
 </table>
-</form>
+</form:form>
 </div>
 </body>
 </html>

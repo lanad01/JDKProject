@@ -12,42 +12,41 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import dao.LoginDao;
+import dao.UserDao;
 import model.User;
 
 @Controller
 public class LoginController {
 	@Autowired
 	private LoginDao loginDao;
+	@Autowired 
+	private UserDao userDao;
 	
 	@RequestMapping(value="/login/loginpost.html" , method=RequestMethod.POST)
 	public ModelAndView login(
 		@Valid User user, BindingResult bindingResult, HttpSession session,HttpServletRequest request) {
-		System.out.println("LoginPost수신");
-		String body=request.getParameter("BODY");
 		if(bindingResult.hasErrors()) {
 			ModelAndView mav=new ModelAndView("menu_header");
-			
-			mav.addObject("HEADER","login.jsp");
-			mav.addObject("BODY",body);
-			mav.getModel().putAll(bindingResult.getModel());
+			mav.getModel().putAll(bindingResult.getModel()); // 여기 해석 어떻게 해야함?
 			return mav;
 		}
-		User loginUser=loginDao.findByIdAndPwd(user); //DB다녀오기
-		ModelAndView mav=new ModelAndView("home/template");
+		User loginUser=loginDao.findByIdAndPwd(user); //DB다녀오기 해당 아이디와 비번에 해당하는 유저의 전체 정보를 select때린다
+		ModelAndView mav=new ModelAndView("menu_header");	
 		if(loginUser !=null) { // 로그인 성공
 			session.setAttribute("loginUser", user.getId()); //세션에 저장
-		}else { // 로그인 실패
-			
+		}else {
+			// 로그인 실패
 		}
-		mav.addObject("BODY","loginResult.jsp");
+		User usr=userDao.findByIdAndPwd(user);
+		System.out.println(usr.getArea());
+		mav.addObject("USER",usr); // User 전체를 받아온다 이걸 menu_header에 보낸다 로그아웃 jsp는 이를 출력해낼 수 있다
+		String body="freebbs/freebbs"; // 로그인 성공 시 첫 보디 창 출력은 자유게시판
+		mav.addObject("BODY",body); 
 		return mav;
 	}
 	@RequestMapping(value="/login/login.html")
 	public ModelAndView toLogin() {
-		System.out.println("login/login수신?");
 		ModelAndView mav=new ModelAndView("login/login");
-		String body="register/register";
-		mav.addObject("BODY",body);
 		mav.addObject(new User());//form form을 위한 객체를 주입
 		return mav;
 	}
