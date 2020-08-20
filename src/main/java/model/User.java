@@ -4,6 +4,7 @@ import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
+import org.springframework.web.multipart.MultipartFile;
 
 public class User {
 	@NotNull(message="이름은 반드시 적어주세요")  //hibernate-validator 라이브러리 의존성 잡아줘야함
@@ -27,6 +28,7 @@ public class User {
 	private String email;
 	private String area;
 	private String picture;
+	private MultipartFile picture_url;
 	public String getName() {
 		return name;
 	}
@@ -99,6 +101,13 @@ public class User {
 	public void setPicture(String picture) {
 		this.picture = picture;
 	}
+	public MultipartFile getPicture_url() {
+		return picture_url;
+	}
+	public void setPicture_url(MultipartFile picture_url) {
+		this.picture_url = picture_url;
+	}
+	
 	
 	
 //	@NotEmpty

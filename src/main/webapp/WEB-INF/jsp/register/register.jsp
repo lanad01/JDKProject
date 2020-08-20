@@ -68,7 +68,7 @@ input{ height:25px;}
 	</tr>
 	<tr>
 		<td class="key">닉네임<h5>*</h5></td>
-		<td><form:input type="text" path="nick" value="" maxlength="20" class="input" onblur="location.href='../register/duplicationcheck.html'"/>
+		<td><form:input type="text" path="nick" value="" maxlength="20" class="input" onblur=""/>
 		<font color="red"><form:errors path="name"></form:errors></font>
 	    <!--  onblur : 마우스 커서가 빠져나가는 순간 이벤트 -->
 		<span class="hmsg" id="hLayernic"></span>
@@ -81,44 +81,46 @@ input{ height:25px;}
 		<form:select path="birth_date">
 		<c:forEach var="i" begin="0" end="${2016-1930}">
   		  <c:set var="yearOption" value="${2016-i}" />
-    		<option value="${yearOption}">${yearOption}
+    		<form:option value="${yearOption}" label="${yearOption }"/>
 		</c:forEach>
 		</form:select>
-		<select name="birth_2">
-		<option value="">월
-			<option value="01">1
-			<option value="02">2
-			<option value="03">3
-			<option value="04">4
-			<option value="05">5
-			<option value="06">6
-			<option value="07">7
-			<option value="08">8
-			<option value="09">9
-			<option value="10">10
-			<option value="11">11
-			<option value="12">12
-		</select>
-		<select name="birth_3">
-		<option value="">일
-		<c:forEach var="i" begin="1" end="31">
-  		  <c:set var="day" value="${i}" />
-    		<option value="${day}">${day}
-		</c:forEach>
-		</select>
 		</td>
 	</tr>
+<%-- 		<formselect name="birth_2"> --%>
+<!-- 		<option value="">월 -->
+<!-- 			<option value="01">1 -->
+<!-- 			<option value="02">2 -->
+<!-- 			<option value="03">3 -->
+<!-- 			<option value="04">4 -->
+<!-- 			<option value="05">5 -->
+<!-- 			<option value="06">6 -->
+<!-- 			<option value="07">7 -->
+<!-- 			<option value="08">8 -->
+<!-- 			<option value="09">9 -->
+<!-- 			<option value="10">10 -->
+<!-- 			<option value="11">11 -->
+<!-- 			<option value="12">12 -->
+<!-- 		</select> -->
+<!-- 		<select name="birth_3"> -->
+<!-- 		<option value="">일 -->
+<%-- 		<c:forEach var="i" begin="1" end="31"> --%>
+<%--   		  <c:set var="day" value="${i}" /> --%>
+<%--     		<option value="${day}">${day} --%>
+<%-- 		</c:forEach> --%>
+<!-- 		</select> -->
+<!-- 		</td> -->
+<!-- 	</tr> -->
 	<tr>
 		<td class="key">성별</td>
 		<td class="shift">
-			<form:radiobutton path="sex" value="M" /><font face='BMDOHYEON' size="0.9em">남성</font>
-			<form:radiobutton path="sex" value="F" /><font face='BMDOHYEON' size="0.9em">여성</font>
+			<form:radiobutton path="gender" value="M" /><font face='BMDOHYEON' size="0.9em">남성</font>
+			<form:radiobutton path="gender" value="F" /><font face='BMDOHYEON' size="0.9em">여성</font>
 		</td>
 	</tr>	
 	<tr>
 	<td class="key">아이디<h5>*</h5></td>
 		<td>
-			<form:input path="id" maxlength="12" class="input" onblur="location.href='../register/duplicationcheck.html'"/>
+			<form:input path="id" maxlength="12" class="input" onblur=""/>
 			<font color="red"><form:errors path="id"></form:errors></font>
 			<span class="hmsg" id="hLayerid"></span>
 			<div>4~12자의 영문(소문자)과 숫자만 사용할 수 있습니다.</div>
@@ -184,6 +186,9 @@ input{ height:25px;}
 		
 		</td>
 	</tr>
+	<tr>
+		<td class="key">사진</td>
+		<td><input type="file" name="picture"/>
 	<tr>
 		<td></td>
 		<td><div class="submitbox">
