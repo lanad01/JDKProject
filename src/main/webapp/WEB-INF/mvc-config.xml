@@ -9,14 +9,14 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!-- Uncomment and your base-package here:
-         <context:component-scan
-            base-package="org.springframework.samples.web"/>  -->
+    <mvc:annotation-driven /> <!--  Annotation을 통해 에러메시지 -->
+    
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 	        <!-- Example: a logical view name of 'showMessage' is mapped to '/WEB-INF/jsp/showMessage.jsp' -->
 	        <property name="prefix" value="/WEB-INF/jsp/"/>
 	        <property name="suffix" value=".jsp"/>
 	</bean>
+	
 	<!--  DB관련 객체 맵핑  -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
 	p:driverClassName="oracle.jdbc.driver.OracleDriver"
@@ -34,18 +34,12 @@
 	
 	<!--  HandlerMapping 부분  -->
 	<context:component-scan base-package="dao,controller"></context:component-scan>
-	<bean id="loginValidator" class="util.LoginValidator"></bean>
-	<bean id="userEntryValidator" class="util.UserEntryValidator"></bean>
 	<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"></bean>
-	<!--  url로 맵핑을 하는 ClassNameHandlerMapping
-	       이제 경로 설정할 때는 ../를 넣어주는 것을 잊지말지어다. +폴더명 경로도 넣어줘야한다 -->
-	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
-		<property name="basenames">
-			<list>
-				<value>errors</value> <!--  properties파일 이름입니다. 언어코드 빼세요 -->
-			</list>
-		</property>
-	</bean>
- <!-- order 속성을 사용하는 다른 부분은 2번을 지정해야함 -->
+	<!--  url로 맵핑을 하는 ClassNameHandlerMapping 이제 경로 설정할 때는 ../를 넣어주는 것을 잊지말지어다. +폴더명 경로도 넣어줘야한다 -->
+ 
+ 	<!--  upload시 사용되는 종속객체 -->
+<!-- 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" -->
+<!-- 	p:maxInMemorySize="5242880"	p:maxUploadSize="5242880"> </bean>  최대 메모리 및 업로드 사이즈 5메가 지정 -->
+	
 
 </beans>

@@ -20,6 +20,8 @@ public class UserDaoImpl implements UserDao {
 	}
 	public void entryUser(User user) {
 		session.insert("user.putUser",user);
+		System.out.println("dd"+user.getAnswer());
+		System.out.println(user.getBirth_date());
 	}
 
 }

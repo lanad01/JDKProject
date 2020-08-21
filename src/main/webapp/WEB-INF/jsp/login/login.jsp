@@ -19,7 +19,7 @@
 		<td>
 			<form:input type="text" path="id" style="width:120px; height:20px; border-spacing:2px;"/>
 			<font color="red"><form:errors path="id"/></font><br/>
-			<form:input type="password" path="password" style="width:120px; height:20px; border-spacing:2px;"/>
+			<form:input  path="password" style="width:120px; height:20px; border-spacing:2px;"/>
 			<font color="red"><form:errors path="password"/></font><br/>
 		</td>
 		<td style="padding-left:30px;">

@@ -1,17 +1,14 @@
 package model;
 
-import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.Email;
 import org.springframework.web.multipart.MultipartFile;
 
-public class User {
+public class User { 
 	@NotNull(message="이름은 반드시 적어주세요")  //hibernate-validator 라이브러리 의존성 잡아줘야함
 	private String name;
 	@NotNull(message="닉네임은 반드시 적어주세요")
 	private String nick;
-	@Future
 	private String birth_date;
 	private String gender;
 	@NotNull(message="아이디는 반드시 적어주세요")
@@ -24,7 +21,6 @@ public class User {
 	private String quiz;
 	@NotNull(message="비밀번호 확인답변은 필수입니다.")
 	private String answer;
-	@Email(message="유효하지 않은 이메일 방식입니다.")
 	private String email;
 	private String area;
 	private String picture;

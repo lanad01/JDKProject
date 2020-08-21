@@ -37,8 +37,15 @@ input{ height:25px;}
     color: #ffffff;
     height: 21px;
 }
+#font{ font-family:'BMDOHYEON';  font-size: 0.7em; }
 </style>
 </head>
+<script type="text/javascript">
+function quizDisplay(quiztext) {
+    var selection = quiztext;
+	document.getElementById("quiz").value=selection;
+    return true;
+}</script>
 <body>
 <div style="padding:30px 0 0 15px;">
 <form:form action="../register/registerpost.html" modelAttribute="user" method="post" enctype="multipart/form-data">
@@ -62,14 +69,14 @@ input{ height:25px;}
 <tr>
 	<td class="key">이름(실명)<h5>*</h5></td>
 		<td><form:input type="text" path="name" maxlength="10" class="input" />
-		<font color="red"><form:errors path="name"></form:errors></font>
+		<font color="red" id="font" ><form:errors path="name"/></font>
 		<div>이름은 반드시 적어주셔야 합니다.</div>
 		</td>
 	</tr>
 	<tr>
 		<td class="key">닉네임<h5>*</h5></td>
 		<td><form:input type="text" path="nick" value="" maxlength="20" class="input" onblur=""/>
-		<font color="red"><form:errors path="name"></form:errors></font>
+		<font color="red" id="font" ><form:errors path="nick"/></font>
 	    <!--  onblur : 마우스 커서가 빠져나가는 순간 이벤트 -->
 		<span class="hmsg" id="hLayernic"></span>
 		<div>닉네임은 자신을 표현할 수 있는 단어로 20자까지 자유롭게 사용할 수 있습니다.</div>
@@ -120,8 +127,8 @@ input{ height:25px;}
 	<tr>
 	<td class="key">아이디<h5>*</h5></td>
 		<td>
-			<form:input path="id" maxlength="12" class="input" onblur=""/>
-			<font color="red"><form:errors path="id"></form:errors></font>
+			<form:input type="text" path="id" maxlength="12" class="input" onblur=""/>
+			<font color="red" id="font" ><form:errors path="id"/></font>
 			<span class="hmsg" id="hLayerid"></span>
 			<div>4~12자의 영문(소문자)과 숫자만 사용할 수 있습니다.</div>
 		</td>
@@ -129,45 +136,50 @@ input{ height:25px;}
 	<tr>
 		<td class="key">비밀번호<h5>*</h5></td>
 		<td><form:password path="password" maxlength="20" class="input" />
-		<font color="red"><form:errors path="password"></form:errors></font>
+		<font color="red" id="font" ><form:errors path="password"/></font>
 			<div>4~12자의 영문과 숫자만 사용할 수 있습니다.</div>
 		</td>
 	</tr>
 	<tr>
 		<td class="key">비밀번호 확인<h5>*</h5></td>
 		<td>
-		<form:password path="pwdCheck"  maxlength="20" class="input" />
-		<font color="red"><form:errors path="pwdCheck"></form:errors></font>
+		<form:password  path="pwdCheck"  maxlength="20" class="input" />
+		<font color="red" id="font" ><form:errors path="pwdCheck"/></font>
 		<div>비밀번호를 한번 더 입력하세요. 비밀번호는 잊지 않도록 주의하시기 바랍니다.</div>
 		</td>
 	</tr>
 	<tr>
 		<td class="key">비번찾기 질문<h5>*</h5></td>
 		<td>
-		<form:select path="quiz" class="pw_q1">
-			<form:option value="선택하십시오" label="선택하십시오"/>
-			<form:option value="-------------------------------"/>
-				<form:option value="내가 좋아하는 캐릭터는?" label="내가 좋아하는 캐릭터는?"/>
-				<form:option value="타인이 모르는 자신만의 신체비밀이 있다면?" label="타인이 모르는 자신만의 신체비밀이 있다면?"/>
-				<form:option value="자신의 인생 좌우명은?" label="자신의 인생 좌우명은?"/>
-				<form:option value="초등학교 때 기억에 남는 짝꿍 이름은?" label="초등학교 때 기억에 남는 짝꿍 이름은?"/>
-				<form:option value="유년시절 가장 생각나는 친구 이름은?" label="유년시절 가장 생각나는 친구 이름은?"/>
-				<form:option value="가장 기억에 남는 선생님 성함은?" label="가장 기억에 남는 선생님 성함은?"/>
-				<form:option value="어릴 적 별명이 있다면?" label="어릴 적 별명이 있다면?"/>
-				<form:option value="가장 감명깊게 본 영화는?" label="가장 감명깊게 본 영화는?"/>
-				<form:option value="기억에 남는 추억의 장소는?" label="기억에 남는 추억의 장소는?"/>
-				<form:option value="내가 좋아하는 캐릭터는?" label="내가 좋아하는 캐릭터는?"/>
-				<form:option value="아버지의 이름은?" label="아버지의 이름은?"/>
-				<form:option value="어머니의 이름은?" label="어머니의 이름은?"/>
-				</form:select><br/>
-		<div><form:input path="quiz" class="input pw_q2" /></div>
-		<font color="red"><form:errors path="quiz"></form:errors></font>
+			<select class="pw_q1" onchange="quizDisplay(this.options[this.selectedIndex].text)">
+				<option value="">&nbsp;+ 선택하십시오.</option>
+				<option value="">-----------------------------------------------------------------------------</option>
+				<option value="내가 좋아하는 캐릭터는?">ㆍ내가 좋아하는 캐릭터는?</option>
+				<option value="타인이 모르는 자신만의 신체비밀이 있다면?">ㆍ타인이 모르는 자신만의 신체비밀이 있다면?</option>
+				<option value="자신의 인생 좌우명은?">ㆍ자신의 인생 좌우명은?</option>
+				<option value="초등학교 때 기억에 남는 짝꿍 이름은?">ㆍ초등학교 때 기억에 남는 짝꿍 이름은?</option>
+				<option value="유년시절 가장 생각나는 친구 이름은?">ㆍ유년시절 가장 생각나는 친구 이름은?</option>
+				<option value="가장 기억에 남는 선생님 성함은?">ㆍ가장 기억에 남는 선생님 성함은?</option>
+				<option value="친구들에게 공개하지 않은 어릴 적 별명이 있다면?">ㆍ친구들에게 공개하지 않은 어릴 적 별명이 있다면?</option>
+				<option value="다시 태어나면 되고 싶은 것은?">ㆍ다시 태어나면 되고 싶은 것은?</option>
+				<option value="가장 감명깊게 본 영화는?">ㆍ가장 감명깊게 본 영화는?</option>
+				<option value="읽은 책 중에서 좋아하는 구절이 있다면?">ㆍ읽은 책 중에서 좋아하는 구절이 있다면?</option>
+				<option value="기억에 남는 추억의 장소는?">ㆍ기억에 남는 추억의 장소는?</option>
+				<option value="인상 깊게 읽은 책 이름은?">ㆍ인상 깊게 읽은 책 이름은?</option>
+				<option value="자신의 보물 제1호는?">ㆍ자신의 보물 제1호는?</option>
+				<option value="받았던 선물 중 기억에 남는 독특한 선물은?">ㆍ받았던 선물 중 기억에 남는 독특한 선물은?</option>
+				<option value="자신이 두번째로 존경하는 인물은?">ㆍ자신이 두번째로 존경하는 인물은?</option>
+				<option value="아버지의 성함은?">ㆍ아버지의 성함은?</option>
+				<option value="어머니의 성함은?">ㆍ어머니의 성함은?</option>
+			</select><br/>
+		<div><form:input type="text" path="quiz" id="quiz" plackholder="직접 작성" /></div>
+		<font color="red" id="font" ><form:errors path="quiz"/></font>
 		</td>
 	</tr>
 	<tr>
 		<td class="key">비번찾기 답변<h5>*</h5></td>
-		<td><form:input path="answer" class="input" />
-		<font color="red"><form:errors path="answer"></form:errors></font>
+		<td><form:input type="text"  path="answer" class="input" />
+		<font color="red" id="font" ><form:errors path="answer"/></font>
 		<div>
 		비밀번호찾기 질문에 대한 답변을 혼자만 알 수 있는 단어나 기호로 입력해 주세요.<br />
 		비밀번호를 찾을 때 필요하므로 반드시 기억해 주세요.
@@ -176,8 +188,8 @@ input{ height:25px;}
 	</tr>
 	<tr>
 		<td class="key">이메일</td>
-		<td><form:input path="email" size="35" class="input" />
-		<font color="red"><form:errors path="email"></form:errors></font>
+		<td><form:input type="text" path="email" size="35" class="input" />
+		<font color="red" id="font" ><form:errors path="email"/></font>
 		<span class="hmsg" id="hLayeremail"></span></td>
 	</tr>
 	<tr>
