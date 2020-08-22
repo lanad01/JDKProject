@@ -23,8 +23,8 @@ public class User {
 	private String answer;
 	private String email;
 	private String area;
-	private String picture;
-	private MultipartFile picture_url;
+	private String picture_url;
+	private MultipartFile picture;
 	public String getName() {
 		return name;
 	}
@@ -91,17 +91,17 @@ public class User {
 	public void setArea(String area) {
 		this.area = area;
 	}
-	public String getPicture() {
-		return picture;
-	}
-	public void setPicture(String picture) {
-		this.picture = picture;
-	}
-	public MultipartFile getPicture_url() {
+	public String getPicture_url() {
 		return picture_url;
 	}
-	public void setPicture_url(MultipartFile picture_url) {
+	public void setPicture_url(String picture_url) {
 		this.picture_url = picture_url;
+	}
+	public MultipartFile getPicture() {
+		return picture;
+	}
+	public void setPicture(MultipartFile picture) {
+		this.picture = picture;
 	}
 	
 	

@@ -34,12 +34,13 @@
 	
 	<!--  HandlerMapping 부분  -->
 	<context:component-scan base-package="dao,controller"></context:component-scan>
+	
 	<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"></bean>
 	<!--  url로 맵핑을 하는 ClassNameHandlerMapping 이제 경로 설정할 때는 ../를 넣어주는 것을 잊지말지어다. +폴더명 경로도 넣어줘야한다 -->
  
- 	<!--  upload시 사용되는 종속객체 -->
-<!-- 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" -->
-<!-- 	p:maxInMemorySize="5242880"	p:maxUploadSize="5242880"> </bean>  최대 메모리 및 업로드 사이즈 5메가 지정 -->
+<!--  upload시 사용되는 종속객체 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+	p:maxInMemorySize="5242880"	p:maxUploadSize="5242880"> </bean>
 	
 
 </beans>

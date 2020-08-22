@@ -34,6 +34,7 @@
 </style>
 </head>
 <body>
+	<form:form 
 	<h2 class="header"><font face='BMDOHYEON'>글쓰기</font></h2>
 	<div class="msg">
 		<table>

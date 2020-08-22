@@ -201,6 +201,8 @@ function quizDisplay(quiztext) {
 	<tr>
 		<td class="key">ป็ม๘</td>
 		<td><input type="file" name="picture"/>
+	</td>
+	</tr>
 	<tr>
 		<td></td>
 		<td><div class="submitbox">

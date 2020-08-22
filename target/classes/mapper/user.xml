@@ -4,7 +4,7 @@
 <mapper namespace="user">
 <insert id="putUser" parameterType="model.User">
 	insert into user_info values(#{name},#{nick},#{birth_date},#{gender},#{id},
-	#{password},#{pwdCheck},#{quiz},#{answer},#{email},#{area},#{picture})
+	#{password},#{pwdCheck},#{quiz},#{answer},#{email},#{area},#{picture_url})
 </insert>
 <select id="getUser" parameterType="model.User" resultType="model.User">
 	select * from user_info where id=#{id} and password=#{password}
