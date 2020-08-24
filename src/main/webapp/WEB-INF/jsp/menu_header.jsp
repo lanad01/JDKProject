@@ -150,7 +150,7 @@ $('.searchModal').hide();
           </c:when>
          <c:otherwise> <!--  로그인 정보가 있을 경우 -->
          <li class="nav-item">
-            <a class="nav-link" href="" onclick="">로그인성공!
+            <a class="nav-link" href="../login/logout.html" onclick="">Sign Out
               <span class="sr-only">(current)</span>
             </a>
           </li>
@@ -181,7 +181,7 @@ $('.searchModal').hide();
 		<li class="vline"></li>
 				<li><a href="#"><span>개념글</span></a></li>
 		<li class="vline"></li>
-				<li><a href="../freebbs/freebbs.html" onClick="test();" target=""><span>자유게시판</span></a>	</li>
+				<li><a href="../bbs/freebbs.html" onClick="test();" target=""><span>자유게시판</span></a>	</li>
 		<li class="vline"></li>
 				<li><a href="#" ><span>경험담&썰</span></a></li>
 		<li class="vline"></li>
@@ -274,7 +274,7 @@ $('.searchModal').hide();
 			
 			<hr>
 			<div style="float:left; text-align:center;">
-				<div style="float:left; cursor: pointer; background-color: #dcdcdc; text-align: center; margin-bottom:13px; width:100px; " onClick="alert('로그인기능구현')">
+				<div style="float:left; cursor: pointer; background-color: #dcdcdc; text-align: center; margin-bottom:13px; width:100px; " onClick="">
 					<input type="submit" style="font-family:'BMDOHYEON'; font-size:0.8em; width:100px;"  value="로그인"/></div>
 					
 				<div style="float:left;  cursor: pointer; background-color: #dcdcdc; text-align: center; margin-bottom:13px; width:100px; margin-left:20px;" onClick="closeModal()">

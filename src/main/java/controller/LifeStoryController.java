@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import model.User;
+
 @Controller
 public class LifeStoryController { 
 		@RequestMapping(value="/lifestory/lifestorymain.html") // 자유게시판에서 글쓰기
@@ -14,6 +16,7 @@ public class LifeStoryController {
 			String body=request.getParameter("BODY");
 			ModelAndView mav=new ModelAndView("menu_header");
 			mav.addObject("BODY",body);
+			mav.addObject(new User());
 			return mav;
 		}
 }

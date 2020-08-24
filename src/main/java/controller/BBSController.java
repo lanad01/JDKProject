@@ -1,26 +1,25 @@
 package controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import dao.UserDao;
-	
-@Controller
-public class LogoutController {
+import model.User;
 
-	@RequestMapping(value="/logout/logout.html")
-	public ModelAndView logout(HttpSession session) {
-		// 로그아웃 세션 비활성화
-		session.invalidate();
-		//jsp선언 logout/logout.jsp
+@Controller
+public class BBSController {
+	@RequestMapping(value="/bbs/freebbs.html") // 자유게시판
+	public ModelAndView freeBBS(HttpServletRequest request) {
 		ModelAndView mav=new ModelAndView("menu_header");
 		String body="freebbs/freebbs";
 		mav.addObject("BODY",body);
-		//mav.setViewName("logout/logout");
+		mav.addObject(new User());
 		return mav;
 	}
 }
+
+
+

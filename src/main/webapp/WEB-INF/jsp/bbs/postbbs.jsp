@@ -13,10 +13,10 @@
 <!-- css -->
 <style type="text/css">
 .header { padding:20px 0 0 0px; margin-left:20px; }
-.msg {  font-size: 1em; font-family:'BMDOHYEON'; font-color:red; border-top:3px solid black; padding:20px 0 0 20px; width:700px; margin-left:20px; }
+.msg {  font-size: 1em; font-family:'BMDOHYEON'; font-color:red; border-top:3px solid black; padding:20px 0 0 20px; width:500px; margin-left:20px; }
 .msg table { margin-left:-20px;}
 .msg input { margin-left:10px;}
-.titlebg { background:#e6e6fa;}
+.titlebg { background:#e6e6fa; width:60px;}
 
 .submitbox {text-align:center; margin-top:15px;}
 .btngray { font-family:'BMDOHYEON';
@@ -36,18 +36,17 @@
 </style>
 </head>
 <body>
-	<form:form action="../write/inputbbs?bbstype=freebbs" modelAttribute="bbs" method="post">
+	<form:form action="../write/inputbbs.html?bbstype=freebbs" modelAttribute="bbs" method="post">
 	<h2 class="header"><font face='BMDOHYEON'>글쓰기</font></h2>
 	<div class="msg">
 		<table>
-			<tr><td class="titlebg">제목</td><td><form:input type="text" path="title" size="50px" /></td>
-			<%-- <td><form:input path="writer"/></td> 작성자 정보 writeController에서 세션으로 아이디얻고 그 아이디를 이 쪽 jsp에서 받아서 hidden 처리      --%>
+			<tr><td class="titlebg" style="">제 목</td><td><form:input type="text" path="title" size="50px" /></td>
 		</table>
 	</div>
 	<div class="col-sm-12" id="contentDiv" style="margin-top:5px;">
 		<label class="contentlabel contact" style="width:400px; min-height:0px; float:left;	text-align:center;"></label>
-<%-- 		<form:textarea style="width:100%; height:450px;" path="content" name="smartEditor" id="smartEditor" rows="150" cols="300"/> --%>
-		<form:textarea path="content" rows="150" cols="300"/>
+		<form:textarea style="width:100%; height:450px;" path="content" name="smartEditor" id="smartEditor" rows="150" cols="300"/> 
+<%-- 		<form:textarea path="content" rows="120" cols="100" style="width:505px;"/> --%>
 	</div>
 	<div class="submitbox">
 			<input type="submit" value="글등록" class="btnblue"  />
