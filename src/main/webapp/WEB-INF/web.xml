@@ -59,6 +59,6 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
         <filter-class>
             org.springframework.web.filter.CharacterEncodingFilter
     </filter-class>
-    
+    <!--  ignore -->
 	</filter>
 </web-app>
