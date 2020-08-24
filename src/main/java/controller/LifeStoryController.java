@@ -16,7 +16,6 @@ public class LifeStoryController {
 			String body=request.getParameter("BODY");
 			ModelAndView mav=new ModelAndView("menu_header");
 			mav.addObject("BODY",body);
-			mav.addObject(new User());
 			return mav;
 		}
 }

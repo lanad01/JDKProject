@@ -13,8 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import dao.WriteDao;
 import model.Bbs;
-import model.User;
-
 @Controller
 public class WriteController {
 	@Autowired
@@ -28,12 +26,11 @@ public class WriteController {
 			System.out.println("로그인필요");
 			mav.addObject("Loginmodal","toLogin");
 			mav.addObject("BODY","freebbs/freebbs");
-			mav.addObject(new User());
 			return mav;
 		} //로그인상태라면?
 		mav.addObject("BODY","bbs/postbbs"); // postbbs에 Bbs 빈 주입
 		mav.addObject(new Bbs());
-		mav.addObject(new User()); //
+		mav.addObject("bbsType","자유게시판");
 		return mav;
 	}
 	
@@ -41,27 +38,26 @@ public class WriteController {
 	public ModelAndView inputBBS(@Valid Bbs bbs, BindingResult bindingResult, HttpSession session, HttpServletRequest request) throws Exception {
 		System.out.println("inputBBS post 수신");
 		ModelAndView mav = new ModelAndView("menu_header");
-		String body="freebbs/freebbs"; // 등록이 완료되면 freebbs목록으로 가야합니다.
-		String bbsType=request.getParameter("bbstype");
-		System.out.println("게시판 타입"+bbsType);
 		if (bindingResult.hasErrors()) { // bidingError
-			System.out.println("bindingErrors");
+			System.out.println("inputBBs / bindingErrors");
 			System.out.println(bindingResult.getAllErrors());
 			mav.addObject("BODY", "bbs/postbbs"); // 에러메시지 객체를 postbbs에 송신
 			mav.getModel().putAll(bindingResult.getModel()); // 그러기 위한 객체
-			mav.addObject(new User());
 			return mav;
-		} // 컨트롤러에서 insert해야 하는 부분 : / bbsType
-		String id=(String) session.getAttribute("loginUser");
-		bbs.setId(id); // 세션 로그인정보를 얻어와서 아이디로 치환
-		bbs.setBbsType(bbsType);
-		System.out.println("작성자:"+bbs.getId());
-		System.out.println("글내용:"+bbs.getTitle();
-		System.out.println("작성자:"+bbs.getRegister_date();
-		writeDao.insertBBS(bbs);
+		} // 컨트롤러에서 insert해야 하는 부분 : / bbsType, user_no / form form 으로 알아서 insert된 부분 : title content 
+		String bbsType=request.getParameter("bbstype");
+		System.out.println("게시판 타입"+bbsType);
+		bbs.setBbstype(bbsType);
+		System.out.println("글내용:"+bbs.getTitle());
 		System.out.println("내용:"+bbs.getContent());
-		System.out.println("내용:"+bbs.getId());
-		this.writeDao.insertBBS(bbs);
+		String id=(String) session.getAttribute("loginUser");
+		System.out.println("세션정보: "+id);
+		Integer user_no=writeDao.getWriter(id); //세션을 통해서 얻은 id를 DB에 보내서 등가조인
+		System.out.println("user_no : "+user_no);
+		bbs.setUser_no(user_no); // 받은 유저넘버를 실질적으로 bbs객체에 삽입
+		//종합된 bbs를 최종적으로 insert, 작성일자는 Impl에서 처리
+		writeDao.insertBBS(bbs);
+		String body="freebbs/freebbs"; // 등록이 완료되면 freebbs목록으로 가야합니다.
 		mav.addObject("BODY",body); //완료 후 게시판 목록으로
 		return mav;
 	}

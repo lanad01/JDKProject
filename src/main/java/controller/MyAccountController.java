@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import model.User;
+
 @Controller
 public class MyAccountController {
 	@RequestMapping(value="/myaccount/mypage.html") // 자유게시판에서 글쓰기

@@ -120,7 +120,7 @@ function quizDisplay(quiztext) {
 	<tr>
 		<td class="key">성별</td>
 		<td class="shift">
-			<form:radiobutton path="gender" value="M" /><font face='BMDOHYEON' size="0.9em">남성</font>
+			<form:radiobutton path="gender" value="M" checked="checked"/><font face='BMDOHYEON' size="0.9em">남성</font>
 			<form:radiobutton path="gender" value="F" /><font face='BMDOHYEON' size="0.9em">여성</font>
 		</td>
 	</tr>	
@@ -172,7 +172,7 @@ function quizDisplay(quiztext) {
 				<option value="아버지의 성함은?">ㆍ아버지의 성함은?</option>
 				<option value="어머니의 성함은?">ㆍ어머니의 성함은?</option>
 			</select><br/>
-		<div><form:input type="text" path="quiz" id="quiz" plackholder="직접 작성" /></div>
+		<div><form:input type="text" path="quiz" id="quiz" plackholder="직접 작성"  /></div>
 		<font color="red" id="font" ><form:errors path="quiz"/></font>
 		</td>
 	</tr>

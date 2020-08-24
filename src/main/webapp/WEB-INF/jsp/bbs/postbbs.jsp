@@ -14,9 +14,11 @@
 <style type="text/css">
 .header { padding:20px 0 0 0px; margin-left:20px; }
 .msg {  font-size: 1em; font-family:'BMDOHYEON'; font-color:red; border-top:3px solid black; padding:20px 0 0 20px; width:500px; margin-left:20px; }
-.msg table { margin-left:-20px;}
+.msg table { margin-left:-36px;}
 .msg input { margin-left:10px;}
-.titlebg { background:#e6e6fa; width:60px;}
+.info { width:75px; font-size:0.8em; text-align:center; }
+input { font-size:0.8em;}
+#textarea{ font-size:0.8em;}
 
 .submitbox {text-align:center; margin-top:15px;}
 .btngray { font-family:'BMDOHYEON';
@@ -40,13 +42,15 @@
 	<h2 class="header"><font face='BMDOHYEON'>글쓰기</font></h2>
 	<div class="msg">
 		<table>
-			<tr><td class="titlebg" style="">제 목</td><td><form:input type="text" path="title" size="50px" /></td>
+			<tr><td><input class="info" type="text" value="제목" disabled="true"></td><td><form:input type="text" path="title" size="54px" /></td></tr>
+			<tr><td><input class="info" type="text" value="작성자명" disabled="true"></td><td><input type="text" value="${sessionScope.loginUser }" disabled="true"></td></tr>
+			<tr><td><input class="info" type="text" value="게시판타입" disabled="true"></td><td><input type="text" value="${bbsType }" disabled="true"></td></tr>
 		</table>
 	</div>
 	<div class="col-sm-12" id="contentDiv" style="margin-top:5px;">
-		<label class="contentlabel contact" style="width:400px; min-height:0px; float:left;	text-align:center;"></label>
-		<form:textarea style="width:100%; height:450px;" path="content" name="smartEditor" id="smartEditor" rows="150" cols="300"/> 
-<%-- 		<form:textarea path="content" rows="120" cols="100" style="width:505px;"/> --%>
+<!-- 		<label class="contentlabel contact" style="width:400px; min-height:0px; float:left;	text-align:center;"></label> -->
+<%-- 		<form:textarea style="width:100%; height:450px;" path="content" name="smartEditor" id="smartEditor" rows="150" cols="300"/>  --%>
+		<form:textarea id="textarea" path="content" rows="120" cols="40" style="width:505px; height:400px;" />
 	</div>
 	<div class="submitbox">
 			<input type="submit" value="글등록" class="btnblue"  />

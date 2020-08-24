@@ -5,6 +5,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.web.multipart.MultipartFile;
 
 public class User { 
+	private Integer user_no;
 	@NotNull(message="이름은 반드시 적어주세요")  //hibernate-validator 라이브러리 의존성 잡아줘야함
 	private String name;
 	@NotNull(message="닉네임은 반드시 적어주세요")
@@ -25,6 +26,12 @@ public class User {
 	private String area;
 	private String picture_url;
 	private MultipartFile picture;
+	public Integer getUser_no() {
+		return user_no;
+	}
+	public void setUser_no(Integer user_no) {
+		this.user_no = user_no;
+	}
 	public String getName() {
 		return name;
 	}

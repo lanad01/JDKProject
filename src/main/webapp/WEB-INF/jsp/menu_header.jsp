@@ -150,6 +150,7 @@ $('.searchModal').hide();
           </c:when>
          <c:otherwise> <!--  로그인 정보가 있을 경우 -->
          <li class="nav-item">
+         	<h2 style="font-color:white;">${sessionScope.loginUser }님 환영합니다</h2>
             <a class="nav-link" href="../login/logout.html" onclick="">Sign Out
               <span class="sr-only">(current)</span>
             </a>
@@ -248,7 +249,7 @@ $('.searchModal').hide();
 	<script src="../resources/vendor/jquery/jquery.min.js"></script>
 	<script src="../resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<!--  Classname으로 찾는거니까.. ../ 붙여서 상위 폴더를 가줘야한다 상우야 -->
-	<form:form action="../login/loginpost.html" modelAttribute="user" method="post">
+	<form action="../login/loginpost.html" modelAttribute="user" method="post">
 	<div id="modal" class="searchModal">
 		<div class="search-modal-content">
 			<a>로그인</a>
@@ -259,13 +260,13 @@ $('.searchModal').hide();
 							<table style="">
 								<tr><td><a>아이디</a></td>
 								
-								<tr><td><form:input path="id" maxlength="20"/><font color="red"><form:errors path="id"/></font></td>
+								<tr><td><input type="text" name="id" maxlength="20"><font color="red"></font></td>
 									<td id="social" rowspan="2" style="padding-left:10px;" ><img alt="" src="../img/social1.gif" width=35 height=35></td>
 									<td id="social" rowspan="2"><img alt="" src="../img/social2.gif" width=35 height=35></td>
 									<td id="social" rowspan="2"><img alt="" src="../img/social3.gif" width=35 height=35></td>
 									<td id="social" rowspan="2"><img alt="" src="../img/social4.gif" width=35 height=35></td>
 								<tr><td><a>비밀번호</a></td>
-								<tr><td><form:password path="password" maxlength="20"/><font color="red"><form:errors path="password"/></font></td>
+								<tr><td><input type="password" name="password" maxlength="20"/><font color="red"></font></td>
 							</table>	
 						</div><!--  내가 건들 수 있는 곳 -->
 					</div>
@@ -286,6 +287,6 @@ $('.searchModal').hide();
 			</div>
 		</div>
     </div>
-    </form:form>
+    </form>
 </body>
 </html>

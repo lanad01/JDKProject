@@ -44,10 +44,31 @@ public class RegisterController {
 		MultipartFile multiFile=user.getPicture();
 		String fileName=null; String path=null;
 		OutputStream out=null; //쓰는 객체
-		if(multiFile !=null) { //이미지 파일이 존재하는 경우
+//		if( user.getPicture().getOriginalFilename().equals("")) { //존재하지않는 경우
+//			System.out.println("빈칸으로 입력되는 경우");
+//			fileName="C:\\Users\\권상우\\Desktop\\JDKProject\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\3-5_\\upload\\default.jpg";
+//			File file=new File(fileName);
+//			out=new FileOutputStream(fileName);//파일 출력 객체 생성'
+//			BufferedInputStream bis=new BufferedInputStream(multiFile.getInputStream());//파일 입력객체
+//			byte[] buffer=new byte[8196]; //8k크기의 공간
+//			int read=0;
+//			while((read=bis.read(buffer))> 0) { //파일을 읽음
+//				out.write(buffer,0,read); // 읽은 내용을 출력될 파일로 출력
+//			}
+//			if(out != null) out.close(); //출력에 사용한 객체를 닫음
+//			if(bis != null) bis.close(); //입력에 사용한 객체를 닫음
+//		}
+		if(multiFile != null) { //이미지 파일이 존재하는 경우
+			System.out.println("multiFile!=null");
 			fileName=multiFile.getOriginalFilename();
 			path=request.getSession().getServletContext().getRealPath("/upload/"+fileName); //절대경로 획득
-			File file=new File(path);//절대경로를 이용하여 파일 생성
+			user.setPicture_url(path);
+			File file=new File(path);
+			System.out.println("file:"+file);
+			System.out.println("fileName:"+fileName);
+			System.out.println("path경로:"+path);
+			//search-ms:displayname=.plugins의%20검색%20결과&crumb=location:C%3A%5CUsers%5C권상우%5CDesktop%5CJDKProject%5C.metadata%5C.plugins\org.eclipse.wst.server.core
+			//절대경로를 이용하여 파일 생성
 			out=new FileOutputStream(path);//파일 출력 객체 생성'
 			BufferedInputStream bis=new BufferedInputStream(multiFile.getInputStream());//파일 입력객체
 			byte[] buffer=new byte[8196]; //8k크기의 공간
