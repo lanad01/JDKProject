@@ -26,5 +26,4 @@ tmp/**
 tmp/**/*
 *.tmp
 *.bak
-local.properties
-/src/main/webapp/*.xml
+local.propertiessrc/main/webapp/*.xml

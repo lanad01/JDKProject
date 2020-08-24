@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bbs">
+<insert id="putBbs" parameterType="model.Bbs">
+	insert into bbs_info values(#{seqno},#{title},#{writer},#{content},#{register_date},#{bbstype})
+</insert>
+<select id="getSeqno" resultType="Integer">
+select max(seqno) from bbs_info
+</select>
+<!--  이러면 애도 커밋이 안되는거 아냐? -->
+</mapper>
+
+<!-- SQL> create table bbs_info( -->
+<!--   2  title varchar2(100) not null, -->
+<!--   3  writer varchar2(40) not null, -->
+<!--   4  content clob, -->
+<!--   5  register_date varchar2(30), -->
+<!--   6  bbstype varchar2(30)); -->
+	
