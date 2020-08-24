@@ -3,6 +3,8 @@
 <%	request.setCharacterEncoding("UTF-8");%>
 <%	response.setContentType("text/html; charset=UTF-8");%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,21 +36,23 @@
 </style>
 </head>
 <body>
-	<form:form 
+	<form:form action="../write/inputbbs?bbstype=freebbs" modelAttribute="bbs" method="post">
 	<h2 class="header"><font face='BMDOHYEON'>글쓰기</font></h2>
 	<div class="msg">
 		<table>
-			<tr><td class="titlebg">제목</td><td><input type="text" size="50px" name="title"></td>
+			<tr><td class="titlebg">제목</td><td><form:input type="text" path="title" size="50px" /></td>
+			<%-- <td><form:input path="writer"/></td> 작성자 정보 writeController에서 세션으로 아이디얻고 그 아이디를 이 쪽 jsp에서 받아서 hidden 처리      --%>
 		</table>
 	</div>
 	<div class="col-sm-12" id="contentDiv" style="margin-top:5px;">
 		<label class="contentlabel contact" style="width:400px; min-height:0px; float:left;	text-align:center;"></label>
-		<textarea style="width:100%; height:450px;" name="smartEditor" id="smartEditor" rows="150" cols="300"></textarea>
+		<form:textarea style="width:100%; height:450px;" path="content" name="smartEditor" id="smartEditor" rows="150" cols="300"/>
 	</div>
 	<div class="submitbox">
-			<input type="button" value="글등록" class="btnblue" onclick="goHref('./');" />
-			<input type="submit" value="취소" class="btngray" />
+			<input type="submit" value="글등록" class="btnblue" onclick="goHref('./');" />
+			<input type="button" value="취소" class="btngray" />
 	</div>
+	</form:form>
 </body>
 <script type="text/javascript" src="../se2/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript"	src="//code.jquery.com/jquery-1.11.0.min.js"></script>

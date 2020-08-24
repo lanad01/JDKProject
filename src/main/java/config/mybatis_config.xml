@@ -4,5 +4,6 @@
 <configuration>
 	<mappers>
 		<mapper resource="mapper/user.xml"></mapper>
+		<mapper resource="mapper/bbs.xml"></mapper>
 	</mappers>
 </configuration>

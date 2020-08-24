@@ -290,7 +290,7 @@ font-weight: normal; font-style: normal;
 			</div>
 			<div class="searchform_right" style="float:left;">
 			<a href="../freebbs/freebbs.html?BODY=freebbs/freebbs"><input type="button" name="bbsList" value="목록으로 " /></a>
-			<input type="button" onclick="window.location.href='../write/freebbs.html?BODY=bbs/postbbs';" value="글쓰기" />
+			<input type="button" onclick="window.location.href='../write/freebbs.html';" value="글쓰기" />
 			</div>
 		</form:form>
 	</div><!--  searchForm -->

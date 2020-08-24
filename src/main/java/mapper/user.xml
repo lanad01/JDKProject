@@ -9,11 +9,22 @@
 <select id="getUser" parameterType="model.User" resultType="model.User">
 	select * from user_info where id=#{id} and password=#{password}
 </select>
-<select id="getItem" parameterType="Integer" resultType="model.Item">
-		select * from my_fruits where item_id=#{id}
-	</select>
-	<select id="getItemList" resultType="model.Item">
-		select * from my_fruits
-	</select>
 
 </mapper>
+
+<!-- SQL> desc user_info -->
+<!--  이름                                      널?      유형 -->
+<!--  NAME                                      NOT NULL VARCHAR2(20) -->
+<!--  NICK                                      NOT NULL VARCHAR2(20) -->
+<!--  BIRTH_DATE                                         VARCHAR2(20) -->
+<!--  GENDER                                             VARCHAR2(4) -->
+<!--  ID                                        NOT NULL VARCHAR2(30) -->
+<!--  PASSWORD                                  NOT NULL VARCHAR2(20) -->
+<!--  PWDCHECK                                  NOT NULL VARCHAR2(100) -->
+<!--  QUIZ                                      NOT NULL VARCHAR2(100) -->
+<!--  ANSWER                                    NOT NULL VARCHAR2(100) -->
+<!--  EMAIL                                              VARCHAR2(40) -->
+<!--  AREA                                               VARCHAR2(30) -->
+<!--  PICTURE_URL                                        VARCHAR2(100) -->
+
+<!-- SQL> -->
