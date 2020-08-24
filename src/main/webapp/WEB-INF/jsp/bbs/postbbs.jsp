@@ -46,10 +46,11 @@
 	</div>
 	<div class="col-sm-12" id="contentDiv" style="margin-top:5px;">
 		<label class="contentlabel contact" style="width:400px; min-height:0px; float:left;	text-align:center;"></label>
-		<form:textarea style="width:100%; height:450px;" path="content" name="smartEditor" id="smartEditor" rows="150" cols="300"/>
+<%-- 		<form:textarea style="width:100%; height:450px;" path="content" name="smartEditor" id="smartEditor" rows="150" cols="300"/> --%>
+		<form:textarea path="content" rows="150" cols="300"/>
 	</div>
 	<div class="submitbox">
-			<input type="submit" value="글등록" class="btnblue" onclick="goHref('./');" />
+			<input type="submit" value="글등록" class="btnblue"  />
 			<input type="button" value="취소" class="btngray" />
 	</div>
 	</form:form>

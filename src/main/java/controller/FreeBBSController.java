@@ -12,7 +12,7 @@ public class FreeBBSController {
 	@RequestMapping(value="/freebbs/freebbs.html") // 자유게시판
 	public ModelAndView freeBBS(HttpServletRequest request,String BODY) {
 		ModelAndView mav=new ModelAndView("menu_header");
-		String body=request.getParameter("BODY");
+		String body="freebbs/freebbs";
 		mav.addObject("BODY",body);
 		return mav;
 	}

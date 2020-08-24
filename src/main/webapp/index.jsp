@@ -11,7 +11,7 @@
 		<title>Welcome</title>
 	</head> 
 	<body>
-		<c:url value="/index/index.html?BODY=lifestory/lifestorymain" var="messageUrl" />
+		<c:url value="/index/index.html" var="messageUrl" />
 		<a href="${messageUrl}">Click to enter</a>
 	</body>
 </html>

@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class MyAccountController {
 	@RequestMapping(value="/myaccount/mypage.html") // 자유게시판에서 글쓰기
 	public ModelAndView test(HttpSession session,HttpServletRequest request) {
-		String body=request.getParameter("BODY");
+		String body="mypage/mypage";
 		ModelAndView mav=new ModelAndView("menu_header");
 		mav.addObject("BODY",body);
 		return mav;

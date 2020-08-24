@@ -67,7 +67,8 @@ public class RegisterController {
 
 	@RequestMapping(value = "/register/register.html") // 자유게시판에서 글쓰기
 	public ModelAndView test(HttpSession session, HttpServletRequest request) {
-		String body = request.getParameter("BODY"); // register/register.jsp
+		System.out.println("register/register수신");
+		String body = "register/register"; // register/register.jsp
 		ModelAndView mav = new ModelAndView("menu_header");
 		mav.addObject("BODY", body);
 		mav.addObject(new User()); // Bean 보내기

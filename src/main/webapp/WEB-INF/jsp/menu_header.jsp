@@ -110,9 +110,18 @@ height:40%;
 </style>
 
 <script src="../resources/vendor/jquery/jquery.min.js"></script>
-<script type="text/javascript">
+<script>
+$(function(){
+	var loginmodal = '${Loginmodal}';
+	
+	if(loginmodal == 'toLogin'){
+	loginpopup(); alert(loginmodal);
+	}else{
+		alert('분기테스트 : toLogin이 없다 => 로그인 요구가 아니다.');
+	}
+});
 function loginpopup() {
-$("#modal").show();
+			$("#modal").show();
 };
 function closeModal() {
 $('.searchModal').hide();
@@ -130,16 +139,29 @@ $('.searchModal').hide();
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive" style="margin-right:40px;">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#" onclick="loginpopup()">Sign In
+        <!--  비로그인 상태일 시 indexController에서 보낸다 세션 정보는 -->
+        <c:choose>
+         <c:when test="${sessionScope.loginUser == null}">
+         <li class="nav-item">
+            <a class="nav-link" href="../login/login.html" onclick="">Sign In
               <span class="sr-only">(current)</span>
             </a>
           </li>
+          </c:when>
+         <c:otherwise> <!--  로그인 정보가 있을 경우 -->
+         <li class="nav-item">
+            <a class="nav-link" href="" onclick="">로그인성공!
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+         </c:otherwise>
+        </c:choose>
+         <!--  비로그인 상태 종료 -->
           <li class="nav-item">
-            <a class="nav-link" href="../register/register.html?BODY=register/register">Register</a>
+            <a class="nav-link" href="../register/register.html">Register</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../myaccount/mypage.html?BODY=mypage/mypage">Account</a>
+            <a class="nav-link" href="../myaccount/mypage.html">Account</a>
           </li>
           <li class="nav-item">
           	<input type="text" name="keyword" placeholder="통합검색" class="keyword" style="width:130px;" ></li> 
@@ -159,7 +181,7 @@ $('.searchModal').hide();
 		<li class="vline"></li>
 				<li><a href="#"><span>개념글</span></a></li>
 		<li class="vline"></li>
-				<li><a href="../freebbs/freebbs.html?BODY=freebbs/freebbs" target=""><span>자유게시판</span></a>	</li>
+				<li><a href="../freebbs/freebbs.html" onClick="test();" target=""><span>자유게시판</span></a>	</li>
 		<li class="vline"></li>
 				<li><a href="#" ><span>경험담&썰</span></a></li>
 		<li class="vline"></li>
@@ -191,14 +213,6 @@ $('.searchModal').hide();
         <div style="border:1px solid; padding:0px;  background-color:#dcdcdc">
         	<font face='BMDOHYEON'>&nbsp; 회원로그인</font> 
         </div>
-        <c:choose>
-        <c:when test="${sessionScope.loginUser == null}"><!--  비로그인 상태일 시 indexController에서 보낸다 세션 정보는 -->
-        	<jsp:include page="/login/login.html"/>
-        </c:when>
-        <c:otherwise>
-        	<jsp:include page="/WEB-INF/jsp/logout/logout.jsp"/>
-        </c:otherwise>
-        </c:choose>
         <div  style="border:1px solid; padding:10px 0 15px 20px;">
         	<table>
         		<tr style="margin-left:5px;">
@@ -211,8 +225,7 @@ $('.searchModal').hide();
       </div>
       <div id="changejsp">
 		<!--  메인 콘텐츠창 include형식으로 합시다  -->
-		
-		<jsp:include page="/WEB-INF/jsp/${BODY }.jsp" flush="false"/>
+		<jsp:include page="/WEB-INF/jsp/${BODY}.jsp" flush="false"/>
 		</div>
      </div>
 	
@@ -230,11 +243,12 @@ $('.searchModal').hide();
     </div>
     <!-- /.container -->
   </footer>
-
+	
   <!-- 로그인 모달창 -->
 	<script src="../resources/vendor/jquery/jquery.min.js"></script>
 	<script src="../resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<!--  Classname으로 찾는거니까.. ../ 붙여서 상위 폴더를 가줘야한다 상우야 -->
+	<form:form action="../login/loginpost.html" modelAttribute="user" method="post">
 	<div id="modal" class="searchModal">
 		<div class="search-modal-content">
 			<a>로그인</a>
@@ -242,32 +256,36 @@ $('.searchModal').hide();
 				<div class="col-sm-12">
 					<div class="row">
 						<div class="col-sm-12"><!-- 내가 건들 수 있는 곳.. -->
-							<form action="../loginform/modallogin.html">
 							<table style="">
 								<tr><td><a>아이디</a></td>
-									
-								<tr><td><input type="text" name="id" maxlength="20"></td>
+								
+								<tr><td><form:input path="id" maxlength="20"/><font color="red"><form:errors path="id"/></font></td>
 									<td id="social" rowspan="2" style="padding-left:10px;" ><img alt="" src="../img/social1.gif" width=35 height=35></td>
 									<td id="social" rowspan="2"><img alt="" src="../img/social2.gif" width=35 height=35></td>
 									<td id="social" rowspan="2"><img alt="" src="../img/social3.gif" width=35 height=35></td>
 									<td id="social" rowspan="2"><img alt="" src="../img/social4.gif" width=35 height=35></td>
 								<tr><td><a>비밀번호</a></td>
-								<tr><td><input type="password" name="pwd" maxlength="20"></td>
-							</table>					
-							</form>
+								<tr><td><form:password path="password" maxlength="20"/><font color="red"><form:errors path="password"/></font></td>
+							</table>	
 						</div><!--  내가 건들 수 있는 곳 -->
 					</div>
 				</div>
 			</div>
+			
 			<hr>
 			<div style="float:left; text-align:center;">
-			<div style="float:left; cursor: pointer; background-color: #faf0e6; text-align: center; margin-bottom:15px; width:100px; " onClick="alert('로그인기능구현')">
-				<span class="pop_bt modalCloseBtn" style="font-size: 13pt;"><a>로그인하기</a></span></div>
-			<div style="float:left;  cursor: pointer; background-color: #faf0e6; text-align: center; margin-bottom:15px; width:100px; margin-left:50px;" onClick="closeModal()">
-				<span class="pop_bt modalCloseBtn" style="font-size: 13pt;"><a>나가기</a></span></div>
+				<div style="float:left; cursor: pointer; background-color: #dcdcdc; text-align: center; margin-bottom:13px; width:100px; " onClick="alert('로그인기능구현')">
+					<input type="submit" style="font-family:'BMDOHYEON'; font-size:0.8em; width:100px;"  value="로그인"/></div>
+					
+				<div style="float:left;  cursor: pointer; background-color: #dcdcdc; text-align: center; margin-bottom:13px; width:100px; margin-left:20px;" onClick="closeModal()">
+					<input type="button" style="font-family:'BMDOHYEON'; font-size:0.8em; width:100px;" 
+						value="회원가입" onClick="location.href='../register/register.html';"></div>
+				<div style="float:left;  cursor: pointer; background-color: #dcdcdc; text-align: center; margin-bottom:13px; width:100px; margin-left:20px;" onClick="closeModal()">
+					<input type="button" style="font-family:'BMDOHYEON'; font-size:0.8em; width:100px;" 
+						value="나가기" onClick="closeModal()"></div>
+			</div>
 		</div>
-	</div>
-</div>
+    </div>
+    </form:form>
 </body>
-
 </html>
