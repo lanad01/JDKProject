@@ -19,7 +19,6 @@
 
 </script>
 <body>
-	<div> ${postNum }</div>
 	<div class="main" style="width:730px;">
 		<div class="topbox">
 			<span class="sp_btn00" style="margin-left:-8px;"><a href="">이전글</a></span>
@@ -56,11 +55,11 @@
 		<span>댓글</span>1개
 </div>
 <div class="sbjbox" style="width:730px; margin-top:29px;">
-	<c:forEach  begin="0" end="3">
+	<c:forEach  var="rep" items="${REP}" >
 		<table class="commentTable">
 			<tr><td><img src="../img/noprofile.gif" alt="" width=40 height=60 style="position:static;"></td>
 				<td style="padding-left:19px;">
-				<span style="font-weight:strong; font-size:15px;">점심뭐먹지 ---</span><span style="font-weight:300"> (49.197.103.♡) 2020.08.17 01:36</span><br/><br/>
+				<span style="font-weight:strong; font-size:15px;">${rep.user_no }</span><span style="font-weight:300"> (49.197.103.♡) 2020.08.17 01:36</span><br/><br/>
 				<span>아니,,, 뭐지? 내가 쓴건데 ;;;
 					암튼 다이빙 같이 갈 구댕이 찾습니다.다들 열심히 사세요.
 					어차피 늙으면 몸 어디 하나는 고장난다고 합니다.
@@ -84,12 +83,14 @@
 <div class="sbjbox" style="width:730px; margin-top:29px;">
 	<c:choose>
 		<c:when test="${sessionScope.loginUser == null}">
-			<h2>댓글 쓰기 - 로그인 한 후 댓글 작성 권한이 있을 경우 이용하실 수 있습니다.</h2>
-			<a href="../login/login.html"><button value="로그인" class="loginbtn"></button></a>
+				<h2 class="loginheader"><span><strong>댓글 쓰기 - </strong> <font color="#c0c0c0"> 로그인 한 후 댓글 작성 권한이 있을 경우 이용하실 수 있습니다.</font></span></h2>
+				<a href="../login/login.html" class="logbtn"><button class="loginbtn">로그인</button></a>
 		</c:when>
 		<c:otherwise>
 			<h2 class="repheader"><strong>댓글 쓰기 - </strong> <font color="#c0c0c0"> 타인을 비방하거나 개인정보를 유출하는 댓글을 삼가주세요.</font></h2>
-			<form:form action="../reply/reply.html" method="post" modelAttribute="reply">
+			<form:form action="../reply/reply.html?seqno=${BBS.seqno }" method="post" modelAttribute="reply">
+			<form:hidden path="repgroupno" value="0"/>
+			<!--  자 보자 내가 여기서 보낼 수 있는 정보가 뭐야? 우선 댓글내용. 게시글 속성(게시글 번호),  -->
 			<table>
 				<tr><td class="tarea"><form:textarea path="content" rows="3" cols="90"/></td>
 				<tr><td class="repbtn"><input type="submit" value="댓글등록" ></td>

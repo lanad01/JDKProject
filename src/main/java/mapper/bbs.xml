@@ -9,7 +9,7 @@
 	select max(seqno) from bbs_info
 </select>
 <select id="getUserNo" resultType="Integer" parameterType="String">
-	select user_no from user_info where id='aldne' 
+	select user_no from user_info where id=#{id} 
 </select>
 <select id="getBBSList" resultType="model.Bbs" parameterType="String">
 	select * from bbs_info where bbstype=#{bbstype}

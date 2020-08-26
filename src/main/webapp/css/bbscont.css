@@ -69,9 +69,10 @@ display: inline-block; white-space: pre-line; overflow: visible;
 .commentTable td{font: 10px BMDOHYEON; padding-bottom:20px;}
 .oneLine { font: 10px BMDOHYEON;}
 
-
 .sbjbox > h2 { font: 13px BMDOHYEON; }
 .repheader { margin-top:12px; margin-left:10px;}
+.loginheader > span {margin-top:15px; padding-left:150px; text-align:center;}
 .sbjbox > table { font: 11px BMDOHYEON; }
-.repbtn { float:right; font: 11px BMDOHYEON;}
+.repbtn  { float:right; font: 11px BMDOHYEON;}
+.logbtn { padding-left:350px; font: 15px BMDOHYEON;}
 .tarea { padding-left:12px;}
