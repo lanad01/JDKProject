@@ -115,9 +115,8 @@ $(function(){
 	var loginmodal = '${Loginmodal}';
 	
 	if(loginmodal == 'toLogin'){
-	loginpopup(); alert(loginmodal);
+	loginpopup(); 
 	}else{
-		alert('분기테스트 : toLogin이 없다 => 로그인 요구가 아니다.');
 	}
 });
 function loginpopup() {
@@ -182,7 +181,7 @@ $('.searchModal').hide();
 		<li class="vline"></li>
 				<li><a href="#"><span>개념글</span></a></li>
 		<li class="vline"></li>
-				<li><a href="../bbs/freebbs.html" onClick="test();" target=""><span>자유게시판</span></a>	</li>
+				<li><a href="../bbs/bbs.html?bbstype=freebbs" onClick="test();" target=""><span>자유게시판</span></a>	</li>
 		<li class="vline"></li>
 				<li><a href="#" ><span>경험담&썰</span></a></li>
 		<li class="vline"></li>
@@ -194,9 +193,9 @@ $('.searchModal').hide();
   				<ul id="main-menu">
   	  				<li><font face='BMDOHYEON'><a href="../lifestory/lifestorymain.html?BODY=lifestory/lifestorymain">생활기</a></font>
      					<ul id="sub-menu">
-       						<li><font face='BMDOHYEON' size="1.3"; ><a href="#" aria-label="subemnu"><span>▶&nbsp;별달고 꺼드럭거리 싶어서 쓰는 생활기</span></a></font></li>
-       						<li><font face='BMDOHYEON' size="1.3"; ><a href="#" aria-label="subemnu">▶&nbsp;에스컬레이터 생활기</a></font></li>			
-       						<li><font face='BMDOHYEON' size="1.3"; ><a href="#" aria-label="subemnu">▶&nbsp;보이쉬재패니즈</a></font></li>
+       						<li><font face='BMDOHYEON' size="1.3" ><a href="#" aria-label="subemnu"><span>▶&nbsp;별달고 꺼드럭거리 싶어서 쓰는 생활기</span></a></font></li>
+       						<li><font face='BMDOHYEON' size="1.3" ><a href="#" aria-label="subemnu">▶&nbsp;에스컬레이터 생활기</a></font></li>			
+       						<li><font face='BMDOHYEON' size="1.3" ><a href="#" aria-label="subemnu">▶&nbsp;보이쉬재패니즈</a></font></li>
       					</ul>
     				</li>
     			</ul>
@@ -249,7 +248,7 @@ $('.searchModal').hide();
 	<script src="../resources/vendor/jquery/jquery.min.js"></script>
 	<script src="../resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<!--  Classname으로 찾는거니까.. ../ 붙여서 상위 폴더를 가줘야한다 상우야 -->
-	<form action="../login/loginpost.html" modelAttribute="user" method="post">
+	<form action="../login/loginpost.html" method="post">
 	<div id="modal" class="searchModal">
 		<div class="search-modal-content">
 			<a>로그인</a>

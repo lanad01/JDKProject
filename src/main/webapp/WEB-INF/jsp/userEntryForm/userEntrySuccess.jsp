@@ -10,7 +10,7 @@
 <title>가입자 등록 완료</title>
 </head>
 <body>
-<%@ include file="/WEB-INF/jsp/menu_header.jsp" %>
+<%-- <%@ include file="/WEB-INF/jsp/menu_header.jsp" %> --%>
 <h2 align="center">가입자 등록 완료</h2>
 <div align="center" class="body">
 <b><font color="red">등록이 완료</font></b>

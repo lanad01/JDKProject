@@ -1,0 +1,77 @@
+@charset "EUC-KR";
+.main {	margin: 30px 0 0 10px;}
+
+@font-face {
+	font-family: 'BMDOHYEON';
+	src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff');
+	format ('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+span.sp_btn00 {
+    display: inline-block;
+    border: #DEDFDE solid 1px;
+}
+span.sp_btn00 {
+    display: inline-block;
+    border: #DEDFDE solid 1px;
+}
+span.sp_btn00 a {
+    display: inline-block;
+    padding: 4px 8px;
+    color:black;
+    font: 13px BMDOHYEON;
+    letter-spacing: -1px;
+    text-decoration: none;
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-top: #FFFFFF 1px solid;
+}
+.date{ float:right; }
+.topbox div.topside {
+    float: right;
+}
+
+.sbjbox {
+    margin-top: 10px;
+    padding: 5px 10px 5px 10px;
+    border: solid;
+    border-width: 2px 1px 1px 1px;
+}
+.sbjbox .subject {
+    margin: 0;
+    padding: 10px 0 10px 0;
+}
+.sbjbox .subject h1 {
+    margin: 0;
+    padding: 0;
+    font: bold 14px BMDOHYEON;
+}
+
+.sbjbox .subject .date {
+    float: right;
+    margin: -7px 0 0 0;
+    text-align: right;
+    font: 10px BMDOHYEON;
+}
+.sbjbox .content {
+display: inline-block; white-space: pre-line; overflow: visible; 
+ font: 11px BMDOHYEON;  
+}
+.bottom {
+    padding: 10px 0 10px 0;
+    text-align: left;
+}
+.bottom div.bottomside {
+    float: right; margin-right:9px;
+}
+.commentHeader { font: 11px BMDOHYEON; } 
+.commentTable{ margin:10px 10px 10px 15px; border-bottom:2px dotted silver;  }
+.commentTable td{font: 10px BMDOHYEON; padding-bottom:20px;}
+.oneLine { font: 10px BMDOHYEON;}
+
+
+.sbjbox > h2 { font: 13px BMDOHYEON; }
+.repheader { margin-top:12px; margin-left:10px;}
+.sbjbox > table { font: 11px BMDOHYEON; }
+.repbtn { float:right; font: 11px BMDOHYEON;}
+.tarea { padding-left:12px;}

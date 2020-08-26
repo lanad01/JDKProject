@@ -31,7 +31,10 @@ public class LoginController {
           session.setAttribute("loginUser", user.getId());//유저 아디로 세션생성
        }
        model.addAttribute("BODY","freebbs/freebbs");
-       return "menu_header";
+       model.addAttribute("bbstype","freebbs");
+       return "redirect:/bbs/bbs.html?bbstype=freebbs";
+//       return "menu_header";
+//       return new ModelAndView("redirect:/bbs/bbs.html?bbstype=freebbs");
     }
 //	@RequestMapping(value="/login/loginpost.html" , method=RequestMethod.POST)
 //	public ModelAndView login(
@@ -68,7 +71,7 @@ public class LoginController {
 		String body="freebbs/freebbs"; // 우선 뽑아내는 화면은 이거고
 		mav.addObject("BODY",body);
 		mav.addObject("Loginmodal","toLogin");
-		return mav;
+		return new ModelAndView("redirect:/bbs/bbs.html?bbstype=freebbs");
 	}
 	
 	@RequestMapping(value="/login/logout.html")
@@ -77,9 +80,9 @@ public class LoginController {
 		session.invalidate();
 		//jsp선언 logout/logout.jsp
 		ModelAndView mav=new ModelAndView("menu_header");
-		String body="freebbs/freebbs";
-		mav.addObject("BODY",body);
+//		String body="freebbs/freebbs";
+//		mav.addObject("BODY",body);
 		//mav.setViewName("logout/logout");
-		return mav;
+		return new ModelAndView("redirect:/bbs/bbs.html?bbstype=freebbs");
 	}
 }

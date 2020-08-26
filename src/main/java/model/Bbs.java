@@ -8,7 +8,6 @@ public class Bbs { // 포인트는 테이블 따로 둡시다
 	private String title;
 	private Integer user_no;
 	private String register_date;
-	@NotEmpty(message="글 내용을 입력하세요")
 	private String content;
 	private String bbstype;
 	public Integer getSeqno() {

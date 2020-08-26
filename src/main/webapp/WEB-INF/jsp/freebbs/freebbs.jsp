@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,9 +82,20 @@ font-weight: normal; font-style: normal;
 					</tr>
 				</thead>
 				<tbody>
+					<c:forEach var="bbs" items="${LIST }">
 					<tr class="noticetr" id="bbsBottomBorder" >
 						<td><img src="../img/notice.gif" alt="공지" class="notice" /></td>
-						<td class="b"><a href="../post/bbsview.html?BODY=freebbs/bbsmain">레벨업 필요 글, 댓글 개수 안내</a><span
+						<td class="b"><a href="../bbs/bbsview.html?seqno=${bbs.seqno }">${bbs.title }</a><span
+							class="comment">(141+1)</span></td>
+						<td class="name" align="center">${bbs.user_no }</td>
+						<td class="hit">86193</td>
+						<td class="sdate">${bbs.register_date }</td>
+						<td class="score">11</td>
+					</tr>
+					</c:forEach>
+					<tr class="noticetr" id="bbsBottomBorder" >
+						<td><img src="../img/notice.gif" alt="공지" class="notice" /></td>
+						<td class="b"><a href="../bbs/bbsview.html?bbstype=free">레벨업 필요 글, 댓글 개수 안내</a><span
 							class="comment">(141+1)</span></td>
 						<td class="name" align="center">브릴</td>
 						<td class="hit">86193</td>
@@ -146,96 +158,6 @@ font-weight: normal; font-style: normal;
 						<td class="sdate">09:30</td>
 						<td class="score">0</td>
 					</tr>
-					<tr id="bbsBottomBorder">
-						<td class="snum">80179</td>
-						<td class="b"><a href="/?m=bbs&amp;uid=103176">안녕하세요 호주
-								갈 수 있을까여</a> <span class="comment">(3+3)</span></td>
-						<td class="name" align="center"><a href="#">워홀처음오는</a></td>
-						<td class="hit">185</td>
-						<td class="sdate">00:18</td>
-						<td class="score">0</td>
-					</tr>
-					<tr id="bbsBottomBorder">
-						<td class="snum">80178</td>
-						<td class="b"><a href="#">텍스레비면제에관해서</a> <span
-							class="comment">(3)</span></td>
-						<td class="name" align="center"><a href="#">블번덩이</a></td>
-						<td class="hit">161</td>
-						<td class="sdate">08.10</td>
-						<td class="score">0</td>
-					</tr>
-					<tr id="bbsBottomBorder">
-						<td class="snum">80177</td>
-						<td class="b"><a href="#">인종차별은 우리만 당하는게 아니구나</a> <span
-							class="comment">(1)</span></td>
-						<td class="name" align="center"><a href="#">거렁뱅</a></td>
-						<td class="hit">236</td>
-						<td class="sdate">08.10</td>
-						<td class="score">0</td>
-					</tr>
-					<tr id="bbsBottomBorder">
-						<td class="snum">80176</td>
-						<td class="b"><a href="#">택스리턴 신청하니 돈내라는데</a> <span
-							class="comment">(2)</span></td>
-						<td class="name" align="center"><a href="#">시봉새</a></td>
-						<td class="hit">236</td>
-						<td class="sdate">08.10</td>
-						<td class="score">0</td>
-					</tr>
-					<tr id="bbsBottomBorder">
-						<td class="snum">80176</td>
-						<td class="b"><a href="#">택스리턴 신청하니 돈내라는데</a> <span
-							class="comment">(2)</span></td>
-						<td class="name" align="center"><a href="#">프레임</a></td>
-						<td class="hit">236</td>
-						<td class="sdate">08.10</td>
-						<td class="score">0</td>
-					</tr>
-					<tr id="bbsBottomBorder">
-						<td class="snum">35231</td>
-						<td class="b"><a href="#">청소 주급 꿀 잡 ㅇㅈ</a> <span
-							class="comment">(2)</span></td>
-						<td class="name" align="center"><a href="#">덴데</a></td>
-						<td class="hit">236</td>
-						<td class="sdate">08.10</td>
-						<td class="score">0</td>
-					</tr>
-					<tr id="bbsBottomBorder">
-						<td class="snum">35231</td>
-						<td class="b"><a href="#">벌금내야하는데 ㅠㅠ</a> <span
-							class="comment">(2)</span></td>
-						<td class="name" align="center"><a href="#">아소크림</a></td>
-						<td class="hit">136</td>
-						<td class="sdate">08.10</td>
-						<td class="score">1</td>
-					</tr>
-					<tr id="bbsBottomBorder">
-						<td class="snum">80175</td>
-						<td class="b"><a href="#">퇴근 후 맥주 세잔</a> <span
-							class="comment">(2)</span></td>
-						<td class="name" align="center"><a href="#">jasper</a></td>
-						<td class="hit">236</td>
-						<td class="sdate">08.10</td>
-						<td class="score">0</td>
-					</tr>
-					<tr id="bbsBottomBorder">
-						<td class="snum">35231</td>
-						<td class="b"><a href="#">두드리면 광명이 온다</a> <span
-							class="comment">(2)</span></td>
-						<td class="name" align="center"><a href="#">파이썬개발자</a></td>
-						<td class="hit">146</td>
-						<td class="sdate">08.10</td>
-						<td class="score">1</td>
-					</tr>
-					<tr id="bbsBottomBorder">
-						<td class="snum">35231</td>
-						<td class="b"><a href="#">질문충이 문제다 항상</a> <span
-							class="comment">(2)</span></td>
-						<td class="name" align="center"><a href="#">JAPJAP</a></td>
-						<td class="hit">123</td>
-						<td class="sdate">08.10</td>
-						<td class="score">0</td>
-					</tr>
 				</tbody>
 			</table>
 		</div>
@@ -290,7 +212,8 @@ font-weight: normal; font-style: normal;
 			</div>
 			<div class="searchform_right" style="float:left;">
 			<a href="../bbs/freebbs.html"><input type="button" name="bbsList" value="목록으로 " /></a>
-			<input type="button" onclick="window.location.href='../write/freebbs.html';" value="글쓰기" />
+			<a href="../write/freebbs.html"><input type="button" name="bbsList" value="글쓰기 " /></a>
+<!-- 			<input type="button" onclick="window.location.href='../write/freebbs.html';" value="글쓰기" /> -->
 			</div>
 		</form:form>
 	</div><!--  searchForm -->

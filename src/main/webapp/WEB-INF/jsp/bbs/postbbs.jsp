@@ -11,30 +11,8 @@
 <meta charset="UTF-8">
 <title>글쓰기</title>
 <!-- css -->
+<link rel="stylesheet" href="../css/postbbs.css">
 <style type="text/css">
-.header { padding:20px 0 0 0px; margin-left:20px; }
-.msg {  font-size: 1em; font-family:'BMDOHYEON'; font-color:red; border-top:3px solid black; padding:20px 0 0 20px; width:500px; margin-left:20px; }
-.msg table { margin-left:-36px;}
-.msg input { margin-left:10px;}
-.info { width:75px; font-size:0.8em; text-align:center; }
-input { font-size:0.8em;}
-#textarea{ font-size:0.8em;}
-
-.submitbox {text-align:center; margin-top:15px;}
-.btngray { font-family:'BMDOHYEON';
-    cursor: pointer;
-    border: #666666 solid 1px;
-    background: #B3B3B3 left bottom repeat-x;
-    color: #ffffff;
-    height: 21px;
-}
-.btnblue { font-family:'BMDOHYEON';
-    cursor: pointer;
-    border: #3399DD solid 1px;
-    background: #33C9FD left bottom repeat-x;
-    color: #ffffff;
-    height: 21px;
-}
 </style>
 </head>
 <body>

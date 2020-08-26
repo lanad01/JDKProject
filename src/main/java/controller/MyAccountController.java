@@ -16,6 +16,8 @@ public class MyAccountController {
 		String body="mypage/mypage";
 		ModelAndView mav=new ModelAndView("menu_header");
 		mav.addObject("BODY",body);
+		String id=(String) session.getAttribute("loginUser");
+		
 		return mav;
 	}
 }

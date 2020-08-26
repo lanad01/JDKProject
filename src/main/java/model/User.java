@@ -2,25 +2,26 @@ package model;
 
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
 public class User { 
 	private Integer user_no;
-	@NotNull(message="이름은 반드시 적어주세요")  //hibernate-validator 라이브러리 의존성 잡아줘야함
+	@NotEmpty(message="이름은 반드시 적어주세요")  //hibernate-validator 라이브러리 의존성 잡아줘야함
 	private String name;
-	@NotNull(message="닉네임은 반드시 적어주세요")
+	@NotEmpty(message="닉네임은 반드시 적어주세요")
 	private String nick;
 	private String birth_date;
 	private String gender;
-	@NotNull(message="아이디는 반드시 적어주세요")
+	@NotEmpty(message="아이디는 반드시 적어주세요")
 	private String id;
-	@NotNull(message="비밀번호는 반드시 적어주세요")
+	@NotEmpty(message="비밀번호는 반드시 적어주세요")
 	private String password;
-	@NotNull(message="비밀번호 확인은 필수입니다.")
+	@NotEmpty(message="비밀번호 확인은 필수입니다.")
 	private String pwdCheck;
-	@NotNull(message="비밀번호 확인질문은 필수입니다.")
+	@NotEmpty(message="비밀번호 확인질문은 필수입니다.")
 	private String quiz;
-	@NotNull(message="비밀번호 확인답변은 필수입니다.")
+	@NotEmpty(message="비밀번호 확인답변은 필수입니다.")
 	private String answer;
 	private String email;
 	private String area;

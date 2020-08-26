@@ -4,9 +4,11 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          id="WebApp_ID" version="2.5">
-
+	
     <display-name>3-5_</display-name>
-    
+    <welcome-file-list>
+        <welcome-file>/WEB-INF/menu_header.html</welcome-file>
+    </welcome-file-list>
    <!--
 		- Location of the XML file that defines the root application context.
 		- Applied by ContextLoaderListener.
