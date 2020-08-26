@@ -55,10 +55,16 @@ public class RepDaoImpl implements RepDao {
 		
 	}
 	public List<Reply> getRepList(Integer seqno) { //bbscont에 뿌려 낼 리플리스트
+		System.out.println("getRepList에 들어가는 seqno : "+seqno);
 		return session.selectList("rep.getRepList",seqno);
 	}
-	public String getReplier(Integer user_no) { //
-		return null;
+	public List<Reply> getRereList(Integer reqno) { // bbscont에 뿌려 낼 대댓글 리스트
+		System.out.println("대댓글 List에 들어가는 reqno : "+reqno);
+		return session.selectList("rep.getRereList",reqno);
 	}
+	public String getReplier(Integer user_no) { //
+		return session.selectOne("rep.getReplier",user_no);
+	}
+	
 
 }

@@ -18,6 +18,13 @@ public class ReplyController {
 	WriteDao writeDao;
 	@Autowired
 	RepDao repDao;
+	@RequestMapping(value="/reply/replyview.html")
+	public ModelAndView replyView(Reply rep, HttpSession session, HttpServletRequest request,Integer repno) {
+		System.out.println("reply/replyView 수신");
+		ModelAndView mav=new ModelAndView("bbs/rereList");
+		System.out.println("reply/replyview repno : "+repno);
+		return mav;
+	}
 	@RequestMapping(value="/reply/reply.html")
 	public ModelAndView replyPost(Reply rep, HttpSession session, HttpServletRequest request,Integer seqno,Integer repgroupno,Integer repno) { //bbscont에서 보내주는 게시판 seqno정보
 		ModelAndView mav=new ModelAndView("menu_header");
@@ -31,7 +38,7 @@ public class ReplyController {
 		System.out.println("reply/reply user 로그인"+id);
 		Integer user_no=writeDao.getWriter(id);
 		System.out.println("reply/reply 최종 login user_no :"+user_no);
-		
+		String repType="";
 		if(repgroupno == 0) {
 			System.out.println("원댓글 추가");
 			rep.setRepgroupno(repgroupno); //원댓글 추가를 통한 댓글 추가 시 원댓글만 추가 
@@ -51,11 +58,12 @@ public class ReplyController {
 			rep.setUser_no(user_no);
 			rep.setSeqno(seqno); //속한 게시글은 댓글과 함께 가두 좋다
 			repDao.entryReRep(rep);
+			repType="대댓글";
 		}
 		System.out.println("최종 content: "+rep.getContent());
 		System.out.println("최종 groupno: "+rep.getRepgroupno());
 		System.out.println("최종 repno: "+rep.getRepno());
-		
+		System.out.println("최종 댓글 타입 : "+repType);
 		String body="bbs/bbscont";
 		mav.addObject("BODY",body);
 		return mav;

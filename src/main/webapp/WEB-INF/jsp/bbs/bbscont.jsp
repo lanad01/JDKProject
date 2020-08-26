@@ -50,6 +50,8 @@
 	</div>
 	
 </div>
+<!-- <div class="commentBox"> -->
+<%-- <jsp:include page="/reply/replyview.html" flush="false"/> --%>
 <div class="commentHeader" style="float:left;">
 		<img src="../img/comment.gif" alt="">
 		<span>댓글</span>1개
@@ -59,24 +61,22 @@
 		<table class="commentTable">
 			<tr><td><img src="../img/noprofile.gif" alt="" width=40 height=60 style="position:static;"></td>
 				<td style="padding-left:19px;">
-				<span style="font-weight:strong; font-size:15px;">${rep.user_no }</span><span style="font-weight:300"> (49.197.103.♡) 2020.08.17 01:36</span><br/><br/>
-				<span>아니,,, 뭐지? 내가 쓴건데 ;;;
-					암튼 다이빙 같이 갈 구댕이 찾습니다.다들 열심히 사세요.
-					어차피 늙으면 몸 어디 하나는 고장난다고 합니다.
-					몸은 소모품이니까, 최대한 돈으로 바꿔놓으세요.
-				</span>
+				<span style="font-weight:strong; font-size:15px;">${REPLIER }</span><span style="font-weight:300"> (49.197.103.♡) 2020.08.17 01:36</span><br/><br/>
+				<span>${rep.content }				</span>
 				</td>
 			</tr>
 		</table>
-		<table class="oneLine" style="margin:10px 10px 10px 15px;">
-			<tr><td><img src="../img/oneline.PNG" style="display:inline"></td><td><img src="../img/noprofile.gif" alt="" width=40 height=60 style="position:static; display:inline" ></td>
-				<td style="padding-left:19px;">
-				<span style="font-weight:strong; font-size:15px;">덴데쟈네카 ---</span><span style="font-weight:300"> (49.197.103.♡) 2020.08.17 01:36</span><br/><br/>
-				<span>돈은 있다가도 없는 것 아니겠습니까?
-				</span>
-				</td>
-			</tr>
-		</table>
+		<!--  대댓글은 같은 repno를 가지되 repgroupno가 하나씩 증가되는 로직이다 -->
+		<jsp:include page="/reply/replyview.html?repno=${rep.repno }" flush="false"/>
+<!-- 		<table class="oneLine" style="margin:10px 10px 10px 15px;"> -->
+<!-- 			<tr><td><img src="../img/oneline.PNG" style="display:inline"></td><td><img src="../img/noprofile.gif" alt="" width=40 height=60 style="position:static; display:inline" ></td> -->
+<!-- 				<td style="padding-left:19px;"> -->
+<!-- 				<span style="font-weight:strong; font-size:15px;">덴데쟈네카 ---</span><span style="font-weight:300"> (49.197.103.♡) 2020.08.17 01:36</span><br/><br/> -->
+<!-- 				<span>돈은 있다가도 없는 것 아니겠습니까? -->
+<!-- 				</span> -->
+<!-- 				</td> -->
+<!-- 			</tr> -->
+<!-- 		</table> -->
 		
 	</c:forEach>
 </div>
@@ -99,5 +99,6 @@
 		</c:otherwise>
 	</c:choose>
 </div>
+<!-- </div>  commentBox종료 -->
 </body>
 </html>

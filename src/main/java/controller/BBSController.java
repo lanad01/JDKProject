@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +33,6 @@ public class BBSController {
 		System.out.println("bbsType : "+bbstype);
 		List<Bbs> fbList=bbsListDao.getBBSList(bbstype);
 		mav.addObject("LIST",fbList);
-		
 		String body="freebbs/freebbs";
 		mav.addObject("BODY",body);
 		
@@ -53,14 +53,22 @@ public class BBSController {
 		mav.addObject("WRITER",writer);
 		mav.addObject("BBS",bbsDetail);
 		//bbsDetail종료 
-	
+		
 		//ReplyDetail
 		List<Reply> rpList=repDao.getRepList(seqno); //seqno는 jsp에서 파라미터로 보내준다. ${seqno}말이다
 		mav.addObject("REP",rpList);
+		System.out.println("seqno가 "+seqno+"인 글의 댓글 갯수는 "+rpList.size());
 		//댓글 작성자 아이디를 얻기 위한 로직 
-//		String replier=repDao
+		for( int i = 0; i < rpList.size(); i++){
+			String replier=repDao.getReplier(rpList.get(i).getUser_no());
+			System.out.println("Replier 반복자:"+replier);
+			mav.addObject("REPLIER",replier);
+		}
 		
-		System.out.println(rpList.get(1));
+		
+		//ReReplyDetail
+//		List<Reply> rereList=repDao.getRereList(repno);
+		
 		String body="bbs/bbscont";
 		mav.addObject("BODY",body);
 		mav.addObject(new Reply()); //리플객체 주입
