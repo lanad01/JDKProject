@@ -11,58 +11,9 @@
 <title>Insert title here</title>
 
 <link	href='https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff'	rel='stylesheet' type='text/css'>
-
+<link rel="stylesheet" href="../css/mypage.css">
 <style type="text/css">
-.main {	margin: 20px 0 0 10px;}
 
-@font-face {
-	font-family: 'BMDOHYEON';
-	src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff');
-	format ('woff');
-	font-weight: normal;
-	font-style: normal;
-}
-.msg {
-	font-size: 1em;
-	font-family: 'BMDOHYEON';
-	font-color: red;
-	border-top: 3px solid black;
-	width: 700px;
-}
-.msg a {color: black;}
-.xr {	margin-top: -10px;}
-.xr li {
-	position: relative;
-	top: 6px;
-	height: 26px;
-	list-style-type: none;
-	float: left;
-	border-top: #dfdfdf solid 1px;
-	border-right: #dfdfdf solid 1px;
-	border-bottom: #dfdfdf solid 1px;
-	background: #f9f9f9;
-	cursor: pointer;
-	color: #666666;
-	float: right;
-	margin-left: 10px;
-}
-.morebox {	display: none;}
-.xr li .morebox li {
-	margin-left: 10px;
-	list-style-type: none;
-	float: none;
-	height: 15px;
-	margin-top: 7px;
-	background: #ffffff;
-}
-.xr li .morebox li a {	text-decoration: none;}
-
-
-.rcontent div {	float: left;}
-.Explain {	margin-left: 20px;}
-.region{width:350px; height:300px; padding-left:20px;}
-.region li{ height:20px; }
-.region h5 { border-bottom:1px dotted silver; font-size:1em; margin-right:150px; background-color:#dcdcdc;}
 </style>
 </head>
 <script type="text/javascript">
@@ -103,11 +54,12 @@
 			<br/>
 			<div class="rcontent">
 				<div class="photo">
-					<img alt="" src="../img/profile.jpg">
+					<img alt="내 사진" src="${pageContext.request.contextPath}/upload/${USER.picture_url }"  
+					width="100" height="70">
 				</div>
 				<div class="Explain">
-					이 곳은 권상우(덴데)님을 위한 공간입니다. <br /> 회원님의 활동내역을 실시간으로 확인하실 수 있습니다.<br />
-					회원등급 : 레벨11(11/25) 포인트 : 1,362 가입일 : 2015.10.21 (1759일전)
+					이 곳은 ${USER.name }(${USER.nick })님을 위한 공간입니다. <br /> 회원님의 활동내역을 실시간으로 확인하실 수 있습니다.<br />
+					회원등급 : 레벨11(11/25) 포인트 : 1,362 가입일 : 
 				</div>
 			</div><br/><br/><br/><br/>
 			<div class="myAcitivity" style="border-top:3px solid black; border-bottom:3px solid black; " >

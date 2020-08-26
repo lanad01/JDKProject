@@ -12,10 +12,10 @@
 	insert into reply_info values(#{repno},#{repgroupno},#{seqno},#{user_no},#{register_date},#{content})
 </insert>
 <select id="getRepList"  resultType="model.Reply" parameterType="Integer">
-	select * from reply_info where seqno=#{seqno} <!--  입력된 seqno와 일치하는 seqno를 가진 bbs_info가 가진 모드 reply를 뽑아낸다  -->
+	select * from reply_info where seqno=#{seqno} and repgroupno=0<!--  입력된 seqno와 일치하는 seqno를 가진 bbs_info가 가진 모드 reply를 뽑아낸다  -->
 </select>
 <select id="getRereList" resultType="model.Reply" parameterType="Integer">
-	select * from reply_info where repno=#{repno} <!-- 같은 부모댓글 번호를 가진 모든 리필들의 리스트는 대댓글로서 처리한다 -->
+	select * from reply_info where repno=#{repno} and repgroupno>0 <!-- 같은 부모댓글 번호를 가지며 repgroupno가 0 이상인 모든 리플들을 리스트업한다 -->
 </select>
 <select id="getReplier" resultType="String" parameterType="Integer">
 	select name from user_info where user_no=#{user_no}

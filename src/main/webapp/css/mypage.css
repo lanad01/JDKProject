@@ -1,0 +1,51 @@
+@charset "EUC-KR";
+.main {	margin: 20px 0 0 10px;}
+
+@font-face {
+	font-family: 'BMDOHYEON';
+	src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff');
+	format ('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+.msg {
+	font-size: 1em;
+	font-family: 'BMDOHYEON';
+	font-color: red;
+	border-top: 3px solid black;
+	width: 700px;
+}
+.msg a {color: black;}
+.xr {	margin-top: -10px;}
+.xr li {
+	position: relative;
+	top: 6px;
+	height: 26px;
+	list-style-type: none;
+	float: left;
+	border-top: #dfdfdf solid 1px;
+	border-right: #dfdfdf solid 1px;
+	border-bottom: #dfdfdf solid 1px;
+	background: #f9f9f9;
+	cursor: pointer;
+	color: #666666;
+	float: right;
+	margin-left: 10px;
+}
+.morebox {	display: none;}
+.xr li .morebox li {
+	margin-left: 10px;
+	list-style-type: none;
+	float: none;
+	height: 15px;
+	margin-top: 7px;
+	background: #ffffff;
+}
+.xr li .morebox li a {	text-decoration: none;}
+
+
+.rcontent div {	float: left;}
+.Explain {	margin-left: 20px;}
+.region{width:350px; height:300px; padding-left:20px;}
+.region li{ height:20px; }
+.region h5 { border-bottom:1px dotted silver; font-size:1em; margin-right:150px; background-color:#dcdcdc;}

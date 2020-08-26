@@ -12,7 +12,9 @@
 <select id="getMaxUserNo" resultType="Integer">
 	select max(user_no) from user_info
 </select>
-
+<select id="getAccountInfo" resultType="model.User" parameterType="String">
+	select * from user_info where id=#{id}
+</select>
 </mapper>
 
 <!-- SQL> desc user_info -->

@@ -149,7 +149,9 @@ $('.searchModal').hide();
           </c:when>
          <c:otherwise> <!--  로그인 정보가 있을 경우 -->
          <li class="nav-item">
-         	<h2 style="font-color:white;">${sessionScope.loginUser }님 환영합니다</h2>
+         	<h2 style="font-family:'BMDOHYEON'; font-size:1.8em; color:#dcdcdc;">${sessionScope.loginUser }님 환영합니다 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2>
+          </li>
+         <li class="nav-item">
             <a class="nav-link" href="../login/logout.html" onclick="">Sign Out
               <span class="sr-only">(current)</span>
             </a>
@@ -157,9 +159,16 @@ $('.searchModal').hide();
          </c:otherwise>
         </c:choose>
          <!--  비로그인 상태 종료 -->
+        <c:choose>
+        	<c:when test="${sessionScope.loginUser == null}">
           <li class="nav-item">
             <a class="nav-link" href="../register/register.html">Register</a>
           </li>
+          	</c:when>
+          	<c:otherwise>
+          	
+          	</c:otherwise>
+        </c:choose>
           <li class="nav-item">
             <a class="nav-link" href="../myaccount/mypage.html">Account</a>
           </li>

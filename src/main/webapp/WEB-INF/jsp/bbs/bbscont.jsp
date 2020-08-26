@@ -16,7 +16,9 @@
 </style>
 </head>
 <script type="text/javascript">
-
+function rereShow(){
+	document.getElementById('rere').style.display="block";
+	}
 </script>
 <body>
 	<div class="main" style="width:730px;">
@@ -60,25 +62,41 @@
 	<c:forEach  var="rep" items="${REP}" >
 		<table class="commentTable">
 			<tr><td><img src="../img/noprofile.gif" alt="" width=40 height=60 style="position:static;"></td>
+				<td><span style="font-weight:strong; font-size:15px; margin-left:10px;">${REPLIER }  (49.197.103.♡) ${rep.register_date }</span><span style="font-weight:300"></span><br/><br/><br/>
+				<span style=" margin-left:10px;">${rep.content } Rep Groupno = ${rep.repgroupno } Repno = ${rep.repno }</span>
+				</td>
+				<td class="crud" style="float:right; margin-left:180px;">
+				<input type="button" onClick="rereShow()" value="댓글">
+				<input type="button" value="수정">
+				<input type="button" value="삭제">
+				<input type="button" value="신고">
+				</td>			
+			</tr>
+			</table>
+			<div id="rere" style="display:none; border-bottom:2px dotted silver;">
+				<form:form action="../reply/reply.html?repno=${rep.repno }" method="post" modelAttribute="reply">
+				<form:hidden path="repgroupno" value="1"/>
+				<form:hidden path="seqno" value="${BBS.seqno }"/>
+				<!--  자 보자 내가 여기서 보낼 수 있는 정보가 뭐야? 우선 댓글내용. 게시글 속성(게시글 번호),  -->
+				<table>
+				<tr><td class="tarea"><form:textarea path="content" rows="3" cols="92"/></td>
+				<tr><td class="repbtn"><input type="submit" value="댓글등록" ></td>
+				</table>
+				</form:form> 
+			</div>
+		<c:forEach var="rere" items="${RERELIST }">
+		<table class="oneLine" style="margin:10px 10px 10px 15px;">
+			<tr><td><img src="../img/oneline.PNG" style="display:inline"></td><td><img src="../img/noprofile.gif" alt="" width=40 height=60 style="position:static; display:inline" ></td>
 				<td style="padding-left:19px;">
-				<span style="font-weight:strong; font-size:15px;">${REPLIER }</span><span style="font-weight:300"> (49.197.103.♡) 2020.08.17 01:36</span><br/><br/>
-				<span>${rep.content }				</span>
+				<span style="font-weight:strong; font-size:15px;">${REREPLIER }</span><span style="font-weight:300"> (49.197.103.♡) ${rere.register_date }</span><br/><br/>
+				<span>${rere.content } repno: ${rere.repno } seqno : ${rere.seqno } user_no : ${rere.user_no }
+				</span>
 				</td>
 			</tr>
 		</table>
-		<!--  대댓글은 같은 repno를 가지되 repgroupno가 하나씩 증가되는 로직이다 -->
-		<jsp:include page="/reply/replyview.html?repno=${rep.repno }" flush="false"/>
-<!-- 		<table class="oneLine" style="margin:10px 10px 10px 15px;"> -->
-<!-- 			<tr><td><img src="../img/oneline.PNG" style="display:inline"></td><td><img src="../img/noprofile.gif" alt="" width=40 height=60 style="position:static; display:inline" ></td> -->
-<!-- 				<td style="padding-left:19px;"> -->
-<!-- 				<span style="font-weight:strong; font-size:15px;">덴데쟈네카 ---</span><span style="font-weight:300"> (49.197.103.♡) 2020.08.17 01:36</span><br/><br/> -->
-<!-- 				<span>돈은 있다가도 없는 것 아니겠습니까? -->
-<!-- 				</span> -->
-<!-- 				</td> -->
-<!-- 			</tr> -->
-<!-- 		</table> -->
-		
+		</c:forEach>
 	</c:forEach>
+	
 </div>
 <div class="sbjbox" style="width:730px; margin-top:29px;">
 	<c:choose>

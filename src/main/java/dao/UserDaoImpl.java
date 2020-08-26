@@ -29,6 +29,9 @@ public class UserDaoImpl implements UserDao {
 		user.setUser_no(userNo);
 		session.insert("user.putUser",user);
 	}
+	public User findByUserId(String id) {
+		return session.selectOne("user.getAccountInfo",id);
+	}
 	
 
 }
