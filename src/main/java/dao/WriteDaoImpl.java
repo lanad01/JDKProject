@@ -30,9 +30,15 @@ public class WriteDaoImpl implements WriteDao {
 		String bbsDate=year+"/"+month+"/"+date;
 		System.out.println("작성일자: "+bbsDate);
 		System.out.println("글번호:" +seqno);
+		bbs.setHit(0);
+		bbs.setPoint(0);
 		bbs.setSeqno(seqno);
 		bbs.setRegister_date(bbsDate); // 작성일 설정
 		session.insert("bbs.putBbs",bbs);
+	}
+	public void addHit(Integer seqno) {
+		session.update("bbs.addHit",seqno);
+		
 	}
 
 	

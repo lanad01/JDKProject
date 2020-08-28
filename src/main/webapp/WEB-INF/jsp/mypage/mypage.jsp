@@ -58,8 +58,8 @@
 					width="100" height="70">
 				</div>
 				<div class="Explain">
-					이 곳은 ${USER.name }(${USER.nick })님을 위한 공간입니다. <br /> 회원님의 활동내역을 실시간으로 확인하실 수 있습니다.<br />
-					회원등급 : 레벨11(11/25) 포인트 : 1,362 가입일 : 
+					이 곳은 <strong>${USER.name }(${USER.nick })</strong>님을 위한 공간입니다. <br /> 회원님의 활동내역을 실시간으로 확인하실 수 있습니다.<br />
+					회원등급 : 레벨11(11/25) 포인트 : 1,362 가입일 : ${USER.register_date }
 				</div>
 			</div><br/><br/><br/><br/>
 			<div class="myAcitivity" style="border-top:3px solid black; border-bottom:3px solid black; " >

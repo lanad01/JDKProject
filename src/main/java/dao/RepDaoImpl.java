@@ -37,6 +37,7 @@ public class RepDaoImpl implements RepDao {
 
 			System.out.println("RedDaoImpl 대댓글 - repgroupno : "+repgroupno);
 			rep.setRepgroupno(repgroupno);
+			System.out.println("RepDaoImpl 대댓글 -repno : " +rep.getRepno() );
 		}
 		Calendar today=Calendar.getInstance();
 		int year=today.get(Calendar.YEAR);

@@ -1,0 +1,39 @@
+@charset "EUC-KR";
+@font-face {
+font-family: 'BMDOHYEON';
+src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff') format('woff');
+font-weight: normal; font-style: normal;
+}
+.upper {
+	border: 1px solid silver;
+	width: 726px;
+	height: 40px;
+	table-layout: fixed;
+}
+.hit, .sdate, .score, .name{ font-size: 0.6em; font-family:'BMDOHYEON'; text-align: center; }
+.upper td {padding-left: 20px;}
+
+.trborder {	border: 1px solid silver;}
+
+.noticetr {	background-color: #f0f8ff; }
+
+.text-center {	text-align:center; }
+
+#bbsBottomBorder {
+	border-bottom: 1px solid silver; height:50px;
+}
+#bbsBottomBorder .name, .hit, .sdate, .score { font-size:0.7em;}
+#bbsBottomBorder .snum{ font-size:0.7em; text-align:center;}
+#bbsBottomBorder .b{font-size:0.85em;}
+#bbsBottomBorder:hover{background:#e6e6fa;}
+#bbslist .btnbox {
+    float: right;
+    width: 130px;
+    text-align: right;
+}
+.freebbs{ font-family:'BMDOHYEON'; }
+.freebbs a{ text-decoration:none; color:black;}
+.bottom { text-align:center; padding-right:30px;}
+
+.searchform { padding-left:70px; padding-top:10px;  font-family:'BMDOHYEON';}
+.searchform_right{ padding-left:90px;}

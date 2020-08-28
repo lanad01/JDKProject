@@ -10,6 +10,20 @@ public class Bbs { // 포인트는 테이블 따로 둡시다
 	private String register_date;
 	private String content;
 	private String bbstype;
+	private Integer hit;
+	private Integer point;
+	public Integer getHit() {
+		return hit;
+	}
+	public void setHit(Integer hit) {
+		this.hit = hit;
+	}
+	public Integer getPoint() {
+		return point;
+	}
+	public void setPoint(Integer point) {
+		this.point = point;
+	}
 	public Integer getSeqno() {
 		return seqno;
 	}

@@ -95,6 +95,7 @@ public class ReplyController {
 			System.out.println("대댓글추가");
 			//이 때, 원댓글 추가가 아닌 댓글 추가시 대댓글 형식으로 시작 / repno는 대댓글 버튼을 가진 해당 리플에서 가져와야함 
 			rep.setRepno(repno); // 대댓글이니까 속하는 곳은 부모댓글인 repno
+			System.out.println("reply/reply 대댓글 repno :"+repno);
 //			rep.setRepgroupno(repgroupno); 여기서 다시 repgroupno가 하나씩 더해지는거야
 			rep.setContent(rep.getContent());
 			rep.setUser_no(user_no);

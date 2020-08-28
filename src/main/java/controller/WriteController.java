@@ -57,8 +57,8 @@ public class WriteController {
 		bbs.setUser_no(user_no); // 받은 유저넘버를 실질적으로 bbs객체에 삽입
 		//종합된 bbs를 최종적으로 insert, 작성일자는 Impl에서 처리
 		writeDao.insertBBS(bbs);
-		String body="freebbs/freebbs"; // 등록이 완료되면 freebbs목록으로 가야합니다.
-		mav.addObject("BODY",body); //완료 후 게시판 목록으로
-		return mav;
+//		String body="freebbs/freebbs"; // 등록이 완료되면 freebbs목록으로 가야합니다.
+//		mav.addObject("BODY",body); //완료 후 게시판 목록으로
+		return new ModelAndView("redirect:../bbs/bbs.html?bbstype="+bbsType);
 	}
 }

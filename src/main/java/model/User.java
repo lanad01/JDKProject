@@ -1,7 +1,6 @@
 package model;
 
-import javax.validation.constraints.NotNull;
-
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,6 +22,8 @@ public class User {
 	private String quiz;
 	@NotEmpty(message="비밀번호 확인답변은 필수입니다.")
 	private String answer;
+	private String register_date;
+	@Email(message="올바르지 않은 이메일 형식입니다.")
 	private String email;
 	private String area;
 	private String picture_url;
@@ -86,6 +87,13 @@ public class User {
 	}
 	public void setAnswer(String answer) {
 		this.answer = answer;
+	}
+	
+	public String getRegister_date() {
+		return register_date;
+	}
+	public void setRegister_date(String register_date) {
+		this.register_date = register_date;
 	}
 	public String getEmail() {
 		return email;

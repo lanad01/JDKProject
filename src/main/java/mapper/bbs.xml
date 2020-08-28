@@ -3,7 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="bbs">
 <insert id="putBbs" parameterType="model.Bbs">
-	insert into bbs_info values(#{seqno},#{title},#{user_no},#{register_date},#{bbstype},#{content})
+	insert into bbs_info values(#{seqno},#{title},#{user_no},#{register_date},#{bbstype},#{content},#{hit},#{point})
 </insert>
 <select id="getSeqno" resultType="Integer">
 	select max(seqno) from bbs_info
@@ -20,6 +20,9 @@
 <select id="getWriter" resultType="String" parameterType="Integer">
 	select name from user_info where user_no=#{user_no}
 </select>
+<update id="addHit" parameterType="Integer">
+	update bbs_info set hit=hit+1 where seqno=#{seqno}
+</update>
 </mapper>
 
 

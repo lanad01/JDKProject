@@ -29,7 +29,7 @@
 	<div class="sbjbox" style="width:730px;">
 		<div class="subject" style="height:60px"> 
 			<h1><span class="category" style="margin-top:15px;"><strong> ${BBS.title }</strong> </span> 
-			<span class="date">Read 139<br />Score 1/0<br />${BBS.register_date }<br/>작성자 : ${WRITER }</span></h1> 
+			<span class="date">${BBS.hit }<br />${BBS.point}<br />${BBS.register_date }<br/>작성자 : ${WRITER }</span></h1> 
 		</div> 
 	</div>
 	<div class="sbjbox" style="width:730px;">

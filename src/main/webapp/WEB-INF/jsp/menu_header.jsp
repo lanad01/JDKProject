@@ -132,7 +132,7 @@ $('.searchModal').hide();
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="../index/index.html">JDK</a>
+      <a class="navbar-brand" href="../bbs/bbs.html?bbstype=freebbs">JDK</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -190,7 +190,7 @@ $('.searchModal').hide();
 		<li class="vline"></li>
 				<li><a href="#"><span>개념글</span></a></li>
 		<li class="vline"></li>
-				<li><a href="../bbs/bbs.html?bbstype=freebbs" onClick="test();" target=""><span>자유게시판</span></a>	</li>
+				<li><a href="..`" onClick="test();" target=""><span>자유게시판</span></a>	</li>
 		<li class="vline"></li>
 				<li><a href="#" ><span>경험담&썰</span></a></li>
 		<li class="vline"></li>

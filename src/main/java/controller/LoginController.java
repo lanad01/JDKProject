@@ -26,42 +26,11 @@ public class LoginController {
 		System.out.println("login/loginpost수신");
        if(userDao.findByIdAndPwd(user) != null) { //로그인 한 아이디 비번이 DB에 있다
           model.addAttribute("login",userDao.findByIdAndPwd(user));
-          System.out.println(user.getId()); 
-          System.out.println(user.getPassword());
           session.setAttribute("loginUser", user.getId());//유저 아디로 세션생성
        }
+       System.out.println("picture url : "+user.getPicture_url());
        return "redirect:/index/index.html";
-//       return "menu_header";
-//       return new ModelAndView("redirect:/bbs/bbs.html?bbstype=freebbs");
-    }
-//	@RequestMapping(value="/login/loginpost.html" , method=RequestMethod.POST)
-//	public ModelAndView login(
-//		@Valid User user, BindingResult bindingResult, HttpSession session,HttpServletRequest request) {
-//		System.out.println("/login/loginpost 수신");
-//		ModelAndView mav=new ModelAndView("menu_header");
-		
-//		if(bindingResult.hasErrors()) {
-//			mav.getModel().putAll(bindingResult.getModel()); // 여기 해석 어떻게 해야함?
-//			System.out.println("에러메시지:"+bindingResult.getAllErrors());
-//			return mav;
-//		}
-		
-//		User loginUser=userDao.findByIdAndPwd(user); //DB다녀오기 해당 아이디와 비번에 해당하는 유저의 전체 정보를 select때린다
-//		if(loginUser != null) { // DB다녀오고 로그인 있으면
-//			System.out.println(user.getId());
-//			System.out.println(user.getPassword());
-//			session.setAttribute("loginUser", user.getId()); //세션에 저장
-//			System.out.println("세션성공 시 로그인 아이디 :"+user.getId());
-//			mav.addObject("USER",user);
-//			String body="freebbs/freebbs"; // 로그인 성공 시 첫 보디 창 출력은 자유게시판
-//			mav.addObject("BODY",body); 
-//			return mav;
-//		}else {	// 로그인 실패
-//			mav.addObject("Loginmodal","toLogin");
-//			return mav;
-//		}
-//		
-//	}
+	}
 	@RequestMapping(value="/login/login.html")
 	public ModelAndView toLogin() {
 		System.out.println("login/login 수신");

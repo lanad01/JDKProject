@@ -11,45 +11,8 @@
 	href='https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff'
 	rel='stylesheet' type='text/css'>
 </head>
+<link rel="stylesheet" href="../css/freebbs.css">
 <style type="text/css">
-@font-face {
-font-family: 'BMDOHYEON';
-src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff') format('woff');
-font-weight: normal; font-style: normal;
-}
-.upper {
-	border: 1px solid silver;
-	width: 726px;
-	height: 40px;
-	table-layout: fixed;
-}
-.hit, .sdate, .score, .name{ font-size: 0.6em; font-family:'BMDOHYEON'; text-align: center; }
-.upper td {padding-left: 20px;}
-
-.trborder {	border: 1px solid silver;}
-
-.noticetr {	background-color: #f0f8ff; }
-
-.text-center {	text-align:center; }
-
-#bbsBottomBorder {
-	border-bottom: 1px solid silver; height:50px;
-}
-#bbsBottomBorder .name, .hit, .sdate, .score { font-size:0.7em;}
-#bbsBottomBorder .snum{ font-size:0.7em; text-align:center;}
-#bbsBottomBorder .b{font-size:0.85em;}
-#bbsBottomBorder:hover{background:#e6e6fa;}
-#bbslist .btnbox {
-    float: right;
-    width: 130px;
-    text-align: right;
-}
-.freebbs{ font-family:'BMDOHYEON'; }
-.freebbs a{ text-decoration:none; color:black;}
-.bottom { text-align:center; padding-right:30px;}
-
-.searchform { padding-left:70px; padding-top:10px;  font-family:'BMDOHYEON';}
-.searchform_right{ padding-left:90px;}
 </style>
 <body>
 	<div class="upperdiv">
@@ -82,16 +45,48 @@ font-weight: normal; font-style: normal;
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="bbs" items="${LIST }">
-					<tr class="noticetr" id="bbsBottomBorder" >
-						<td><img src="../img/notice.gif" alt="공지" class="notice" /></td>
-						<td class="b"><a href="../bbs/bbsview.html?seqno=${bbs.seqno }">${bbs.title }</a><span
-							class="comment">(141+1)</span></td>
-						<td class="name" align="center">${bbs.user_no }</td>
-						<td class="hit">86193</td>
-						<td class="sdate">${bbs.register_date }</td>
-						<td class="score">11</td>
-					</tr>
+					<c:forEach var="bbs" items="${LIST }" varStatus="status" >
+						<!--  user_no : 1 - writer가 권상우인 글은 공지사항 -->
+						<c:choose>
+							<c:when test="${bbs.user_no==1 }"><!-- 브릴인 경우 -->
+								<tr class="noticetr" id="bbsBottomBorder" >
+									<td><img src="../img/notice.gif" alt="공지" class="notice" /></td>
+									<td class="b"><a href="../bbs/bbsview.html?seqno=${bbs.seqno }">${bbs.title }</a>
+									<span class="comment">
+									<c:forEach var="reAndrere" items="${REPANDRERE}" begin="${status.index}" end="${status.index}">
+									(${reAndrere})
+									</c:forEach>
+									</span></td>
+									<td class="name" align="center">
+								<c:forEach var="writer" items="${WRITERLIST}" begin="${status.index}" end="${status.index}">
+									${writer}
+								</c:forEach>
+									</td>
+									<td class="hit">${bbs.hit }</td>
+									<td class="sdate">${bbs.register_date }</td>
+									<td class="score">${bbs.point }</td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<tr id="bbsBottomBorder">
+									<td class="snum">${bbs.seqno }</td>
+									<td class="b"><a href="../bbs/bbsview.html?seqno=${bbs.seqno }">${bbs.title }</a>
+									<span class="comment">
+									<c:forEach var="reAndrere" items="${REPANDRERE}" begin="${status.index}" end="${status.index}">
+									(${reAndrere})
+									</c:forEach>
+									</span></td>
+									<td class="name" align="center">
+									<c:forEach var="writer" items="${WRITERLIST}" begin="${status.index}" end="${status.index}">
+									${writer}
+									</c:forEach>
+									<td class="hit">${bbs.hit }</td>
+									<td class="sdate">${bbs.register_date }</td>
+									<td class="score">${bbs.point }</td>
+								</tr>
+							</c:otherwise>
+						</c:choose>
+					
 					</c:forEach>
 					<tr class="noticetr" id="bbsBottomBorder" >
 						<td><img src="../img/notice.gif" alt="공지" class="notice" /></td>
@@ -211,7 +206,7 @@ font-weight: normal; font-style: normal;
 			<input type="submit" value=" 검색 " class="btnblue" />
 			</div>
 			<div class="searchform_right" style="float:left;">
-			<a href="../bbs/freebbs.html"><input type="button" name="bbsList" value="목록으로 " /></a>
+			<a href="../bbs/bbs.html?bbstype=freebbs"><input type="button" name="bbsList" value="목록으로 " /></a>
 			<a href="../write/freebbs.html"><input type="button" name="bbsList" value="글쓰기 " /></a>
 <!-- 			<input type="button" onclick="window.location.href='../write/freebbs.html';" value="글쓰기" /> -->
 			</div>

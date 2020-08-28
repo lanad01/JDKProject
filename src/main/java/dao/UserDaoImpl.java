@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.Calendar;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -23,6 +25,13 @@ public class UserDaoImpl implements UserDao {
 		
 	}
 	public void entryUser(User user) {
+		Calendar today=Calendar.getInstance();
+		int year=today.get(Calendar.YEAR);
+		int month=today.get(Calendar.MONTH)+1;
+		int date=today.get(Calendar.DATE);
+		String regDate=year+"/"+month+"/"+date;
+		System.out.println("작성일자: "+regDate);
+		user.setRegister_date(regDate);
 		Integer userNo=this.findMaxUserNo();
 		if(userNo==null) userNo=0; 
 		userNo=userNo+1;
