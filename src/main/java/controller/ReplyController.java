@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,16 +21,60 @@ public class ReplyController {
 	WriteDao writeDao;
 	@Autowired
 	RepDao repDao;
-	@RequestMapping(value="/reply/reply.html")
+	@RequestMapping(value="/reply/rerep.html")
+	public ModelAndView rerepPost(Reply rep, HttpSession session, HttpServletRequest request,Integer seqno,Integer repgroupno,Integer repno) {
+		ModelAndView mav=new ModelAndView("bbs/rereList");
+		System.out.println("#################### /reply/rerep.html 수신 #######################");
+		System.out.println("seqno : "+seqno);
+		System.out.println("repno : "+repno);
+		//우선 repno가 같은 모든 대댓글을 출력
+		List<Reply> rereList=repDao.getRereList(repno); //rep를 통해서 대댓글리스트 생성
+		System.out.println(" 댓글 "+repno+"의 대댓글리스트는   :  "+rereList);
+		
+		//대댓글 작성자 아이디를 얻기 위한 로직 
+		for( int t = 0; t < rereList.size(); t++){ //대댓글리스트를 통해서 얻어오기
+			String rereplier=repDao.getReplier(rereList.get(t).getUser_no());
+			System.out.println("----------------여기서부터는 rereList----------------------");
+			System.out.println("대댓글 작성자 반복자:"+rereplier);
+			System.out.println("rereList의 repno"+rereList.get(t).getRepno()+"rpList의 repno"+repno);
+			mav.addObject("REREPLIER",rereplier);
+		}
+		mav.addObject("RERELIST",rereList);
+			
+		return mav;
+	}
+	
+	@RequestMapping(value="/reply/replylist.html")
+	public ModelAndView replyPost2(Reply rep, HttpSession session, HttpServletRequest request,Integer seqno) { //bbscont에서 보내주는 게시판 seqno정보
+		// 우선 받아온 seqno를 토대로 rpList를 만들어보자
+		ModelAndView mav=new ModelAndView("bbs/reList");
+		System.out.println("#################### /reply/replyList.html 수신 #######################");
+		//받아온 seqno를 가진 게시글의 모든 댓글목록을 가져온다
+		List<Reply> rpList=repDao.getRepList(seqno); //seqno는 jsp에서 파라미터로 보내준다. ${seqno}말이다
+		
+		System.out.println("---------------Reple List를 얻은 후의 테스트 --------------------");
+		//댓글 작성자 아이디를 얻기 위한 로직 
+		ArrayList<String> replierList=new ArrayList<String>();
+		for( int i = 0; i < rpList.size(); i++){
+			String replier=repDao.getReplier(rpList.get(i).getUser_no());
+			System.out.println("@@@@@@@@@@ rpList 인덱스  "+i+"번째 @@@@@@@@@@");
+			System.out.println("user_no : "+rpList.get(i).getUser_no());
+			replierList.add(replier);
+			System.out.println("Replier List :"+replierList.get(i));
+		}
+		mav.addObject(new Reply());
+		mav.addObject("REPLIERLIST",replierList);
+		mav.addObject("REP",rpList);
+		return mav;
+	}
+	@RequestMapping(value="/reply/reply.html") //replypost
 	public ModelAndView replyPost(Reply rep, HttpSession session, HttpServletRequest request,Integer seqno,Integer repgroupno,Integer repno) { //bbscont에서 보내주는 게시판 seqno정보
 		ModelAndView mav=new ModelAndView("menu_header");
 		//컨트롤러 set 목록 : user_no, seqno, content
 		//Dao set 목록 : repno, register_Date, repgroupno(원댓글일 경우 gropuno는 0) // 대댓글 버튼을 통한 댓글추가일 경우에는 repno를 유지시키면서 repgroupno만을 증가시키는 로직
 		System.out.println("----------------------reply/reply수신---------------------------");
-		System.out.println("reply/reply.html seqno 수신 : "+seqno);
-		System.out.println("reply/reply.html repqno 수신 : "+repno);
-		System.out.println("reply/reply.html repgroupno 수신 : "+repgroupno);
 		System.out.println(" 댓글 내용 : "+ rep.getContent());
+		//과연
 		String id=(String)session.getAttribute("loginUser");
 		System.out.println("reply/reply 세션아이디 정보"+id);
 		Integer user_no=writeDao.getWriter(id);
@@ -39,7 +84,7 @@ public class ReplyController {
 			System.out.println("원댓글 추가");
 			rep.setRepgroupno(repgroupno); //원댓글 추가를 통한 댓글 추가 시 원댓글만 추가 
 			rep.setContent(rep.getContent()); // 게시글 내용
-			rep.setUser_no(user_no); //유저번호
+			rep.setUser_no(user_no); //유저번호로 다시 원댓글의 user_no를 결정??아니야 유저번호는 유지되고 있어 
 			rep.setSeqno(seqno); //게시글번호
 //			Integer repno=repDao.getMaxRepNo(); repno를 여기서 추가하면안대
 //			System.out.println("reply/reply repno : "+repno); //여기가 핵심 . 원댓글 이므로 

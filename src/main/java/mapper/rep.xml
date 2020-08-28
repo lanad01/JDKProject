@@ -20,6 +20,9 @@
 <select id="getReplier" resultType="String" parameterType="Integer">
 	select name from user_info where user_no=#{user_no}
 </select>
+<select id="getRereNum" resultType="Integer" parameterType="Integer">
+	select count(*) from reply_info where seqno=#{seqno} and repgroupno != 0
+</select>
 </mapper>
 
 

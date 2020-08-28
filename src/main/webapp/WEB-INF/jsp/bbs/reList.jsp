@@ -1,0 +1,54 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<script type="text/javascript">	
+function rereShow(repno){
+ 	document.getElementById(repno).style.display="block";
+ 
+}
+</script>
+<body>
+<div class="sbjbox" style="width:730px; margin-top:29px;">
+	<c:forEach  var="rep" items="${REP}" >
+		<table class="commentTable">
+			<tr><td><img src="../img/noprofile.gif" alt="" width=40 height=60 style="position:static;"></td>
+				<td><span style="font-weight:strong; font-size:15px; margin-left:10px;">
+				  
+				(49.197.103.♡) ${rep.register_date }</span><span style="font-weight:300"></span><br/><br/><br/>
+				<span style=" margin-left:10px;">${rep.content } Rep Groupno = ${rep.repgroupno } Repno = ${rep.repno } User_no : ${rep.user_no }</span>
+				</td>
+				<td class="crud" style="float:right; margin-left:180px;">
+				<input type="button" onClick="rereShow(${rep.repno})" value="댓글">
+				<input type="button" value="수정">
+				<input type="button" value="삭제">
+				<input type="button" value="신고">
+				</td>			
+			</tr>
+		</table>		
+		<!--  대댓글 div 평소엔 display none -->
+		<div id="${rep.repno}" style="display:none; border-bottom:2px dotted silver;">ㅇㅇ
+		<form:form action="../reply/reply.html" method="post" modelAttribute="reply">
+		<form:input id="repnoSend" path="repno" value=""/>
+		<form:hidden path="repgroupno" value="1"/>
+		<form:hidden path="seqno" value="${BBS.seqno }"/> 
+		<table>
+			<tr><td class="tarea"> repno가 ${rep.repno }인 댓글의 대댓글을 추가합니다 <form:textarea path="content" rows="3" cols="92"/></td>
+			<tr><td class="repbtn"><input type="submit" value="댓글등록" ></td>
+		</table>
+		</form:form> 
+		</div>
+		
+		<jsp:include page="/reply/rerep.html?repno=${rep.repno}&seqno=${BBS.seqno }&repgroupno=1" flush="false"/>
+	</c:forEach>
+	
+</div>
+</body>
+</html>

@@ -64,6 +64,9 @@ public class RepDaoImpl implements RepDao {
 	public String getReplier(Integer user_no) { //
 		return session.selectOne("rep.getReplier",user_no);
 	}
+	public Integer getRereNum(Integer seqno) {
+		return session.selectOne("rep.getRereNum",seqno);
+	}
 	
 
 }
