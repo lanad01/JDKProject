@@ -41,6 +41,10 @@ public class UserDaoImpl implements UserDao {
 	public User findByUserId(String id) {
 		return session.selectOne("user.getAccountInfo",id);
 	}
+	public void updateUser(User user) {
+		session.update("user.updateUser", user);
+		
+	}
 	
 
 }

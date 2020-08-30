@@ -7,5 +7,6 @@ public interface UserDao {
 	void entryUser(User user);
 	User findByIdAndPwd(User user);
 	User findByUserId(String id);
+	void updateUser(User user);
 	
 }

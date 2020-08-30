@@ -59,7 +59,6 @@ public class RegisterController {
 			}catch(Exception e) {
 				e.printStackTrace();
 			} //이미지 설정 후 저장
-			user.setPicture_url(fileName);
 			System.out.println("fileName:"+fileName);
 			System.out.println("path경로:"+path);	
 			user.setPicture_url(fileName); //이미지 파일명을 설정
@@ -82,5 +81,48 @@ public class RegisterController {
 		mav.addObject(new User()); // Bean 보내기
 		return mav;
 	}
-
+	@RequestMapping(value="/register/modify.html")
+	public ModelAndView modify(@Valid User user, BindingResult bindingResult, HttpSession session,
+			HttpServletRequest request, String page) throws Exception {
+		System.out.println("register/modify 수신");
+		ModelAndView mav=new ModelAndView("menu_header");
+		mav.addObject("BODY", "mypage/mypage");
+		mav.addObject("MPBODY",page);
+		if (bindingResult.hasErrors()) { // 오류로 인한 로그인 실패
+			System.out.println("bindingErrors");
+			System.out.println(bindingResult.getAllErrors());
+			mav.getModel().putAll(bindingResult.getModel());
+			return mav;
+		} // BindingResult를 벗어난 뒤 이미지 등록작업
+		MultipartFile multiFile=user.getPicture();
+		String fileName=null; String path=null;
+		OutputStream out=null; //쓰는 객체
+		if(multiFile != null) { //이미지 파일이 존재하는 경우
+			System.out.println("multiFile!=null");
+			fileName=multiFile.getOriginalFilename();
+			ServletContext ctx=session.getServletContext();
+			path=ctx.getRealPath("/upload/"+fileName);
+			try {
+				out=new FileOutputStream(path); 
+				BufferedInputStream bis=new BufferedInputStream(multiFile.getInputStream());
+				byte [] buffer=new byte[8156];
+				int read=0;
+				while((read = bis.read(buffer)) > 0 ) {
+					out.write(buffer,0,read);
+				}
+				if(out != null) out.close();
+				if(bis != null) bis.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			} //이미지 설정 후 저장
+			System.out.println("fileName:"+fileName);
+			System.out.println("path경로:"+path);	
+			user.setPicture_url(fileName); //이미지 파일명을 설정
+			System.out.println("세션에 들어갈 id : "+user.getId());
+			this.userDao.updateUser(user);
+			return mav;
+		}
+	return mav;
+	}
 }
+

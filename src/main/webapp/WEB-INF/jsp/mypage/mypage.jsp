@@ -36,7 +36,7 @@
 						src="../img/dropClose.gif" onClick="moreboxClose()" height=10 width=10>
 						<div id="morebox" class="morebox">
 							<ul>
-								<li style="margin-top: 2px;"><a href="" id="1"	onmouseover="focus(this)">정보수정</a></li>
+								<li style="margin-top: 2px;"><a href="../myaccount/pagecontrol.html?page=2" id="1"	onmouseover="focus(this)">정보수정</a></li>
 								<li><a href="" id="2" onmouseover="focus(this)">비번변경</a></li>
 								<li><a href="" id="3" onmouseover="focus(this)">회원탈퇴</a></li>
 							</ul>
@@ -62,34 +62,45 @@
 					회원등급 : 레벨11(11/25) 포인트 : 1,362 가입일 : ${USER.register_date }
 				</div>
 			</div><br/><br/><br/><br/>
-			<div class="myAcitivity" style="border-top:3px solid black; border-bottom:3px solid black; " >
-			<table class="posttable" rules="all" style="border:2px dotted silver; margin-top:20px; margin-bottom:20px;">
-				<tr><td class="region"><h5>내가 등록한 게시물</h5>
+			
+			<c:choose>
+				<c:when test="${MPBODY==1 }">
+					<div class="myAcitivity" style="border-top:3px solid black; border-bottom:3px solid black; " >
+					<table class="posttable" rules="all" style="border:2px dotted silver; margin-top:20px; margin-bottom:20px;">
+					<tr><td class="region"><h5>내가 등록한 게시물</h5>
 						<c:forEach var="myPost"  begin="0" end="10" varStatus="status">
 							<li style="list-style:none;"><p>ㆍ${status.index }</p></li>
 						</c:forEach>
-					</td>
+						</td>
 					
-					<td class="region"><h5>내 게시물에 달린 댓글</h5>
-					<c:forEach var="myPost"  begin="0" end="10" varStatus="status">
-							<li style="list-style:none;"><p>ㆍ${status.index }</p></li>
-						</c:forEach>
-					</td>
-				</tr>
-				<tr><td class="region"><h5>내가 등록한 댓글</h5>
+						<td class="region"><h5>내 게시물에 달린 댓글</h5>
 						<c:forEach var="myPost"  begin="0" end="10" varStatus="status">
 							<li style="list-style:none;"><p>ㆍ${status.index }</p></li>
 						</c:forEach>
-					</td>
-					
-					<td class="region"><h5>내 댓글에 달린 한줄 의견</h5>
-					<c:forEach var="myPost"  begin="0" end="10" varStatus="status">
+						</td>
+					</tr>
+					<tr><td class="region"><h5>내가 등록한 댓글</h5>
+						<c:forEach var="myPost"  begin="0" end="10" varStatus="status">
 							<li style="list-style:none;"><p>ㆍ${status.index }</p></li>
 						</c:forEach>
-					</td>
-				</tr>
-			</table>
-			</div>
+						</td>
+					
+						<td class="region"><h5>내 댓글에 달린 한줄 의견</h5>
+						<c:forEach var="myPost"  begin="0" end="10" varStatus="status">
+							<li style="list-style:none;"><p>ㆍ${status.index }</p></li>
+						</c:forEach>
+						</td>
+					</tr>
+				</table>
+				</div>
+				</c:when>
+				<c:when test="${MPBODY=='2'}"> <!--  정보수정 버튼 클릭  -->
+					<div style="border:none;">
+					<jsp:include page="/myaccount/modify.html" flush="false"/>
+					</div>
+				
+				</c:when>
+			</c:choose>
 		</div>
 	</div>
 <!-- Ui종료  -->

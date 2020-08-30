@@ -7,37 +7,10 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>가입자 등록화면</title>
+<title>JDK - 회원 정보 수정</title>
 <link href='https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="../css/modification.css">
 <style type="text/css">
- 
-@font-face {
-font-family: 'BMDOHYEON'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff') format('woff');
-font-weight: normal; font-style: normal; }
-
-.msg {  font-size: 1em; font-family:'BMDOHYEON'; font-color:red; border-top:3px solid black; padding:20px 0 20px 0; width:700px; }
-.key{   font-size: 0.7em; font-family:'BMDOHYEON'; font-color:red;  }
-
-.joinTable td{ border-top:1px solid silver; padding:10px 0 10px 0;  }
-.joinTable div{ font-family:'BMDOHYEON';  font-size: 0.7em; font-color:#0000ff; padding-top:10px;}
-.joinTable h5{ color:#ff0000;}
-input{ height:25px;}
-.submitbox {top:50%; right:50%;}
-.btngray { font-family:'BMDOHYEON';
-    cursor: pointer;
-    border: #666666 solid 1px;
-    background: #B3B3B3 left bottom repeat-x;
-    color: #ffffff;
-    height: 21px;
-}
-.btnblue { font-family:'BMDOHYEON';
-    cursor: pointer;
-    border: #3399DD solid 1px;
-    background: #33C9FD left bottom repeat-x;
-    color: #ffffff;
-    height: 21px;
-}
-#font{ font-family:'BMDOHYEON';  font-size: 0.7em; }
 </style>
 </head>
 <script type="text/javascript">
@@ -45,8 +18,7 @@ function quizDisplay(quiztext) {
     var selection = quiztext;
 	document.getElementById("quiz").value=selection;
     return true;
-}
-</script>
+}</script>
 <body>
 <div style="padding:30px 0 0 15px;">
 <form:form action="../register/registerpost.html" modelAttribute="user" method="post" enctype="multipart/form-data">
@@ -207,8 +179,7 @@ function quizDisplay(quiztext) {
 	<tr>
 		<td></td>
 		<td><div class="submitbox">
-			<input type="button" value="가입취소" class="btngray" onclick="location.href='../index/index.html?BODY=freebbs/freebbs'"/>
-			<input type="submit" value="회원가입" class="btnblue" />
+			<input type="submit" value="정보수정" class="btnblue" />
 		</div></td>
 	</tbody>
 </table>

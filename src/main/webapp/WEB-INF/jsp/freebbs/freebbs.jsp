@@ -88,44 +88,44 @@
 						</c:choose>
 					
 					</c:forEach>
-					<tr class="noticetr" id="bbsBottomBorder" >
-						<td><img src="../img/notice.gif" alt="공지" class="notice" /></td>
-						<td class="b"><a href="../bbs/bbsview.html?bbstype=free">레벨업 필요 글, 댓글 개수 안내</a><span
-							class="comment">(141+1)</span></td>
-						<td class="name" align="center">브릴</td>
-						<td class="hit">86193</td>
-						<td class="sdate">03.05</td>
-						<td class="score">11</td>
-					</tr>
-					<tr class="noticetr" id="bbsBottomBorder">
-						<td><img src="../img/notice.gif" alt="공지" class="notice" /></td>
-						<td class="b"><a href="#">호주생활, 워홀, 영어 관련 질문만 여기에 해주세요.</a> <span
-							class="comment">(10+2)</span></td>
-						<td class="name" align="center">브릴</td>
-						<td class="hit">96861</td>
-						<td class="sdate">12.31</td>
-						<td class="score">6</td>
-					</tr>
+<!-- 					<tr class="noticetr" id="bbsBottomBorder" > -->
+<!-- 						<td><img src="../img/notice.gif" alt="공지" class="notice" /></td> -->
+<!-- 						<td class="b"><a href="../bbs/bbsview.html?bbstype=free">레벨업 필요 글, 댓글 개수 안내</a><span -->
+<!-- 							class="comment">(141+1)</span></td> -->
+<!-- 						<td class="name" align="center">브릴</td> -->
+<!-- 						<td class="hit">86193</td> -->
+<!-- 						<td class="sdate">03.05</td> -->
+<!-- 						<td class="score">11</td> -->
+<!-- 					</tr> -->
+<!-- 					<tr class="noticetr" id="bbsBottomBorder"> -->
+<!-- 						<td><img src="../img/notice.gif" alt="공지" class="notice" /></td> -->
+<!-- 						<td class="b"><a href="#">호주생활, 워홀, 영어 관련 질문만 여기에 해주세요.</a> <span -->
+<!-- 							class="comment">(10+2)</span></td> -->
+<!-- 						<td class="name" align="center">브릴</td> -->
+<!-- 						<td class="hit">96861</td> -->
+<!-- 						<td class="sdate">12.31</td> -->
+<!-- 						<td class="score">6</td> -->
+<!-- 					</tr> -->
 
-					<tr class="noticetr" id="bbsBottomBorder">
-						<td><img src="../img/notice.gif" alt="공지" class="notice" /></td>
-						<td class="b"><a href="#">호주 워홀 생활기 연재하실 분
-								모집합니다.</a> <span class="comment">(85+9)</span></td>
-						<td class="name" align="center">브릴</td>
-						<td class="hit">176460</td>
-						<td class="sdate">12.22</td>
-						<td class="score">4</td>
-					</tr>
+<!-- 					<tr class="noticetr" id="bbsBottomBorder"> -->
+<!-- 						<td><img src="../img/notice.gif" alt="공지" class="notice" /></td> -->
+<!-- 						<td class="b"><a href="#">호주 워홀 생활기 연재하실 분 -->
+<!-- 								모집합니다.</a> <span class="comment">(85+9)</span></td> -->
+<!-- 						<td class="name" align="center">브릴</td> -->
+<!-- 						<td class="hit">176460</td> -->
+<!-- 						<td class="sdate">12.22</td> -->
+<!-- 						<td class="score">4</td> -->
+<!-- 					</tr> -->
 
-					<tr class="noticetr" id="bbsBottomBorder">
-						<td><img src="../img/notice.gif" alt="공지" class="notice" /></td>
-						<td class="b"><a href="#">2012년 12월 17일 공식 오픈</a><span
-							class="comment">(41+2)</span></td>
-						<td class="name" align="center">브릴</td>
-						<td class="hit">167536</td>
-						<td class="sdate">12.17</td>
-						<td class="score">21</td>
-					</tr>
+<!-- 					<tr class="noticetr" id="bbsBottomBorder"> -->
+<!-- 						<td><img src="../img/notice.gif" alt="공지" class="notice" /></td> -->
+<!-- 						<td class="b"><a href="#">2012년 12월 17일 공식 오픈</a><span -->
+<!-- 							class="comment">(41+2)</span></td> -->
+<!-- 						<td class="name" align="center">브릴</td> -->
+<!-- 						<td class="hit">167536</td> -->
+<!-- 						<td class="sdate">12.17</td> -->
+<!-- 						<td class="score">21</td> -->
+<!-- 					</tr> -->
 					<!--  공지 게시판 종료 -->
 					<tr id="bbsBottomBorder">
 						<td class="snum">80182</td>

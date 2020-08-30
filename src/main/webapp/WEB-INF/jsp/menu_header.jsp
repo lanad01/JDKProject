@@ -125,6 +125,27 @@ function loginpopup() {
 function closeModal() {
 $('.searchModal').hide();
 };
+function fnLoginBtn(){
+    $.ajax({
+       async: true,
+       type : 'POST',
+       data : {"id" : $("#id").val(), "password" : $("#password").val() }, //입력 값 jquery 방식으로 가져오기
+       url : "../login/loginpost.html",
+       success : function(data) {
+       console.log("1aaa");
+            
+               if(data == 1){
+          alert("로그인에 성공 했습니다.");
+          location.href="../index/index.html";
+          }else{
+             alert("로그인에 실패했습니다.");
+          }
+               
+       },error : function(e){
+          console.log(e);
+       }
+    });
+ }
 </script>
 
 <body>        
@@ -190,7 +211,7 @@ $('.searchModal').hide();
 		<li class="vline"></li>
 				<li><a href="#"><span>개념글</span></a></li>
 		<li class="vline"></li>
-				<li><a href="..`" onClick="test();" target=""><span>자유게시판</span></a>	</li>
+				<li><a href="../bbs/bbs.html?bbstype=freebbs" onClick="test();" target=""><span>자유게시판</span></a>	</li>
 		<li class="vline"></li>
 				<li><a href="#" ><span>경험담&썰</span></a></li>
 		<li class="vline"></li>
@@ -253,47 +274,48 @@ $('.searchModal').hide();
     <!-- /.container -->
   </footer>
 	
-  <!-- 로그인 모달창 -->
-	<script src="../resources/vendor/jquery/jquery.min.js"></script>
-	<script src="../resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-	<!--  Classname으로 찾는거니까.. ../ 붙여서 상위 폴더를 가줘야한다 상우야 -->
-	<form action="../login/loginpost.html" method="post">
-	<div id="modal" class="searchModal">
-		<div class="search-modal-content">
-			<a>로그인</a>
-			<div class="row">
-				<div class="col-sm-12">
-					<div class="row">
-						<div class="col-sm-12"><!-- 내가 건들 수 있는 곳.. -->
-							<table style="">
-								<tr><td><a>아이디</a></td>
-								
-								<tr><td><input type="text" name="id" maxlength="20"><font color="red"></font></td>
-									<td id="social" rowspan="2" style="padding-left:10px;" ><img alt="" src="../img/social1.gif" width=35 height=35></td>
-									<td id="social" rowspan="2"><img alt="" src="../img/social2.gif" width=35 height=35></td>
-									<td id="social" rowspan="2"><img alt="" src="../img/social3.gif" width=35 height=35></td>
-									<td id="social" rowspan="2"><img alt="" src="../img/social4.gif" width=35 height=35></td>
-								<tr><td><a>비밀번호</a></td>
-								<tr><td><input type="password" name="password" maxlength="20"/><font color="red"></font></td>
-							</table>	
-						</div><!--  내가 건들 수 있는 곳 -->
-					</div>
-				</div>
-			</div>
-			
-			<hr>
-			<div style="float:left; text-align:center;">
-				<div style="float:left; cursor: pointer; background-color: #dcdcdc; text-align: center; margin-bottom:13px; width:100px; " onClick="">
-					<input type="submit" style="font-family:'BMDOHYEON'; font-size:0.8em; width:100px;"  value="로그인"/></div>
-					
-				<div style="float:left;  cursor: pointer; background-color: #dcdcdc; text-align: center; margin-bottom:13px; width:100px; margin-left:20px;" onClick="closeModal()">
-					<input type="button" style="font-family:'BMDOHYEON'; font-size:0.8em; width:100px;" 
-						value="회원가입" onClick="location.href='../register/register.html';"></div>
-				<div style="float:left;  cursor: pointer; background-color: #dcdcdc; text-align: center; margin-bottom:13px; width:100px; margin-left:20px;" onClick="closeModal()">
-					<input type="button" style="font-family:'BMDOHYEON'; font-size:0.8em; width:100px;" 
-						value="나가기" onClick="closeModal()"></div>
-			</div>
-		</div>
+   <!-- 로그인 모달창 -->
+   <script src="../resources/vendor/jquery/jquery.min.js"></script>
+   <script src="../resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+   <!--  Classname으로 찾는거니까.. ../ 붙여서 상위 폴더를 가줘야한다 상우야 -->
+   <form action="" method="post">
+<%--    <form action="../login/loginpost.html" method="post"> --%>
+   <div id="modal" class="searchModal">
+      <div class="search-modal-content">
+         <a>로그인</a>
+         <div class="row">
+            <div class="col-sm-12">
+               <div class="row">
+                  <div class="col-sm-12"><!-- 내가 건들 수 있는 곳.. -->
+                     <table style="">
+                        <tr><td><a>아이디</a></td>
+                        
+                        <tr><td><input type="text" id="id" name="id" maxlength="20"><font color="red"></font></td>
+                           <td id="social" rowspan="2" style="padding-left:10px;" ><img alt="" src="../img/social1.gif" width=35 height=35></td>
+                           <td id="social" rowspan="2"><img alt="" src="../img/social2.gif" width=35 height=35></td>
+                           <td id="social" rowspan="2"><img alt="" src="../img/social3.gif" width=35 height=35></td>
+                           <td id="social" rowspan="2"><img alt="" src="../img/social4.gif" width=35 height=35></td>
+                        <tr><td><a>비밀번호</a></td>
+                        <tr><td><input type="password" id="password" name="password" maxlength="20"/><font color="red"></font></td>
+                     </table>   
+                  </div><!--  내가 건들 수 있는 곳 -->
+               </div>
+            </div>
+         </div>
+         
+         <hr>
+         <div style="float:left; text-align:center;">
+            <div style="float:left; cursor: pointer; background-color: #dcdcdc; text-align: center; margin-bottom:13px; width:100px; " >
+               <input type="button" style="font-family:'BMDOHYEON'; font-size:0.8em; width:100px;"  value="로그인" onClick="fnLoginBtn();"/></div>
+               
+            <div style="float:left;  cursor: pointer; background-color: #dcdcdc; text-align: center; margin-bottom:13px; width:100px; margin-left:20px;" onClick="closeModal()">
+               <input type="button" style="font-family:'BMDOHYEON'; font-size:0.8em; width:100px;" 
+                  value="회원가입" onClick="location.href='../register/register.html';"></div>
+            <div style="float:left;  cursor: pointer; background-color: #dcdcdc; text-align: center; margin-bottom:13px; width:100px; margin-left:20px;" onClick="closeModal()">
+               <input type="button" style="font-family:'BMDOHYEON'; font-size:0.8em; width:100px;" 
+                  value="나가기" onClick="closeModal()"></div>
+         </div>
+      </div>
     </div>
     </form>
 </body>

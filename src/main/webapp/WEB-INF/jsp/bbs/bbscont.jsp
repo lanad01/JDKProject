@@ -29,7 +29,7 @@
 	<div class="sbjbox" style="width:730px;">
 		<div class="subject" style="height:60px"> 
 			<h1><span class="category" style="margin-top:15px;"><strong> ${BBS.title }</strong> </span> 
-			<span class="date">${BBS.hit }<br />${BBS.point}<br />${BBS.register_date }<br/>작성자 : ${WRITER }</span></h1> 
+			<span class="date">Read ${BBS.hit }<br />추천수 : ${BBS.point}<br />${BBS.register_date }<br/>작성자 : ${WRITER }</span></h1> 
 		</div> 
 	</div>
 	<div class="sbjbox" style="width:730px;">
@@ -55,7 +55,7 @@
 <div class="commentHeader" style="float:left;">
 		<img src="../img/comment.gif" alt="">
 		<span>댓글(${REPNUM }+${RERENUM})</span>
-</div>
+</div>	
 <jsp:include page="/reply/replylist.html?seqno=${BBS.seqno}" flush="false"/>
 
 <div class="sbjbox" style="width:730px; margin-top:29px;">

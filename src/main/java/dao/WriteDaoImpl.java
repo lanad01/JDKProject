@@ -16,7 +16,6 @@ public class WriteDaoImpl implements WriteDao {
 		return session.selectOne("bbs.getSeqno");
 	}
 	public Integer getWriter(String id) {
-		System.out.println("impl 수신 id : "+id);
 		return session.selectOne("bbs.getUserNo",id);
 	}
 	public void insertBBS(Bbs bbs) {  // 여기서 추가해야할 것 seqno bbsType
@@ -27,9 +26,10 @@ public class WriteDaoImpl implements WriteDao {
 		int year=today.get(Calendar.YEAR);
 		int month=today.get(Calendar.MONTH)+1;
 		int date=today.get(Calendar.DATE);
-		String bbsDate=year+"/"+month+"/"+date;
-		System.out.println("작성일자: "+bbsDate);
-		System.out.println("글번호:" +seqno);
+		int hour=today.get(Calendar.HOUR);
+		int min=today.get(Calendar.MINUTE);
+		String bbsDate=year+"/"+month+"/"+date+"  "+hour+":"+min;
+	
 		bbs.setHit(0);
 		bbs.setPoint(0);
 		bbs.setSeqno(seqno);

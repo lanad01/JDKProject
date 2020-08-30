@@ -15,6 +15,13 @@
 <select id="getAccountInfo" resultType="model.User" parameterType="String">
 	select * from user_info where id=#{id}
 </select>
+<update id="updateUser" parameterType="model.User">
+	update user_info set 
+	user_no=#{user_no},	name=#{name},	nick=#{nick},	birth_date=#{birth_date},
+	gender=#{gender},	id=#{id},	password=#{password},	pwdcheck=#{pwdcheck},
+	quiz=#{quiz},	answer=#{answer},	email=#{email},	area=#{area},
+	picture_url=#{picture_url},	register_date=#{register_date}
+</update>
 </mapper>
 
 <!-- SQL> desc user_info -->

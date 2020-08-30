@@ -23,7 +23,6 @@ public class WriteController {
 		String id=(String)session.getAttribute("loginUser");
 		ModelAndView mav = new ModelAndView("menu_header");
 		if(id == null) { //로그인 상태가 아니라면
-			System.out.println("로그인필요");
 			mav.addObject("Loginmodal","toLogin");
 			mav.addObject("BODY","freebbs/freebbs");
 			return mav;

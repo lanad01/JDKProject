@@ -1,0 +1,29 @@
+@charset "EUC-KR";
+
+@font-face {
+font-family: 'BMDOHYEON'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff') format('woff');
+font-weight: normal; font-style: normal; }
+
+.msg {  font-size: 1em; font-family:'BMDOHYEON'; font-color:red; border-top:3px solid black; padding:20px 0 20px 0; width:700px; }
+.key{   font-size: 0.7em; font-family:'BMDOHYEON'; font-color:red;  }
+
+.joinTable td{ border-top:1px solid silver; padding:10px 0 10px 0;  }
+.joinTable div{ font-family:'BMDOHYEON';  font-size: 0.7em; font-color:#0000ff; padding-top:10px;}
+.joinTable h5{ color:#ff0000;}
+input{ height:25px;}
+.submitbox {top:50%; right:50%;}
+.btngray { font-family:'BMDOHYEON';
+    cursor: pointer;
+    border: #666666 solid 1px;
+    background: #B3B3B3 left bottom repeat-x;
+    color: #ffffff;
+    height: 21px;
+}
+.btnblue { font-family:'BMDOHYEON';
+    cursor: pointer;
+    border: #3399DD solid 1px;
+    background: #33C9FD left bottom repeat-x;
+    color: #ffffff;
+    height: 21px;
+}
+#font{ font-family:'BMDOHYEON';  font-size: 0.7em; }
