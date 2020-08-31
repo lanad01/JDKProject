@@ -16,8 +16,6 @@ public class User {
 	private String id;
 	@NotEmpty(message="비밀번호는 반드시 적어주세요")
 	private String password;
-	@NotEmpty(message="비밀번호 확인은 필수입니다.")
-	private String pwdCheck;
 	@NotEmpty(message="비밀번호 확인질문은 필수입니다.")
 	private String quiz;
 	@NotEmpty(message="비밀번호 확인답변은 필수입니다.")
@@ -69,12 +67,6 @@ public class User {
 	}
 	public void setPassword(String password) {
 		this.password = password;
-	}
-	public String getPwdCheck() {
-		return pwdCheck;
-	}
-	public void setPwdCheck(String pwdCheck) {
-		this.pwdCheck = pwdCheck;
 	}
 	public String getQuiz() {
 		return quiz;

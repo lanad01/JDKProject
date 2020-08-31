@@ -17,11 +17,21 @@
 </style>
 </head>
 <script type="text/javascript">
+	window.onload=function(){
+		var updateResult='${SUCCESS}';
+		if(updateResult=='success'){
+			alert('회원 정보 수정이 완료되었습니다!');
+		}
+	}
 	function morebox() {
 		document.getElementById("morebox").style.display = "block";
 	}
 	function moreboxClose() {
 		document.getElementById("morebox").style.display = "none";
+	}
+	function pwdChange(){
+		window.open("../myaccount/pwdchangepop.html","_blank",'scrollbars=no, width=450,height=250,status=no,resizable=no,left=400,top=300').focus();
+
 	}
 </script>
 <body>
@@ -37,8 +47,8 @@
 						<div id="morebox" class="morebox">
 							<ul>
 								<li style="margin-top: 2px;"><a href="../myaccount/pagecontrol.html?page=2" id="1"	onmouseover="focus(this)">정보수정</a></li>
-								<li><a href="" id="2" onmouseover="focus(this)">비번변경</a></li>
-								<li><a href="" id="3" onmouseover="focus(this)">회원탈퇴</a></li>
+								<li><a href="" id="2" onmouseover="focus(this)" onClick="pwdChange()">비번변경</a></li>
+								<li><a href="../myaccount/pagecontrol.html?page=4" id="3" onmouseover="focus(this)">회원탈퇴</a></li>
 							</ul>
 						</div>
 					</li>
@@ -55,7 +65,8 @@
 			<div class="rcontent">
 				<div class="photo">
 					<img alt="내 사진" src="${pageContext.request.contextPath}/upload/${USER.picture_url }"  
-					width="100" height="70">
+					width="100" height="70" onerror="this.src='../img/noprofile.gif' ">
+
 				</div>
 				<div class="Explain">
 					이 곳은 <strong>${USER.name }(${USER.nick })</strong>님을 위한 공간입니다. <br /> 회원님의 활동내역을 실시간으로 확인하실 수 있습니다.<br />
@@ -98,7 +109,16 @@
 					<div style="border:none;">
 					<jsp:include page="/myaccount/modify.html" flush="false"/>
 					</div>
-				
+				</c:when>
+				<c:when test="${MPBODY=='3' }">
+					<div>
+					<jsp:include page="/myaccount/pwdchange.html" flush="false"/>
+					</div>
+				</c:when>
+				<c:when test="${MPBODY=='4' }">
+					<div>
+					<jsp:include page="/myaccount/deletepage.html" flush="false"/>
+					</div>
 				</c:when>
 			</c:choose>
 		</div>

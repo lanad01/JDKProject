@@ -41,6 +41,16 @@ input{ height:25px;}
 </style>
 </head>
 <script type="text/javascript">
+function pwdValid(){
+	var pwd=document.getElementById("pwd").value;
+	var pwdCheck=document.getElementById("pwdCheck").value;
+	if(pwd!=pwdCheck){
+		document.getElementById("pwdVaildMessage").style.display="block";
+	}
+	if(pwd == pwdCheck){
+		document.getElementById("pwdVaildMessage").style.display="none";
+	}
+}
 function quizDisplay(quiztext) {
     var selection = quiztext;
 	document.getElementById("quiz").value=selection;
@@ -136,7 +146,7 @@ function quizDisplay(quiztext) {
 	</tr>
 	<tr>
 		<td class="key">비밀번호<h5>*</h5></td>
-		<td><form:password path="password" maxlength="20" class="input" />
+		<td><form:password path="password" maxlength="20" id="pwd" class="input" />
 		<font color="red" id="font" ><form:errors path="password"/></font>
 			<div>4~12자의 영문과 숫자만 사용할 수 있습니다.</div>
 		</td>
@@ -144,8 +154,8 @@ function quizDisplay(quiztext) {
 	<tr>
 		<td class="key">비밀번호 확인<h5>*</h5></td>
 		<td>
-		<form:password  path="pwdCheck"  maxlength="20" class="input" />
-		<font color="red" id="font" ><form:errors path="pwdCheck"/></font>
+		<input type="password" id="pwdCheck" onblur="pwdValid();">
+		<font color="red" id="font" size="1em"><span id="pwdVaildMessage" style="display:none;">암호와 암호확인이 일치하지 않습니다!!</span></font>
 		<div>비밀번호를 한번 더 입력하세요. 비밀번호는 잊지 않도록 주의하시기 바랍니다.</div>
 		</td>
 	</tr>

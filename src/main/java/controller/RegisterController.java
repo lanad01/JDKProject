@@ -2,6 +2,7 @@ package controller;
 
 import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 
@@ -88,6 +89,7 @@ public class RegisterController {
 		ModelAndView mav=new ModelAndView("menu_header");
 		mav.addObject("BODY", "mypage/mypage");
 		mav.addObject("MPBODY",page);
+		
 		if (bindingResult.hasErrors()) { // 오류로 인한 로그인 실패
 			System.out.println("bindingErrors");
 			System.out.println(bindingResult.getAllErrors());
@@ -112,16 +114,17 @@ public class RegisterController {
 				}
 				if(out != null) out.close();
 				if(bis != null) bis.close();
-			}catch(Exception e) {
+			}catch(FileNotFoundException e) {
 				e.printStackTrace();
 			} //이미지 설정 후 저장
 			System.out.println("fileName:"+fileName);
 			System.out.println("path경로:"+path);	
 			user.setPicture_url(fileName); //이미지 파일명을 설정
-			System.out.println("세션에 들어갈 id : "+user.getId());
 			this.userDao.updateUser(user);
+			//성공시 성공메시지 출력을 위한 파라미터 송신
+			mav.addObject("SUCCESS","success");
 			return mav;
-		}
+		}	
 	return mav;
 	}
 }

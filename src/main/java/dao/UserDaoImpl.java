@@ -45,6 +45,14 @@ public class UserDaoImpl implements UserDao {
 		session.update("user.updateUser", user);
 		
 	}
+	public void updatePwd(User user) {
+		session.update("user.updatePwd",user);
+		
+	}
+	public void deleteUser(Integer user_no) {
+		session.delete("user.deleteUser",user_no);
+		
+	}
 	
 
 }

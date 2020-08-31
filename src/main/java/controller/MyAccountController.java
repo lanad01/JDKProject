@@ -5,7 +5,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import dao.UserDao;
@@ -35,24 +39,71 @@ public class MyAccountController {
 		System.out.println("pagecontrol 수신 page :"+page);
 		ModelAndView mav=new ModelAndView("menu_header");
 		mav.addObject("MPBODY",page);
-		String body="mypage/mypage";
-		String id=(String) session.getAttribute("loginUser");
-		User user=userDao.findByUserId(id);
-		mav.addObject("USER",user);
+		// 회원 정보 수정
+		String body = "mypage/mypage";
+		String id = (String) session.getAttribute("loginUser");
+		User user = userDao.findByUserId(id);
+		mav.addObject("USER", user);
 		System.out.println(user.getId());
-		mav.addObject("BODY",body);
-		
+		mav.addObject("BODY", body);
 		return mav;
 	}
-	
 	@RequestMapping(value="/myaccount/modify.html")
 	public ModelAndView modify(HttpSession session) {
 		System.out.println("myaccount/modify 수신 확인");
 		ModelAndView mav=new ModelAndView("mypage/mypage_modify");
 		String id=(String) session.getAttribute("loginUser");
 		User user=this.userDao.findByUserId(id);
+		mav.addObject("ID",user.getId());
+		mav.addObject("PWD",user.getPassword());
 		mav.addObject(user);
-		
 		return mav;
+	}
+	@RequestMapping(value="/myaccount/pwdchangepop.html") 
+	public ModelAndView pwdChangepop(HttpSession session) { // 비밀번호 수정
+		ModelAndView mav=new ModelAndView("mypage/pwdchange");
+		String id=(String)session.getAttribute("loginUser");
+		User user=this.userDao.findByUserId(id);
+		mav.addObject(user);
+		return mav;
+	}
+	@RequestMapping(value="/myaccount/pwdchange.html")
+	public ModelAndView pwdChange(HttpSession session,HttpServletRequest request,User user) {
+		System.out.println("myaccount/pwdchange수신");
+//		ModelAndView mav=new ModelAndView("menu_header");
+//		String body="mypage/mypage";
+//		mav.addObject("BODY",body);  
+//		mav.addObject("MPBODY","1"); 
+		// 완료 되면 mypage의 디폴트로 간다
+		System.out.println(user.getId());
+		System.out.println(user.getPassword());
+		String newpwd=request.getParameter("newpwd");
+		user.setPassword(newpwd);
+		System.out.println(user.getPassword());
+		System.out.println(user.getUser_no());
+		this.userDao.updatePwd(user);
+		System.out.println(newpwd);
+		ModelAndView mav=new ModelAndView("mypage/pwdchange");
+		mav.addObject("SUCCESS","success");
+		return mav;
+	}
+	@RequestMapping(value="/myaccount/deletepage.html")
+	public ModelAndView delete(HttpSession session) {
+		System.out.println("myaccount/deletepage 수신 확인");
+		ModelAndView mav=new ModelAndView("mypage/delete");
+		String id=(String) session.getAttribute("loginUser");
+		User user=this.userDao.findByUserId(id);
+		mav.addObject(user);
+		return mav;
+	}
+	@RequestMapping(value="/myaccount/delete.html")
+	public ModelAndView deleteUser(HttpSession session) {
+		System.out.println("myaccount/delete 수신 확인");
+		String id=(String) session.getAttribute("loginUser");
+		User user=this.userDao.findByUserId(id);
+		System.out.println(user.getUser_no());
+		this.userDao.deleteUser(user.getUser_no());
+		session.invalidate();
+		return new ModelAndView("redirect:/bbs/bbs.html?bbstype=freebbs");
 	}
 }

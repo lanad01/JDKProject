@@ -4,7 +4,7 @@
 <mapper namespace="user">
 <insert id="putUser" parameterType="model.User">
 	insert into user_info values(#{user_no},#{name},#{nick},#{birth_date},#{gender},#{id},
-	#{password},#{pwdCheck},#{quiz},#{answer},#{email},#{area},#{picture_url},#{register_date})
+	#{password},#{quiz},#{answer},#{email},#{area},#{picture_url},#{register_date})
 </insert>
 <select id="getUser" parameterType="model.User" resultType="model.User">
 	select * from user_info where id=#{id} and password=#{password}
@@ -17,11 +17,18 @@
 </select>
 <update id="updateUser" parameterType="model.User">
 	update user_info set 
-	user_no=#{user_no},	name=#{name},	nick=#{nick},	birth_date=#{birth_date},
-	gender=#{gender},	id=#{id},	password=#{password},	pwdcheck=#{pwdcheck},
+	name=#{name},	nick=#{nick},	birth_date=#{birth_date},
+	gender=#{gender},	id=#{id},	password=#{password},
 	quiz=#{quiz},	answer=#{answer},	email=#{email},	area=#{area},
 	picture_url=#{picture_url},	register_date=#{register_date}
+	where user_no=#{user_no}
 </update>
+<update id="updatePwd" parameterType="String">
+	update user_info set password=#{password} where user_no=#{user_no}
+</update>
+<delete id="deleteUser" parameterType="Integer">
+	delete from user_info where user_no=#{user_no}
+</delete>
 </mapper>
 
 <!-- SQL> desc user_info -->

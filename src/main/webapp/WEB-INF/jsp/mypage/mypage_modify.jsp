@@ -111,6 +111,8 @@ input {
 				</div>
 				<form:hidden path="user_no"/>
 				<form:hidden path="register_date"/>
+				<form:hidden path="id"/>
+				<form:hidden path="password"/>
 				<table class="modify">
 					<tr><td>이름 <font color="red" id="font">*</font> :  </td>
 						<td><form:input path="name" maxlength="20"/>
@@ -137,13 +139,12 @@ input {
 						</td>
 					</tr>
 					<tr><td>아이디 <font color="red" id="font">*</font> :  </td>
-						<td><form:input path="id" maxlength="8" disabled="true"/>
-						<font color="red" id="font" ><form:errors path="id"/></font>
+						<td><input type="text" value="${ID }" maxlength="8" disabled="true"/>
 						<div><font color="red" size="1.0">아이디는 바꿀 수 없습니다!!</font></div>
 						</td>
 					</tr>
 					<tr><td>비밀번호 <font color="red" id="font">*</font> :  </td>
-						<td><form:input path="password" maxlength="20" disabled="true"/>
+						<td><input type="password" value="${PWD }" maxlength="20" disabled="true"/>
 						<div><font color="red" size="1.0">비밀번호 변경 기능을 사용해주세요!!</font></div>
 						</td>
 					</tr>
