@@ -39,9 +39,4 @@ public class BBSListDaoImpl implements BBSListDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	public Date getRegisterDate(Integer seqno) {
-		// TODO Auto-generated method stub
-		return session.selectOne("bbs.getRegister",seqno);
-	}
-
 }

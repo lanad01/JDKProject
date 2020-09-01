@@ -1,8 +1,7 @@
 package controller;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +31,6 @@ public class BBSController {
 		if(bbstype==null) bbstype="freebbs"; //bbstype이 널값일 경우에 디폴트는 자게
 		//게시판에서 비로그인 상태로 글쓰기를 눌렀을 경우.
 		String loginWrite=request.getParameter("writelogin");
-		System.out.println("GGGGGGG"+loginWrite);
 		if(loginWrite =="1") {
 			mav.addObject("Loginmodal","toLogin");
 		}
@@ -55,19 +53,13 @@ public class BBSController {
 		List<Bbs> AllList=bbsListDao.getBBSList(bbstype); 
 //		Collections.reverse(AllList);
 		List<Bbs> bbsList=new ArrayList<Bbs>();
-		List<String> registerDate=new ArrayList<String>();
-		String temp="";
+		List<String> timeList=new ArrayList<String>();
 		System.out.println("이번 페이지넘버는 PAGENO : "+PAGENO);
 		for(int i=((PAGENO-1)*5); i< ((PAGENO-1)*5)+5; i++) {
 			// PAGENO * 5 + 1 부터  PAGENO *5 +5
 			try {
 			
 			bbsList.add(AllList.get(i));
-			
-			DateFormat df = new SimpleDateFormat("yy.MM.dd hh:mm");
-			temp = df.format(bbsListDao.getRegisterDate(AllList.get(i).getSeqno()));
-			System.out.println(temp);
-			registerDate.add(temp);
 			}catch(IndexOutOfBoundsException e) {
 				System.out.println("IndexOutOfBoundsException");
 			}
@@ -85,6 +77,7 @@ public class BBSController {
 			Integer rereNum=repDao.getRereNum(bbsList.get(t).getSeqno());
 			repAndrere.add(repNum+"+"+rereNum);
 		}
+		System.out.println(bbsList.get(0).getRegister_date());
 		// 페이징 찾기
 		int totalCnt = bbsListDao.getPageCnt(bbstype);//전체 글의 갯수 검색
 		System.out.println("게시판 타입 : "+bbstype+"   총 게시글 수 :" + totalCnt);
@@ -99,7 +92,6 @@ public class BBSController {
 		mav.addObject("WRITERLIST",writerList);
 		mav.addObject("LIST",bbsList);
 		mav.addObject("BBSTYPE",bbstype);
-		mav.addObject("REGISTERDATE",registerDate);
 		String body="bbs/bbslist";
 		mav.addObject("BODY",body);
 		return mav;
