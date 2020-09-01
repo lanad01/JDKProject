@@ -45,29 +45,25 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="bbs" items="${LIST }" varStatus="status" >
-						<!--  user_no : 1 - writer가 권상우인 글은 공지사항 -->
-						<c:choose>
-							<c:when test="${bbs.user_no==1 }"><!-- 브릴인 경우 -->
+					<c:forEach var="notice" items="${NOTICES}" varStatus="status">
 								<tr class="noticetr" id="bbsBottomBorder" >
 									<td><img src="../img/notice.gif" alt="공지" class="notice" /></td>
-									<td class="b"><a href="../bbs/bbsview.html?seqno=${bbs.seqno }">${bbs.title }</a>
+									<td class="b"><a href="../bbs/bbsview.html?seqno=${notice.seqno }">${notice.title }</a>
 									<span class="comment">
-									<c:forEach var="reAndrere" items="${REPANDRERE}" begin="${status.index}" end="${status.index}">
+									<c:forEach var="reAndrere" items="${NOTICEREnRERE}" begin="${status.index}" end="${status.index}">
 									<font color="blue" size="1">(${reAndrere})</font>
 									</c:forEach>
 									</span></td>
 									<td class="name" align="center">
-								<c:forEach var="writer" items="${WRITERLIST}" begin="${status.index}" end="${status.index}">
-									${writer}
-								</c:forEach>
+									브릴
 									</td>
-									<td class="hit">${bbs.hit }</td>
-									<td class="sdate">${bbs.register_date }</td>
-									<td class="score">${bbs.point }</td>
+									<td class="hit">${notice.hit }</td>
+									<td class="sdate">${notice.register_date }</td>
+									<td class="score">${notice.point }</td>
 								</tr>
-							</c:when>
-							<c:otherwise>
+					</c:forEach>
+								
+					<c:forEach var="bbs" items="${LIST }" varStatus="status" >
 								<tr id="bbsBottomBorder">
 									<td class="snum">${bbs.seqno }</td>
 									<td class="b"><a href="../bbs/bbsview.html?seqno=${bbs.seqno }">${bbs.title }</a>
@@ -84,8 +80,6 @@
 									<td class="sdate">${bbs.register_date }</td>
 									<td class="score">${bbs.point }</td>
 								</tr>
-							</c:otherwise>
-						</c:choose>
 					</c:forEach>
 				</tbody>
 			</table>
@@ -98,27 +92,6 @@
 			<img src="../img/split.gif" class="split" alt=""/> 
 			<a href="../bbs/bbs.html?bbstype=${BBSTYPE}&PAGENO=${page}" style="color:black;">${page }</a>
 			</c:forEach>
-<!-- 			<img src="../img/split.gif" class="split" alt=""/>  -->
-<!-- 			<span class="selected" title="1 페이지">1</span>  -->
-<!-- 			<img src="../img/split.gif" class="split" alt="" />  -->
-<!-- 			<a href="" class="notselected" title="2 페이지">2</a> -->
-<!-- 			<img src="../img/split.gif" class="split" alt="" /> -->
-<!-- 			<a href="" class="notselected" title="3 페이지">3</a> -->
-<!-- 			<img src="../img/split.gif" class="split" alt="" /> -->
-<!-- 			<a href="" class="notselected" title="4 페이지">4</a> -->
-<!-- 			<img src="../img/split.gif" class="split" alt="" /> -->
-<!-- 			<a href="" class="notselected" title="5 페이지">5</a>  -->
-<!-- 			<img src="../img/split.gif" class="split" alt="" />  -->
-<!-- 			<a href="" class="notselected" title="6 페이지">6</a>  -->
-<!-- 			<img src="../img/split.gif" class="split" alt="" />  -->
-<!-- 			<a href="" class="notselected" title="7 페이지">7</a>  -->
-<!-- 			<img src="../img/split.gif" class="split" alt="" />  -->
-<!-- 			<a href="" class="notselected" title="8 페이지">8</a> -->
-<!-- 			<img src="../img/split.gif" class="split" alt="" /> -->
-<!-- 			<a href="" class="notselected" title="9 페이지">9</a>  -->
-<!-- 			<img src="../img/split.gif" class="split" alt="" />  -->
-<!-- 			<a href="" class="notselected" title="10 페이지">10</a>  -->
-<!-- 			<img src="../img/split.gif" class="split" alt="" />  -->
 			<a href="#"><img src="../img/behind.gif" alt="다음 10 페이지" /></a>
 			<a href="#"><img src="../img/lastpage.gif" alt="마지막페이지" /></a>
 		</div>

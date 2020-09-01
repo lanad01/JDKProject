@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -29,6 +30,18 @@ public class BBSListDaoImpl implements BBSListDao {
 	public List<Bbs> read5Bbs(String bbsType) {
 		// TODO Auto-generated method stub
 		return session.selectList("bbs.getBbs5",bbsType);
+	}
+	public List<Bbs> getNotices(Integer user_no) {
+		// TODO Auto-generated method stub
+		return session.selectList("bbs.getNotice",user_no);
+	}
+	public List<Bbs> getTop10ByHit() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public Date getRegisterDate(Integer seqno) {
+		// TODO Auto-generated method stub
+		return session.selectOne("bbs.getRegister",seqno);
 	}
 
 }

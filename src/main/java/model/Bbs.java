@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Date;
+
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class Bbs { // 포인트는 테이블 따로 둡시다
@@ -7,7 +9,7 @@ public class Bbs { // 포인트는 테이블 따로 둡시다
 	@NotEmpty(message="제목을 입력하세요")
 	private String title;
 	private Integer user_no;
-	private String register_date;
+	private Date register_date;
 	private String content;
 	private String bbstype;
 	private Integer hit;
@@ -42,10 +44,10 @@ public class Bbs { // 포인트는 테이블 따로 둡시다
 	public void setUser_no(Integer user_no) {
 		this.user_no = user_no;
 	}
-	public String getRegister_date() {
+	public Date getRegister_date() {
 		return register_date;
 	}
-	public void setRegister_date(String register_date) {
+	public void setRegister_date(Date register_date) {
 		this.register_date = register_date;
 	}
 	public String getContent() {

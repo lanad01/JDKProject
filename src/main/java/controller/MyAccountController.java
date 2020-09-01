@@ -99,6 +99,6 @@ public class MyAccountController {
 		System.out.println(user.getUser_no());
 		this.userDao.deleteUser(user.getUser_no());
 		session.invalidate();
-		return new ModelAndView("redirect:/bbs/bbs.html?bbstype=freebbs");
+		return new ModelAndView("redirect:/bbs/bbs.html");
 	}
 }

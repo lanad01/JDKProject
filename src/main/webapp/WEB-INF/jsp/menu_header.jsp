@@ -126,6 +126,19 @@ function loginpopup() {
 function closeModal() {
 $('.searchModal').hide();
 };
+function hitBbs(input){
+	$.ajax({
+		async: true,
+		type : 'POST',
+		data : "input="+input ,
+		url : "../navi/hit.html",
+		success : function(data){
+			alert(data);
+		},error : function(e){
+			alert("실패");
+		}
+	})
+}
 function fnLoginBtn(){
     $.ajax({
        async: true,
@@ -247,8 +260,9 @@ function fnLoginBtn(){
         <div  style="border:1px solid; padding:10px 0 15px 20px;">
         	<table>
         		<tr style="margin-left:5px;">
-        			<th><a href="#" class="list-group-item"><font face='BMDOHYEON' size="2em" color="red">많이 본 글</font></a></th>
-          			<th><a href="#" class="list-group-item"><font face='BMDOHYEON' size="2em" color="red">댓글 많은 글</font></a></th></tr>
+        			<th><font face='BMDOHYEON' size="2em" color="red"><a href="#" id="dd" class="list-group-item" onClick="hitBbs('hit');">많이 본 글</a></font></th>
+          			<th><font face='BMDOHYEON' size="2em" color="red"><a href="#" class="list-group-item" onClick="hitBbs('rep');">댓글 많은 글</a></font></th>
+          		</tr>
          		<tr><td>&#9312;</td></tr><tr><td>&#9313;</td></tr><tr><td>&#9314;</td></tr><tr><td>&#9315;</td></tr><tr><td>&#9316;</td></tr>
 				<tr><td>&#9317;</td></tr><tr><td>&#9318;</td></tr><tr><td>&#9319;</td></tr><tr><td>&#9320;</td></tr><tr><td>&#9321;</td></tr>
 			</table>

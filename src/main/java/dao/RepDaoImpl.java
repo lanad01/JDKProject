@@ -32,14 +32,14 @@ public class RepDaoImpl implements RepDao {
 			repgroupno++;
 			rep.setRepgroupno(repgroupno);
 		}
-		Calendar today=Calendar.getInstance();
-		int year=today.get(Calendar.YEAR);
-		int month=today.get(Calendar.MONTH)+1;
-		int date=today.get(Calendar.DATE);
-		int hour=today.get(Calendar.HOUR);
-		int min=today.get(Calendar.MINUTE);
-		String repDate=year+"/"+month+"/"+date+"  "+hour+":"+min;
-		rep.setRegister_date(repDate); //set
+//		Calendar today=Calendar.getInstance();
+//		int year=today.get(Calendar.YEAR);
+//		int month=today.get(Calendar.MONTH)+1;
+//		int date=today.get(Calendar.DATE);
+//		int hour=today.get(Calendar.HOUR);
+//		int min=today.get(Calendar.MINUTE);
+//		String repDate=year+"/"+month+"/"+date+"  "+hour+":"+min;
+//		rep.setRegister_date(repDate); //set
 		session.insert("rep.putRep",rep);
 	}
 

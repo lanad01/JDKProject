@@ -21,19 +21,10 @@ public class WriteDaoImpl implements WriteDao {
 	public void insertBBS(Bbs bbs) {  // 여기서 추가해야할 것 seqno bbsType
 		Integer seqno=this.getMaxSeqno();
 		if(seqno==null) seqno=0; 
-		seqno=seqno+1;
-		Calendar today=Calendar.getInstance();
-		int year=today.get(Calendar.YEAR);
-		int month=today.get(Calendar.MONTH)+1;
-		int date=today.get(Calendar.DATE);
-		int hour=today.get(Calendar.HOUR);
-		int min=today.get(Calendar.MINUTE);
-		String bbsDate=year+"/"+month+"/"+date+"  "+hour+":"+min;
-	
+		seqno=seqno+1; 
 		bbs.setHit(0);
 		bbs.setPoint(0);
-		bbs.setSeqno(seqno);
-		bbs.setRegister_date(bbsDate); // 작성일 설정
+		bbs.setSeqno(seqno); // 작성일 설정
 		session.insert("bbs.putBbs",bbs);
 	}
 	public void addHit(Integer seqno) {

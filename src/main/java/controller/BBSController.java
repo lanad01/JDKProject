@@ -1,7 +1,8 @@
 package controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,24 +32,44 @@ public class BBSController {
 		if(bbstype==null) bbstype="freebbs"; //bbstype이 널값일 경우에 디폴트는 자게
 		//게시판에서 비로그인 상태로 글쓰기를 눌렀을 경우.
 		String loginWrite=request.getParameter("writelogin");
-		if(loginWrite !=null) {
+		System.out.println("GGGGGGG"+loginWrite);
+		if(loginWrite =="1") {
 			mav.addObject("Loginmodal","toLogin");
 		}
 		System.out.println("bbsType : "+bbstype);
-		//페이징 작업
 		
+		//공지사항 리스트 작업
+		List<Bbs> notice=bbsListDao.getNotices(1);
+		List<String> noticeRepAndrere=new ArrayList<String>();
+		mav.addObject("NOTICES",notice);
+		for(int i=0; i< notice.size(); i++) { //댓글 개수 가져오기
+			Integer noticeRepNum=repDao.getRepList(notice.get(i).getSeqno()).size();
+			Integer noticeRereNum=repDao.getRereNum(notice.get(i).getSeqno());
+			System.out.println("공지사항 댓글 개수 :" + noticeRepNum);
+			System.out.println("공지사항 대댓글 개수 :" + noticeRereNum);
+			noticeRepAndrere.add(noticeRepNum+"+"+noticeRereNum);
+		}
+		mav.addObject("NOTICEREnRERE",noticeRepAndrere);
+		//페이징 작업
 		if(PAGENO == null) PAGENO = 1;
 		List<Bbs> AllList=bbsListDao.getBBSList(bbstype); 
 //		Collections.reverse(AllList);
 		List<Bbs> bbsList=new ArrayList<Bbs>();
+		List<String> registerDate=new ArrayList<String>();
+		String temp="";
 		System.out.println("이번 페이지넘버는 PAGENO : "+PAGENO);
 		for(int i=((PAGENO-1)*5); i< ((PAGENO-1)*5)+5; i++) {
 			// PAGENO * 5 + 1 부터  PAGENO *5 +5
 			try {
+			
 			bbsList.add(AllList.get(i));
-			System.out.println(i+"번째 "+bbstype+"게시판의 게시글 제목"+AllList.get(i).getTitle());
+			
+			DateFormat df = new SimpleDateFormat("yy.MM.dd hh:mm");
+			temp = df.format(bbsListDao.getRegisterDate(AllList.get(i).getSeqno()));
+			System.out.println(temp);
+			registerDate.add(temp);
 			}catch(IndexOutOfBoundsException e) {
-				System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%Index");
+				System.out.println("IndexOutOfBoundsException");
 			}
 		}
 		System.out.println("bbsList 사이즈 : "+bbsList.size());
@@ -78,6 +99,7 @@ public class BBSController {
 		mav.addObject("WRITERLIST",writerList);
 		mav.addObject("LIST",bbsList);
 		mav.addObject("BBSTYPE",bbstype);
+		mav.addObject("REGISTERDATE",registerDate);
 		String body="bbs/bbslist";
 		mav.addObject("BODY",body);
 		return mav;

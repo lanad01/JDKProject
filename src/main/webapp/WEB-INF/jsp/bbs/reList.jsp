@@ -33,7 +33,7 @@ function rereShow(repno){
 				 ${replier}
 				 </c:forEach>
 				
-				(49.197.103.¢½) ${rep.register_date }</span><span style="font-weight:300"></span><br/><br/><br/>
+				<font size="0.8em" color="blue">${rep.register_date }</font></span><span style="font-weight:300"></span><br/><br/><br/>
 				<span style=" margin-left:10px;">${rep.content } Rep Groupno = ${rep.repgroupno } Repno = ${rep.repno } User_no : ${rep.user_no }</span>
 				</td>
 				<td class="crud" style="float:right; margin-left:180px;">

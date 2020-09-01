@@ -47,11 +47,7 @@ public class LoginController {
 	public ModelAndView logout(HttpSession session) {
 		// 로그아웃 세션 비활성화
 		session.invalidate();
-		// jsp선언 logout/logout.jsp
-		ModelAndView mav = new ModelAndView("menu_header");
-		String body = "freebbs/freebbs";
-		mav.addObject("BODY", body);
 		// mav.setViewName("logout/logout");
-		return new ModelAndView("redirect:/index/index.html"); // 메인페이지
+		return new ModelAndView("redirect:/bbs/bbs.html");
 	}
 }

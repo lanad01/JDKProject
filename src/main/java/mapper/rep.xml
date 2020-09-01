@@ -9,7 +9,7 @@
 	select max(repgroupno) from reply_info where repno=#{repno} <!--  같은 repno를 가진 댓글 레코드의 repgroupno 최대치를 얻어온다  -->
 </select>
 <insert id="putRep" parameterType="model.Reply">
-	insert into reply_info values(#{repno},#{repgroupno},#{seqno},#{user_no},#{register_date},#{content})
+	insert into reply_info values(#{repno},#{repgroupno},#{seqno},#{user_no},sysdate ,#{content})
 </insert>
 <select id="getRepList"  resultType="model.Reply" parameterType="Integer">
 	select * from reply_info where seqno=#{seqno} and repgroupno=0<!--  입력된 seqno와 일치하는 seqno를 가진 bbs_info가 가진 모드 reply를 뽑아낸다  -->
