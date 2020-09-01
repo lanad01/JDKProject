@@ -12,7 +12,7 @@
 	select user_no from user_info where id=#{id} 
 </select>
 <select id="getBBSList" resultType="model.Bbs" parameterType="String">
-	select * from bbs_info where bbstype=#{bbstype}
+	select * from bbs_info where bbstype=#{bbstype} order by seqno desc
 </select>
 <select id="getBbsDetail" resultType="model.Bbs" parameterType="Integer">
 	select * from bbs_info where seqno=#{seqno}
@@ -23,6 +23,18 @@
 <update id="addHit" parameterType="Integer">
 	update bbs_info set hit=hit+1 where seqno=#{seqno}
 </update>
+<select id="getPageCntByBbsType" parameterType="String" resultType="Integer">
+	select count(*) from bbs_info where bbstype=#{bbstype}
+</select>
+<select id="getBbS5" resultType="model.Bbs" parameterType="String">
+	select * from bbs_info where 
+	select seqno,title,id,register_date from
+			(select rownum rn, seqno, title, id, register_date
+				from	(select seqno,title,id,register_date
+						from my_bbs order by seqno desc))
+	where (rn > ((#{no}-1)*5)) and 
+			(rn <![CDATA[<]]> (((#{no}-1)*5)+6)) 
+	</select>
 </mapper>
 
 

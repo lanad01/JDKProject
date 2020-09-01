@@ -70,10 +70,6 @@ public class MyAccountController {
 	@RequestMapping(value="/myaccount/pwdchange.html")
 	public ModelAndView pwdChange(HttpSession session,HttpServletRequest request,User user) {
 		System.out.println("myaccount/pwdchange수신");
-//		ModelAndView mav=new ModelAndView("menu_header");
-//		String body="mypage/mypage";
-//		mav.addObject("BODY",body);  
-//		mav.addObject("MPBODY","1"); 
 		// 완료 되면 mypage의 디폴트로 간다
 		System.out.println(user.getId());
 		System.out.println(user.getPassword());
@@ -82,9 +78,8 @@ public class MyAccountController {
 		System.out.println(user.getPassword());
 		System.out.println(user.getUser_no());
 		this.userDao.updatePwd(user);
-		System.out.println(newpwd);
+		System.out.println("새로운 비밀번호: "+newpwd);
 		ModelAndView mav=new ModelAndView("mypage/pwdchange");
-		mav.addObject("SUCCESS","success");
 		return mav;
 	}
 	@RequestMapping(value="/myaccount/deletepage.html")

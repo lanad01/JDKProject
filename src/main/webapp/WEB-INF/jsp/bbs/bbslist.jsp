@@ -20,8 +20,8 @@
 		<table class="upper">
 			<tr style="width:400px;"> <%@ include file="/WEB-INF/jsp/gridBBS/ad.jsp" %></tr>
 			<tr>
-				<td><img alt="" src="../img/total.jpg">&nbsp;&nbsp; <font
-					face='BMDOHYEON'>자유게시판 / Total ${totalPost } </font> ${totalwriting }</td>
+				<td><img alt="" src="../img/total.jpg">&nbsp;&nbsp; 
+				<font face='BMDOHYEON'>자유게시판 / Total ${totalPost } </font> ${totalwriting }</td>
 			</tr>
 		</table>
 		<div class="mainbbs">
@@ -54,7 +54,7 @@
 									<td class="b"><a href="../bbs/bbsview.html?seqno=${bbs.seqno }">${bbs.title }</a>
 									<span class="comment">
 									<c:forEach var="reAndrere" items="${REPANDRERE}" begin="${status.index}" end="${status.index}">
-									(${reAndrere})
+									<font color="blue" size="1">(${reAndrere})</font>
 									</c:forEach>
 									</span></td>
 									<td class="name" align="center">
@@ -73,7 +73,7 @@
 									<td class="b"><a href="../bbs/bbsview.html?seqno=${bbs.seqno }">${bbs.title }</a>
 									<span class="comment">
 									<c:forEach var="reAndrere" items="${REPANDRERE}" begin="${status.index}" end="${status.index}">
-									(${reAndrere})
+									<font color="blue" size="1">(${reAndrere})</font>
 									</c:forEach>
 									</span></td>
 									<td class="name" align="center">
@@ -86,73 +86,7 @@
 								</tr>
 							</c:otherwise>
 						</c:choose>
-					
 					</c:forEach>
-<!-- 					<tr class="noticetr" id="bbsBottomBorder" > -->
-<!-- 						<td><img src="../img/notice.gif" alt="공지" class="notice" /></td> -->
-<!-- 						<td class="b"><a href="../bbs/bbsview.html?bbstype=free">레벨업 필요 글, 댓글 개수 안내</a><span -->
-<!-- 							class="comment">(141+1)</span></td> -->
-<!-- 						<td class="name" align="center">브릴</td> -->
-<!-- 						<td class="hit">86193</td> -->
-<!-- 						<td class="sdate">03.05</td> -->
-<!-- 						<td class="score">11</td> -->
-<!-- 					</tr> -->
-<!-- 					<tr class="noticetr" id="bbsBottomBorder"> -->
-<!-- 						<td><img src="../img/notice.gif" alt="공지" class="notice" /></td> -->
-<!-- 						<td class="b"><a href="#">호주생활, 워홀, 영어 관련 질문만 여기에 해주세요.</a> <span -->
-<!-- 							class="comment">(10+2)</span></td> -->
-<!-- 						<td class="name" align="center">브릴</td> -->
-<!-- 						<td class="hit">96861</td> -->
-<!-- 						<td class="sdate">12.31</td> -->
-<!-- 						<td class="score">6</td> -->
-<!-- 					</tr> -->
-
-<!-- 					<tr class="noticetr" id="bbsBottomBorder"> -->
-<!-- 						<td><img src="../img/notice.gif" alt="공지" class="notice" /></td> -->
-<!-- 						<td class="b"><a href="#">호주 워홀 생활기 연재하실 분 -->
-<!-- 								모집합니다.</a> <span class="comment">(85+9)</span></td> -->
-<!-- 						<td class="name" align="center">브릴</td> -->
-<!-- 						<td class="hit">176460</td> -->
-<!-- 						<td class="sdate">12.22</td> -->
-<!-- 						<td class="score">4</td> -->
-<!-- 					</tr> -->
-
-<!-- 					<tr class="noticetr" id="bbsBottomBorder"> -->
-<!-- 						<td><img src="../img/notice.gif" alt="공지" class="notice" /></td> -->
-<!-- 						<td class="b"><a href="#">2012년 12월 17일 공식 오픈</a><span -->
-<!-- 							class="comment">(41+2)</span></td> -->
-<!-- 						<td class="name" align="center">브릴</td> -->
-<!-- 						<td class="hit">167536</td> -->
-<!-- 						<td class="sdate">12.17</td> -->
-<!-- 						<td class="score">21</td> -->
-<!-- 					</tr> -->
-					<!--  공지 게시판 종료 -->
-					<tr id="bbsBottomBorder">
-						<td class="snum">80182</td>
-						<td class="b"><a href="/?m=bbs&amp;uid=103180">워홀 성공 팁</a></td>
-						<td class="name" align="center"><a href="#">돌아온원써니</a></td>
-						<td class="hit">60</td>
-						<td class="sdate">14:02</td>
-						<td class="score">0</td>
-					</tr>
-					<tr id="bbsBottomBorder">
-						<td class="snum">80181</td>
-						<td class="b"><a href="/?m=bbs&amp;uid=103178">ㄴㅇㄹ</a> <span
-							class="new"></span></td>
-						<td class="name" align="center"><a href="#">ㅇㄹ내</a></td>
-						<td class="hit">32</td>
-						<td class="sdate">11:32</td>
-						<td class="score">0</td>
-					</tr>
-					<tr id="bbsBottomBorder">
-						<td class="snum">80180</td>
-						<td class="b"><a href="/?m=bbs&amp;uid=103177">Grain이
-								익어간다</a></td>
-						<td class="name" align="center"><a href="#">참치김치찌개</a></td>
-						<td class="hit">68</td>
-						<td class="sdate">09:30</td>
-						<td class="score">0</td>
-					</tr>
 				</tbody>
 			</table>
 		</div>
@@ -160,27 +94,31 @@
 			<div class="pagebox01">
 			<img src="../img/firstpage.gif" alt="처음페이지" /> 
 			<img src="../img/before.gif"alt="이전 10 페이지" />
+			<c:forEach var="page" begin="1" end="${PAGE_CNT}">
 			<img src="../img/split.gif" class="split" alt=""/> 
-			<span class="selected" title="1 페이지">1</span> 
-			<img src="../img/split.gif" class="split" alt="" /> 
-			<a href="" class="notselected" title="2 페이지">2</a>
-			<img src="../img/split.gif" class="split" alt="" />
-			<a href="" class="notselected" title="3 페이지">3</a>
-			<img src="../img/split.gif" class="split" alt="" />
-			<a href="" class="notselected" title="4 페이지">4</a>
-			<img src="../img/split.gif" class="split" alt="" />
-			<a href="" class="notselected" title="5 페이지">5</a> 
-			<img src="../img/split.gif" class="split" alt="" /> 
-			<a href="" class="notselected" title="6 페이지">6</a> 
-			<img src="../img/split.gif" class="split" alt="" /> 
-			<a href="" class="notselected" title="7 페이지">7</a> 
-			<img src="../img/split.gif" class="split" alt="" /> 
-			<a href="" class="notselected" title="8 페이지">8</a>
-			<img src="../img/split.gif" class="split" alt="" />
-			<a href="" class="notselected" title="9 페이지">9</a> 
-			<img src="../img/split.gif" class="split" alt="" /> 
-			<a href="" class="notselected" title="10 페이지">10</a> 
-			<img src="../img/split.gif" class="split" alt="" /> 
+			<a href="../bbs/bbs.html?bbstype=${BBSTYPE}&PAGENO=${page}" style="color:black;">${page }</a>
+			</c:forEach>
+<!-- 			<img src="../img/split.gif" class="split" alt=""/>  -->
+<!-- 			<span class="selected" title="1 페이지">1</span>  -->
+<!-- 			<img src="../img/split.gif" class="split" alt="" />  -->
+<!-- 			<a href="" class="notselected" title="2 페이지">2</a> -->
+<!-- 			<img src="../img/split.gif" class="split" alt="" /> -->
+<!-- 			<a href="" class="notselected" title="3 페이지">3</a> -->
+<!-- 			<img src="../img/split.gif" class="split" alt="" /> -->
+<!-- 			<a href="" class="notselected" title="4 페이지">4</a> -->
+<!-- 			<img src="../img/split.gif" class="split" alt="" /> -->
+<!-- 			<a href="" class="notselected" title="5 페이지">5</a>  -->
+<!-- 			<img src="../img/split.gif" class="split" alt="" />  -->
+<!-- 			<a href="" class="notselected" title="6 페이지">6</a>  -->
+<!-- 			<img src="../img/split.gif" class="split" alt="" />  -->
+<!-- 			<a href="" class="notselected" title="7 페이지">7</a>  -->
+<!-- 			<img src="../img/split.gif" class="split" alt="" />  -->
+<!-- 			<a href="" class="notselected" title="8 페이지">8</a> -->
+<!-- 			<img src="../img/split.gif" class="split" alt="" /> -->
+<!-- 			<a href="" class="notselected" title="9 페이지">9</a>  -->
+<!-- 			<img src="../img/split.gif" class="split" alt="" />  -->
+<!-- 			<a href="" class="notselected" title="10 페이지">10</a>  -->
+<!-- 			<img src="../img/split.gif" class="split" alt="" />  -->
 			<a href="#"><img src="../img/behind.gif" alt="다음 10 페이지" /></a>
 			<a href="#"><img src="../img/lastpage.gif" alt="마지막페이지" /></a>
 		</div>
@@ -206,8 +144,8 @@
 			<input type="submit" value=" 검색 " class="btnblue" />
 			</div>
 			<div class="searchform_right" style="float:left;">
-			<a href="../bbs/bbs.html?bbstype=freebbs"><input type="button" name="bbsList" value="목록으로 " /></a>
-			<a href="../write/freebbs.html"><input type="button" name="bbsList" value="글쓰기 " /></a>
+			<a href="../bbs/bbs.html?bbstype=${BBSTYPE}"><input type="button" name="bbsList" value="목록으로 " /></a>
+			<a href="../write/bbs.html?bbstype=${BBSTYPE}"><input type="button" name="bbsList" value="글쓰기 " /></a>
 <!-- 			<input type="button" onclick="window.location.href='../write/freebbs.html';" value="글쓰기" /> -->
 			</div>
 		</form:form>

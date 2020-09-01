@@ -19,6 +19,11 @@ function rereShow(repno){
 </script>
 <body>
 <div class="sbjbox" style="width:730px; margin-top:29px;">
+	<c:choose>
+		<c:when test="${NOCOM==0 }">
+			<h2 align="center" style="margin-top:15px;"> No comment by guest.<br/> 댓글을 등록해주세요! </h2>
+		</c:when>
+	</c:choose>
 	<c:forEach  var="rep" items="${REP}" varStatus="status"  >
 		<table class="commentTable">
 			<tr><td><img src="../img/noprofile.gif" alt="" width=40 height=60 style="position:static;"></td>

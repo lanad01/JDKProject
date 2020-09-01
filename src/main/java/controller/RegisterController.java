@@ -31,7 +31,6 @@ public class RegisterController {
 			HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView("menu_header");
 		System.out.println("Registerpost수신");
-		String body = "freebbs/freebbs";
 		if (bindingResult.hasErrors()) { // 오류로 인한 로그인 실패
 			System.out.println("bindingErrors");
 			System.out.println(bindingResult.getAllErrors());
@@ -66,11 +65,9 @@ public class RegisterController {
 			System.out.println("세션에 들어갈 id : "+user.getId());
 			session.setAttribute("loginUser", user.getId());
 			this.userDao.entryUser(user);
-			mav.addObject("BODY",body);
-			return mav; // 삽입 후 다시 목록을 띄운다
+			return new ModelAndView("redirect:/bbs/bbs.html?bbstype=freebbs");
 		}
-		mav.addObject("BODY",body);
-		return mav;
+		return new ModelAndView("redirect:/bbs/bbs.html?bbstype=freebbs");
 	}
 	
 	@RequestMapping(value = "/register/register.html") // 자유게시판에서 글쓰기

@@ -16,13 +16,25 @@
 </style>
 </head>
 <body>
-	<form:form action="../write/inputbbs.html?bbstype=freebbs" modelAttribute="bbs" method="post">
+	<form:form action="../write/inputbbs.html" modelAttribute="bbs" method="post">
 	<h2 class="header"><font face='BMDOHYEON'>글쓰기</font></h2>
 	<div class="msg">
 		<table>
-			<tr><td><input class="info" type="text" value="제목" disabled="true"></td><td><form:input type="text" path="title" size="54px" /></td></tr>
+			<tr><td><input class="info" type="text" value="제목" disabled="true"></td>
+				<td><form:input type="text" path="title" size="54px"/>
+				</td>
+			</tr>
+			<tr><td></td><td>&nbsp;&nbsp;<font color="red" id="font" ><form:errors path="title"/></font></td>
 			<tr><td><input class="info" type="text" value="작성자명" disabled="true"></td><td><input type="text" value="${sessionScope.loginUser }" disabled="true"></td></tr>
-			<tr><td><input class="info" type="text" value="게시판타입" disabled="true"></td><td><input type="text" value="${bbsType }" disabled="true"></td></tr>
+			<tr><td><input class="info" type="text" value="게시판타입" disabled="true"></td>
+			<td ><form:select path="bbstype" style="margin-left:10px;">
+					<form:option value="freebbs" label="자유게시판"/>
+					<form:option value="info" label="정보공유게시판"/>
+					<form:option value="qna" label="질문답변게시판"/>
+					<form:option value="lifestory" label="생활기"/>
+					<form:option value="experience" label="경험담썰"/>
+				</form:select>
+<%-- 			<input type="text" value="${bbsType }" disabled="true"></td></tr> --%>
 		</table>
 	</div>
 	<div class="col-sm-12" id="contentDiv" style="margin-top:5px;">

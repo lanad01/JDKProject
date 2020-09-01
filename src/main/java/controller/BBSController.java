@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,29 +26,59 @@ public class BBSController {
 	@Autowired
 	RepDao repDao;
 	@RequestMapping(value="/bbs/bbs.html") // 자유게시판 목록 여기서 받은 게시판 LIST 목록을 ADD해야한다.
-	public ModelAndView freeBBS(HttpServletRequest request,String bbstype) {
+	public ModelAndView freeBBS(HttpServletRequest request,String bbstype,Integer PAGENO) {
 		ModelAndView mav=new ModelAndView("menu_header");
-		//자유게시판 LIST 
+		if(bbstype==null) bbstype="freebbs"; //bbstype이 널값일 경우에 디폴트는 자게
+		//게시판에서 비로그인 상태로 글쓰기를 눌렀을 경우.
+		String loginWrite=request.getParameter("writelogin");
+		if(loginWrite !=null) {
+			mav.addObject("Loginmodal","toLogin");
+		}
 		System.out.println("bbsType : "+bbstype);
-		List<Bbs> fbList=bbsListDao.getBBSList(bbstype);
+		//페이징 작업
+		
+		if(PAGENO == null) PAGENO = 1;
+		List<Bbs> AllList=bbsListDao.getBBSList(bbstype); 
+//		Collections.reverse(AllList);
+		List<Bbs> bbsList=new ArrayList<Bbs>();
+		System.out.println("이번 페이지넘버는 PAGENO : "+PAGENO);
+		for(int i=((PAGENO-1)*5); i< ((PAGENO-1)*5)+5; i++) {
+			// PAGENO * 5 + 1 부터  PAGENO *5 +5
+			try {
+			bbsList.add(AllList.get(i));
+			System.out.println(i+"번째 "+bbstype+"게시판의 게시글 제목"+AllList.get(i).getTitle());
+			}catch(IndexOutOfBoundsException e) {
+				System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%Index");
+			}
+		}
+		System.out.println("bbsList 사이즈 : "+bbsList.size());
+		//작성자와 대댓글 숫자 작성
 		List<String> writerList=new ArrayList<String>();
 		List<String> repAndrere=new ArrayList<String>();
-		for( int t = 0; t < fbList.size(); t++){ //대댓글리스트를 통해서 얻어오기
-			String writer=bbsListDao.getWriter(fbList.get(t).getUser_no()); //게시글 리스트들의 user_no들만큼 반복하며 writer집어넣기
+		for( int t = 0; t < bbsList.size(); t++){ 
+			String writer=bbsListDao.getWriter(bbsList.get(t).getUser_no()); //게시글 리스트들의 user_no들만큼 반복하며 writer집어넣기
 			writerList.add(writer);
 			mav.addObject("WRITER",writer); //저짝에서 새로운 forEach로 받는다
-			System.out.println("----------bbs/bbs writer / fbList 번호 "+fbList.get(t)+"의 writer는 "+writer);
 			// 게시글의 댓글과 대댓글 수를 구하는 로직
-			Integer repNum=repDao.getRepList(fbList.get(t).getSeqno()).size();
-			Integer rereNum=repDao.getRereNum(fbList.get(t).getSeqno());
-			System.out.println("해당 개시글의 댓글개수는 :" +repNum+" 대댓글의 개수는 : "+ rereNum);
+			Integer repNum=repDao.getRepList(bbsList.get(t).getSeqno()).size();
+			Integer rereNum=repDao.getRereNum(bbsList.get(t).getSeqno());
 			repAndrere.add(repNum+"+"+rereNum);
-			System.out.println("댓글 대댓글 수 출력 "+t+"번 째 게시글의 값: "+repAndrere);
 		}
+		// 페이징 찾기
+		int totalCnt = bbsListDao.getPageCnt(bbstype);//전체 글의 갯수 검색
+		System.out.println("게시판 타입 : "+bbstype+"   총 게시글 수 :" + totalCnt);
+		int pageCnt = 0;//페이지 갯수
+		if(totalCnt > 0) {
+			pageCnt = totalCnt / 5;
+			if(totalCnt % 5 > 0) pageCnt++;
+		}
+		System.out.println("뿜어내야 할 페이지 수"+pageCnt);
+		mav.addObject("PAGE_CNT", pageCnt); // 총 페이지 개수
 		mav.addObject("REPANDRERE",repAndrere);
 		mav.addObject("WRITERLIST",writerList);
-		mav.addObject("LIST",fbList);
-		String body="freebbs/freebbs";
+		mav.addObject("LIST",bbsList);
+		mav.addObject("BBSTYPE",bbstype);
+		String body="bbs/bbslist";
 		mav.addObject("BODY",body);
 		return mav;
 	}
@@ -57,22 +88,20 @@ public class BBSController {
 		//bbsDetail
 		System.out.println("--------------------여기서부터는 bbs/bbsview seqno=" + seqno+"-----------------------");
 		Bbs bbsDetail=bbsListDao.getBbsDetail(seqno);
-		System.out.println("bbsUser_no : "+bbsDetail.getUser_no());
 		mav.addObject("BBS",bbsDetail);
 		//bbsDetail종료 
 		
 		//작성자 뿌리기 by seqno
 		String writer=bbsListDao.getWriter(bbsDetail.getUser_no());
-		System.out.println("작성자 나오니? : "+writer);
 		mav.addObject("WRITER",writer);
 		//조회수 증가 
 		writeDao.addHit(seqno);
 		
 		//댓글 및 대댓글 갯수 정하는 메서드 구현
-		System.out.println("댓글 갯수 정하는 메소드 결과 : "+repDao.getRepList(seqno).size());
 		mav.addObject("REPNUM",repDao.getRepList(seqno).size());
 		repDao.getRereNum(seqno); // 게시글을 통해 모든 대댓글 갯수
 		mav.addObject("RERENUM",repDao.getRereNum(seqno));
+		
 		//종료
 		String body="bbs/bbscont";
 		mav.addObject("BODY",body);

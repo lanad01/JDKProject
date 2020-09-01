@@ -10,7 +10,7 @@
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script>
 $(function(){
-	location.href="../3-5_/bbs/bbs.html?bbstype=freebbs";
+	location.href="../3-5_/bbs/bbs.html";
 });
 </script>
 	<head>

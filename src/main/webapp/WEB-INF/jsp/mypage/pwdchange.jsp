@@ -29,6 +29,18 @@
 </style>
 <script src="../resources/vendor/jquery/jquery.min.js"></script>
 <script>
+function close2(frm){
+	document.getElementById("main").style.display = "none";
+	self.close();
+	window.opener.location.reload();
+	var result = confirm("정말로 변경하시겠습니까?");
+	if(result == false) {
+		alert('비밀번호 변경이 취소 되었습니다.');
+		return false;
+	}else{
+	return true;
+	}
+}
 function pwdCheck(){
 	var prepwd=document.getElementById("prepwd").value; 
 	var userpwd=document.getElementById("userpwd").value;
@@ -60,11 +72,9 @@ function pwdCheck3(){
 </script>
 </head>
 <body>
-<c:choose>
-		<c:when test="${SUCCESS!='success' }">
-	<div class="main">
+	<div id="main" style="display:block;">
 		<div class="msg">
-			<form:form action="../myaccount/pwdchange.html" method="post" modelAttribute="user" name="fm">
+			<form:form action="../myaccount/pwdchange.html" onSubmit="return close2(this);" method="post" modelAttribute="user" name="fm">
 				<form:hidden path="user_no" id="user_no"/>
 				<form:hidden path="password" id="userpwd"/>
 				<form:hidden path="id" id="id"/>
@@ -82,22 +92,13 @@ function pwdCheck3(){
 							<div id="error3" style="color:red; margin-top:5px; font-size:0.8em;"></div>
 						<tr><td>&nbsp;</td></tr>
 						<tr><td></td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<input type="submit" value="비밀번호 변경" onSubmit="alert('ddd');"></td>
+						<input type="submit" value="비밀번호 변경"></td>
 						</tr>
 					</table>
 				</div>
 			</form:form>
 		</div>
 	</div>
-	</c:when>
-		<c:when test="${SUCCESS=='success' }">
-		<div class="end">
-		<br/><br/>
-		<h2 align="center" style="font-family:'BMDOHYEON'; size:1.3em; ">비밀번호 변경이 완료되었습니다.</h2>
-		<h2 align="center"><a href="" onClick="window.close()" style="background:#dcdcdc;">나가기</a></h2>
-		</div>
-		</c:when>
-	</c:choose>
 	
 </body>
 </html>

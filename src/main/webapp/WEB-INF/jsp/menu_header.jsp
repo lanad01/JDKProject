@@ -115,6 +115,7 @@ $(function(){
 	var loginmodal = '${Loginmodal}';
 	
 	if(loginmodal == 'toLogin'){
+		alert('로그인이 필요한 작업입니다!');
 	loginpopup(); 
 	}else{
 	}
@@ -136,7 +137,7 @@ function fnLoginBtn(){
             
                if(data == 1){
           alert("로그인에 성공 했습니다.");
-          location.href="../index/index.html";
+          location.href="../bbs/bbs.html?bbstype=freebbs";
           }else{
              alert("로그인에 실패했습니다.");
           }

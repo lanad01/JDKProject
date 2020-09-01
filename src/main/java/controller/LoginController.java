@@ -36,7 +36,8 @@ public class LoginController {
 	public ModelAndView toLogin() {
 		System.out.println("login/login 수신");
 		ModelAndView mav = new ModelAndView("menu_header"); // 원래는 login/login이었는데 상단바로만 로그인을 구현하니 이제는 메인으로 보내고
-		String body = "freebbs/freebbs"; // 우선 뽑아내는 화면은 이거고
+		String body = "bbs/bbslist"; // 우선 뽑아내는 화면은 이거고
+		mav.addObject("PAGENO",1);
 		mav.addObject("BODY", body);
 		mav.addObject("Loginmodal", "toLogin");
 		return mav;

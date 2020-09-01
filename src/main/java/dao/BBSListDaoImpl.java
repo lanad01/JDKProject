@@ -12,17 +12,23 @@ public class BBSListDaoImpl implements BBSListDao {
 	@Autowired
 	private SqlSession session;
 	public List<Bbs> getBBSList(String bbstype) {
-		System.out.println("bbslistdaoimpl bbstype :"+bbstype);
 		return session.selectList("bbs.getBBSList", bbstype);
 	}
 	public Bbs getBbsDetail(Integer seqno) {
 		// TODO Auto-generated method stub
-		System.out.println("BBSLISTDAOIMPL: "+seqno);
 		return session.selectOne("bbs.getBbsDetail", seqno);
 	}
 	public String getWriter(Integer user_no) {
 		// TODO Auto-generated method stub
 		return session.selectOne("bbs.getWriter",user_no);
+	}
+	public Integer getPageCnt(String bbsType) {
+		// TODO Auto-generated method stub
+		return session.selectOne("bbs.getPageCntByBbsType",bbsType);
+	}
+	public List<Bbs> read5Bbs(String bbsType) {
+		// TODO Auto-generated method stub
+		return session.selectList("bbs.getBbs5",bbsType);
 	}
 
 }
