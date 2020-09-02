@@ -28,7 +28,7 @@ public class WriteDaoImpl implements WriteDao {
 		int date=today.get(Calendar.DATE);
 		int hour=today.get(Calendar.HOUR);
 		int min=today.get(Calendar.MINUTE);
-		String bbsDate=year+"/"+month+"/"+date+"  "+hour+":"+min;
+		String bbsDate=year+"/"+month+"/"+date+" "+hour+":"+min;
 		
 		bbs.setHit(0);
 		bbs.setPoint(0);

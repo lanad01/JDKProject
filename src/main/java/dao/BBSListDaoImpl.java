@@ -37,6 +37,10 @@ public class BBSListDaoImpl implements BBSListDao {
 	}
 	public List<Bbs> getTop10ByHit() {
 		// TODO Auto-generated method stub
-		return null;
+		return session.selectList("bbs.getTop10Hit");
+	}
+	public List<Bbs> getTop10ByRep() {
+		// TODO Auto-generated method stub
+		return session.selectList("bbs.getTop10Rep");
 	}
 }

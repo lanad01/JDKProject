@@ -27,15 +27,20 @@ public class BBSController {
 	RepDao repDao;
 	@RequestMapping(value="/bbs/bbs.html") // 자유게시판 목록 여기서 받은 게시판 LIST 목록을 ADD해야한다.
 	public ModelAndView freeBBS(HttpServletRequest request,String bbstype,Integer PAGENO) {
+		System.out.println("bbs/bbs.html 수신");
+		
 		ModelAndView mav=new ModelAndView("menu_header");
 		if(bbstype==null) bbstype="freebbs"; //bbstype이 널값일 경우에 디폴트는 자게
 		//게시판에서 비로그인 상태로 글쓰기를 눌렀을 경우.
 		String loginWrite=request.getParameter("writelogin");
-		if(loginWrite =="1") {
-			mav.addObject("Loginmodal","toLogin");
+		try {
+			if(loginWrite.equals("1")) {
+				System.out.println("mav.add LoginModal"+loginWrite);
+				mav.addObject("Loginmodal", "toLogin");
+			}
+		}catch(NullPointerException e) {
+			System.out.println("Null");
 		}
-		System.out.println("bbsType : "+bbstype);
-		
 		//공지사항 리스트 작업
 		List<Bbs> notice=bbsListDao.getNotices(1);
 		List<String> noticeRepAndrere=new ArrayList<String>();
@@ -43,28 +48,23 @@ public class BBSController {
 		for(int i=0; i< notice.size(); i++) { //댓글 개수 가져오기
 			Integer noticeRepNum=repDao.getRepList(notice.get(i).getSeqno()).size();
 			Integer noticeRereNum=repDao.getRereNum(notice.get(i).getSeqno());
-			System.out.println("공지사항 댓글 개수 :" + noticeRepNum);
-			System.out.println("공지사항 대댓글 개수 :" + noticeRereNum);
 			noticeRepAndrere.add(noticeRepNum+"+"+noticeRereNum);
 		}
 		mav.addObject("NOTICEREnRERE",noticeRepAndrere);
 		//페이징 작업
 		if(PAGENO == null) PAGENO = 1;
 		List<Bbs> AllList=bbsListDao.getBBSList(bbstype); 
+		System.out.println(AllList.size());
 //		Collections.reverse(AllList);
 		List<Bbs> bbsList=new ArrayList<Bbs>();
-		List<String> timeList=new ArrayList<String>();
-		System.out.println("이번 페이지넘버는 PAGENO : "+PAGENO);
 		for(int i=((PAGENO-1)*5); i< ((PAGENO-1)*5)+5; i++) {
 			// PAGENO * 5 + 1 부터  PAGENO *5 +5
 			try {
 			
 			bbsList.add(AllList.get(i));
 			}catch(IndexOutOfBoundsException e) {
-				System.out.println("IndexOutOfBoundsException");
 			}
 		}
-		System.out.println("bbsList 사이즈 : "+bbsList.size());
 		//작성자와 대댓글 숫자 작성
 		List<String> writerList=new ArrayList<String>();
 		List<String> repAndrere=new ArrayList<String>();
@@ -77,7 +77,6 @@ public class BBSController {
 			Integer rereNum=repDao.getRereNum(bbsList.get(t).getSeqno());
 			repAndrere.add(repNum+"+"+rereNum);
 		}
-		System.out.println(bbsList.get(0).getRegister_date());
 		// 페이징 찾기
 		int totalCnt = bbsListDao.getPageCnt(bbstype);//전체 글의 갯수 검색
 		System.out.println("게시판 타입 : "+bbstype+"   총 게시글 수 :" + totalCnt);

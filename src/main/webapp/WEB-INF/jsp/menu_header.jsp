@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<% request.setCharacterEncoding("utf-8"); %>
+<% response.setContentType("text/html; charset=utf-8"); %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -107,18 +109,20 @@ height:40%;
 .search-modal-content table{ border-top:2px solid black; }
 #social { padding-bottom:13px;}
 .register {font-family:'BMDOHYEON'; font-size:0.8em; color:black; background:#f5f5f5; border:1px solid black; }
+#pa{ }
 </style>
 
 <script src="../resources/vendor/jquery/jquery.min.js"></script>
 <script>
 $(function(){
+	hitBbs('hit');
 	var loginmodal = '${Loginmodal}';
-	
 	if(loginmodal == 'toLogin'){
 		alert('로그인이 필요한 작업입니다!');
 	loginpopup(); 
 	}else{
 	}
+	
 });
 function loginpopup() {
 			$("#modal").show();
@@ -130,10 +134,17 @@ function hitBbs(input){
 	$.ajax({
 		async: true,
 		type : 'POST',
-		data : "input="+input ,
+		data : { "input": input } ,
+		dataType : "json",
 		url : "../navi/hit.html",
+		contentType: "application/json; charset=utf-8",
 		success : function(data){
-			alert(data);
+			alert(input);
+			var list_Length = Object.keys(data).length;
+			for(i=0; i<list_Length; i++){
+				document.getElementById("pa"+(i+1)).innerHTML=data[i].title;
+				document.getElementById("li"+(i+1)).href="../bbs/bbsview.html?seqno="+data[i].seqno;
+			}1
 		},error : function(e){
 			alert("실패");
 		}
@@ -260,11 +271,21 @@ function fnLoginBtn(){
         <div  style="border:1px solid; padding:10px 0 15px 20px;">
         	<table>
         		<tr style="margin-left:5px;">
-        			<th><font face='BMDOHYEON' size="2em" color="red"><a href="#" id="dd" class="list-group-item" onClick="hitBbs('hit');">많이 본 글</a></font></th>
-          			<th><font face='BMDOHYEON' size="2em" color="red"><a href="#" class="list-group-item" onClick="hitBbs('rep');">댓글 많은 글</a></font></th>
+        			<th><font face='BMDOHYEON' size="2em" color="red"><a href="#" id="hit" class="list-group-item" onClick="hitBbs('hit');">많이 본 글</a></font></th>
+          			<th><font face='BMDOHYEON' size="2em" color="red"><a href="#" id="rep" class="list-group-item" onClick="hitBbs('rep');">댓글 많은 글</a></font></th>
           		</tr>
-         		<tr><td>&#9312;</td></tr><tr><td>&#9313;</td></tr><tr><td>&#9314;</td></tr><tr><td>&#9315;</td></tr><tr><td>&#9316;</td></tr>
-				<tr><td>&#9317;</td></tr><tr><td>&#9318;</td></tr><tr><td>&#9319;</td></tr><tr><td>&#9320;</td></tr><tr><td>&#9321;</td></tr>
+          	</table>
+          	<table style=" font-family:'BMDOHYEON'; font-size:0.8em; color:black; margin-top:7px; ">
+         		<tr><td>&#9312; &nbsp;</td><td><a href="" id="li1"><span id="pa1"></span></a></td></tr>
+         		<tr><td>&#9313; &nbsp;</td><td><a href="" id="li2"><span id="pa2"></span></a></td></tr>
+         		<tr><td>&#9314; &nbsp;</td><td><a href="" id="li3"><span id="pa3"></span></a></td></tr>
+         		<tr><td>&#9315; &nbsp;</td><td><a href="" id="li4"><span id="pa4"></span></a></td></tr>
+         		<tr><td>&#9316; &nbsp;</td><td><a href="" id="li5"><span id="pa5"></span></a></td></tr>
+				<tr><td>&#9317; &nbsp;</td><td><a href="" id="li6"><span id="pa6"></span></a></td></tr>
+				<tr><td>&#9318; &nbsp;</td><td><a href="" id="li7"><span id="pa7"></span></a></td></tr>
+				<tr><td>&#9319; &nbsp;</td><td><a href="" id="li8"><span id="pa8"></span></a></td></tr>
+				<tr><td>&#9320; &nbsp;</td><td><a href="" id="li9"><span id="pa9"></span></a></td></tr>
+				<tr><td>&#9321; &nbsp;</td><td><a href="" id="li10"><span id="pa10"></span></a></td></tr>
 			</table>
         </div>
       </div>

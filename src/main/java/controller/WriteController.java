@@ -23,9 +23,10 @@ public class WriteController {
 		String id=(String)session.getAttribute("loginUser");
 		ModelAndView mav = new ModelAndView("menu_header");
 		if(id == null) { //로그인 상태가 아니라면
+			System.out.println("idNull");
 			mav.addObject("Loginmodal","toLogin");
 //			mav.addObject("BODY","bbs/bbslist");
-			return new ModelAndView("redirect:/bbs/bbs.html?writelogin=1");
+			return new ModelAndView("forward:/bbs/bbs.html?writelogin=1");
 		} //로그인상태라면?
 		mav.addObject("BODY","bbs/postbbs"); // postbbs에 Bbs 빈 주입
 		mav.addObject(new Bbs());
@@ -52,6 +53,6 @@ public class WriteController {
 		bbs.setUser_no(user_no); // 받은 유저넘버를 실질적으로 bbs객체에 삽입
 		//종합된 bbs를 최종적으로 insert, 작성일자는 Impl에서 처리
 		writeDao.insertBBS(bbs);
-		return new ModelAndView("redirect:../bbs/bbs.html?bbstype="+bbsType);
+		return new ModelAndView("redirect:/bbs/bbs.html?bbstype="+bbsType);
 	}
 }

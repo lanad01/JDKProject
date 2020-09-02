@@ -12,4 +12,5 @@ public interface RepDao {
 	List<Reply> getRereList(Integer repno); //댓글 부모 번호를 통해 같은 부모번호를 가졌다면 리스트로서 가져온다.
 	String getReplier(Integer user_no); //댓글의 user_no를 통해서 실제 뽑아 낼 id를 가져오는 메서드
 	Integer getRereNum(Integer seqno);
+	String getPicture(Integer user_no);
 }

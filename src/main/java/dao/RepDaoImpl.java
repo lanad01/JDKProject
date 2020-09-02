@@ -55,6 +55,10 @@ public class RepDaoImpl implements RepDao {
 	public Integer getRereNum(Integer seqno) {
 		return session.selectOne("rep.getRereNum",seqno);
 	}
+	public String getPicture(Integer user_no) {
+		// TODO Auto-generated method stub
+		return session.selectOne("rep.getPicture",user_no);
+	}
 	
 
 }

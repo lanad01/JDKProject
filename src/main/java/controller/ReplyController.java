@@ -52,11 +52,15 @@ public class ReplyController {
 		}
 		//댓글 작성자 아이디를 얻기 위한 로직 
 		ArrayList<String> replierList=new ArrayList<String>();
+		List<String> replierPicUrl=new ArrayList<String>();
 		for( int i = 0; i < rpList.size(); i++){
 			String replier=repDao.getReplier(rpList.get(i).getUser_no());
+			String pictureUrl=repDao.getPicture(rpList.get(i).getUser_no());
 			replierList.add(replier);
+			replierPicUrl.add(pictureUrl);
 		}
 		mav.addObject(new Reply());
+		mav.addObject("REPLIERPIC",replierPicUrl);
 		mav.addObject("REPLIERLIST",replierList);
 		mav.addObject("REP",rpList);
 		return mav;

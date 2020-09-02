@@ -26,7 +26,12 @@ function rereShow(repno){
 	</c:choose>
 	<c:forEach  var="rep" items="${REP}" varStatus="status"  >
 		<table class="commentTable">
-			<tr><td><img src="../img/noprofile.gif" alt="" width=40 height=60 style="position:static;"></td>
+			<tr><td>
+				<c:forEach var="picture" items="${REPLIERPIC }"  begin="${status.index}" end="${status.index}">
+				<img alt="댓글작성자 사진" src="${pageContext.request.contextPath}/upload/${picture}"  
+					width="60" height="60" onerror="this.src='../img/noprofile.gif' ">
+				</c:forEach>
+				</td>
 				<td><span style="font-weight:strong; font-size:15px; margin-left:10px;">
 				
 				 <c:forEach begin="${status.index}" end="${status.index}" var="replier" items="${REPLIERLIST}">

@@ -23,6 +23,9 @@
 <select id="getRereNum" resultType="Integer" parameterType="Integer">
 	select count(*) from reply_info where seqno=#{seqno} and repgroupno != 0
 </select>
+<select id="getPicture" resultType="String" parameterType="Integer">
+	select picture_url from user_info where user_no=#{user_no}
+</select>
 </mapper>
 
 
