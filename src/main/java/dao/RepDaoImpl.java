@@ -32,14 +32,6 @@ public class RepDaoImpl implements RepDao {
 			repgroupno++;
 			rep.setRepgroupno(repgroupno);
 		}
-//		Calendar today=Calendar.getInstance();
-//		int year=today.get(Calendar.YEAR);
-//		int month=today.get(Calendar.MONTH)+1;
-//		int date=today.get(Calendar.DATE);
-//		int hour=today.get(Calendar.HOUR);
-//		int min=today.get(Calendar.MINUTE);
-//		String repDate=year+"/"+month+"/"+date+"  "+hour+":"+min;
-//		rep.setRegister_date(repDate); //set
 		session.insert("rep.putRep",rep);
 	}
 
@@ -58,6 +50,33 @@ public class RepDaoImpl implements RepDao {
 	public String getPicture(Integer user_no) {
 		// TODO Auto-generated method stub
 		return session.selectOne("rep.getPicture",user_no);
+	}
+	public String getReplierByRepno(Integer repno) {
+		// TODO Auto-generated method stub
+		return session.selectOne("rep.getReplierByRepno",repno);
+	}
+	public void deleteRep(Integer repno) {
+		// TODO Auto-generated method stub
+		session.delete("rep.deleteByRepno",repno);
+	}
+	public void updateRep(Reply rep) {
+		session.update("rep.updateRep", rep);
+	}
+	public Reply getRep(Integer repno) {
+		// TODO Auto-generated method stub
+		return session.selectOne("rep.getRepByRepno",repno);
+	}
+	public void updateRere(Reply rereply) {
+		// TODO Auto-generated method stub
+		session.update("rep.updateRere",rereply);
+	}
+	public void deleteRere(Reply rep) {
+		// TODO Auto-generated method stub
+		session.delete("rep.deleteRere", rep);
+	}
+	public String getRereplierByRere(Reply rep) {
+		// TODO Auto-generated method stub
+		return session.selectOne("rep.getRereplierByRere",rep);
 	}
 	
 

@@ -1,7 +1,6 @@
 package controller;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -96,14 +95,22 @@ public class BBSController {
 		return mav;
 	}
 	@RequestMapping(value="/bbs/bbsview.html") 
-	public ModelAndView bbsview(Integer seqno) {  // 게시판 뷰, seqno를 수신하고 이를 토대로 해당 게시글 DB에 접속하여 글 세부내용을 전부 뽑아온다
+	public ModelAndView bbsview(Integer seqno,HttpServletRequest req) {  // 게시판 뷰, seqno를 수신하고 이를 토대로 해당 게시글 DB에 접속하여 글 세부내용을 전부 뽑아온다
 		ModelAndView mav=new ModelAndView("menu_header");
 		//bbsDetail
 		System.out.println("--------------------여기서부터는 bbs/bbsview seqno=" + seqno+"-----------------------");
 		Bbs bbsDetail=bbsListDao.getBbsDetail(seqno);
 		mav.addObject("BBS",bbsDetail);
-		//bbsDetail종료 
-		
+		//댓글 삭제 버튼 누를 시 비로그인이면 해당 페이지 로드하면서 로그인요구
+		String loginWrite=req.getParameter("loginwrite");
+		try {
+			if(loginWrite.equals("1")) {
+				System.out.println("mav.add LoginModal"+loginWrite);
+				mav.addObject("Loginmodal", "toLogin");
+			}
+		}catch(NullPointerException e) {
+			System.out.println("Null");
+		}
 		//작성자 뿌리기 by seqno
 		String writer=bbsListDao.getWriter(bbsDetail.getUser_no());
 		mav.addObject("WRITER",writer);

@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<% request.setCharacterEncoding("utf-8"); %>
-<% response.setContentType("text/html; charset=utf-8"); %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -137,9 +135,7 @@ function hitBbs(input){
 		data : { "input": input } ,
 		dataType : "json",
 		url : "../navi/hit.html",
-		contentType: "application/json; charset=utf-8",
 		success : function(data){
-			alert(input);
 			var list_Length = Object.keys(data).length;
 			for(i=0; i<list_Length; i++){
 				document.getElementById("pa"+(i+1)).innerHTML=data[i].title;

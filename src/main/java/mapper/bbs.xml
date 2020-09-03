@@ -33,7 +33,7 @@
 	select title, seqno from
 	(select a.*, rownum rn from bbs_info a
 	where TO_DATE(REGISTER_DATE,'YYYY/MM/DD HH24:MI')
-	BETWEEN SYSDATE-1 AND SYSDATE)
+	BETWEEN SYSDATE-2 AND SYSDATE)
 	where rn <![CDATA[<]]> 11
 	order by hit desc
 </select>

@@ -13,4 +13,11 @@ public interface RepDao {
 	String getReplier(Integer user_no); //댓글의 user_no를 통해서 실제 뽑아 낼 id를 가져오는 메서드
 	Integer getRereNum(Integer seqno);
 	String getPicture(Integer user_no);
+	String getReplierByRepno(Integer repno);
+	void deleteRep(Integer repno);
+	Reply getRep(Integer repno);
+	void updateRep(Reply rep);
+	void updateRere(Reply rereply);
+	void deleteRere(Reply rep);
+	String getRereplierByRere(Reply rep);
 }

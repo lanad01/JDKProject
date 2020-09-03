@@ -26,6 +26,29 @@
 <select id="getPicture" resultType="String" parameterType="Integer">
 	select picture_url from user_info where user_no=#{user_no}
 </select>
+<select id="getReplierByRepno" resultType="String" parameterType="Integer">
+	select id from user_info 
+	where (select user_no from reply_info where repno=#{repno} and repgroupno=0 )=user_no
+</select>
+<delete id="deleteByRepno" parameterType="Integer">
+	delete from reply_info where repno=#{repno}
+</delete>
+<update id="updateRep" parameterType="model.Reply">
+	update reply_info set content=#{content}, register_date=sysdate where repno=#{repno} and repgroupno=0
+</update>
+<select id="getRepByRepno" parameterType="Integer" resultType="model.Reply">
+	select * from reply_info where repno=#{repno} and repgroupno=0
+</select>
+<update id="updateRere" parameterType="model.Reply">
+	update reply_info set content=#{content}, register_date=sysdate where repno=#{repno} and repgroupno=#{repgroupno}
+</update>
+<delete id="deleteRere" parameterType="model.Reply">
+	delete from reply_info where repno=#{repno} and repgroupno=#{repgroupno}
+</delete>
+<select id="getRereplierByRere" parameterType="model.Reply" resultType="String">
+	select id from user_info
+	where (select user_no from reply_info where repno=#{repno} and repgroupno=#{repgroupno})=user_no
+</select>
 </mapper>
 
 
