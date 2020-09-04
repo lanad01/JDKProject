@@ -5,13 +5,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import dao.BBSListDao;
+import dao.RepDao;
 import dao.UserDao;
 import model.User;
 
@@ -19,6 +17,10 @@ import model.User;
 public class MyAccountController {
 	@Autowired
 	UserDao userDao;
+	@Autowired
+	RepDao repDao;
+	@Autowired
+	BBSListDao bbsListDao;
 	@RequestMapping(value="/myaccount/mypage.html") // 자유게시판에서 글쓰기
 	public ModelAndView test(HttpSession session,HttpServletRequest request) {
 		ModelAndView mav=new ModelAndView("menu_header");
@@ -30,6 +32,7 @@ public class MyAccountController {
 			return mav;
 		} //로그인 상태라면 정보를 가져온다
 		User user=userDao.findByUserId(id);
+		Integer user_no=user.getUser_no();
 		mav.addObject("MPBODY",1); //마이페이지 디폴트페이지
 		mav.addObject("USER",user);
 		return mav;

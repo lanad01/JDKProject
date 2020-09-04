@@ -9,24 +9,15 @@
 <head>
 <meta charset="EUC-KR">
 <title></title>
-
-<link
-	href='https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff'
-	rel='stylesheet' type='text/css'>
+<link href='https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff'	rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="../css/mypage.css">
-<link
-	href='https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff'
-	rel='stylesheet' type='text/css'>
 <style type="text/css">
 @font-face {
 	font-family: 'BMDOHYEON';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff')
-		format('woff');
+	src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff')format('woff');
 	font-weight: normal;
 	font-style: normal;
 }
-
 .msg {
 	font-size: 1em;
 	font-family: 'BMDOHYEON';
@@ -35,14 +26,12 @@
 	padding: 20px 0 20px 0;
 	width: 700px;
 }
-
 .key {
 	font-size: 1em;
 	font-family: 'BMDOHYEON';
 	font-color: red;
 	background:silver;
 }
-
 .modify tr {
 	height:60px; width:100px;
 	border-bottom:1px solid silver;
@@ -88,23 +77,44 @@ input {
 }
 </style>
 </head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
 <script type="text/javascript">
-	function morebox() {
-		document.getElementById("morebox").style.display = "block";
-	}
-	function moreboxClose() {
-		document.getElementById("morebox").style.display = "none";
-	}
-	function quizDisplay(quiztext) {
-	    var selection = quiztext;
-		document.getElementById("quiz").value=selection;
-	    return true;
-	}
+function morebox() {
+	document.getElementById("morebox").style.display = "block";
+}
+function moreboxClose() {
+	document.getElementById("morebox").style.display = "none";
+}
+function quizDisplay(quiztext) {
+    var selection = quiztext;
+	document.getElementById("quiz").value=selection;
+	return true;
+}
+function modify() {
+	swal({
+        title: "정말 변경하시겠습니까?",
+        text: "언제든지 다시 변경하실 수 있습니다",
+        type: "success",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "변경",
+        closeOnConfirm: false,
+        closeOnCancel: false
+	}, function(isConfirm){
+		if(isConfirm){
+			document.modifyform.submit();
+			swal("회원정보수정", "성공", "success");
+		}else{
+			swal("Cancelled", "정보수정 취소", "error");
+		}
+	});
+};
 </script>
 <body>
 	<div class="main">
 		<div class="msg">
-			<form:form action="../register/modify.html?page=2" modelAttribute="user" method="post" enctype="multipart/form-data">
+			<form:form action="../register/modify.html?page=2" name="modifyform" modelAttribute="user" method="post" enctype="multipart/form-data">
 				<div class="msg">
 					<span>(*)</span> 표시가 있는 항목은 반드시 입력해야 합니다.<br /> 허위로 작성된 정보일 경우 승인이
 					보류되거나 임의로 삭제처리될 수 있으니 주의해 주세요.
@@ -196,13 +206,8 @@ input {
 					<tr><td>사진 : </td>
 						<td><input type="file" name="picture"/></td>
 					</tr>
-					<tr style="border-bottom:none; ">
-					<td>
-					<div class="submitbox" style="padding-left:50px;">
-					<input type="submit" value="정보변경" class="btnblue" />
-					</div>
-					</td>
 				</table>
+				<input type="button" value="정보변경" onClick="modify()"class="btnblue" style="float:right; margin-top:15px; margin-right:190px;"/>
 			</form:form>
 		</div>
 	</div>

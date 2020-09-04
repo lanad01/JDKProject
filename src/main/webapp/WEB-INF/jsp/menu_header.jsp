@@ -83,7 +83,7 @@ font-weight: normal; font-style: normal; }
 #sub-menu > li >  a:hover {
  text-decoration: none;
 }
-.hit > span{ display:inline-block; width:100px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.hit > span{  text-align:left;}
 /* The Modal (background) */
 .searchModal {
 display: none; /* Hidden by default */
@@ -277,16 +277,16 @@ function fnLoginBtn(){
           		</tr>
           	</table>
           	<table class="hit" style=" font-family:'BMDOHYEON'; font-size:0.8em; color:black; margin-top:7px; ">
-         		<tr><td>&#9312; &nbsp;</td><td id="hit2"><a href="" id="li1"><span id="pa1"></span></a></td></tr>
-         		<tr><td>&#9313; &nbsp;</td><td id="hit2"><a href="" id="li2"><span id="pa2"></span></a></td></tr>
-         		<tr><td>&#9314; &nbsp;</td><td id="hit2"><a href="" id="li3"><span id="pa3"></span></a></td></tr>
-         		<tr><td>&#9315; &nbsp;</td><td id="hit2"><a href="" id="li4"><span id="pa4"></span></a></td></tr>
-         		<tr><td>&#9316; &nbsp;</td><td id="hit2"><a href="" id="li5"><span id="pa5"></span></a></td></tr>
-				<tr><td>&#9317; &nbsp;</td><td id="hit2"><a href="" id="li6"><span id="pa6"></span></a></td></tr>
-				<tr><td>&#9318; &nbsp;</td><td id="hit2"><a href="" id="li7"><span id="pa7"></span></a></td></tr>
-				<tr><td>&#9319; &nbsp;</td><td id="hit2"><a href="" id="li8"><span id="pa8"></span></a></td></tr>
-				<tr><td>&#9320; &nbsp;</td><td id="hit2"><a href="" id="li9"><span id="pa9"></span></a></td></tr>
-				<tr><td>&#9321; &nbsp;</td><td id="hit2"><a href="" id="li10"><span id="pa10"></span></a></td></tr>
+         		<tr><td>&#9312; &nbsp;</td><td><a href="" id="li1"><span id="pa1"></span></a></td></tr>
+         		<tr><td>&#9313; &nbsp;</td><td><a href="" id="li2"><span id="pa2"></span></a></td></tr>
+         		<tr><td>&#9314; &nbsp;</td><td><a href="" id="li3"><span id="pa3"></span></a></td></tr>
+         		<tr><td>&#9315; &nbsp;</td><td><a href="" id="li4"><span id="pa4"></span></a></td></tr>
+         		<tr><td>&#9316; &nbsp;</td><td><a href="" id="li5"><span id="pa5"></span></a></td></tr>
+				<tr><td>&#9317; &nbsp;</td><td><a href="" id="li6"><span id="pa6"></span></a></td></tr>
+				<tr><td>&#9318; &nbsp;</td><td><a href="" id="li7"><span id="pa7"></span></a></td></tr>
+				<tr><td>&#9319; &nbsp;</td><td><a href="" id="li8"><span id="pa8"></span></a></td></tr>
+				<tr><td>&#9320; &nbsp;</td><td><a href="" id="li9"><span id="pa9"></span></a></td></tr>
+				<tr><td>&#9321; &nbsp;</td><td><a href="" id="li10"><span id="pa10"></span></a></td></tr>
 			</table>
         </div>
       </div>

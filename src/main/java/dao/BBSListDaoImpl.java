@@ -54,6 +54,13 @@ public class BBSListDaoImpl implements BBSListDao {
 	public void updateBbs(Bbs bbs) {
 		// TODO Auto-generated method stub
 		session.update("bbs.updateBbs",bbs);
-		
+	}
+	public Integer getRownum(Bbs bbs) {
+		// TODO Auto-generated method stub
+		return session.selectOne("bbs.getRownum",bbs);
+	}
+	public void like(Bbs bbs) {
+		// TODO Auto-generated method stub
+		session.update("bbs.like",bbs);
 	}
 }

@@ -61,13 +61,12 @@ public class BBSController {
 		//페이징 작업
 		if(PAGENO == null) PAGENO = 1;
 		List<Bbs> AllList=bbsListDao.getBBSList(bbstype); 
-		System.out.println(AllList.size());
-//		Collections.reverse(AllList);
+		List<Integer> rownumList=new ArrayList<Integer>();
 		List<Bbs> bbsList=new ArrayList<Bbs>();
 		for(int i=((PAGENO-1)*5); i< ((PAGENO-1)*5)+5; i++) {
 			// PAGENO * 5 + 1 부터  PAGENO *5 +5
 			try {
-			
+			rownumList.add(bbsListDao.getRownum(AllList.get(i)));
 			bbsList.add(AllList.get(i));
 			}catch(IndexOutOfBoundsException e) {
 			}
@@ -92,6 +91,8 @@ public class BBSController {
 			pageCnt = totalCnt / 5;
 			if(totalCnt % 5 > 0) pageCnt++;
 		}
+		//rownum test 
+		
 		//토탈 글 숫자 찾기
 		Integer totalPost=bbsListDao.getBBSList(bbstype).size();
 		mav.addObject("totalPost",totalPost);
@@ -99,6 +100,7 @@ public class BBSController {
 		mav.addObject("REPANDRERE",repAndrere);
 		mav.addObject("WRITERLIST",writerList);
 		mav.addObject("LIST",bbsList);
+		mav.addObject("ROWNUMLIST",rownumList);
 		mav.addObject("BBSTYPE",bbstype);
 		String body="bbs/bbslist";
 		mav.addObject("BODY",body);
@@ -115,7 +117,6 @@ public class BBSController {
 		String loginWrite=req.getParameter("loginwrite");
 		try {
 			if(loginWrite.equals("1")) {
-				System.out.println("mav.add LoginModal"+loginWrite);
 				mav.addObject("Loginmodal", "toLogin");
 			}
 		}catch(NullPointerException e) {
@@ -198,11 +199,7 @@ public class BBSController {
 		String seqno=request.getParameter("seqno");
 		String bbstype=request.getParameter("bbstype");
 		Integer seqnoInt=Integer.parseInt(seqno);
-		System.out.println("seqno : "+seqno+  "  bbstype : "+bbstype);
 		Bbs bbs=bbsListDao.getBbsDetail(seqnoInt);
-		String content=bbs.getContent();
-		String title=bbs.getTitle();
-		System.out.println(content+"^^^^^^^^^^^^^^6"+title);
 		mav.addObject(bbs);
 		mav.addObject("UPDATE",1);
 		mav.addObject("BODY","bbs/postbbs"); // postbbs에 Bbs 빈 주입
@@ -215,7 +212,6 @@ public class BBSController {
 		ModelAndView mav=new ModelAndView("menu_header");
 		System.out.println("bbs/Updateimpl.html 수신");
 		String seqno=request.getParameter("seqno");
-		String bbstype=request.getParameter("bbstype");
 		Integer seqnoInt=Integer.parseInt(seqno);
 		if (bindingResult.hasErrors()) { // bidingError
 			System.out.println("inputBBs / bindingErrors");
@@ -229,18 +225,55 @@ public class BBSController {
 	@RequestMapping(value="/bbs/prepost.html")
 	public ModelAndView prePost(String seqno) { //해당 게시판에 속하는 게시글들을 리스트업하고 seqno를 바탕으로 하나
 		System.out.println("bbs/prepost 수신 / seqno = "+seqno);
-		
-			
-		
-		return new ModelAndView("redirect:/bbs/bbsview?seqno=");
+		return new ModelAndView("redirect:/bbs/bbsview.html?seqno=");
 	}
 	@RequestMapping(value="/bbs/nextpost.html")
 	public ModelAndView nextPost(String seqno) {
 		System.out.println("bbs/nextpost 수신 / seqno = "+seqno);
 		Integer prepage=Integer.parseInt(seqno)+1;
 		System.out.println("prepage 값  : "+prepage);
-		return new ModelAndView("redirect:/bbs/bbsview?seqno="+prepage);
+		return new ModelAndView("redirect:/bbs/bbsview.html?seqno="+prepage);
 		
+	}
+	@ResponseBody
+	@RequestMapping(value = "/bbs/like.html", method = RequestMethod.POST, produces ="application/json; charset=UTF-8")
+	public int likeBbs(HttpSession session,HttpServletRequest request) throws Exception {
+		System.out.println("bbs/like 수신");
+		int result=0; // 결과값 보낼 int
+		String seqno=request.getParameter("seqno"); //받아온 댓글번 String
+		Integer seqnoInt=Integer.parseInt(seqno); //검색을 위한 parsing
+		System.out.println("받아온 seqno : "+seqnoInt);
+		String args=request.getParameter("args");
+		System.out.println("받아온 추천 / 반대 여부 : "+args);
+		//분기 1 - 비로그인 상태
+		String id=(String)session.getAttribute("loginUser"); //세션정보
+		if(id==null) {
+			return 2; // 둘다 안됨
+		}
+		Bbs bbs=bbsListDao.getBbsDetail(seqnoInt);
+		String writerId=bbsListDao.getId(bbs.getUser_no());
+		System.out.println("Session Id : "+id+"   writer : "+writerId);
+		//분기 2 - 작성자 본인이 아니면 추천/반대 가능
+		Integer prePoint=bbs.getPoint();
+		
+		if(!id.contentEquals(writerId)) { 
+			System.out.println("불일치로 오기는 하냐?");
+			if(args.contentEquals("like")) {
+				System.out.println("추천분기");
+				bbs.setPoint(prePoint+1);
+				bbsListDao.like(bbs);
+			}else if(args.contentEquals("dislike")) {
+				System.out.println("반대분기");
+				bbs.setPoint(prePoint-1);
+				bbsListDao.like(bbs);
+			}
+			System.out.println("추천/반대 한 후 포인트 : "+bbs.getPoint());
+			return 1; //0
+		}else if(id.contentEquals(writerId)) {  // 분기 3 - 전부 일치
+			System.out.println("일치분기");
+			return 0; 
+		}
+		return result; //0
 	}
 }
 

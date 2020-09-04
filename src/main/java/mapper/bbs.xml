@@ -12,7 +12,7 @@
 	select user_no from user_info where id=#{id} 
 </select>
 <select id="getBBSList" resultType="model.Bbs" parameterType="String">
-	select seqno, title, user_no, register_date, bbstype, content, hit, point from bbs_info where bbstype=#{bbstype} order by seqno desc
+	select rownum, seqno, title, user_no, register_date, bbstype, content, hit, point from bbs_info where bbstype=#{bbstype} order by seqno desc
 </select>
 <select id="getBbsDetail" resultType="model.Bbs" parameterType="Integer">
 	select seqno, title, user_no, register_date, bbstype, content, hit, point from bbs_info where seqno=#{seqno}
@@ -55,6 +55,15 @@
 <update id="updateBbs" parameterType="model.Bbs">
 	update bbs_info set
 	bbstype=#{bbstype}, title=#{title}, content=#{content}, register_date=sysdate where seqno=#{seqno}
+</update>
+<select id="getRownum" parameterType="model.Bbs" resultType="Integer">
+	select rn from(select rownum rn, seqno from 
+	(select b.* from bbs_info b where bbstype=#{bbstype} order by seqno asc))
+	where seqno=#{seqno}
+</select>
+<update id="like" parameterType="Integer">
+	update bbs_info set
+	point=#{point} where seqno=#{seqno}
 </update>
 </mapper>
 

@@ -76,7 +76,11 @@
 								
 					<c:forEach var="bbs" items="${LIST }" varStatus="status" >
 								<tr id="bbsBottomBorder">
-									<td class="snum">${bbs.seqno }</td>
+									<td class="snum">
+									<c:forEach var="rownum" items="${ROWNUMLIST}" begin="${status.index}" end="${status.index}">
+									${rownum }
+									</c:forEach>
+									</td>
 									<td class="b"><a href="../bbs/bbsview.html?seqno=${bbs.seqno }">${bbs.title }</a>
 									<span class="comment">
 									<c:forEach var="reAndrere" items="${REPANDRERE}" begin="${status.index}" end="${status.index}">

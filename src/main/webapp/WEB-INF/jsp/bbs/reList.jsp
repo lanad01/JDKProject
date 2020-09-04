@@ -97,7 +97,7 @@ function rpUpd(repno,seqno){
 				 ${replier}
 				 </c:forEach>
 				
-				<font size="0.8em" color="blue">${rep.register_date }</font></span><span style="font-weight:300"></span><br/><br/><br/>
+				<font size="0.8em" color="blue">${rep.register_date }</font></span><span style="font-weight:300"></span><br/><br/>
 				<span style=" margin-left:10px;">${rep.content } Rep Groupno = ${rep.repgroupno } Repno = ${rep.repno } User_no : ${rep.user_no }</span>
 				</td>
 				<td class="crud" style="width:20%; float:right;  position:absolute;">

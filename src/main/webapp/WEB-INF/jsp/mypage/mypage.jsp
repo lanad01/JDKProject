@@ -17,12 +17,7 @@
 </style>
 </head>
 <script type="text/javascript">
-	window.onload=function(){
-		var updateResult='${SUCCESS}';
-		if(updateResult=='success'){
-			alert('회원 정보 수정이 완료되었습니다!');
-		}
-	}
+	
 	function morebox() {
 		document.getElementById("morebox").style.display = "block";
 	}

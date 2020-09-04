@@ -83,7 +83,8 @@ function rereUpd(repno,seqno,groupno){
 		</c:forEach>
 		</td>
 		<td style="padding-left:19px; width:70%">
-		<span style="font-weight:strong; font-size:15px;">${REREPLIER}</span><span style="font-weight:300">${rere.register_date }</span><br/><br/>
+		<span style="font-weight:strong; font-size:15px;">${REREPLIER}</span>
+		<span style="font-weight:300; font-size:1;"><font size="0.8em" color="blue"> &nbsp;&nbsp;${rere.register_date }</font></span><br/>
 		<span>${rere.content } repno: ${rere.repno } seqno : ${rere.seqno } user_no : ${rere.user_no } groupno : ${rere.repgroupno } </span>
 		</td>
 		<td width="15%" style="position:absolute;">

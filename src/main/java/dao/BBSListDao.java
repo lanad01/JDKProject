@@ -17,4 +17,6 @@ public interface BBSListDao { //DB에서 가져오기
 	void deleteBbs(Integer seqno);
 	String getId(Integer user_no);
 	void updateBbs(Bbs bbs);
+	Integer getRownum(Bbs bbs);
+	void like(Bbs bbs);
 }

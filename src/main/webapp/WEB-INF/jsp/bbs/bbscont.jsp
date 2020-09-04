@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -19,6 +18,42 @@
 </head>
 <script src="../resources/vendor/jquery/jquery.min.js"></script>
 <script type="text/javascript">
+function like(seqno,args) { // 삭제
+	if(args=='like') var a="추천";
+	else if(args=='dislike') var a="반대";
+	swal({
+        title: "정말 "+a+"하시겠습니까?",
+        text: "높은 추천을 기록한 글은 개념글로 가게 됩니다.",
+        type: "info",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: a,
+        closeOnConfirm: false,
+        closeOnCancel: false
+    }, function (isConfirm) {
+    	 if (isConfirm){
+			var bbstype=document.getElementById("bbstype").value;
+			$.ajax({
+   	 		async: true,
+   			type : 'POST',
+   			data : { "seqno": seqno, "args" : args } ,
+  			dataType : "json",
+			url : "../bbs/like.html",
+		    success : function(data){
+		    	if(data==1) {
+		    	swal("추천/반대가 적용되었습니다!", "");
+		    	}
+		   		if(data==0) swal("","작성자 본인은 추천/반대 할 수 없습니다.", "error");
+		    	if(data==2) location.href="../bbs/bbsview.html?loginwrite=1&seqno="+seqno;
+		   	},error : function(e){
+		   		swal("","실패", "error");
+		  		}
+		  	})
+			}else{
+			swal("",a+" 취소!", "success");
+			}
+  		  });
+};
 function myFunction4(seqno){ // 수정
 	var bbstype=document.getElementById("bbstype").value;
 	$.ajax({
@@ -75,12 +110,8 @@ function myFunction3(seqno) { // 삭제
 </script>
 <body>
 	<input type="hidden" id="bbstype" value="${BBS.bbstype }">
-	<div class="main" style="width:730px;">
-		<div class="topbox">
-		<div class="topside" style="margin-right:10px;"><span class="sp_btn00"><a href="../bbs/bbs.html?bbstype=${BBS.bbstype }">목록으로</a></span></div>
-		</div>
-	</div>
-	<div class="sbjbox" style="width:730px;">
+	
+	<div class="sbjbox" style="width:730px; margin-top:27px;">
 		<div class="subject" style="height:60px"> 
 			<h1><span class="category" style="margin-top:15px;"><strong> ${BBS.title } </strong></span>
 			<font color="blue" size="1"><span>(${REPNUM }+${RERENUM})</span></font>
@@ -90,7 +121,10 @@ function myFunction3(seqno) { // 삭제
 	<div class="sbjbox" style="width:730px;">
 		<div id="vContent" class="content" style="width:730px; margin:10px 50px 10px 10px; padding-right:40px;">${BBS.content }
 		<br/><br/>
-		<div style="text-align:center; margin-bottom:-10px;" ><img src="../img/like.png" alt="추천"><img src="../img/dislike.png" alt="반대"></div>
+		<div style="text-align:center; margin-bottom:-10px;">
+			<img src="../img/like.png" onClick="like(${BBS.seqno},'like')" alt="추천">
+			<img src="../img/dislike.png" onClick="like(${BBS.seqno},'dislike')" alt="반대">
+		</div>
 		</div>
 		
 	</div>

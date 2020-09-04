@@ -53,6 +53,6 @@ public class WriteController {
 		bbs.setUser_no(user_no); // 받은 유저넘버를 실질적으로 bbs객체에 삽입
 		//종합된 bbs를 최종적으로 insert, 작성일자는 Impl에서 처리
 		writeDao.insertBBS(bbs);
-		return new ModelAndView("redirect:/bbs/bbs.html?bbstype="+bbsType);
+		return new ModelAndView("redirect:/bbs/bbsview.html?seqno="+bbs.getSeqno());
 	}
 }

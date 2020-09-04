@@ -62,8 +62,11 @@
 						<tr>
 							<td><input class="info" type="text" value="게시판타입"	disabled="true"></td>
 							<td><form:select path="bbstype" style="margin-left:10px;">
-									<c:if test=${bbsType==null }">
-									
+									<c:if test="${bbsType==null }">
+									<form:option value="freebbs" label="자유게시판" selected="selected"   />
+									<form:option value="exp" label="경험담썰" />
+									<form:option value="info" label="정보&팁게시판"  />
+									<form:option value="qna" label="질문답변게시판" />
 									</c:if>
 									<c:if test="${bbsType=='freebbs' }">
 									<form:option value="freebbs" label="자유게시판" selected="selected"   />
