@@ -33,6 +33,7 @@ public class NaviController {
 			}
 			return list;
 		}else if(input.equals("rep")) {
+			System.out.println("dddddd");
 			list=bbsListDao.getTop10ByRep();
 			for(int i=0; i<list.size(); i++) {
 			}

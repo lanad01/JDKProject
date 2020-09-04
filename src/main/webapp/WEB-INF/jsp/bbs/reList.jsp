@@ -8,6 +8,8 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
 </head>
 <style type="text/css">
 @font-face {
@@ -20,32 +22,42 @@ function rereShow(repno){
 	document.getElementById("repnoSend").value=repno;
  	document.getElementById(repno).style.display="block";
 }
-// function rpmod(repno,seqno){
-// 	 var formData = $("#form1").serialize();
-// 	 var content=document.getElementById("content").value;
-// 	 alert(formData);
-// 	 alert('내용'+content);
-// 	 $.ajax({
-// 		 async: true,
-//          cache : false,
-//          url : "../reply/rpUpd.html" , // 요기에
-//          type : 'POST', 
-//          data: { "repno" : repno, "seqno" : seqno, "content" : content } ,
-//          dataType : "json",
-//          success : function(data) {
-//          	 alert(data);
-//              var jsonObj = JSON.parse(data);
-//              alert(jsonObj);
-//          }, // success 
- 
-//          error : function(xhr, status) {
-//              alert(xhr + " : " + status);
-//          }
-//      }); // $.ajax */
-// }
+function myFunction2(repno,seqno) {
+    swal({
+        title: "정말 삭제하시겠습니까?",
+        text: "삭제된 대댓글은 복구되지 않습니다!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "예 삭제하겠습니다.",
+        closeOnConfirm: false,
+        closeOnCancel: false
+    }, function (isConfirm) {
+        if (isConfirm){
+        	$.ajax({
+    			async: true,
+    			type : 'POST',
+    			data : { "repno": repno } ,
+    			dataType : "json",
+    			url : "../reply/del.html",
+    			success : function(data){
+    				if(data==1) {
+    					swal("성공적으로 삭제되었습니다!!", "");
+    					location.reload();
+    				}
+    				if(data==0) swal("","해당 댓글의 작성자가 아닙니다!!", "error");
+    				if(data==2) location.href="../bbs/bbsview.html?loginwrite=1&seqno="+seqno;
+    			},error : function(e){
+    				swal("","실패!!", "error");
+    			}
+    		})
+        } else {
+            swal("Cancelled", "댓글 삭제가 취소되었습니다.", "error");
+        }
+    });
+};
 function rpUpd(repno,seqno){
 	document.getElementById("repnoSend2").value=repno;
-// 	alert(document.getElementById("p"+repno).innerHTML);
  	document.getElementById("p"+repno).style.display="block";
 	$.ajax({
 		async: true,
@@ -54,41 +66,14 @@ function rpUpd(repno,seqno){
 		dataType : "json",
 		url : "../reply/modi.html",
 		success : function(data){
-			
 			if(data==1){
-				alert('일치분기');
-// 				document.getElementById("repModi").style.display="block";
 			}
-			if(data==0) alert('해당 댓글의 작성자가 아닙니다!!')
+			if(data==0) swal("","해당 댓글의 작성자가 아닙니다!!", "error");
 			if(data==2) location.href="../bbs/bbsview.html?loginwrite=1&seqno="+seqno;
 		},error : function(e){
-			alert("실패");
+			swal("","실패!!", "error");
 		}
 	})
-}
-function rpDel(repno,seqno){
-	if(confirm("정말로 삭제하시겠습니까?")==true){
-		$.ajax({
-			async: true,
-			type : 'POST',
-			data : { "repno": repno } ,
-			dataType : "json",
-			url : "../reply/del.html",
-			success : function(data){
-				alert(data);
-				if(data==1) {
-					alert('성공적으로 삭제되었습니다!!');
-					location.reload();
-				}
-				if(data==0) alert('해당 댓글의 작성자가 아닙니다!!')
-				if(data==2) location.href="../bbs/bbsview.html?loginwrite=1&seqno="+seqno;
-			},error : function(e){
-				alert("실패");
-			}
-		})
-	}else{ //취소
-		return false;
-	}	
 }
 </script>
 <body>
@@ -118,7 +103,7 @@ function rpDel(repno,seqno){
 				<td class="crud" style="width:20%; float:right;  position:absolute;">
 				<input type="button" onClick="rereShow(${rep.repno})" value="댓글">
 				<input type="button" onClick="rpUpd(${rep.repno},${rep.seqno})" value="수정">
-				<input type="button" onClick="rpDel(${rep.repno},${rep.seqno})" value="삭제">
+				<input type="button" onClick="myFunction2(${rep.repno},${rep.seqno})" value="삭제">
 				<input type="button" value="신고">
 				</td>				
 			</tr>

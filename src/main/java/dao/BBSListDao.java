@@ -14,4 +14,7 @@ public interface BBSListDao { //DB에서 가져오기
 	List<Bbs> getNotices(Integer user_no);
 	List<Bbs> getTop10ByHit();
 	List<Bbs> getTop10ByRep();
+	void deleteBbs(Integer seqno);
+	String getId(Integer user_no);
+	void updateBbs(Bbs bbs);
 }

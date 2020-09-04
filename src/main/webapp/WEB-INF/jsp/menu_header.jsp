@@ -19,6 +19,8 @@
   <link href="<%=request.getContextPath()%>/resources/vendor/bootstrap/css/shop-homepage.css" rel="stylesheet">
   <!--  폰트   -->
   <link href='https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff' rel='stylesheet' type='text/css'>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+  <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
 </head>
 <link href="<%=request.getContextPath()%>/WEB-INF/css/menuHeader.css" type="text/css" rel="stylesheet" />
 <style type="text/css">
@@ -81,6 +83,7 @@ font-weight: normal; font-style: normal; }
 #sub-menu > li >  a:hover {
  text-decoration: none;
 }
+.hit > span{ display:inline-block; width:100px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 /* The Modal (background) */
 .searchModal {
 display: none; /* Hidden by default */
@@ -113,10 +116,13 @@ height:40%;
 <script src="../resources/vendor/jquery/jquery.min.js"></script>
 <script>
 $(function(){
+// 	message('notice','Hello World!');
 	hitBbs('hit');
 	var loginmodal = '${Loginmodal}';
 	if(loginmodal == 'toLogin'){
-		alert('로그인이 필요한 작업입니다!');
+// 		alert('로그인이 필요한 작업입니다!');
+		swal("","로그인이 필요합니다!", "error");
+
 	loginpopup(); 
 	}else{
 	}
@@ -138,9 +144,12 @@ function hitBbs(input){
 		success : function(data){
 			var list_Length = Object.keys(data).length;
 			for(i=0; i<list_Length; i++){
+				if(data[i].title.length > 18 ) {
+					data[i].title=data[i].title.substring(0,17)+"....";
+				}
 				document.getElementById("pa"+(i+1)).innerHTML=data[i].title;
 				document.getElementById("li"+(i+1)).href="../bbs/bbsview.html?seqno="+data[i].seqno;
-			}1
+			}
 		},error : function(e){
 			alert("실패");
 		}
@@ -152,25 +161,21 @@ function fnLoginBtn(){
        type : 'POST',
        data : {"id" : $("#id").val(), "password" : $("#password").val() }, //입력 값 jquery 방식으로 가져오기
        url : "../login/loginpost.html",
-       success : function(data) {
-       console.log("1aaa");
-            
-               if(data == 1){
-          alert("로그인에 성공 했습니다.");
+       success : function(data) {         
+          if(data == 1){
+          swal("성공 메시지","로그인 성공하셨습니다!", "success");
           location.href="../bbs/bbs.html?bbstype=freebbs";
           }else{
-             alert("로그인에 실패했습니다.");
+          swal("","로그인에 실패하셨습니다!", "error");
           }
-               
        },error : function(e){
-          console.log(e);
        }
     });
  }
 </script>
 
 <body>        
-
+  
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
@@ -228,17 +233,17 @@ function fnLoginBtn(){
   <div id="topmenu">
 	<div class="wrap">
 		<ul style="list-style:none;">
-				<li><a href="#"><span>전체글보기</span></a>	</li>
+				<li><a href=""><span>전체글보기</span></a>	</li>
 		<li class="vline"></li>
-				<li><a href="#"><span>개념글</span></a></li>
+				<li><a href=""><span>개념글</span></a></li>
 		<li class="vline"></li>
-				<li><a href="../bbs/bbs.html?bbstype=freebbs" onClick="test();" target=""><span>자유게시판</span></a>	</li>
+				<li><a href="../bbs/bbs.html?bbstype=freebbs" target=""><span>자유게시판</span></a>	</li>
 		<li class="vline"></li>
-				<li><a href="#" ><span>경험담&썰</span></a></li>
+				<li><a href="../bbs/bbs.html?bbstype=exp" ><span>경험담&썰</span></a></li>
 		<li class="vline"></li>
-				<li><a href="#"><span>정보&팁</span></a></li>
+				<li><a href="../bbs/bbs.html?bbstype=info"><span>정보&팁</span></a></li>
 		<li class="vline"></li>
-				<li><a href="#"><span>질문 답변</span></a></li>
+				<li><a href="../bbs/bbs.html?bbstype=qna"><span>질문 답변</span></a></li>
 		<li>
 			<nav role="navigation" class="drop">
   				<ul id="main-menu">
@@ -271,17 +276,17 @@ function fnLoginBtn(){
           			<th><font face='BMDOHYEON' size="2em" color="red"><a href="#" id="rep" class="list-group-item" onClick="hitBbs('rep');">댓글 많은 글</a></font></th>
           		</tr>
           	</table>
-          	<table style=" font-family:'BMDOHYEON'; font-size:0.8em; color:black; margin-top:7px; ">
-         		<tr><td>&#9312; &nbsp;</td><td><a href="" id="li1"><span id="pa1"></span></a></td></tr>
-         		<tr><td>&#9313; &nbsp;</td><td><a href="" id="li2"><span id="pa2"></span></a></td></tr>
-         		<tr><td>&#9314; &nbsp;</td><td><a href="" id="li3"><span id="pa3"></span></a></td></tr>
-         		<tr><td>&#9315; &nbsp;</td><td><a href="" id="li4"><span id="pa4"></span></a></td></tr>
-         		<tr><td>&#9316; &nbsp;</td><td><a href="" id="li5"><span id="pa5"></span></a></td></tr>
-				<tr><td>&#9317; &nbsp;</td><td><a href="" id="li6"><span id="pa6"></span></a></td></tr>
-				<tr><td>&#9318; &nbsp;</td><td><a href="" id="li7"><span id="pa7"></span></a></td></tr>
-				<tr><td>&#9319; &nbsp;</td><td><a href="" id="li8"><span id="pa8"></span></a></td></tr>
-				<tr><td>&#9320; &nbsp;</td><td><a href="" id="li9"><span id="pa9"></span></a></td></tr>
-				<tr><td>&#9321; &nbsp;</td><td><a href="" id="li10"><span id="pa10"></span></a></td></tr>
+          	<table class="hit" style=" font-family:'BMDOHYEON'; font-size:0.8em; color:black; margin-top:7px; ">
+         		<tr><td>&#9312; &nbsp;</td><td id="hit2"><a href="" id="li1"><span id="pa1"></span></a></td></tr>
+         		<tr><td>&#9313; &nbsp;</td><td id="hit2"><a href="" id="li2"><span id="pa2"></span></a></td></tr>
+         		<tr><td>&#9314; &nbsp;</td><td id="hit2"><a href="" id="li3"><span id="pa3"></span></a></td></tr>
+         		<tr><td>&#9315; &nbsp;</td><td id="hit2"><a href="" id="li4"><span id="pa4"></span></a></td></tr>
+         		<tr><td>&#9316; &nbsp;</td><td id="hit2"><a href="" id="li5"><span id="pa5"></span></a></td></tr>
+				<tr><td>&#9317; &nbsp;</td><td id="hit2"><a href="" id="li6"><span id="pa6"></span></a></td></tr>
+				<tr><td>&#9318; &nbsp;</td><td id="hit2"><a href="" id="li7"><span id="pa7"></span></a></td></tr>
+				<tr><td>&#9319; &nbsp;</td><td id="hit2"><a href="" id="li8"><span id="pa8"></span></a></td></tr>
+				<tr><td>&#9320; &nbsp;</td><td id="hit2"><a href="" id="li9"><span id="pa9"></span></a></td></tr>
+				<tr><td>&#9321; &nbsp;</td><td id="hit2"><a href="" id="li10"><span id="pa10"></span></a></td></tr>
 			</table>
         </div>
       </div>

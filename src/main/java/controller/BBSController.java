@@ -4,14 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import dao.BBSListDao;
 import dao.RepDao;
+import dao.UserDao;
 import dao.WriteDao;
 import model.Bbs;
 import model.Reply;
@@ -24,6 +30,8 @@ public class BBSController {
 	WriteDao writeDao;
 	@Autowired
 	RepDao repDao;
+	@Autowired
+	UserDao userDao;
 	@RequestMapping(value="/bbs/bbs.html") // 자유게시판 목록 여기서 받은 게시판 LIST 목록을 ADD해야한다.
 	public ModelAndView freeBBS(HttpServletRequest request,String bbstype,Integer PAGENO) {
 		System.out.println("bbs/bbs.html 수신");
@@ -84,7 +92,9 @@ public class BBSController {
 			pageCnt = totalCnt / 5;
 			if(totalCnt % 5 > 0) pageCnt++;
 		}
-		System.out.println("뿜어내야 할 페이지 수"+pageCnt);
+		//토탈 글 숫자 찾기
+		Integer totalPost=bbsListDao.getBBSList(bbstype).size();
+		mav.addObject("totalPost",totalPost);
 		mav.addObject("PAGE_CNT", pageCnt); // 총 페이지 개수
 		mav.addObject("REPANDRERE",repAndrere);
 		mav.addObject("WRITERLIST",writerList);
@@ -127,6 +137,110 @@ public class BBSController {
 		mav.addObject("BODY",body);
 		mav.addObject(new Reply()); //리플객체 주입
 		return mav;
+	}
+	@ResponseBody
+	@RequestMapping(value = "/bbs/delbbsvalid.html", method = RequestMethod.POST, produces ="application/json; charset=UTF-8")
+	public int delBbs(HttpSession session,HttpServletRequest request) throws Exception {
+		System.out.println("bbs/delbbsValid 수신");
+		int result=0; // 결과값 보낼 int
+		String seqno=request.getParameter("seqno"); //받아온 댓글번 String
+		Integer seqnoInt=Integer.parseInt(seqno); //검색을 위한 parsing
+		System.out.println("받아온 seqno : "+seqnoInt);
+		
+		//분기 1 - 비로그인 상태
+		String id=(String)session.getAttribute("loginUser"); //세션정보
+		if(id==null) {
+			return 2;
+		}
+		Bbs bbs=bbsListDao.getBbsDetail(seqnoInt);
+		String writerId=bbsListDao.getId(bbs.getUser_no());
+		System.out.println("Session Id : "+id+"   writer : "+writerId);
+		if(!id.contentEquals(writerId)) { //분기 2 - 로그인상태이지만 작성자와 일치하지않는 경우
+			return result; //0
+		}else if(id.contentEquals(writerId)) {  // 분기 3 - 전부 일치
+			System.out.println("일치분기");
+			bbsListDao.deleteBbs(seqnoInt);
+			return 1;
+		}
+		return result; //0
+	}
+	@ResponseBody
+	@RequestMapping(value = "/bbs/bbsmodvalid.html", method = RequestMethod.POST, produces ="application/json; charset=UTF-8")
+	public int modBbs(HttpSession session,HttpServletRequest request) throws Exception {
+		System.out.println("bbs/bbsmodValid 수신");
+		int result=0; // 결과값 보낼 int
+		String bbstype=request.getParameter("bbstype");
+		String seqno=request.getParameter("seqno"); //받아온 댓글번 String
+		Integer seqnoInt=Integer.parseInt(seqno); //검색을 위한 parsing
+		System.out.println("받아온 seqno : "+seqnoInt+" 받아온 bbstype : "+bbstype);
+		
+		//분기 1 - 비로그인 상태
+		String id=(String)session.getAttribute("loginUser"); //세션정보
+		if(id==null) {
+			return 2;
+		}
+		Bbs bbs=bbsListDao.getBbsDetail(seqnoInt);
+		String writerId=bbsListDao.getId(bbs.getUser_no());
+		System.out.println("Session Id : "+id+"   writer : "+writerId);
+		if(!id.contentEquals(writerId)) { //분기 2 - 로그인상태이지만 작성자와 일치하지않는 경우
+			return result; //0
+		}else if(id.contentEquals(writerId)) {  // 분기 3 - 전부 일치
+			System.out.println("일치분기");
+			return 1;
+		}
+		return result; //0
+	}
+
+	@RequestMapping(value="/bbs/bbsupd.html")
+	public ModelAndView updateBbs(HttpSession session,HttpServletRequest request) {
+		ModelAndView mav=new ModelAndView("menu_header");
+		System.out.println("bbs/bbsupd.html 수신");
+		String seqno=request.getParameter("seqno");
+		String bbstype=request.getParameter("bbstype");
+		Integer seqnoInt=Integer.parseInt(seqno);
+		System.out.println("seqno : "+seqno+  "  bbstype : "+bbstype);
+		Bbs bbs=bbsListDao.getBbsDetail(seqnoInt);
+		String content=bbs.getContent();
+		String title=bbs.getTitle();
+		System.out.println(content+"^^^^^^^^^^^^^^6"+title);
+		mav.addObject(bbs);
+		mav.addObject("UPDATE",1);
+		mav.addObject("BODY","bbs/postbbs"); // postbbs에 Bbs 빈 주입
+		mav.addObject("bbsType",bbstype);
+		return mav;
+	}
+	
+	@RequestMapping(value="/bbs/bbsupdimpl.html")
+	public ModelAndView updateBbsImpl(@Valid Bbs bbs, BindingResult bindingResult, HttpSession session, HttpServletRequest request) {
+		ModelAndView mav=new ModelAndView("menu_header");
+		System.out.println("bbs/Updateimpl.html 수신");
+		String seqno=request.getParameter("seqno");
+		String bbstype=request.getParameter("bbstype");
+		Integer seqnoInt=Integer.parseInt(seqno);
+		if (bindingResult.hasErrors()) { // bidingError
+			System.out.println("inputBBs / bindingErrors");
+			mav.addObject("BODY", "bbs/postbbs"); // 에러메시지 객체를 postbbs에 송신
+			mav.getModel().putAll(bindingResult.getModel()); // 그러기 위한 객체
+			return mav;
+		} // 컨트롤러에서 insert해야 하는 부분 : / bbsType, user_no / form form 으로 알아서 insert된 부분 : title content 
+		bbsListDao.updateBbs(bbs);
+		return new ModelAndView("redirect:/bbs/bbsview.html?seqno="+seqnoInt);
+	}
+	@RequestMapping(value="/bbs/prepost.html")
+	public ModelAndView prePost(String seqno) { //해당 게시판에 속하는 게시글들을 리스트업하고 seqno를 바탕으로 하나
+		System.out.println("bbs/prepost 수신 / seqno = "+seqno);
+		
+			
+		
+		return new ModelAndView("redirect:/bbs/bbsview?seqno=");
+	}
+	@RequestMapping(value="/bbs/nextpost.html")
+	public ModelAndView nextPost(String seqno) {
+		System.out.println("bbs/nextpost 수신 / seqno = "+seqno);
+		Integer prepage=Integer.parseInt(seqno)+1;
+		System.out.println("prepage 값  : "+prepage);
+		return new ModelAndView("redirect:/bbs/bbsview?seqno="+prepage);
+		
 	}
 }
 

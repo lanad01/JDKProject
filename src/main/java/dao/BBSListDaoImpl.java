@@ -43,4 +43,17 @@ public class BBSListDaoImpl implements BBSListDao {
 		// TODO Auto-generated method stub
 		return session.selectList("bbs.getTop10Rep");
 	}
+	public void deleteBbs(Integer seqno) {
+		// TODO Auto-generated method stub
+		session.delete("bbs.deleteBbs",seqno);
+	}
+	public String getId(Integer user_no) {
+		// TODO Auto-generated method stub
+		return session.selectOne("bbs.getId",user_no);
+	}
+	public void updateBbs(Bbs bbs) {
+		// TODO Auto-generated method stub
+		session.update("bbs.updateBbs",bbs);
+		
+	}
 }

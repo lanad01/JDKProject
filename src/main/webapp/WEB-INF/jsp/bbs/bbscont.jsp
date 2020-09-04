@@ -12,18 +12,72 @@
 
 <link	href='https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff'	rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="../css/bbscont.css">
-<style type="text/css">}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+<style type="text/css">
 </style>
 </head>
+<script src="../resources/vendor/jquery/jquery.min.js"></script>
 <script type="text/javascript">
-
+function myFunction4(seqno){ // 수정
+	var bbstype=document.getElementById("bbstype").value;
+	$.ajax({
+	 		async: true,
+			type : 'POST',
+			data : { "seqno": seqno, "bbstype" : bbstype } ,
+			dataType : "json",
+		url : "../bbs/bbsmodvalid.html",
+	    success : function(data){
+	    	if(data==1) {
+	    	swal("아이디가 일치합니다!", "success");
+	    	location.href="../bbs/bbsupd.html?seqno="+seqno+"&bbstype="+bbstype;}
+	   		if(data==0) swal("","해당 게시글의 작성자가 아닙니다!!", "error");
+	    	if(data==2) location.href="../bbs/bbsview.html?loginwrite=1&seqno="+seqno;
+	   	},error : function(e){
+	   		swal("","실패", "error");
+	  		}
+	  	})
+}
+function myFunction3(seqno) { // 삭제
+	swal({
+        title: "정말 삭제하시겠습니까?",
+        text: "삭제된 대댓글은 복구되지 않습니다!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "예 삭제하겠습니다.",
+        closeOnConfirm: false,
+        closeOnCancel: false
+    }, function (isConfirm) {
+    	 if (isConfirm){
+			var bbstype=document.getElementById("bbstype").value;
+			$.ajax({
+   	 		async: true,
+   			type : 'POST',
+   			data : { "seqno": seqno } ,
+  			dataType : "json",
+			url : "../bbs/delbbsvalid.html",
+		    success : function(data){
+		    	if(data==1) {
+		    	swal("성공적으로 삭제되었습니다!!", "");
+		    	location.href="../bbs/bbs.html?bbstype="+bbstype;}
+		   		if(data==0) swal("","해당 댓글의 작성자가 아닙니다!!", "error");
+		    	if(data==2) location.href="../bbs/bbsview.html?loginwrite=1&seqno="+seqno;
+		   	},error : function(e){
+		   		swal("","실패", "error");
+		  		}
+		  	})
+			}else{
+			swal("","삭제 취소", "success");
+			}
+  		  });
+};
 </script>
 <body>
+	<input type="hidden" id="bbstype" value="${BBS.bbstype }">
 	<div class="main" style="width:730px;">
 		<div class="topbox">
-			<span class="sp_btn00" style="margin-left:-8px;"><a href="">이전글</a></span>
-			<span class="sp_btn00"><a href="" onclick="alert('다음글이 없습니다.')">다음글</a></span>
-		<div class="topside" style="margin-right:10px;"><span class="sp_btn00"><a href="../freebbs/freebbs.html?BODY=freebbs/freebbs">목록으로</a></span></div>
+		<div class="topside" style="margin-right:10px;"><span class="sp_btn00"><a href="../bbs/bbs.html?bbstype=${BBS.bbstype }">목록으로</a></span></div>
 		</div>
 	</div>
 	<div class="sbjbox" style="width:730px;">
@@ -41,13 +95,15 @@
 		
 	</div>
 	<div class="bottom">
-		<span class="sp_btn00" style="margin-left:-100px;"><a href="">이전글</a></span>
+		<span class="sp_btn00" style="margin-left:-100px;"><a href="../bbs/prepost.html?seqno=${BBS.seqno}&bbstype=${BBS.bbstype}">이전글</a></span>
 		<span class="sp_btn00" ><a href="" onclick="alert('다음글이 없습니다.')">다음글</a></span>
 	<div class="bottomside">
-		<span class="sp_btn00"><a href="../write/freebbs.html">글쓰기</a></span>
-		<span class="sp_btn00"><a href="">수정</a></span>
-		<span class="sp_btn00"><a href="" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a></span>
-		<span class="sp_btn00"><a href="../bbs/freebbs.html">목록으로</a></span>
+	<font face="BMDOHYEON" size="1.0em" color="blue">
+		<span class="sp_btn00"><input type="button" onclick="location.href='../write/bbs.html?bbstype=${BBS.bbstype}'" value="글쓰기"></span>
+		<span class="sp_btn00"><input type="button" onclick="myFunction3(${BBS.seqno})" value="삭제"></span>
+		<span class="sp_btn00"><input type="button" onclick="myFunction4(${BBS.seqno})" value="수정"></span>
+		<span class="sp_btn00"><input type="button" onclick="location.href='../bbs/bbs.html?bbstype=freebbs'" value="목록으로"></span>
+	</font>
 	</div>
 	
 </div>

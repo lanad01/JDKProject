@@ -21,7 +21,18 @@
 			<tr style="width:400px;"> <%@ include file="/WEB-INF/jsp/gridBBS/ad.jsp" %></tr>
 			<tr>
 				<td><img alt="" src="../img/total.jpg">&nbsp;&nbsp; 
-				<font face='BMDOHYEON'>자유게시판 / Total ${totalPost } </font> ${totalwriting }</td>
+				<font face='BMDOHYEON'>
+				<c:choose>
+					<c:when test="${BBSTYPE=='freebbs' }">자유게시판</c:when>
+					<c:when test="${BBSTYPE=='qna' }">질문답변게시판</c:when>
+					<c:when test="${BBSTYPE=='whole' }">전체글보기</c:when>
+					<c:when test="${BBSTYPE=='ganyum' }">개념글</c:when>
+					<c:when test="${BBSTYPE=='exp' }">경험담&썰</c:when>
+					<c:when test="${BBSTYPE=='info' }">정보공유게시판</c:when>
+					<c:when test="${BBSTYPE=='life' }">생활기 게시판</c:when>
+				</c:choose>
+				 / Total ${totalPost } 
+				</font></td>
 			</tr>
 		</table>
 		<div class="mainbbs">

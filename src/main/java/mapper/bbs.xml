@@ -33,18 +33,29 @@
 	select title, seqno from
 	(select a.*, rownum rn from bbs_info a
 	where TO_DATE(REGISTER_DATE,'YYYY/MM/DD HH24:MI')
-	BETWEEN SYSDATE-2 AND SYSDATE)
+	BETWEEN SYSDATE-4 AND SYSDATE)
 	where rn <![CDATA[<]]> 11
 	order by hit desc
 </select>
 <select id="getTop10Rep" resultType="model.Bbs">
-	select title from
-	(select a.*, rownum rn from bbs_info a
-	where TO_DATE(REGISTER_DATE,'YYYY/MM/DD HH24:MI')
-	BETWEEN SYSDATE-1 AND SYSDATE)
+	select title, seqno, c from (
+	select b.*, rownum rn, (select count(*) from reply_info where seqno=b.seqno) c
+	from bbs_info b
+	where TO_DATE(b.REGISTER_DATE,'YYYY/MM/DD HH24:MI')
+	BETWEEN SYSDATE-4 AND SYSDATE)
 	where rn <![CDATA[<]]> 11
-	order by hit desc
+	order by c desc
 </select>
+<delete id="deleteBbs" parameterType="Integer">
+	delete from bbs_info where seqno=#{seqno}
+</delete>
+<select id="getId" resultType="String" parameterType="Integer">
+	select id from user_info where user_no=#{user_no}
+</select>
+<update id="updateBbs" parameterType="model.Bbs">
+	update bbs_info set
+	bbstype=#{bbstype}, title=#{title}, content=#{content}, register_date=sysdate where seqno=#{seqno}
+</update>
 </mapper>
 
 

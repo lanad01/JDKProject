@@ -11,33 +11,45 @@
 <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
 <script src="../resources/vendor/jquery/jquery.min.js"></script>
 <script type="text/javascript">	
-
-function rereDel(repno,seqno,groupno){
-	if(confirm('정말로 삭제하시겠습니까?',"")==true){
-		$.ajax({
-			async: true,
-			type : 'POST',
-			data : { "repno": repno, "repgroupno" : groupno } ,
-			dataType : "json",
-			url : "../reply/reredel.html",
-			success : function(data){
-				if(data==1) {
-					swal("성공적으로 삭제되었습니다!!", "");
-					location.reload();
-				}
-				if(data==0) Alert('해당 댓글의 작성자가 아닙니다!!','warning')
-				if(data==2) location.href="../bbs/bbsview.html?loginwrite=1&seqno="+seqno;
-			},error : function(e){
-				alert("실패");
-			}
-		})
-	}else{ //취소
-		return false;
-	}	
-}
+// $(function(){
+// 	myFunction();
+// })
+function myFunction(repno,seqno,groupno) {
+    swal({
+        title: "정말 삭제하시겠습니까?",
+        text: "삭제된 대댓글은 복구되지 않습니다!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "예 삭제하겠습니다.",
+        closeOnConfirm: false,
+        closeOnCancel: false	
+    }, function (isConfirm) {
+        if (isConfirm){
+        	$.ajax({
+    			async: true,
+    			type : 'POST',
+    			data : { "repno": repno, "repgroupno" : groupno } ,
+    			dataType : "json",
+    			url : "../reply/reredel.html",
+    			success : function(data){
+    				if(data==1) {
+    					swal("성공적으로 삭제되었습니다!!", "");
+    					location.reload();
+    				}
+    				if(data==0) swal("","해당 댓글의 작성자가 아닙니다!!", "error");
+    				if(data==2) location.href="../bbs/bbsview.html?loginwrite=1&seqno="+seqno;
+    			},error : function(e){
+    				swal("","실패", "error");
+    			}
+    		})
+        } else {
+            swal("Cancelled", "댓글 삭제가 취소되었습니다.", "error");
+        }
+    });
+};
 function rereUpd(repno,seqno,groupno){
 	document.getElementById("repnoSend3").value=repno;
-// 	alert(document.getElementById("p"+repno).innerHTML);
  	document.getElementById("t"+repno+groupno).style.display="block";
  	$.ajax({
 		async: true,
@@ -48,13 +60,13 @@ function rereUpd(repno,seqno,groupno){
 		success : function(data){
 			
 			if(data==1){
-				alert('일치분기');
+				swal("","아이디가 일치합니다", "success");
 // 				document.getElementById("repModi").style.display="block";
 			}
-			if(data==0) alert('해당 대댓글의 작성자가 아닙니다!!')
+			if(data==0) swal("","해당 대댓글의 작성자가 아닙니다!!", "error");
 			if(data==2) location.href="../bbs/bbsview.html?loginwrite=1&seqno="+seqno;
 		},error : function(e){
-			alert("실패");
+			swal("","실패", "error");
 		}
 	})
 }
@@ -76,7 +88,7 @@ function rereUpd(repno,seqno,groupno){
 		</td>
 		<td width="15%" style="position:absolute;">
 		<input type="button" onClick="rereUpd(${rere.repno},${rere.seqno}, ${rere.repgroupno })" value="수정">
-		<input type="button" onClick="rereDel(${rere.repno},${rere.seqno}, ${rere.repgroupno })" value="삭제">
+		<input type="button" onClick="myFunction(${rere.repno},${rere.seqno}, ${rere.repgroupno })" value="삭제">
 		<input type="button" value="신고">
 		</td>
 		</tr>
@@ -94,7 +106,5 @@ function rereUpd(repno,seqno,groupno){
 </form>
 </div>
 </c:forEach>
-<button onclick="Alert();">Alert</button>
-<button onclick="Confirm();">Confirm</button>
 </body>
 </html>
