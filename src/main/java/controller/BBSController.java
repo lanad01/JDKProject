@@ -223,8 +223,10 @@ public class BBSController {
 		return new ModelAndView("redirect:/bbs/bbsview.html?seqno="+seqnoInt);
 	}
 	@RequestMapping(value="/bbs/prepost.html")
-	public ModelAndView prePost(String seqno) { //해당 게시판에 속하는 게시글들을 리스트업하고 seqno를 바탕으로 하나
-		System.out.println("bbs/prepost 수신 / seqno = "+seqno);
+	public ModelAndView prePost(String seqno,String bbstype) { //해당 게시판에 속하는 게시글들을 리스트업하고 seqno를 바탕으로 하나
+		System.out.println("bbs/prepost 수신 / seqno = "+seqno+ " bbstype : "+bbstype);
+		
+		
 		return new ModelAndView("redirect:/bbs/bbsview.html?seqno=");
 	}
 	@RequestMapping(value="/bbs/nextpost.html")
