@@ -225,6 +225,10 @@ public class BBSController {
 	@RequestMapping(value="/bbs/prepost.html")
 	public ModelAndView prePost(String seqno,String bbstype) { //해당 게시판에 속하는 게시글들을 리스트업하고 seqno를 바탕으로 하나
 		System.out.println("bbs/prepost 수신 / seqno = "+seqno+ " bbstype : "+bbstype);
+		Integer seqnoInt=Integer.parseInt(seqno);
+		Bbs bbs=bbsListDao.getBbsDetail(seqnoInt);
+		Integer rownum=bbsListDao.getRownum(bbs);
+		System.out.println("수신한 Rown"+rownum);
 		
 		
 		return new ModelAndView("redirect:/bbs/bbsview.html?seqno=");
