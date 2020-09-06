@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title></title>
 <link href='https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff'	rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="../css/mypage.css">
@@ -93,20 +93,20 @@ function quizDisplay(quiztext) {
 }
 function modify() {
 	swal({
-        title: "Á¤¸» º¯°æÇÏ½Ã°Ú½À´Ï±î?",
-        text: "¾ðÁ¦µçÁö ´Ù½Ã º¯°æÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù",
+        title: "ì •ë§ ë³€ê²½í•˜ì‹œê² ìŠµë‹ˆê¹Œ?",
+        text: "ì–¸ì œë“ ì§€ ë‹¤ì‹œ ë³€ê²½í•˜ì‹¤ ìˆ˜ ìžˆìŠµë‹ˆë‹¤",
         type: "success",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
-        confirmButtonText: "º¯°æ",
+        confirmButtonText: "ë³€ê²½",
         closeOnConfirm: false,
         closeOnCancel: false
 	}, function(isConfirm){
 		if(isConfirm){
 			document.modifyform.submit();
-			swal("È¸¿øÁ¤º¸¼öÁ¤", "¼º°ø", "success");
+			swal("íšŒì›ì •ë³´ìˆ˜ì •", "ì„±ê³µ", "success");
 		}else{
-			swal("Cancelled", "Á¤º¸¼öÁ¤ Ãë¼Ò", "error");
+			swal("Cancelled", "ì •ë³´ìˆ˜ì • ì·¨ì†Œ", "error");
 		}
 	});
 };
@@ -116,24 +116,24 @@ function modify() {
 		<div class="msg">
 			<form:form action="../register/modify.html?page=2" name="modifyform" modelAttribute="user" method="post" enctype="multipart/form-data">
 				<div class="msg">
-					<span>(*)</span> Ç¥½Ã°¡ ÀÖ´Â Ç×¸ñÀº ¹Ýµå½Ã ÀÔ·ÂÇØ¾ß ÇÕ´Ï´Ù.<br /> ÇãÀ§·Î ÀÛ¼ºµÈ Á¤º¸ÀÏ °æ¿ì ½ÂÀÎÀÌ
-					º¸·ùµÇ°Å³ª ÀÓÀÇ·Î »èÁ¦Ã³¸®µÉ ¼ö ÀÖÀ¸´Ï ÁÖÀÇÇØ ÁÖ¼¼¿ä.
+					<span>(*)</span> í‘œì‹œê°€ ìžˆëŠ” í•­ëª©ì€ ë°˜ë“œì‹œ ìž…ë ¥í•´ì•¼ í•©ë‹ˆë‹¤.<br /> í—ˆìœ„ë¡œ ìž‘ì„±ëœ ì •ë³´ì¼ ê²½ìš° ìŠ¹ì¸ì´
+					ë³´ë¥˜ë˜ê±°ë‚˜ ìž„ì˜ë¡œ ì‚­ì œì²˜ë¦¬ë  ìˆ˜ ìžˆìœ¼ë‹ˆ ì£¼ì˜í•´ ì£¼ì„¸ìš”.
 				</div>
 				<form:hidden path="user_no"/>
 				<form:hidden path="register_date"/>
 				<form:hidden path="id"/>
 				<form:hidden path="password"/>
 				<table class="modify">
-					<tr><td>ÀÌ¸§ <font color="red" id="font">*</font> :  </td>
+					<tr><td>ì´ë¦„ <font color="red" id="font">*</font> :  </td>
 						<td><form:input path="name" maxlength="20"/>
 						<font color="red" id="font" ><form:errors path="name"/></font></td>
 					</tr>
-					<tr><td>´Ð³×ÀÓ  <font color="red" id="font">*</font> :  </td>
+					<tr><td>ë‹‰ë„¤ìž„  <font color="red" id="font">*</font> :  </td>
 						<td><form:input path="nick" maxlength="20"/>
 						<font color="red" id="font" ><form:errors path="name"/></font>
-						<div><font size="1.0">´Ð³×ÀÓÀº ÀÚ½ÅÀ» Ç¥ÇöÇÒ ¼ö ÀÖ´Â ´Ü¾î·Î 20ÀÚ±îÁö ÀÚÀ¯·Ó°Ô »ç¿ëÇÒ ¼ö ÀÖ½À´Ï´Ù.</font></div></td>
+						<div><font size="1.0">ë‹‰ë„¤ìž„ì€ ìžì‹ ì„ í‘œí˜„í•  ìˆ˜ ìžˆëŠ” ë‹¨ì–´ë¡œ 20ìžê¹Œì§€ ìžìœ ë¡­ê²Œ ì‚¬ìš©í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.</font></div></td>
 					</tr>
-					<tr><td>»ýÀÏ  <font color="red" id="font"></font> :  </td>
+					<tr><td>ìƒì¼  <font color="red" id="font"></font> :  </td>
 						<td>
 						<form:select path="birth_date">
 						<c:forEach var="i" begin="0" end="${2016-1930}">
@@ -143,74 +143,74 @@ function modify() {
 						</form:select>
 						</td>
 					</tr>
-					<tr><td>¼ºº° : </td>
-						<td><form:radiobutton path="gender" value="M" checked="checked"/><font face='BMDOHYEON' size="0.9em">³²¼º</font>
-							<form:radiobutton path="gender" value="F" /><font face='BMDOHYEON' size="0.9em">¿©¼º</font>
+					<tr><td>ì„±ë³„ : </td>
+						<td><form:radiobutton path="gender" value="M" checked="checked"/><font face='BMDOHYEON' size="0.9em">ë‚¨ì„±</font>
+							<form:radiobutton path="gender" value="F" /><font face='BMDOHYEON' size="0.9em">ì—¬ì„±</font>
 						</td>
 					</tr>
-					<tr><td>¾ÆÀÌµð <font color="red" id="font">*</font> :  </td>
+					<tr><td>ì•„ì´ë”” <font color="red" id="font">*</font> :  </td>
 						<td><input type="text" value="${ID }" maxlength="8" disabled="true"/>
-						<div><font color="red" size="1.0">¾ÆÀÌµð´Â ¹Ù²Ü ¼ö ¾ø½À´Ï´Ù!!</font></div>
+						<div><font color="red" size="1.0">ì•„ì´ë””ëŠ” ë°”ê¿€ ìˆ˜ ì—†ìŠµë‹ˆë‹¤!!</font></div>
 						</td>
 					</tr>
-					<tr><td>ºñ¹Ð¹øÈ£ <font color="red" id="font">*</font> :  </td>
+					<tr><td>ë¹„ë°€ë²ˆí˜¸ <font color="red" id="font">*</font> :  </td>
 						<td><input type="password" value="${PWD }" maxlength="20" disabled="true"/>
-						<div><font color="red" size="1.0">ºñ¹Ð¹øÈ£ º¯°æ ±â´ÉÀ» »ç¿ëÇØÁÖ¼¼¿ä!!</font></div>
+						<div><font color="red" size="1.0">ë¹„ë°€ë²ˆí˜¸ ë³€ê²½ ê¸°ëŠ¥ì„ ì‚¬ìš©í•´ì£¼ì„¸ìš”!!</font></div>
 						</td>
 					</tr>
-					<tr><td>ºñ¹øÃ£±â Áú¹®  <font color="red" id="font">*</font> : </td>
+					<tr><td>ë¹„ë²ˆì°¾ê¸° ì§ˆë¬¸  <font color="red" id="font">*</font> : </td>
 						<td>
 						<select class="pw_q1" onchange="quizDisplay(this.options[this.selectedIndex].text)">
-						<option value="">&nbsp;+ ¼±ÅÃÇÏ½Ê½Ã¿À.</option>
+						<option value="">&nbsp;+ ì„ íƒí•˜ì‹­ì‹œì˜¤.</option>
 						<option value="" selected disabled>-------------------------------</option>
-						<option value="³»°¡ ÁÁ¾ÆÇÏ´Â Ä³¸¯ÅÍ´Â?">¤ý³»°¡ ÁÁ¾ÆÇÏ´Â Ä³¸¯ÅÍ´Â?</option>
-						<option value="Å¸ÀÎÀÌ ¸ð¸£´Â ÀÚ½Å¸¸ÀÇ ½ÅÃ¼ºñ¹ÐÀÌ ÀÖ´Ù¸é?">¤ýÅ¸ÀÎÀÌ ¸ð¸£´Â ÀÚ½Å¸¸ÀÇ ½ÅÃ¼ºñ¹ÐÀÌ ÀÖ´Ù¸é?</option>
-						<option value="ÀÚ½ÅÀÇ ÀÎ»ý ÁÂ¿ì¸íÀº?">¤ýÀÚ½ÅÀÇ ÀÎ»ý ÁÂ¿ì¸íÀº?</option>
-						<option value="ÃÊµîÇÐ±³ ¶§ ±â¾ï¿¡ ³²´Â Â¦²á ÀÌ¸§Àº?">¤ýÃÊµîÇÐ±³ ¶§ ±â¾ï¿¡ ³²´Â Â¦²á ÀÌ¸§Àº?</option>
-						<option value="À¯³â½ÃÀý °¡Àå »ý°¢³ª´Â Ä£±¸ ÀÌ¸§Àº?">¤ýÀ¯³â½ÃÀý °¡Àå »ý°¢³ª´Â Ä£±¸ ÀÌ¸§Àº?</option>
-						<option value="°¡Àå ±â¾ï¿¡ ³²´Â ¼±»ý´Ô ¼ºÇÔÀº?">¤ý°¡Àå ±â¾ï¿¡ ³²´Â ¼±»ý´Ô ¼ºÇÔÀº?</option>
-						<option value="Ä£±¸µé¿¡°Ô °ø°³ÇÏÁö ¾ÊÀº ¾î¸± Àû º°¸íÀÌ ÀÖ´Ù¸é?">¤ýÄ£±¸µé¿¡°Ô °ø°³ÇÏÁö ¾ÊÀº ¾î¸± Àû º°¸íÀÌ ÀÖ´Ù¸é?</option>
-						<option value="´Ù½Ã ÅÂ¾î³ª¸é µÇ°í ½ÍÀº °ÍÀº?">¤ý´Ù½Ã ÅÂ¾î³ª¸é µÇ°í ½ÍÀº °ÍÀº?</option>
-						<option value="°¡Àå °¨¸í±í°Ô º» ¿µÈ­´Â?">¤ý°¡Àå °¨¸í±í°Ô º» ¿µÈ­´Â?</option>
-						<option value="ÀÐÀº Ã¥ Áß¿¡¼­ ÁÁ¾ÆÇÏ´Â ±¸ÀýÀÌ ÀÖ´Ù¸é?">¤ýÀÐÀº Ã¥ Áß¿¡¼­ ÁÁ¾ÆÇÏ´Â ±¸ÀýÀÌ ÀÖ´Ù¸é?</option>
-						<option value="±â¾ï¿¡ ³²´Â Ãß¾ïÀÇ Àå¼Ò´Â?">¤ý±â¾ï¿¡ ³²´Â Ãß¾ïÀÇ Àå¼Ò´Â?</option>
-						<option value="ÀÎ»ó ±í°Ô ÀÐÀº Ã¥ ÀÌ¸§Àº?">¤ýÀÎ»ó ±í°Ô ÀÐÀº Ã¥ ÀÌ¸§Àº?</option>
-						<option value="ÀÚ½ÅÀÇ º¸¹° Á¦1È£´Â?">¤ýÀÚ½ÅÀÇ º¸¹° Á¦1È£´Â?</option>
-						<option value="¹Þ¾Ò´ø ¼±¹° Áß ±â¾ï¿¡ ³²´Â µ¶Æ¯ÇÑ ¼±¹°Àº?">¤ý¹Þ¾Ò´ø ¼±¹° Áß ±â¾ï¿¡ ³²´Â µ¶Æ¯ÇÑ ¼±¹°Àº?</option>
-						<option value="ÀÚ½ÅÀÌ µÎ¹øÂ°·Î Á¸°æÇÏ´Â ÀÎ¹°Àº?">¤ýÀÚ½ÅÀÌ µÎ¹øÂ°·Î Á¸°æÇÏ´Â ÀÎ¹°Àº?</option>
-						<option value="¾Æ¹öÁöÀÇ ¼ºÇÔÀº?">¤ý¾Æ¹öÁöÀÇ ¼ºÇÔÀº?</option>
-						<option value="¾î¸Ó´ÏÀÇ ¼ºÇÔÀº?">¤ý¾î¸Ó´ÏÀÇ ¼ºÇÔÀº?</option>
+						<option value="ë‚´ê°€ ì¢‹ì•„í•˜ëŠ” ìºë¦­í„°ëŠ”?">ã†ë‚´ê°€ ì¢‹ì•„í•˜ëŠ” ìºë¦­í„°ëŠ”?</option>
+						<option value="íƒ€ì¸ì´ ëª¨ë¥´ëŠ” ìžì‹ ë§Œì˜ ì‹ ì²´ë¹„ë°€ì´ ìžˆë‹¤ë©´?">ã†íƒ€ì¸ì´ ëª¨ë¥´ëŠ” ìžì‹ ë§Œì˜ ì‹ ì²´ë¹„ë°€ì´ ìžˆë‹¤ë©´?</option>
+						<option value="ìžì‹ ì˜ ì¸ìƒ ì¢Œìš°ëª…ì€?">ã†ìžì‹ ì˜ ì¸ìƒ ì¢Œìš°ëª…ì€?</option>
+						<option value="ì´ˆë“±í•™êµ ë•Œ ê¸°ì–µì— ë‚¨ëŠ” ì§ê¿ ì´ë¦„ì€?">ã†ì´ˆë“±í•™êµ ë•Œ ê¸°ì–µì— ë‚¨ëŠ” ì§ê¿ ì´ë¦„ì€?</option>
+						<option value="ìœ ë…„ì‹œì ˆ ê°€ìž¥ ìƒê°ë‚˜ëŠ” ì¹œêµ¬ ì´ë¦„ì€?">ã†ìœ ë…„ì‹œì ˆ ê°€ìž¥ ìƒê°ë‚˜ëŠ” ì¹œêµ¬ ì´ë¦„ì€?</option>
+						<option value="ê°€ìž¥ ê¸°ì–µì— ë‚¨ëŠ” ì„ ìƒë‹˜ ì„±í•¨ì€?">ã†ê°€ìž¥ ê¸°ì–µì— ë‚¨ëŠ” ì„ ìƒë‹˜ ì„±í•¨ì€?</option>
+						<option value="ì¹œêµ¬ë“¤ì—ê²Œ ê³µê°œí•˜ì§€ ì•Šì€ ì–´ë¦´ ì  ë³„ëª…ì´ ìžˆë‹¤ë©´?">ã†ì¹œêµ¬ë“¤ì—ê²Œ ê³µê°œí•˜ì§€ ì•Šì€ ì–´ë¦´ ì  ë³„ëª…ì´ ìžˆë‹¤ë©´?</option>
+						<option value="ë‹¤ì‹œ íƒœì–´ë‚˜ë©´ ë˜ê³  ì‹¶ì€ ê²ƒì€?">ã†ë‹¤ì‹œ íƒœì–´ë‚˜ë©´ ë˜ê³  ì‹¶ì€ ê²ƒì€?</option>
+						<option value="ê°€ìž¥ ê°ëª…ê¹Šê²Œ ë³¸ ì˜í™”ëŠ”?">ã†ê°€ìž¥ ê°ëª…ê¹Šê²Œ ë³¸ ì˜í™”ëŠ”?</option>
+						<option value="ì½ì€ ì±… ì¤‘ì—ì„œ ì¢‹ì•„í•˜ëŠ” êµ¬ì ˆì´ ìžˆë‹¤ë©´?">ã†ì½ì€ ì±… ì¤‘ì—ì„œ ì¢‹ì•„í•˜ëŠ” êµ¬ì ˆì´ ìžˆë‹¤ë©´?</option>
+						<option value="ê¸°ì–µì— ë‚¨ëŠ” ì¶”ì–µì˜ ìž¥ì†ŒëŠ”?">ã†ê¸°ì–µì— ë‚¨ëŠ” ì¶”ì–µì˜ ìž¥ì†ŒëŠ”?</option>
+						<option value="ì¸ìƒ ê¹Šê²Œ ì½ì€ ì±… ì´ë¦„ì€?">ã†ì¸ìƒ ê¹Šê²Œ ì½ì€ ì±… ì´ë¦„ì€?</option>
+						<option value="ìžì‹ ì˜ ë³´ë¬¼ ì œ1í˜¸ëŠ”?">ã†ìžì‹ ì˜ ë³´ë¬¼ ì œ1í˜¸ëŠ”?</option>
+						<option value="ë°›ì•˜ë˜ ì„ ë¬¼ ì¤‘ ê¸°ì–µì— ë‚¨ëŠ” ë…íŠ¹í•œ ì„ ë¬¼ì€?">ã†ë°›ì•˜ë˜ ì„ ë¬¼ ì¤‘ ê¸°ì–µì— ë‚¨ëŠ” ë…íŠ¹í•œ ì„ ë¬¼ì€?</option>
+						<option value="ìžì‹ ì´ ë‘ë²ˆì§¸ë¡œ ì¡´ê²½í•˜ëŠ” ì¸ë¬¼ì€?">ã†ìžì‹ ì´ ë‘ë²ˆì§¸ë¡œ ì¡´ê²½í•˜ëŠ” ì¸ë¬¼ì€?</option>
+						<option value="ì•„ë²„ì§€ì˜ ì„±í•¨ì€?">ã†ì•„ë²„ì§€ì˜ ì„±í•¨ì€?</option>
+						<option value="ì–´ë¨¸ë‹ˆì˜ ì„±í•¨ì€?">ã†ì–´ë¨¸ë‹ˆì˜ ì„±í•¨ì€?</option>
 						</select><br/>
-						<div><font size="1.0"><form:input type="text" path="quiz" id="quiz" placeholder="Á÷Á¢ ÀÛ¼º" size="40" /></font></div>
+						<div><font size="1.0"><form:input type="text" path="quiz" id="quiz" placeholder="ì§ì ‘ ìž‘ì„±" size="40" /></font></div>
 						<font color="red" id="font" ><form:errors path="quiz"/></font>
 						</td>
 					</tr>
-					<tr><td>ºñ¹ø Ã£±â ´äº¯   <font color="red" id="font">*</font> : </td>
+					<tr><td>ë¹„ë²ˆ ì°¾ê¸° ë‹µë³€   <font color="red" id="font">*</font> : </td>
 						<td><form:input type="text"  path="answer" class="input" />
 						<font color="red" id="font" ><form:errors path="answer"/></font>
 						<div>
-						<font size="1.0">ºñ¹Ð¹øÈ£Ã£±â Áú¹®¿¡ ´ëÇÑ ´äº¯À» È¥ÀÚ¸¸ ¾Ë ¼ö ÀÖ´Â ´Ü¾î³ª ±âÈ£·Î ÀÔ·ÂÇØ ÁÖ¼¼¿ä.<br />
-						ºñ¹Ð¹øÈ£¸¦ Ã£À» ¶§ ÇÊ¿äÇÏ¹Ç·Î ¹Ýµå½Ã ±â¾ïÇØ ÁÖ¼¼¿ä.</font>
+						<font size="1.0">ë¹„ë°€ë²ˆí˜¸ì°¾ê¸° ì§ˆë¬¸ì— ëŒ€í•œ ë‹µë³€ì„ í˜¼ìžë§Œ ì•Œ ìˆ˜ ìžˆëŠ” ë‹¨ì–´ë‚˜ ê¸°í˜¸ë¡œ ìž…ë ¥í•´ ì£¼ì„¸ìš”.<br />
+						ë¹„ë°€ë²ˆí˜¸ë¥¼ ì°¾ì„ ë•Œ í•„ìš”í•˜ë¯€ë¡œ ë°˜ë“œì‹œ ê¸°ì–µí•´ ì£¼ì„¸ìš”.</font>
 						</div>
 						</td>
 					</tr>
-					<tr><td>ÀÌ¸ÞÀÏ : </td>
+					<tr><td>ì´ë©”ì¼ : </td>
 						<td><form:input type="text" path="email" size="35" class="input" />
 						<font color="red" id="font" ><form:errors path="email"/></font>
 						</td>
 					</tr>
-					<tr><td>Áö¿ª : </td>
+					<tr><td>ì§€ì—­ : </td>
 						<td><form:input path="area" size="15" class="input" />
 						</td>
 					</tr>
-					<tr><td>»çÁø : </td>
+					<tr><td>ì‚¬ì§„ : </td>
 						<td><input type="file" name="picture"/></td>
 					</tr>
 				</table>
-				<input type="button" value="Á¤º¸º¯°æ" onClick="modify()"class="btnblue" style="float:right; margin-top:15px; margin-right:190px;"/>
+				<input type="button" value="ì •ë³´ë³€ê²½" onClick="modify()"class="btnblue" style="float:right; margin-top:15px; margin-right:190px;"/>
 			</form:form>
 		</div>
 	</div>
-	<!-- UiÁ¾·á  -->
+	<!-- Uiì¢…ë£Œ  -->
 </body>
 </html>

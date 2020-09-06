@@ -3,8 +3,11 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="bbs">
 <insert id="putBbs" parameterType="model.Bbs">
-	insert into bbs_info values(#{seqno},#{title},#{user_no}, #{register_date} ,#{bbstype},#{content},#{hit},#{point})
+	insert into bbs_info values(#{seqno},#{title},#{user_no}, #{register_date} ,#{bbstype},#{content},#{hit},#{point},#{rn})
 </insert>
+<select id="getMaxRow" parameterType="String" resultType="Integer">
+	select max(rn) from bbs_info where bbstype=#{bbstype}
+</select>
 <select id="getSeqno" resultType="Integer">
 	select max(seqno) from bbs_info
 </select>
@@ -12,10 +15,21 @@
 	select user_no from user_info where id=#{id} 
 </select>
 <select id="getBBSList" resultType="model.Bbs" parameterType="String">
-	select rownum, seqno, title, user_no, register_date, bbstype, content, hit, point from bbs_info where bbstype=#{bbstype} order by seqno desc
+	select   rownum,
+			 seqno, 
+			 title,
+			 user_no, 
+			 register_date, 
+			 bbstype, 
+			 content, 
+			 hit, 
+			 point, 
+			 rn 
+	from bbs_info 
+	where bbstype=#{bbstype} order by seqno desc
 </select>
 <select id="getBbsDetail" resultType="model.Bbs" parameterType="Integer">
-	select seqno, title, user_no, register_date, bbstype, content, hit, point from bbs_info where seqno=#{seqno}
+	select seqno, title, user_no, register_date, bbstype, content, hit, point, rn from bbs_info where seqno=#{seqno}
 </select>
 <select id="getWriter" resultType="String" parameterType="Integer">
 	select name from user_info where user_no=#{user_no}
@@ -27,23 +41,23 @@
 	select count(*) from bbs_info where bbstype=#{bbstype}
 </select>
 <select id="getNotice" parameterType="Integer" resultType="model.Bbs">
-	select seqno, title, user_no, register_date, bbstype, content, hit, point from bbs_info where user_no=#{user_no}
+	select rownum, seqno, title, user_no, register_date, bbstype, content, hit, point from bbs_info where user_no=#{user_no}
 </select>
 <select id="getTop10Hit" resultType="model.Bbs">
 	select title, seqno from
-	(select a.*, rownum rn from bbs_info a
+	(select a.*, rownum rown from bbs_info a
 	where TO_DATE(REGISTER_DATE,'YYYY/MM/DD HH24:MI')
 	BETWEEN SYSDATE-4 AND SYSDATE)
-	where rn <![CDATA[<]]> 11
+	where rown <![CDATA[<]]> 11
 	order by hit desc
 </select>
 <select id="getTop10Rep" resultType="model.Bbs">
 	select title, seqno, c from (
-	select b.*, rownum rn, (select count(*) from reply_info where seqno=b.seqno) c
+	select b.*, rownum rown, (select count(*) from reply_info where seqno=b.seqno) c
 	from bbs_info b
 	where TO_DATE(b.REGISTER_DATE,'YYYY/MM/DD HH24:MI')
 	BETWEEN SYSDATE-4 AND SYSDATE)
-	where rn <![CDATA[<]]> 11
+	where rown <![CDATA[<]]> 11
 	order by c desc
 </select>
 <delete id="deleteBbs" parameterType="Integer">
@@ -57,14 +71,40 @@
 	bbstype=#{bbstype}, title=#{title}, content=#{content}, register_date=sysdate where seqno=#{seqno}
 </update>
 <select id="getRownum" parameterType="model.Bbs" resultType="Integer">
-	select rn from(select rownum rn, seqno from 
+	select rown from(select rownum rown, seqno from 
 	(select b.* from bbs_info b where bbstype=#{bbstype} order by seqno asc))
 	where seqno=#{seqno}
+</select>
+<select id="getSeqnoByRownum" parameterType="model.Bbs" resultType="Integer">
+	select seqno from(select rownum rown, seqno, title from 
+	(select b.* from bbs_info b where bbstype=#{bbstype} order by seqno asc))
+	where rown=#{rn}
 </select>
 <update id="like" parameterType="Integer">
 	update bbs_info set
 	point=#{point} where seqno=#{seqno}
 </update>
+<select id="searchByTotal" resultType="model.Bbs" parameterType="model.Search">
+	select * 
+	from bbs_info
+	where bbstype=#{ bbstype} and
+	title like '%' || #{keyword} || '%' or
+	content like '%' || #{keyword} || '%'
+</select>
+<select id="searchByContent" resultType="model.Bbs" parameterType="model.Search">
+	select * 
+	from bbs_info
+	where bbstype=#{ bbstype} and
+	content like '%' || #{keyword} || '%'
+</select>
+<select id="searchByName" resultType="model.Bbs" parameterType="model.Search">
+	select b.* from(
+	select user_no from user_info 
+	where name like '%' || #{keyword} || '%') u left join bbs_info b
+	on u.user_no=b.user_no
+	where b.bbstype=#{bbstype}
+</select>
+
 </mapper>
 
 

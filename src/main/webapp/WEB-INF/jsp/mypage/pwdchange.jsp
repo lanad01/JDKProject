@@ -1,13 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>	
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>ºñ¹Ğ¹øÈ£ º¯°æ</title>
+<meta charset="UTF-8">
+<title>ë¹„ë°€ë²ˆí˜¸ ë³€ê²½</title>
 <style type="text/css">
 @font-face {
 	font-family: 'BMDOHYEON';
@@ -33,9 +33,9 @@ function close2(frm){
 	document.getElementById("main").style.display = "none";
 	self.close();
 	window.opener.location.reload();
-	var result = confirm("Á¤¸»·Î º¯°æÇÏ½Ã°Ú½À´Ï±î?");
+	var result = confirm("ì •ë§ë¡œ ë³€ê²½í•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
 	if(result == false) {
-		alert('ºñ¹Ğ¹øÈ£ º¯°æÀÌ Ãë¼Ò µÇ¾ú½À´Ï´Ù.');
+		alert('ë¹„ë°€ë²ˆí˜¸ ë³€ê²½ì´ ì·¨ì†Œ ë˜ì—ˆìŠµë‹ˆë‹¤.');
 		return false;
 	}else{
 	return true;
@@ -45,27 +45,27 @@ function pwdCheck(){
 	var prepwd=document.getElementById("prepwd").value; 
 	var userpwd=document.getElementById("userpwd").value;
 	if(prepwd!=userpwd){
-		document.getElementById("error").innerHTML="µî·ÏµÈ ºñ¹Ğ¹øÈ£¿Í ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù!!";
+		document.getElementById("error").innerHTML="ë“±ë¡ëœ ë¹„ë°€ë²ˆí˜¸ì™€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤!!";
 	}else if(prepwd==userpwd){
-		document.getElementById("error").innerHTML="µî·ÏµÈ ºñ¹Ğ¹øÈ£¿Í ÀÏÄ¡ÇÕ´Ï´Ù.";
+		document.getElementById("error").innerHTML="ë“±ë¡ëœ ë¹„ë°€ë²ˆí˜¸ì™€ ì¼ì¹˜í•©ë‹ˆë‹¤.";
 	}
 }
 function pwdCheck2(){
 	var newpwd=document.getElementById("newpwd").value;
 	var userpwd=document.getElementById("userpwd").value;
 	if(newpwd==userpwd){
-		document.getElementById("error2").innerHTML="±âÁ¸ ºñ¹Ğ¹øÈ£¿Í ´Ù¸¥ ºñ¹Ğ¹øÈ£·Î ¼³Á¤ÇØÁÖ¼¼¿ä.";
+		document.getElementById("error2").innerHTML="ê¸°ì¡´ ë¹„ë°€ë²ˆí˜¸ì™€ ë‹¤ë¥¸ ë¹„ë°€ë²ˆí˜¸ë¡œ ì„¤ì •í•´ì£¼ì„¸ìš”.";
 	}else if(newpwd!=userpwd){
-		document.getElementById("error2").innerHTML="À¯È¿ÇÑ ºñ¹Ğ¹øÈ£ÀÔ´Ï´Ù ^^";
+		document.getElementById("error2").innerHTML="ìœ íš¨í•œ ë¹„ë°€ë²ˆí˜¸ì…ë‹ˆë‹¤ ^^";
 	}
 }
 function pwdCheck3(){
 	var newpwd=document.getElementById("newpwd").value;
 	var pwdcheck=document.getElementById("pwdCheck").value;
 	if(newpwd!=pwdcheck){
-		document.getElementById("error3").innerHTML="ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù!!";
+		document.getElementById("error3").innerHTML="ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤!!";
 	}else if(newpwd==pwdcheck){
-		document.getElementById("error3").innerHTML="ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÕ´Ï´Ù.";
+		document.getElementById("error3").innerHTML="ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•©ë‹ˆë‹¤.";
 	}
 }
 
@@ -79,20 +79,20 @@ function pwdCheck3(){
 				<form:hidden path="password" id="userpwd"/>
 				<form:hidden path="id" id="id"/>
 				<div class="msg">
-					<span style="margin-left:30px; margin-bottom:10px;"></span><font size="1.3em" color="blue"> (*)ºñ¹Ğ¹øÈ£´Â ÁÖ±âÀûÀ¸·Î º¯°æÇÏ´Â °ÍÀÌ ÁÁ½À´Ï´Ù.</font><br /> <br/>
+					<span style="margin-left:30px; margin-bottom:10px;"></span><font size="1.3em" color="blue"> (*)ë¹„ë°€ë²ˆí˜¸ëŠ” ì£¼ê¸°ì ìœ¼ë¡œ ë³€ê²½í•˜ëŠ” ê²ƒì´ ì¢‹ìŠµë‹ˆë‹¤.</font><br /> <br/>
 					<table>
-						<tr><td class="pwd">ÇöÀç ºñ¹Ğ¹øÈ£</td><td><input type="password" name="prepwd" id="prepwd" >
-							<a onClick="pwdCheck()" style="background:#dcdcdc; border:1px solid black;"><font size="1.5">ÀÏÄ¡ È®ÀÎ</font></a>
+						<tr><td class="pwd">í˜„ì¬ ë¹„ë°€ë²ˆí˜¸</td><td><input type="password" name="prepwd" id="prepwd" >
+							<a onClick="pwdCheck()" style="background:#dcdcdc; border:1px solid black;"><font size="1.5">ì¼ì¹˜ í™•ì¸</font></a>
 							<div id="error" style="color:red; margin-top:5px; font-size:0.8em;"></div>
 							</td>
-						<tr><td class="pwd">º¯°æ ºñ¹Ğ¹øÈ£</td><td><input type="password" name="newpwd" id="newpwd" onblur="pwdCheck2()">
+						<tr><td class="pwd">ë³€ê²½ ë¹„ë°€ë²ˆí˜¸</td><td><input type="password" name="newpwd" id="newpwd" onblur="pwdCheck2()">
 							<div id="error2" style="color:red; margin-top:5px; font-size:0.8em;"></div>
 							</td>
-						<tr><td class="pwd">ºñ¹Ğ¹øÈ£ È®ÀÎ</td><td><input type="password" name="newpwdchk" id="pwdCheck" onblur="pwdCheck3()">
+						<tr><td class="pwd">ë¹„ë°€ë²ˆí˜¸ í™•ì¸</td><td><input type="password" name="newpwdchk" id="pwdCheck" onblur="pwdCheck3()">
 							<div id="error3" style="color:red; margin-top:5px; font-size:0.8em;"></div>
 						<tr><td>&nbsp;</td></tr>
 						<tr><td></td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<input type="submit" value="ºñ¹Ğ¹øÈ£ º¯°æ"></td>
+						<input type="submit" value="ë¹„ë°€ë²ˆí˜¸ ë³€ê²½"></td>
 						</tr>
 					</table>
 				</div>

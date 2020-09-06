@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 
 <link	href='https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff'	rel='stylesheet' type='text/css'>
@@ -18,12 +18,17 @@
 </head>
 <script src="../resources/vendor/jquery/jquery.min.js"></script>
 <script type="text/javascript">
-function like(seqno,args) { // »èÁ¦
-	if(args=='like') var a="ÃßÃµ";
-	else if(args=='dislike') var a="¹İ´ë";
+$(function(){
+	var nopage=document.getElementById("nopage").value;
+	if(nopage=="next") alert("ë‹¤ìŒ í˜ì´ì§€ê°€ ì—†ìŠµë‹ˆë‹¤");
+	if(nopage=="previous") alert("ì´ì „ ê¸€ì´ ì—†ìŠµë‹ˆë‹¤");
+})
+function like(seqno,args) { // ì‚­ì œ
+	if(args=='like') var a="ì¶”ì²œ";
+	else if(args=='dislike') var a="ë°˜ëŒ€";
 	swal({
-        title: "Á¤¸» "+a+"ÇÏ½Ã°Ú½À´Ï±î?",
-        text: "³ôÀº ÃßÃµÀ» ±â·ÏÇÑ ±ÛÀº °³³ä±Û·Î °¡°Ô µË´Ï´Ù.",
+        title: "ì •ë§ "+a+"í•˜ì‹œê² ìŠµë‹ˆê¹Œ?",
+        text: "ë†’ì€ ì¶”ì²œì„ ê¸°ë¡í•œ ê¸€ì€ ê°œë…ê¸€ë¡œ ê°€ê²Œ ë©ë‹ˆë‹¤.",
         type: "info",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
@@ -41,20 +46,20 @@ function like(seqno,args) { // »èÁ¦
 			url : "../bbs/like.html",
 		    success : function(data){
 		    	if(data==1) {
-		    	swal("ÃßÃµ/¹İ´ë°¡ Àû¿ëµÇ¾ú½À´Ï´Ù!", "");
+		    	swal("ì¶”ì²œ/ë°˜ëŒ€ê°€ ì ìš©ë˜ì—ˆìŠµë‹ˆë‹¤!", "");
 		    	}
-		   		if(data==0) swal("","ÀÛ¼ºÀÚ º»ÀÎÀº ÃßÃµ/¹İ´ë ÇÒ ¼ö ¾ø½À´Ï´Ù.", "error");
+		   		if(data==0) swal("","ì‘ì„±ì ë³¸ì¸ì€ ì¶”ì²œ/ë°˜ëŒ€ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.", "error");
 		    	if(data==2) location.href="../bbs/bbsview.html?loginwrite=1&seqno="+seqno;
 		   	},error : function(e){
-		   		swal("","½ÇÆĞ", "error");
+		   		swal("","ì‹¤íŒ¨", "error");
 		  		}
 		  	})
 			}else{
-			swal("",a+" Ãë¼Ò!", "success");
+			swal("",a+" ì·¨ì†Œ!", "success");
 			}
   		  });
 };
-function myFunction4(seqno){ // ¼öÁ¤
+function myFunction4(seqno){ // ìˆ˜ì •
 	var bbstype=document.getElementById("bbstype").value;
 	$.ajax({
 	 		async: true,
@@ -64,23 +69,23 @@ function myFunction4(seqno){ // ¼öÁ¤
 		url : "../bbs/bbsmodvalid.html",
 	    success : function(data){
 	    	if(data==1) {
-	    	swal("¾ÆÀÌµğ°¡ ÀÏÄ¡ÇÕ´Ï´Ù!", "success");
+	    	swal("ì•„ì´ë””ê°€ ì¼ì¹˜í•©ë‹ˆë‹¤!", "success");
 	    	location.href="../bbs/bbsupd.html?seqno="+seqno+"&bbstype="+bbstype;}
-	   		if(data==0) swal("","ÇØ´ç °Ô½Ã±ÛÀÇ ÀÛ¼ºÀÚ°¡ ¾Æ´Õ´Ï´Ù!!", "error");
+	   		if(data==0) swal("","í•´ë‹¹ ê²Œì‹œê¸€ì˜ ì‘ì„±ìê°€ ì•„ë‹™ë‹ˆë‹¤!!", "error");
 	    	if(data==2) location.href="../bbs/bbsview.html?loginwrite=1&seqno="+seqno;
 	   	},error : function(e){
-	   		swal("","½ÇÆĞ", "error");
+	   		swal("","ì‹¤íŒ¨", "error");
 	  		}
 	  	})
 }
-function myFunction3(seqno) { // »èÁ¦
+function myFunction3(seqno) { // ì‚­ì œ
 	swal({
-        title: "Á¤¸» »èÁ¦ÇÏ½Ã°Ú½À´Ï±î?",
-        text: "»èÁ¦µÈ ´ë´ñ±ÛÀº º¹±¸µÇÁö ¾Ê½À´Ï´Ù!",
+        title: "ì •ë§ ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?",
+        text: "ì‚­ì œëœ ëŒ€ëŒ“ê¸€ì€ ë³µêµ¬ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤!",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
-        confirmButtonText: "¿¹ »èÁ¦ÇÏ°Ú½À´Ï´Ù.",
+        confirmButtonText: "ì˜ˆ ì‚­ì œí•˜ê² ìŠµë‹ˆë‹¤.",
         closeOnConfirm: false,
         closeOnCancel: false
     }, function (isConfirm) {
@@ -94,49 +99,49 @@ function myFunction3(seqno) { // »èÁ¦
 			url : "../bbs/delbbsvalid.html",
 		    success : function(data){
 		    	if(data==1) {
-		    	swal("¼º°øÀûÀ¸·Î »èÁ¦µÇ¾ú½À´Ï´Ù!!", "");
+		    	swal("ì„±ê³µì ìœ¼ë¡œ ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤!!", "");
 		    	location.href="../bbs/bbs.html?bbstype="+bbstype;}
-		   		if(data==0) swal("","ÇØ´ç ´ñ±ÛÀÇ ÀÛ¼ºÀÚ°¡ ¾Æ´Õ´Ï´Ù!!", "error");
+		   		if(data==0) swal("","í•´ë‹¹ ëŒ“ê¸€ì˜ ì‘ì„±ìê°€ ì•„ë‹™ë‹ˆë‹¤!!", "error");
 		    	if(data==2) location.href="../bbs/bbsview.html?loginwrite=1&seqno="+seqno;
 		   	},error : function(e){
-		   		swal("","½ÇÆĞ", "error");
+		   		swal("","ì‹¤íŒ¨", "error");
 		  		}
 		  	})
 			}else{
-			swal("","»èÁ¦ Ãë¼Ò", "success");
+			swal("","ì‚­ì œ ì·¨ì†Œ", "success");
 			}
   		  });
 };
 </script>
 <body>
 	<input type="hidden" id="bbstype" value="${BBS.bbstype }">
-	
+	<input type="hidden" id="nopage" value="${NOPAGE }">
 	<div class="sbjbox" style="width:730px; margin-top:27px;">
 		<div class="subject" style="height:60px"> 
 			<h1><span class="category" style="margin-top:15px;"><strong> ${BBS.title } </strong></span>
 			<font color="blue" size="1"><span>(${REPNUM }+${RERENUM})</span></font>
-			<span class="date">Read ${BBS.hit }<br />ÃßÃµ¼ö : ${BBS.point}<br />${BBS.register_date }<br/>ÀÛ¼ºÀÚ : ${WRITER }</span></h1> 
+			<span class="date">Read ${BBS.hit }<br />ì¶”ì²œìˆ˜ : ${BBS.point}<br />${BBS.register_date }<br/>ì‘ì„±ì : ${WRITER }</span></h1> 
 		</div> 
 	</div>
 	<div class="sbjbox" style="width:730px;">
 		<div id="vContent" class="content" style="width:730px; margin:10px 50px 10px 10px; padding-right:40px;">${BBS.content }
 		<br/><br/>
 		<div style="text-align:center; margin-bottom:-10px;">
-			<img src="../img/like.png" onClick="like(${BBS.seqno},'like')" alt="ÃßÃµ">
-			<img src="../img/dislike.png" onClick="like(${BBS.seqno},'dislike')" alt="¹İ´ë">
+			<img src="../img/like.png" onClick="like(${BBS.seqno},'like')" alt="ì¶”ì²œ">
+			<img src="../img/dislike.png" onClick="like(${BBS.seqno},'dislike')" alt="ë°˜ëŒ€">
 		</div>
 		</div>
 		
 	</div>
 	<div class="bottom">
-		<span class="sp_btn00" style="margin-left:-100px;"><a href="../bbs/prepost.html?seqno=${BBS.seqno}&bbstype=${BBS.bbstype}">ÀÌÀü±Û</a></span>
-		<span class="sp_btn00" ><a href="" onclick="alert('´ÙÀ½±ÛÀÌ ¾ø½À´Ï´Ù.')">´ÙÀ½±Û</a></span>
+		<span class="sp_btn00" style="margin-left:-100px;"><a href="../bbs/prepost.html?seqno=${BBS.seqno}&bbstype=${BBS.bbstype}">ì´ì „ê¸€</a></span>
+		<span class="sp_btn00" ><a href="../bbs/nextpost.html?seqno=${BBS.seqno}&bbstype=${BBS.bbstype}"" onclick=>ë‹¤ìŒê¸€</a></span>
 	<div class="bottomside">
 	<font face="BMDOHYEON" size="1.0em" color="blue">
-		<span class="sp_btn00"><input type="button" onclick="location.href='../write/bbs.html?bbstype=${BBS.bbstype}'" value="±Û¾²±â"></span>
-		<span class="sp_btn00"><input type="button" onclick="myFunction3(${BBS.seqno})" value="»èÁ¦"></span>
-		<span class="sp_btn00"><input type="button" onclick="myFunction4(${BBS.seqno})" value="¼öÁ¤"></span>
-		<span class="sp_btn00"><input type="button" onclick="location.href='../bbs/bbs.html?bbstype=freebbs'" value="¸ñ·ÏÀ¸·Î"></span>
+		<span class="sp_btn00"><input type="button" onclick="location.href='../write/bbs.html?bbstype=${BBS.bbstype}'" value="ê¸€ì“°ê¸°"></span>
+		<span class="sp_btn00"><input type="button" onclick="myFunction3(${BBS.seqno})" value="ì‚­ì œ"></span>
+		<span class="sp_btn00"><input type="button" onclick="myFunction4(${BBS.seqno})" value="ìˆ˜ì •"></span>
+		<span class="sp_btn00"><input type="button" onclick="location.href='../bbs/bbs.html?bbstype=${BBS.bbstype}'" value="ëª©ë¡ìœ¼ë¡œ"></span>
 	</font>
 	</div>
 	
@@ -145,29 +150,29 @@ function myFunction3(seqno) { // »èÁ¦
 <%-- <jsp:include page="/reply/replyview.html" flush="false"/> --%>
 <div class="commentHeader" style="float:left;">
 		<img src="../img/comment.gif" alt="">
-		<span>´ñ±Û(${REPNUM }+${RERENUM})</span>
+		<span>ëŒ“ê¸€(${REPNUM }+${RERENUM})</span>
 </div>	
 <jsp:include page="/reply/replylist.html?seqno=${BBS.seqno}" flush="false"/>
 
 <div class="sbjbox" style="width:730px; margin-top:29px;">
 	<c:choose>
 		<c:when test="${sessionScope.loginUser == null}">
-				<h2 class="loginheader"><span><strong>´ñ±Û ¾²±â - </strong> <font color="#c0c0c0"> ·Î±×ÀÎ ÇÑ ÈÄ ´ñ±Û ÀÛ¼º ±ÇÇÑÀÌ ÀÖÀ» °æ¿ì ÀÌ¿ëÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù.</font></span></h2>
-				<a href="../login/login.html" class="logbtn"><button class="loginbtn">·Î±×ÀÎ</button></a>
+				<h2 class="loginheader"><span><strong>ëŒ“ê¸€ ì“°ê¸° - </strong> <font color="#c0c0c0"> ë¡œê·¸ì¸ í•œ í›„ ëŒ“ê¸€ ì‘ì„± ê¶Œí•œì´ ìˆì„ ê²½ìš° ì´ìš©í•˜ì‹¤ ìˆ˜ ìˆìŠµë‹ˆë‹¤.</font></span></h2>
+				<a href="../login/login.html" class="logbtn"><button class="loginbtn">ë¡œê·¸ì¸</button></a>
 		</c:when>
 		<c:otherwise>
-			<h2 class="repheader"><strong>´ñ±Û ¾²±â - </strong> <font color="#c0c0c0"> Å¸ÀÎÀ» ºñ¹æÇÏ°Å³ª °³ÀÎÁ¤º¸¸¦ À¯ÃâÇÏ´Â ´ñ±ÛÀ» »ï°¡ÁÖ¼¼¿ä.</font></h2>
+			<h2 class="repheader"><strong>ëŒ“ê¸€ ì“°ê¸° - </strong> <font color="#c0c0c0"> íƒ€ì¸ì„ ë¹„ë°©í•˜ê±°ë‚˜ ê°œì¸ì •ë³´ë¥¼ ìœ ì¶œí•˜ëŠ” ëŒ“ê¸€ì„ ì‚¼ê°€ì£¼ì„¸ìš”.</font></h2>
 			<form:form action="../reply/reply.html?seqno=${BBS.seqno }" method="post" modelAttribute="reply">
 			<form:hidden path="repgroupno" value="0"/>
-			<!--  ÀÚ º¸ÀÚ ³»°¡ ¿©±â¼­ º¸³¾ ¼ö ÀÖ´Â Á¤º¸°¡ ¹¹¾ß? ¿ì¼± ´ñ±Û³»¿ë. °Ô½Ã±Û ¼Ó¼º(°Ô½Ã±Û ¹øÈ£),  -->
+			<!--  ì ë³´ì ë‚´ê°€ ì—¬ê¸°ì„œ ë³´ë‚¼ ìˆ˜ ìˆëŠ” ì •ë³´ê°€ ë­ì•¼? ìš°ì„  ëŒ“ê¸€ë‚´ìš©. ê²Œì‹œê¸€ ì†ì„±(ê²Œì‹œê¸€ ë²ˆí˜¸),  -->
 			<table>
 				<tr><td class="tarea"><form:textarea path="content" rows="3" cols="90"/></td>
-				<tr><td class="repbtn"><input type="submit" value="´ñ±Ûµî·Ï" ></td>
+				<tr><td class="repbtn"><input type="submit" value="ëŒ“ê¸€ë“±ë¡" ></td>
 			</table>
 			</form:form> 
 		</c:otherwise>
 	</c:choose>
 </div>
-<!-- </div>  commentBoxÁ¾·á -->
+<!-- </div>  commentBoxì¢…ë£Œ -->
 </body>
 </html>

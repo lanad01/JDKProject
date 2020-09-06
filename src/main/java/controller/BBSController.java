@@ -21,6 +21,7 @@ import dao.UserDao;
 import dao.WriteDao;
 import model.Bbs;
 import model.Reply;
+import model.Search;
 
 @Controller
 public class BBSController {
@@ -35,7 +36,6 @@ public class BBSController {
 	@RequestMapping(value="/bbs/bbs.html") // 자유게시판 목록 여기서 받은 게시판 LIST 목록을 ADD해야한다.
 	public ModelAndView freeBBS(HttpServletRequest request,String bbstype,Integer PAGENO) {
 		System.out.println("bbs/bbs.html 수신");
-		
 		ModelAndView mav=new ModelAndView("menu_header");
 		if(bbstype==null) bbstype="freebbs"; //bbstype이 널값일 경우에 디폴트는 자게
 		//게시판에서 비로그인 상태로 글쓰기를 눌렀을 경우.
@@ -61,12 +61,12 @@ public class BBSController {
 		//페이징 작업
 		if(PAGENO == null) PAGENO = 1;
 		List<Bbs> AllList=bbsListDao.getBBSList(bbstype); 
-		List<Integer> rownumList=new ArrayList<Integer>();
+//		List<Integer> rownumList=new ArrayList<Integer>();
 		List<Bbs> bbsList=new ArrayList<Bbs>();
 		for(int i=((PAGENO-1)*5); i< ((PAGENO-1)*5)+5; i++) {
 			// PAGENO * 5 + 1 부터  PAGENO *5 +5
 			try {
-			rownumList.add(bbsListDao.getRownum(AllList.get(i)));
+//			rownumList.add(bbsListDao.getRownum(AllList.get(i)));
 			bbsList.add(AllList.get(i));
 			}catch(IndexOutOfBoundsException e) {
 			}
@@ -91,8 +91,32 @@ public class BBSController {
 			pageCnt = totalCnt / 5;
 			if(totalCnt % 5 > 0) pageCnt++;
 		}
-		//rownum test 
+		// 검색작업
+		List<Bbs> searchedBbs=new ArrayList<Bbs>();
+		String searchKey = request.getParameter("searchKey");
+		String keyword = request.getParameter("keyword");
+		Search sch=new Search();
+		sch.setBbstype(bbstype);
+		sch.setKeyword(keyword);
+		sch.setSearchkey(searchKey);
+		System.out.println("Search객체 확인 : "+sch.getBbstype()+" / "+sch.getKeyword()+" / "+sch.getSearchkey());
+		if(searchKey==null) searchKey="";
+		if(keyword==null) keyword="";
+		System.out.println("제목 / 내용으로 찾기");
+		try {
+			searchedBbs = bbsListDao.searchBbs(sch);
+			for (int i = 0; i < searchedBbs.size(); i++) {
+				System.out.println(i + "번째 검색 글의 title : " + searchedBbs.get(i).getTitle());
+			}
+			if(searchedBbs.size()==0) {
+				System.out.println("검색된 게시판 글이 0");
+				mav.addObject("SEARCHEDBBS","0");
+			}
+		} catch(NullPointerException e) {
+			System.out.println("검색 Null");
+		}
 		
+
 		//토탈 글 숫자 찾기
 		Integer totalPost=bbsListDao.getBBSList(bbstype).size();
 		mav.addObject("totalPost",totalPost);
@@ -100,14 +124,14 @@ public class BBSController {
 		mav.addObject("REPANDRERE",repAndrere);
 		mav.addObject("WRITERLIST",writerList);
 		mav.addObject("LIST",bbsList);
-		mav.addObject("ROWNUMLIST",rownumList);
+//		mav.addObject("ROWNUMLIST",rownumList);
 		mav.addObject("BBSTYPE",bbstype);
 		String body="bbs/bbslist";
 		mav.addObject("BODY",body);
 		return mav;
 	}
 	@RequestMapping(value="/bbs/bbsview.html") 
-	public ModelAndView bbsview(Integer seqno,HttpServletRequest req) {  // 게시판 뷰, seqno를 수신하고 이를 토대로 해당 게시글 DB에 접속하여 글 세부내용을 전부 뽑아온다
+	public ModelAndView bbsview(Integer seqno,HttpServletRequest req,String nopage) {  // 게시판 뷰, seqno를 수신하고 이를 토대로 해당 게시글 DB에 접속하여 글 세부내용을 전부 뽑아온다
 		ModelAndView mav=new ModelAndView("menu_header");
 		//bbsDetail
 		System.out.println("--------------------여기서부터는 bbs/bbsview seqno=" + seqno+"-----------------------");
@@ -133,6 +157,18 @@ public class BBSController {
 		repDao.getRereNum(seqno); // 게시글을 통해 모든 대댓글 갯수
 		mav.addObject("RERENUM",repDao.getRereNum(seqno));
 		
+		//이전글 다음글 없는 경우 처리
+		try {
+			if (nopage == null) {
+				nopage = "";
+			} else if (nopage.contentEquals("1")) {
+				mav.addObject("NOPAGE", "next");
+			} else if (nopage.contentEquals("0")) {
+				mav.addObject("NOPAGE", "previous");
+			}
+		}catch(Exception e) {
+			
+		}
 		//종료
 		String body="bbs/bbscont";
 		mav.addObject("BODY",body);
@@ -227,19 +263,43 @@ public class BBSController {
 		System.out.println("bbs/prepost 수신 / seqno = "+seqno+ " bbstype : "+bbstype);
 		Integer seqnoInt=Integer.parseInt(seqno);
 		Bbs bbs=bbsListDao.getBbsDetail(seqnoInt);
-		Integer rownum=bbsListDao.getRownum(bbs);
-		System.out.println("수신한 Rown"+rownum);
-		
-		
-		return new ModelAndView("redirect:/bbs/bbsview.html?seqno=");
+		Integer stdRownum=bbsListDao.getRownum(bbs);
+		Integer rownum=stdRownum-1;
+		bbs.setRn(rownum);
+		Integer preSeqno=0;
+		try {
+			preSeqno=bbsListDao.getSeqnoByRownum(bbs);
+			if(preSeqno==null) {
+				preSeqno=seqnoInt;
+				System.out.println("다음 seqno가 없으므로 현재 페이즈의 seqno를 출력합니다. "+seqnoInt);
+				return new ModelAndView("redirect:/bbs/bbsview.html?nopage=0&seqno=" + seqnoInt);
+			}
+		}catch(Exception e) {
+			System.out.println("No more previous Page");
+		}
+		return new ModelAndView("redirect:/bbs/bbsview.html?seqno="+preSeqno);
 	}
 	@RequestMapping(value="/bbs/nextpost.html")
 	public ModelAndView nextPost(String seqno) {
 		System.out.println("bbs/nextpost 수신 / seqno = "+seqno);
-		Integer prepage=Integer.parseInt(seqno)+1;
-		System.out.println("prepage 값  : "+prepage);
-		return new ModelAndView("redirect:/bbs/bbsview.html?seqno="+prepage);
-		
+		Integer seqnoInt=Integer.parseInt(seqno);
+		Bbs bbs=bbsListDao.getBbsDetail(seqnoInt);
+		Integer stdRownum=bbsListDao.getRownum(bbs);
+		System.out.println("호출한 게시글의 Rown : "+stdRownum);
+		Integer rownum=stdRownum+1;
+		bbs.setRn(rownum);
+		Integer nextSeqno=0;
+		try {
+			nextSeqno=bbsListDao.getSeqnoByRownum(bbs);
+			if(nextSeqno==null) {
+				nextSeqno=seqnoInt;
+				System.out.println("다음 seqno가 없으므로 현재 페이즈의 seqno를 출력합니다. "+seqnoInt);
+				return new ModelAndView("redirect:/bbs/bbsview.html?nopage=1&seqno=" + seqnoInt);
+			}
+		} catch (Exception e) {
+			System.out.println("No more nextPage");
+		}
+		return new ModelAndView("redirect:/bbs/bbsview.html?seqno="+nextSeqno);
 	}
 	@ResponseBody
 	@RequestMapping(value = "/bbs/like.html", method = RequestMethod.POST, produces ="application/json; charset=UTF-8")
@@ -282,6 +342,3 @@ public class BBSController {
 		return result; //0
 	}
 }
-
-
-

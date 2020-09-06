@@ -1,49 +1,49 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="../css/3-1.css">
 </head>
 <body>
 <%@ include file="/WEB-INF/jsp/menu_header.jsp" %>
 <div align="center" class="body"></div>
-<h2>°úÀÏ »ó¼¼ Á¤º¸</h2>
+<h2>ê³¼ì¼ ìƒì„¸ ì •ë³´</h2>
 <table>
 	<tr><td><img alt="" src="../img/${sendMap.picture_url}"></td>
 		<td align="center">
 			<table>
 				<tr height="50">
-					<td width="80">»óÇ°ÀÌ¸§</td>
+					<td width="80">ìƒí’ˆì´ë¦„</td>
 					<td width="160">${sendMap.item_name }</td>
 				</tr>
 				<tr height="50">
-					<td width="80">°¡°İ</td>
+					<td width="80">ê°€ê²©</td>
 					<td width="160">${sendMap.price }</td>
 				</tr>
 				<tr height="50">
-					<td width="80">»óÇ°¼³¸í</td>
+					<td width="80">ìƒí’ˆì„¤ëª…</td>
 					<td width="160">${sendMap.description }</td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center" width="230">
 						<form action="../cart/cartAdd.html"> 
-						<!--  itemId¿Í quantity°¡ cartController·Î °£´Ù -->
+						<!--  itemIdì™€ quantityê°€ cartControllerë¡œ ê°„ë‹¤ -->
 							<input type="hidden" name="itemId" value="${sendMap.item_id }"/>
 							<table>
 								<tr><td><select name="quantity">
 										<option>1</option><option>2</option>
 										<option>3</option><option>4</option>
 										<option>5</option><option>6</option>
-										</select> &nbsp;°³</td>
-									<td><input type="submit" value="Ä«Æ®¿¡ ´ã±â"/></td></tr>
+										</select> &nbsp;ê°œ</td>
+									<td><input type="submit" value="ì¹´íŠ¸ì— ë‹´ê¸°"/></td></tr>
 							</table>
 						</form>
 					</td>
 				<tr><td colspan="2" align="center" width="240">
-					<a href="../index/index.html"> ¸ñ·ÏÀ¸·Î µ¹¾Æ°¡±â</a></td>
+					<a href="../index/index.html"> ëª©ë¡ìœ¼ë¡œ ëŒì•„ê°€ê¸°</a></td>
 				</tr>
 			</table>
 		</td>

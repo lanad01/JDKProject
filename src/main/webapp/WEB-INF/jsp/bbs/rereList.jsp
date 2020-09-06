@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
@@ -16,12 +16,12 @@
 // })
 function myFunction(repno,seqno,groupno) {
     swal({
-        title: "Á¤¸» »èÁ¦ÇÏ½Ã°Ú½À´Ï±î?",
-        text: "»èÁ¦µÈ ´ë´ñ±ÛÀº º¹±¸µÇÁö ¾Ê½À´Ï´Ù!",
+        title: "ì •ë§ ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?",
+        text: "ì‚­ì œëœ ëŒ€ëŒ“ê¸€ì€ ë³µêµ¬ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤!",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
-        confirmButtonText: "¿¹ »èÁ¦ÇÏ°Ú½À´Ï´Ù.",
+        confirmButtonText: "ì˜ˆ ì‚­ì œí•˜ê² ìŠµë‹ˆë‹¤.",
         closeOnConfirm: false,
         closeOnCancel: false	
     }, function (isConfirm) {
@@ -34,17 +34,17 @@ function myFunction(repno,seqno,groupno) {
     			url : "../reply/reredel.html",
     			success : function(data){
     				if(data==1) {
-    					swal("¼º°øÀûÀ¸·Î »èÁ¦µÇ¾ú½À´Ï´Ù!!", "");
+    					swal("ì„±ê³µì ìœ¼ë¡œ ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤!!", "");
     					location.reload();
     				}
-    				if(data==0) swal("","ÇØ´ç ´ñ±ÛÀÇ ÀÛ¼ºÀÚ°¡ ¾Æ´Õ´Ï´Ù!!", "error");
+    				if(data==0) swal("","í•´ë‹¹ ëŒ“ê¸€ì˜ ì‘ì„±ìê°€ ì•„ë‹™ë‹ˆë‹¤!!", "error");
     				if(data==2) location.href="../bbs/bbsview.html?loginwrite=1&seqno="+seqno;
     			},error : function(e){
-    				swal("","½ÇÆĞ", "error");
+    				swal("","ì‹¤íŒ¨", "error");
     			}
     		})
         } else {
-            swal("Cancelled", "´ñ±Û »èÁ¦°¡ Ãë¼ÒµÇ¾ú½À´Ï´Ù.", "error");
+            swal("Cancelled", "ëŒ“ê¸€ ì‚­ì œê°€ ì·¨ì†Œë˜ì—ˆìŠµë‹ˆë‹¤.", "error");
         }
     });
 };
@@ -60,13 +60,13 @@ function rereUpd(repno,seqno,groupno){
 		success : function(data){
 			
 			if(data==1){
-				swal("","¾ÆÀÌµğ°¡ ÀÏÄ¡ÇÕ´Ï´Ù", "success");
+				swal("","ì•„ì´ë””ê°€ ì¼ì¹˜í•©ë‹ˆë‹¤", "success");
 // 				document.getElementById("repModi").style.display="block";
 			}
-			if(data==0) swal("","ÇØ´ç ´ë´ñ±ÛÀÇ ÀÛ¼ºÀÚ°¡ ¾Æ´Õ´Ï´Ù!!", "error");
+			if(data==0) swal("","í•´ë‹¹ ëŒ€ëŒ“ê¸€ì˜ ì‘ì„±ìê°€ ì•„ë‹™ë‹ˆë‹¤!!", "error");
 			if(data==2) location.href="../bbs/bbsview.html?loginwrite=1&seqno="+seqno;
 		},error : function(e){
-			swal("","½ÇÆĞ", "error");
+			swal("","ì‹¤íŒ¨", "error");
 		}
 	})
 }
@@ -78,7 +78,7 @@ function rereUpd(repno,seqno,groupno){
 		<td width="5%"><img src="../img/oneline.PNG" style="display:inline"></td>
 		<td width="10%">
 		<c:forEach var="picture" items="${REREPIC }"  begin="${status.index}" end="${status.index}">
-		<img alt="´ë´ñ±ÛÀÛ¼ºÀÚ »çÁø" src="${pageContext.request.contextPath}/upload/${picture}"  
+		<img alt="ëŒ€ëŒ“ê¸€ì‘ì„±ì ì‚¬ì§„" src="${pageContext.request.contextPath}/upload/${picture}"  
 			width="60" height="60" onerror="this.src='../img/noprofile.gif' ">
 		</c:forEach>
 		</td>
@@ -88,9 +88,9 @@ function rereUpd(repno,seqno,groupno){
 		<span>${rere.content } repno: ${rere.repno } seqno : ${rere.seqno } user_no : ${rere.user_no } groupno : ${rere.repgroupno } </span>
 		</td>
 		<td width="15%" style="position:absolute;">
-		<input type="button" onClick="rereUpd(${rere.repno},${rere.seqno}, ${rere.repgroupno })" value="¼öÁ¤">
-		<input type="button" onClick="myFunction(${rere.repno},${rere.seqno}, ${rere.repgroupno })" value="»èÁ¦">
-		<input type="button" value="½Å°í">
+		<input type="button" onClick="rereUpd(${rere.repno},${rere.seqno}, ${rere.repgroupno })" value="ìˆ˜ì •">
+		<input type="button" onClick="myFunction(${rere.repno},${rere.seqno}, ${rere.repgroupno })" value="ì‚­ì œ">
+		<input type="button" value="ì‹ ê³ ">
 		</td>
 		</tr>
 </table>
@@ -102,7 +102,7 @@ function rereUpd(repno,seqno,groupno){
 			<input type="hidden" name="repno"  value="${rere.repno }">
 			<input type="hidden" name="seqno" value="${rere.seqno}">
 			<input type="hidden" name="repgroupno" value="${rere.repgroupno}">
-			<input type="submit" value="´ë´ñ±Û¼öÁ¤"  style="float:right; margin-right:8px; font-size:1.2em;">
+			<input type="submit" value="ëŒ€ëŒ“ê¸€ìˆ˜ì •"  style="float:right; margin-right:8px; font-size:1.2em;">
 			</font>	
 </form>
 </div>

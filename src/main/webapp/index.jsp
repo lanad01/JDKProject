@@ -15,7 +15,7 @@ $(function(){
 });
 </script>
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <title>Welcome</title>
 </head>
 <body>

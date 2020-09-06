@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -11,13 +11,13 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>JDKÇÁ·ÎÁ§Æ®</title>
+  <title>JDKí”„ë¡œì íŠ¸</title>
 
   <!-- Bootstrap core CSS -->
   <link href="<%=request.getContextPath()%>/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom styles for this template -->
   <link href="<%=request.getContextPath()%>/resources/vendor/bootstrap/css/shop-homepage.css" rel="stylesheet">
-  <!--  ÆùÆ®   -->
+  <!--  í°íŠ¸   -->
   <link href='https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff' rel='stylesheet' type='text/css'>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
   <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
@@ -38,7 +38,7 @@ font-weight: normal; font-style: normal; }
 .keyword{ margin-top:7px;}
 .bottom{ margin-left:100px;}
 #navbarResponsive{ padding-right:70px;}
-/* µå·Ó¸Ş´º ½ºÅ¸ÀÏ */
+/* ë“œë¡­ë©”ë‰´ ìŠ¤íƒ€ì¼ */
  .drop { /* nav */
    width: 100%;   display: flex;    justify-content: center; 
   position: relative;   z-index:1 
@@ -65,7 +65,7 @@ font-weight: normal; font-style: normal; }
   transition: all 0.15s ease-in;
   margin: 0px -40px 30px 0px;
 }
-#sub-menu > li { /* ¼­ºê¸Ş´º ¹è°æ¤· */
+#sub-menu > li { /* ì„œë¸Œë©”ë‰´ ë°°ê²½ã…‡ */
   text-decoration: none;
   list-style: none;
   margin: -10px 100px 0px -40px;
@@ -120,8 +120,8 @@ $(function(){
 	hitBbs('hit');
 	var loginmodal = '${Loginmodal}';
 	if(loginmodal == 'toLogin'){
-// 		alert('·Î±×ÀÎÀÌ ÇÊ¿äÇÑ ÀÛ¾÷ÀÔ´Ï´Ù!');
-		swal("","·Î±×ÀÎÀÌ ÇÊ¿äÇÕ´Ï´Ù!", "error");
+// 		alert('ë¡œê·¸ì¸ì´ í•„ìš”í•œ ì‘ì—…ì…ë‹ˆë‹¤!');
+		swal("","ë¡œê·¸ì¸ì´ í•„ìš”í•©ë‹ˆë‹¤!", "error");
 
 	loginpopup(); 
 	}else{
@@ -151,7 +151,7 @@ function hitBbs(input){
 				document.getElementById("li"+(i+1)).href="../bbs/bbsview.html?seqno="+data[i].seqno;
 			}
 		},error : function(e){
-			alert("½ÇÆĞ");
+			alert("ì‹¤íŒ¨");
 		}
 	})
 }
@@ -159,14 +159,14 @@ function fnLoginBtn(){
     $.ajax({
        async: true,
        type : 'POST',
-       data : {"id" : $("#id").val(), "password" : $("#password").val() }, //ÀÔ·Â °ª jquery ¹æ½ÄÀ¸·Î °¡Á®¿À±â
+       data : {"id" : $("#id").val(), "password" : $("#password").val() }, //ì…ë ¥ ê°’ jquery ë°©ì‹ìœ¼ë¡œ ê°€ì ¸ì˜¤ê¸°
        url : "../login/loginpost.html",
        success : function(data) {         
           if(data == 1){
-          swal("¼º°ø ¸Ş½ÃÁö","·Î±×ÀÎ ¼º°øÇÏ¼Ì½À´Ï´Ù!", "success");
+          swal("ì„±ê³µ ë©”ì‹œì§€","ë¡œê·¸ì¸ ì„±ê³µí•˜ì…¨ìŠµë‹ˆë‹¤!", "success");
           location.href="../bbs/bbs.html?bbstype=freebbs";
           }else{
-          swal("","·Î±×ÀÎ¿¡ ½ÇÆĞÇÏ¼Ì½À´Ï´Ù!", "error");
+          swal("","ë¡œê·¸ì¸ì— ì‹¤íŒ¨í•˜ì…¨ìŠµë‹ˆë‹¤!", "error");
           }
        },error : function(e){
        }
@@ -185,7 +185,7 @@ function fnLoginBtn(){
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive" style="margin-right:40px;">
         <ul class="navbar-nav ml-auto">
-        <!--  ºñ·Î±×ÀÎ »óÅÂÀÏ ½Ã indexController¿¡¼­ º¸³½´Ù ¼¼¼Ç Á¤º¸´Â -->
+        <!--  ë¹„ë¡œê·¸ì¸ ìƒíƒœì¼ ì‹œ indexControllerì—ì„œ ë³´ë‚¸ë‹¤ ì„¸ì…˜ ì •ë³´ëŠ” -->
         <c:choose>
          <c:when test="${sessionScope.loginUser == null}">
          <li class="nav-item">
@@ -194,9 +194,9 @@ function fnLoginBtn(){
             </a>
           </li>
           </c:when>
-         <c:otherwise> <!--  ·Î±×ÀÎ Á¤º¸°¡ ÀÖÀ» °æ¿ì -->
+         <c:otherwise> <!--  ë¡œê·¸ì¸ ì •ë³´ê°€ ìˆì„ ê²½ìš° -->
          <li class="nav-item">
-         	<h2 style="font-family:'BMDOHYEON'; font-size:1.8em; color:#dcdcdc;">${sessionScope.loginUser }´Ô È¯¿µÇÕ´Ï´Ù &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2>
+         	<h2 style="font-family:'BMDOHYEON'; font-size:1.8em; color:#dcdcdc;">${sessionScope.loginUser }ë‹˜ í™˜ì˜í•©ë‹ˆë‹¤ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2>
           </li>
          <li class="nav-item">
             <a class="nav-link" href="../login/logout.html" onclick="">Sign Out
@@ -205,7 +205,7 @@ function fnLoginBtn(){
           </li>
          </c:otherwise>
         </c:choose>
-         <!--  ºñ·Î±×ÀÎ »óÅÂ Á¾·á -->
+         <!--  ë¹„ë¡œê·¸ì¸ ìƒíƒœ ì¢…ë£Œ -->
         <c:choose>
         	<c:when test="${sessionScope.loginUser == null}">
           <li class="nav-item">
@@ -220,38 +220,38 @@ function fnLoginBtn(){
             <a class="nav-link" href="../myaccount/mypage.html">Account</a>
           </li>
           <li class="nav-item">
-          	<input type="text" name="keyword" placeholder="ÅëÇÕ°Ë»ö" class="keyword" style="width:130px;" ></li> 
+          	<input type="text" name="keyword" placeholder="í†µí•©ê²€ìƒ‰" class="keyword" style="width:130px;" ></li> 
           <li class="nav-item">
-          	<input type="button" name="keyword" class="searchButton" value="°Ë»ö" style="width:60px; margin-left:10px; margin-top:7px;" ></li> 
+          	<input type="button" name="keyword" class="searchButton" value="ê²€ìƒ‰" style="width:60px; margin-left:10px; margin-top:7px;" ></li> 
         </ul>
       </div>
     </div>
   </nav>
-  <!--  »ó´Ü ³×ºñ°ÔÀÌ¼Ç Á¾·á -->
+  <!--  ìƒë‹¨ ë„¤ë¹„ê²Œì´ì…˜ ì¢…ë£Œ -->
   
-  <!--  ¸ŞÀÎ¸Ş´º ½ÃÀÛ -->
+  <!--  ë©”ì¸ë©”ë‰´ ì‹œì‘ -->
   <div id="topmenu">
 	<div class="wrap">
 		<ul style="list-style:none;">
-				<li><a href=""><span>ÀüÃ¼±Ûº¸±â</span></a>	</li>
+				<li><a href=""><span>ì „ì²´ê¸€ë³´ê¸°</span></a>	</li>
 		<li class="vline"></li>
-				<li><a href=""><span>°³³ä±Û</span></a></li>
+				<li><a href=""><span>ê°œë…ê¸€</span></a></li>
 		<li class="vline"></li>
-				<li><a href="../bbs/bbs.html?bbstype=freebbs" target=""><span>ÀÚÀ¯°Ô½ÃÆÇ</span></a>	</li>
+				<li><a href="../bbs/bbs.html?bbstype=freebbs" target=""><span>ììœ ê²Œì‹œíŒ</span></a>	</li>
 		<li class="vline"></li>
-				<li><a href="../bbs/bbs.html?bbstype=exp" ><span>°æÇè´ã&½ä</span></a></li>
+				<li><a href="../bbs/bbs.html?bbstype=exp" ><span>ê²½í—˜ë‹´&ì°</span></a></li>
 		<li class="vline"></li>
-				<li><a href="../bbs/bbs.html?bbstype=info"><span>Á¤º¸&ÆÁ</span></a></li>
+				<li><a href="../bbs/bbs.html?bbstype=info"><span>ì •ë³´&íŒ</span></a></li>
 		<li class="vline"></li>
-				<li><a href="../bbs/bbs.html?bbstype=qna"><span>Áú¹® ´äº¯</span></a></li>
+				<li><a href="../bbs/bbs.html?bbstype=qna"><span>ì§ˆë¬¸ ë‹µë³€</span></a></li>
 		<li>
 			<nav role="navigation" class="drop">
   				<ul id="main-menu">
-  	  				<li><font face='BMDOHYEON'><a href="../lifestory/lifestorymain.html?BODY=lifestory/lifestorymain">»ıÈ°±â</a></font>
+  	  				<li><font face='BMDOHYEON'><a href="../lifestory/lifestorymain.html?BODY=lifestory/lifestorymain">ìƒí™œê¸°</a></font>
      					<ul id="sub-menu">
-       						<li><font face='BMDOHYEON' size="1.3" ><a href="#" aria-label="subemnu"><span>¢º&nbsp;º°´Ş°í ²¨µå·°°Å¸® ½Í¾î¼­ ¾²´Â »ıÈ°±â</span></a></font></li>
-       						<li><font face='BMDOHYEON' size="1.3" ><a href="#" aria-label="subemnu">¢º&nbsp;¿¡½ºÄÃ·¹ÀÌÅÍ »ıÈ°±â</a></font></li>			
-       						<li><font face='BMDOHYEON' size="1.3" ><a href="#" aria-label="subemnu">¢º&nbsp;º¸ÀÌ½¬ÀçÆĞ´ÏÁî</a></font></li>
+       						<li><font face='BMDOHYEON' size="1.3" ><a href="#" aria-label="subemnu"><span>â–¶&nbsp;ë³„ë‹¬ê³  êº¼ë“œëŸ­ê±°ë¦¬ ì‹¶ì–´ì„œ ì“°ëŠ” ìƒí™œê¸°</span></a></font></li>
+       						<li><font face='BMDOHYEON' size="1.3" ><a href="#" aria-label="subemnu">â–¶&nbsp;ì—ìŠ¤ì»¬ë ˆì´í„° ìƒí™œê¸°</a></font></li>			
+       						<li><font face='BMDOHYEON' size="1.3" ><a href="#" aria-label="subemnu">â–¶&nbsp;ë³´ì´ì‰¬ì¬íŒ¨ë‹ˆì¦ˆ</a></font></li>
       					</ul>
     				</li>
     			</ul>
@@ -260,20 +260,20 @@ function fnLoginBtn(){
 		</ul>
 	</div>
 </div>
-  <!--  ¸ŞÀÎ ¸Ş´º Á¾·á -->
+  <!--  ë©”ì¸ ë©”ë‰´ ì¢…ë£Œ -->
   
-  <!-- ÁÂ´Ü ³×ºñ°ÔÀÌ¼Ç -->
+  <!-- ì¢Œë‹¨ ë„¤ë¹„ê²Œì´ì…˜ -->
    <div class="container">
     <div class="row">
       <div class="col-lg-3" style="margin-top:25px;" >
         <div style="border:1px solid; padding:0px;  background-color:#dcdcdc">
-        	<font face='BMDOHYEON'>&nbsp; È¸¿ø·Î±×ÀÎ</font> 
+        	<font face='BMDOHYEON'>&nbsp; íšŒì›ë¡œê·¸ì¸</font> 
         </div>
         <div  style="border:1px solid; padding:10px 0 15px 20px;">
         	<table>
         		<tr style="margin-left:5px;">
-        			<th><font face='BMDOHYEON' size="2em" color="red"><a href="#" id="hit" class="list-group-item" onClick="hitBbs('hit');">¸¹ÀÌ º» ±Û</a></font></th>
-          			<th><font face='BMDOHYEON' size="2em" color="red"><a href="#" id="rep" class="list-group-item" onClick="hitBbs('rep');">´ñ±Û ¸¹Àº ±Û</a></font></th>
+        			<th><font face='BMDOHYEON' size="2em" color="red"><a href="#" id="hit" class="list-group-item" onClick="hitBbs('hit');">ë§ì´ ë³¸ ê¸€</a></font></th>
+          			<th><font face='BMDOHYEON' size="2em" color="red"><a href="#" id="rep" class="list-group-item" onClick="hitBbs('rep');">ëŒ“ê¸€ ë§ì€ ê¸€</a></font></th>
           		</tr>
           	</table>
           	<table class="hit" style=" font-family:'BMDOHYEON'; font-size:0.8em; color:black; margin-top:7px; ">
@@ -291,19 +291,19 @@ function fnLoginBtn(){
         </div>
       </div>
       <div id="changejsp">
-		<!--  ¸ŞÀÎ ÄÜÅÙÃ÷Ã¢ includeÇü½ÄÀ¸·Î ÇÕ½Ã´Ù  -->
+		<!--  ë©”ì¸ ì½˜í…ì¸ ì°½ includeí˜•ì‹ìœ¼ë¡œ í•©ì‹œë‹¤  -->
 		<jsp:include page="/WEB-INF/jsp/${BODY}.jsp" flush="false"/>
 		</div>
      </div>
 	
-  <!-- ÁÂ´Ü ³×ºñ°ÔÀÌ¼Ç Á¾·á -->
+  <!-- ì¢Œë‹¨ ë„¤ë¹„ê²Œì´ì…˜ ì¢…ë£Œ -->
   	
 </div>	
   <!-- Footer -->
   <footer class="py-5 bg-dark" style="margin-top:100px;">
     <div class="container" >
       <p class="m-0 text-center text-white" style="font-family: 'BMDOHYEON';">Copyright &copy; Your Website 2020</p>
-   	  <p style="text-align:center;"><font color="white" style="font-family: 'BMDOHYEON';" >È¨ÆäÀÌÁö ÀÌ¿ë¾à°ü | °³ÀÎÁ¤º¸ Ãë±Ş¹æÄ§ | °Ô½Ã¹° °ÔÀç¿øÄ¢ <br>
+   	  <p style="text-align:center;"><font color="white" style="font-family: 'BMDOHYEON';" >í™ˆí˜ì´ì§€ ì´ìš©ì•½ê´€ | ê°œì¸ì •ë³´ ì·¨ê¸‰ë°©ì¹¨ | ê²Œì‹œë¬¼ ê²Œì¬ì›ì¹™ <br>
 		Copyright 2020 JDKProject.co.kr All rights reserved.<br><br>
 		Runtime 0.298
       </font><p>
@@ -311,31 +311,31 @@ function fnLoginBtn(){
     <!-- /.container -->
   </footer>
 	
-   <!-- ·Î±×ÀÎ ¸ğ´ŞÃ¢ -->
+   <!-- ë¡œê·¸ì¸ ëª¨ë‹¬ì°½ -->
    <script src="../resources/vendor/jquery/jquery.min.js"></script>
    <script src="../resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-   <!--  ClassnameÀ¸·Î Ã£´Â°Å´Ï±î.. ../ ºÙ¿©¼­ »óÀ§ Æú´õ¸¦ °¡Áà¾ßÇÑ´Ù »ó¿ì¾ß -->
+   <!--  Classnameìœ¼ë¡œ ì°¾ëŠ”ê±°ë‹ˆê¹Œ.. ../ ë¶™ì—¬ì„œ ìƒìœ„ í´ë”ë¥¼ ê°€ì¤˜ì•¼í•œë‹¤ ìƒìš°ì•¼ -->
    <form action="" method="post">
 <%--    <form action="../login/loginpost.html" method="post"> --%>
    <div id="modal" class="searchModal">
       <div class="search-modal-content">
-         <a>·Î±×ÀÎ</a>
+         <a>ë¡œê·¸ì¸</a>
          <div class="row">
             <div class="col-sm-12">
                <div class="row">
-                  <div class="col-sm-12"><!-- ³»°¡ °Çµé ¼ö ÀÖ´Â °÷.. -->
+                  <div class="col-sm-12"><!-- ë‚´ê°€ ê±´ë“¤ ìˆ˜ ìˆëŠ” ê³³.. -->
                      <table style="">
-                        <tr><td><a>¾ÆÀÌµğ</a></td>
+                        <tr><td><a>ì•„ì´ë””</a></td>
                         
                         <tr><td><input type="text" id="id" name="id" maxlength="20"><font color="red"></font></td>
                            <td id="social" rowspan="2" style="padding-left:10px;" ><img alt="" src="../img/social1.gif" width=35 height=35></td>
                            <td id="social" rowspan="2"><img alt="" src="../img/social2.gif" width=35 height=35></td>
                            <td id="social" rowspan="2"><img alt="" src="../img/social3.gif" width=35 height=35></td>
                            <td id="social" rowspan="2"><img alt="" src="../img/social4.gif" width=35 height=35></td>
-                        <tr><td><a>ºñ¹Ğ¹øÈ£</a></td>
+                        <tr><td><a>ë¹„ë°€ë²ˆí˜¸</a></td>
                         <tr><td><input type="password" id="password" name="password" maxlength="20"/><font color="red"></font></td>
                      </table>   
-                  </div><!--  ³»°¡ °Çµé ¼ö ÀÖ´Â °÷ -->
+                  </div><!--  ë‚´ê°€ ê±´ë“¤ ìˆ˜ ìˆëŠ” ê³³ -->
                </div>
             </div>
          </div>
@@ -343,14 +343,14 @@ function fnLoginBtn(){
          <hr>
          <div style="float:left; text-align:center;">
             <div style="float:left; cursor: pointer; background-color: #dcdcdc; text-align: center; margin-bottom:13px; width:100px; " >
-               <input type="button" style="font-family:'BMDOHYEON'; font-size:0.8em; width:100px;"  value="·Î±×ÀÎ" onClick="fnLoginBtn();"/></div>
+               <input type="button" style="font-family:'BMDOHYEON'; font-size:0.8em; width:100px;"  value="ë¡œê·¸ì¸" onClick="fnLoginBtn();"/></div>
                
             <div style="float:left;  cursor: pointer; background-color: #dcdcdc; text-align: center; margin-bottom:13px; width:100px; margin-left:20px;" onClick="closeModal()">
                <input type="button" style="font-family:'BMDOHYEON'; font-size:0.8em; width:100px;" 
-                  value="È¸¿ø°¡ÀÔ" onClick="location.href='../register/register.html';"></div>
+                  value="íšŒì›ê°€ì…" onClick="location.href='../register/register.html';"></div>
             <div style="float:left;  cursor: pointer; background-color: #dcdcdc; text-align: center; margin-bottom:13px; width:100px; margin-left:20px;" onClick="closeModal()">
                <input type="button" style="font-family:'BMDOHYEON'; font-size:0.8em; width:100px;" 
-                  value="³ª°¡±â" onClick="closeModal()"></div>
+                  value="ë‚˜ê°€ê¸°" onClick="closeModal()"></div>
          </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 
@@ -12,7 +12,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <link
 	href='https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff'
@@ -45,7 +45,7 @@ font-weight: normal; font-style: normal;
 			<tr style="width:400px;"> <%@ include file="/WEB-INF/jsp/gridBBS/ad.jsp" %></tr>
 			<tr>
 				<td><img alt="" src="../img/total.jpg">&nbsp;&nbsp; 
-				<font face='BMDOHYEON'>JDK¿¡¼­ ÀÏº» °³¹ßÀÚ »ýÈ°±â¸¦ ¿¬ÀçÇÏ½Ç ºÐµéÀ» ¸ðÁýÇÕ´Ï´Ù. </font></td>
+				<font face='BMDOHYEON'>JDKì—ì„œ ì¼ë³¸ ê°œë°œìž ìƒí™œê¸°ë¥¼ ì—°ìž¬í•˜ì‹¤ ë¶„ë“¤ì„ ëª¨ì§‘í•©ë‹ˆë‹¤. </font></td>
 				
 			</tr>
 		</table>
@@ -54,11 +54,11 @@ font-weight: normal; font-style: normal;
 	<img src="../img/lifestory.png" alt="" height=300 width=600>
 	</div>
 	<div class="list" style="text-align:center; padding-top:20px;">
-	<h2>¿¬Àç ÁßÀÎ »ýÈ°±â ¸ñ·Ï</h2>
+	<h2>ì—°ìž¬ ì¤‘ì¸ ìƒí™œê¸° ëª©ë¡</h2>
 		<ul>
-			<li><a href="#" >¡á º°´Þ°í ²¨µå·°°Å¸® ½Í¾î¼­ ¾²´Â »ýÈ°±â</a></li>
-			<li><a href="#">¡á ¿¡½ºÄÃ·¹ÀÌÅÍ »ýÈ°±â</a></li>
-			<li><a href="#">¡á º¸ÀÌ½¬ÀçÆÐ´ÏÁî</a></li>
+			<li><a href="#" >â–  ë³„ë‹¬ê³  êº¼ë“œëŸ­ê±°ë¦¬ ì‹¶ì–´ì„œ ì“°ëŠ” ìƒí™œê¸°</a></li>
+			<li><a href="#">â–  ì—ìŠ¤ì»¬ë ˆì´í„° ìƒí™œê¸°</a></li>
+			<li><a href="#">â–  ë³´ì´ì‰¬ìž¬íŒ¨ë‹ˆì¦ˆ</a></li>
 		</ul>
 	</div>
 </body>

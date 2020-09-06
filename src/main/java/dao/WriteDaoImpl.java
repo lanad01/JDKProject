@@ -29,7 +29,11 @@ public class WriteDaoImpl implements WriteDao {
 		int hour=today.get(Calendar.HOUR);
 		int min=today.get(Calendar.MINUTE);
 		String bbsDate=year+"/"+month+"/"+date+" "+hour+":"+min;
-		
+		Integer rownum=this.getMaxRownum(bbs.getBbstype());
+		if(rownum==null) {
+			rownum=1;
+			bbs.setRn(rownum);
+		}
 		bbs.setHit(0);
 		bbs.setPoint(0);
 		bbs.setSeqno(seqno);
@@ -38,7 +42,10 @@ public class WriteDaoImpl implements WriteDao {
 	}
 	public void addHit(Integer seqno) {
 		session.update("bbs.addHit",seqno);
-		
+	}
+	public Integer getMaxRownum(String bbstype) {
+		// TODO Auto-generated method stub
+		return session.selectOne("bbs.getMaxRow",bbstype);
 	}
 
 	

@@ -15,6 +15,13 @@ public class Bbs { // 포인트는 테이블 따로 둡시다
 	private String bbstype;
 	private Integer hit;
 	private Integer point;
+	private Integer rn;
+	public Integer getRn() {
+		return rn;
+	}
+	public void setRn(Integer rn) {
+		this.rn = rn;
+	}
 	public Integer getHit() {
 		return hit;
 	}

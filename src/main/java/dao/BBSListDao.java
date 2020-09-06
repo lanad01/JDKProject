@@ -1,9 +1,9 @@
 package dao;
 
-import java.util.Date;
 import java.util.List;
 
 import model.Bbs;
+import model.Search;
 
 public interface BBSListDao { //DB에서 가져오기
 	List<Bbs> getBBSList(String bbstype);
@@ -19,4 +19,6 @@ public interface BBSListDao { //DB에서 가져오기
 	void updateBbs(Bbs bbs);
 	Integer getRownum(Bbs bbs);
 	void like(Bbs bbs);
+	Integer getSeqnoByRownum(Bbs bbs);
+	List<Bbs> searchBbs(Search sch);
 }

@@ -1,30 +1,30 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>°¡ÀÔÀÚ µî·Ï ¿Ï·á</title>
+<meta charset="UTF-8">
+<title>ê°€ì…ì ë“±ë¡ ì™„ë£Œ</title>
 </head>
 <body>
 <%-- <%@ include file="/WEB-INF/jsp/menu_header.jsp" %> --%>
-<h2 align="center">°¡ÀÔÀÚ µî·Ï ¿Ï·á</h2>
+<h2 align="center">ê°€ì…ì ë“±ë¡ ì™„ë£Œ</h2>
 <div align="center" class="body">
-<b><font color="red">µî·ÏÀÌ ¿Ï·á</font></b>
+<b><font color="red">ë“±ë¡ì´ ì™„ë£Œ</font></b>
 <table>
-	<tr height="40px"><td>»ç¿ëÀÚID</td><td>${user.id }</td></tr>
-	<tr height="40px"><td>¾ÏÈ£</td><td>${user.pwd }</td></tr>
-	<tr height="40px"><td>ÀÌ¸§</td><td>${user.name }</td></tr>
-	<tr height="40px"><td>ÁÖ¼Ò</td><td>${user.address }</td></tr>
-	<tr height="40px"><td>ÀÌ¸ŞÀÏ</td><td>${user.email }</td></tr>
-	<tr height="40px"><td>¼ºº°</td><td>${user.gender }</td></tr>
-	<tr height="40px"><td>Á÷¾÷</td><td>${user.job }</td></tr>
+	<tr height="40px"><td>ì‚¬ìš©ìID</td><td>${user.id }</td></tr>
+	<tr height="40px"><td>ì•”í˜¸</td><td>${user.pwd }</td></tr>
+	<tr height="40px"><td>ì´ë¦„</td><td>${user.name }</td></tr>
+	<tr height="40px"><td>ì£¼ì†Œ</td><td>${user.address }</td></tr>
+	<tr height="40px"><td>ì´ë©”ì¼</td><td>${user.email }</td></tr>
+	<tr height="40px"><td>ì„±ë³„</td><td>${user.gender }</td></tr>
+	<tr height="40px"><td>ì§ì—…</td><td>${user.job }</td></tr>
 </table>
-<a>¸ñ·ÏÀ¸·Î µ¹¾Æ°¡±â</a><br/>
-<a> °è»êÇÏ·¯ °¡±â</a>
+<a>ëª©ë¡ìœ¼ë¡œ ëŒì•„ê°€ê¸°</a><br/>
+<a> ê³„ì‚°í•˜ëŸ¬ ê°€ê¸°</a>
 
 </div>
 </body>

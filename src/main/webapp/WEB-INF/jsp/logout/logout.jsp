@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <style type="text/css">
@@ -13,30 +13,30 @@
 <div class="loginborder" style="border:1px solid; padding-left:10px;">
 <form action="../logout/logout.html"  method="get">
 	<table>
-	<tr><td> ${USER.name }´Ô</td>
-		<td> ${sessionScope.loginUser}´Ô</td>
-	<tr><td><a href="../myaccount/mypage.html?BODY=mypage/mypage"><input style="font-family:'BMDOHYEON'; font-size:0.8em;" type="button" value="¸¶ÀÌÆäÀÌÁö"></a>
-		<td><input type="submit" style="font-family:'BMDOHYEON'; font-size:0.8em;"  value="·Î±×¾Æ¿ô"/><br>
+	<tr><td> ${USER.name }ë‹˜</td>
+		<td> ${sessionScope.loginUser}ë‹˜</td>
+	<tr><td><a href="../myaccount/mypage.html?BODY=mypage/mypage"><input style="font-family:'BMDOHYEON'; font-size:0.8em;" type="button" value="ë§ˆì´íŽ˜ì´ì§€"></a>
+		<td><input type="submit" style="font-family:'BMDOHYEON'; font-size:0.8em;"  value="ë¡œê·¸ì•„ì›ƒ"/><br>
 	</tr>
 	</table>
 </form>
 </div>
 
-<!--  HttpServletRequestÀÇ °æ¿ì Request°¡ Default°ªÀÌ¾ú±â ¶§¹®¿¡ 
-      EL³»¿¡¼­ requestScope´Â »ý·«À» ÇØµµ µÆ¾ú´Ù
-            ±Ùµ¥ sessionÀº ¾Æ´Ï¾ß ¤»
- ------------Âü°í--------------------------------------------------------------------------
- pageContext JSPÀÇ page ±âº» °´Ã¼¿Í µ¿ÀÏÇÏ´Ù. 
- pageScope  pageContext ±âº» °´Ã¼¿¡ ÀúÀåµÈ ¼Ó¼ºÀÇ [¼Ó¼º, °ª] ¸ÅÇÎÀ» ÀúÀåÇÑ Map °´Ã¼ 
- requestScope  request ±âº» °´Ã¼¿¡ ÀúÀåµÈ ¼Ó¼ºÀÇ [¼Ó¼º, °ª] ¸ÅÇÎÀ» ÀúÀåÇÑ Map °´Ã¼ 
- sessionScope session ±âº» °´Ã¼¿¡ ÀúÀåµÈ ¼Ó¼ºÀÇ [¼Ó¼º, °ª] ¸ÅÇÎÀ» ÀúÀåÇÑ Map °´Ã¼ 
- applicationScope  application ±âº» °´Ã¼¿¡ ÀúÀåµÈ ¼Ó¼ºÀÇ  [¼Ó¼º, °ª]  ¸ÅÇÎÀ» ÀúÀåÇÑ Map °´Ã¼ 
- param  ¿äÃ» ÆÄ¶ó¹ÌÅÍÀÇ [ÆÄ¶ó¹ÌÅÍÀÌ¸§, °ª] ¸ÅÇÎÀ» ÀúÀåÇÑ Map °´Ã¼, Å¸ÀÔÀº String (request.getParameter(ÀÌ¸§)ÀÇ °á°ú¿Í µ¿ÀÏ)
- paramValues ¿äÃ» ÆÄ¶ó¹ÌÅÍÀÇ[ÆÄ¶ó¹ÌÅÍÀÌ¸§, °ª¹è¿­]¸ÅÇÎÀ» ÀúÀåÇÑ Map °´Ã¼, Å¸ÀÔÀº String[] (request.getParameterValues(ÀÌ¸§)ÀÇ °á°ú¿Í µ¿ÀÏ)
- header ¿äÃ» Á¤º¸ÀÇ [Çì´õÀÌ¸§, °ª] ¸ÅÇÎÀ» ÀúÀåÇÑ Map °´Ã¼ (request.getHeader(ÀÌ¸§)ÀÇ °á°ú¿Í µ¿ÀÏ)
- headerValues ¿äÃ» Á¤º¸ÀÇ[Çì´õÀÌ¸§, °ª ¹è¿­] ¸ÅÇÎÀ» ÀúÀåÇÑ Map °´Ã¼ (request.getHeaders(ÀÌ¸§)ÀÇ °á°ú¿Í µ¿ÀÏ)
- cookie [ÄíÅ° ÀÌ¸§, Cookie] ¸ÅÇÎÀ» ÀúÀåÇÑ Map °´Ã¼ (request.getCookies()·Î ±¸ÇÑ Cookie ¹è¿­·Î ºÎÅÍ ¸ÅÇÎÀ» »ý¼º) 
- initParam ÃÊ±âÈ­ ÆÄ¶ó¹ÌÅÍÀÇ[ÀÌ¸§, °ª] ¸ÅÇÎÀ» ÀúÀåÇÑ Map °´Ã¼ (application.getInitParameter(ÀÌ¸§)ÀÇ °á°ú¿Í µ¿ÀÏ) 
+<!--  HttpServletRequestì˜ ê²½ìš° Requestê°€ Defaultê°’ì´ì—ˆê¸° ë•Œë¬¸ì— 
+      ELë‚´ì—ì„œ requestScopeëŠ” ìƒëžµì„ í•´ë„ ëì—ˆë‹¤
+            ê·¼ë° sessionì€ ì•„ë‹ˆì•¼ ã…‹
+ ------------ì°¸ê³ --------------------------------------------------------------------------
+ pageContext JSPì˜ page ê¸°ë³¸ ê°ì²´ì™€ ë™ì¼í•˜ë‹¤. 
+ pageScope  pageContext ê¸°ë³¸ ê°ì²´ì— ì €ìž¥ëœ ì†ì„±ì˜ [ì†ì„±, ê°’] ë§¤í•‘ì„ ì €ìž¥í•œ Map ê°ì²´ 
+ requestScope  request ê¸°ë³¸ ê°ì²´ì— ì €ìž¥ëœ ì†ì„±ì˜ [ì†ì„±, ê°’] ë§¤í•‘ì„ ì €ìž¥í•œ Map ê°ì²´ 
+ sessionScope session ê¸°ë³¸ ê°ì²´ì— ì €ìž¥ëœ ì†ì„±ì˜ [ì†ì„±, ê°’] ë§¤í•‘ì„ ì €ìž¥í•œ Map ê°ì²´ 
+ applicationScope  application ê¸°ë³¸ ê°ì²´ì— ì €ìž¥ëœ ì†ì„±ì˜  [ì†ì„±, ê°’]  ë§¤í•‘ì„ ì €ìž¥í•œ Map ê°ì²´ 
+ param  ìš”ì²­ íŒŒë¼ë¯¸í„°ì˜ [íŒŒë¼ë¯¸í„°ì´ë¦„, ê°’] ë§¤í•‘ì„ ì €ìž¥í•œ Map ê°ì²´, íƒ€ìž…ì€ String (request.getParameter(ì´ë¦„)ì˜ ê²°ê³¼ì™€ ë™ì¼)
+ paramValues ìš”ì²­ íŒŒë¼ë¯¸í„°ì˜[íŒŒë¼ë¯¸í„°ì´ë¦„, ê°’ë°°ì—´]ë§¤í•‘ì„ ì €ìž¥í•œ Map ê°ì²´, íƒ€ìž…ì€ String[] (request.getParameterValues(ì´ë¦„)ì˜ ê²°ê³¼ì™€ ë™ì¼)
+ header ìš”ì²­ ì •ë³´ì˜ [í—¤ë”ì´ë¦„, ê°’] ë§¤í•‘ì„ ì €ìž¥í•œ Map ê°ì²´ (request.getHeader(ì´ë¦„)ì˜ ê²°ê³¼ì™€ ë™ì¼)
+ headerValues ìš”ì²­ ì •ë³´ì˜[í—¤ë”ì´ë¦„, ê°’ ë°°ì—´] ë§¤í•‘ì„ ì €ìž¥í•œ Map ê°ì²´ (request.getHeaders(ì´ë¦„)ì˜ ê²°ê³¼ì™€ ë™ì¼)
+ cookie [ì¿ í‚¤ ì´ë¦„, Cookie] ë§¤í•‘ì„ ì €ìž¥í•œ Map ê°ì²´ (request.getCookies()ë¡œ êµ¬í•œ Cookie ë°°ì—´ë¡œ ë¶€í„° ë§¤í•‘ì„ ìƒì„±) 
+ initParam ì´ˆê¸°í™” íŒŒë¼ë¯¸í„°ì˜[ì´ë¦„, ê°’] ë§¤í•‘ì„ ì €ìž¥í•œ Map ê°ì²´ (application.getInitParameter(ì´ë¦„)ì˜ ê²°ê³¼ì™€ ë™ì¼) 
  -->
 </body>
 </html>

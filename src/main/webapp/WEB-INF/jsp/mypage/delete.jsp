@@ -1,13 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>ºñ¹Ğ¹øÈ£ º¯°æ</title>
+<meta charset="UTF-8">
+<title>ë¹„ë°€ë²ˆí˜¸ ë³€ê²½</title>
 <style type="text/css">
 @font-face {
 	font-family: 'BMDOHYEON';
@@ -32,19 +32,19 @@ table td{padding-left:20px;}
 		var pwd = document.getElementById("inputpwd").value;
 		var userpwd = document.getElementById("userpwd").value;
 		if (pwd != userpwd) {
-			document.getElementById("error").innerHTML = "µî·ÏµÈ ºñ¹Ğ¹øÈ£¿Í ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù!!";
+			document.getElementById("error").innerHTML = "ë“±ë¡ëœ ë¹„ë°€ë²ˆí˜¸ì™€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤!!";
 			
 		} else if (pwd == userpwd) {
-			document.getElementById("error").innerHTML = "µî·ÏµÈ ºñ¹Ğ¹øÈ£¿Í ÀÏÄ¡ÇÕ´Ï´Ù.";
+			document.getElementById("error").innerHTML = "ë“±ë¡ëœ ë¹„ë°€ë²ˆí˜¸ì™€ ì¼ì¹˜í•©ë‹ˆë‹¤.";
 			var but=document.getElementById("deletebutton");
 			but.disabled=false;
 		}
 	}
 	function button_event(){
 		var form1=document.deleteForm;
-		if (confirm("Á¤¸» »èÁ¦ÇÏ½Ã°Ú½À´Ï±î??") == true){    //È®ÀÎ
+		if (confirm("ì •ë§ ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ??") == true){    //í™•ì¸
 		    form1.submit();
-		}else{   //Ãë¼Ò
+		}else{   //ì·¨ì†Œ
 		    return false;
 		}
 	}
@@ -55,17 +55,17 @@ table td{padding-left:20px;}
 		<form:hidden path="user_no" id="user_no" />
 		<form:hidden path="password" id="userpwd" />
 		<div class="msg">
-			<font size="2em" color="blue">È¸¿øÅ»Åğ¸¦ ¿øÇÏ½Ã¸é ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇÏ½Å ÈÄ È¸¿øÅ»Åğ ¹öÆ°À»
-				Å¬¸¯ÇØ ÁÖ¼¼¿ä. <br />Å»ÅğÇÏ½Ã¸é È¸¿øÁ¤º¸°¡ µ¥ÀÌÅÍº£ÀÌ½º¿¡¼­ ¿ÏÀüÈ÷ »èÁ¦µË´Ï´Ù.
+			<font size="2em" color="blue">íšŒì›íƒˆí‡´ë¥¼ ì›í•˜ì‹œë©´ ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì‹  í›„ íšŒì›íƒˆí‡´ ë²„íŠ¼ì„
+				í´ë¦­í•´ ì£¼ì„¸ìš”. <br />íƒˆí‡´í•˜ì‹œë©´ íšŒì›ì •ë³´ê°€ ë°ì´í„°ë² ì´ìŠ¤ì—ì„œ ì™„ì „íˆ ì‚­ì œë©ë‹ˆë‹¤.
 			</font><br /> <br />
 			<table>
 				<tr>
-					<td class="pwd">ºñ¹Ğ¹øÈ£</td>
+					<td class="pwd">ë¹„ë°€ë²ˆí˜¸</td>
 					<td><input type="password" name="prepwd" id="inputpwd" style="color:black;">
-						<a onClick="pwdCheck()"	style="background: #dcdcdc; border: 1px solid black;"><font	size="1.5em">ÀÏÄ¡ È®ÀÎ</font></a>
+						<a onClick="pwdCheck()"	style="background: #dcdcdc; border: 1px solid black;"><font	size="1.5em">ì¼ì¹˜ í™•ì¸</font></a>
 						<div id="error"	style="color: red; margin-top: 5px; font-size: 0.8em;"></div>
 					</td>
-					<td><form:button onClick="button_event()" id="deletebutton" style="margin-bottom:2px;" disabled="true">È¸¿øÅ»Åğ</form:button></td>
+					<td><form:button onClick="button_event()" id="deletebutton" style="margin-bottom:2px;" disabled="true">íšŒì›íƒˆí‡´</form:button></td>
 				</tr>
 			</table>
 		</div>

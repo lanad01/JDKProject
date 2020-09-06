@@ -627,9 +627,9 @@ console.log(1);
  		req.open(opt.method.toUpperCase(), url, opt.async);
  		if (opt.sendheader) {
  			if(!this._headers["Content-Type"]){
- 				req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+ 				req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
  			}
- 			req.setRequestHeader("charset", "utf-8");
+ 			req.setRequestHeader("charset", "UTF-8");
  			for (var x in this._headers) {
  				if(this._headers.hasOwnProperty(x)){
  					if (typeof this._headers[x] == "function") 

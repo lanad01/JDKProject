@@ -1,20 +1,30 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
-<link
-	href='https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff'
-	rel='stylesheet' type='text/css'>
+<link href='https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff'	rel='stylesheet' type='text/css'>
 </head>
 <link rel="stylesheet" href="../css/freebbs.css">
+<script src="../resources/vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	var noSearch=document.getElementById("search").value;
+	if(noSearch=='0'){
+		alert('ê²€ìƒ‰ì¡°ê±´ì— ë§žëŠ” ê²Œì‹œê¸€ì´ ì—†ìŠµë‹ˆë‹¤');
+	}else if(noSearch==null){
+		
+	}
+})
+</script>
 <style type="text/css">
 </style>
 <body>
+	<input type="hidden" id="search" value="${SEARCHEDBBS }">
 	<div class="upperdiv">
 		<img alt="" src="img/total.jpg" width=50 height=20>
 		<table class="upper">
@@ -23,13 +33,13 @@
 				<td><img alt="" src="../img/total.jpg">&nbsp;&nbsp; 
 				<font face='BMDOHYEON'>
 				<c:choose>
-					<c:when test="${BBSTYPE=='freebbs' }">ÀÚÀ¯°Ô½ÃÆÇ</c:when>
-					<c:when test="${BBSTYPE=='qna' }">Áú¹®´äº¯°Ô½ÃÆÇ</c:when>
-					<c:when test="${BBSTYPE=='whole' }">ÀüÃ¼±Ûº¸±â</c:when>
-					<c:when test="${BBSTYPE=='ganyum' }">°³³ä±Û</c:when>
-					<c:when test="${BBSTYPE=='exp' }">°æÇè´ã&½ä</c:when>
-					<c:when test="${BBSTYPE=='info' }">Á¤º¸°øÀ¯°Ô½ÃÆÇ</c:when>
-					<c:when test="${BBSTYPE=='life' }">»ýÈ°±â °Ô½ÃÆÇ</c:when>
+					<c:when test="${BBSTYPE=='freebbs' }">ìžìœ ê²Œì‹œíŒ</c:when>
+					<c:when test="${BBSTYPE=='qna' }">ì§ˆë¬¸ë‹µë³€ê²Œì‹œíŒ</c:when>
+					<c:when test="${BBSTYPE=='whole' }">ì „ì²´ê¸€ë³´ê¸°</c:when>
+					<c:when test="${BBSTYPE=='ganyum' }">ê°œë…ê¸€</c:when>
+					<c:when test="${BBSTYPE=='exp' }">ê²½í—˜ë‹´&ì°</c:when>
+					<c:when test="${BBSTYPE=='info' }">ì •ë³´ê³µìœ ê²Œì‹œíŒ</c:when>
+					<c:when test="${BBSTYPE=='life' }">ìƒí™œê¸° ê²Œì‹œíŒ</c:when>
 				</c:choose>
 				 / Total ${totalPost } 
 				</font></td>
@@ -47,18 +57,18 @@
 				</colgroup>
 				<thead>
 					<tr class="trborder">
-						<th class="text-center" scope="col" class="side1">¹øÈ£</th>
-						<th class="text-center" scope="col">Á¦¸ñ</th>
-						<th class="text-center" scope="col">±Û¾´ÀÌ</th>
-						<th class="text-center" scope="col">Á¶È¸</th>
-						<th class="text-center" scope="col">³¯Â¥</th>
-						<th class="text-center" scope="col" class="side2">ÃßÃµ</th>
+						<th class="text-center" scope="col" class="side1">ë²ˆí˜¸</th>
+						<th class="text-center" scope="col">ì œëª©</th>
+						<th class="text-center" scope="col">ê¸€ì“´ì´</th>
+						<th class="text-center" scope="col">ì¡°íšŒ</th>
+						<th class="text-center" scope="col">ë‚ ì§œ</th>
+						<th class="text-center" scope="col" class="side2">ì¶”ì²œ</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach var="notice" items="${NOTICES}" varStatus="status">
 								<tr class="noticetr" id="bbsBottomBorder" >
-									<td><img src="../img/notice.gif" alt="°øÁö" class="notice" /></td>
+									<td><img src="../img/notice.gif" alt="ê³µì§€" class="notice" /></td>
 									<td class="b"><a href="../bbs/bbsview.html?seqno=${notice.seqno }">${notice.title }</a>
 									<span class="comment">
 									<c:forEach var="reAndrere" items="${NOTICEREnRERE}" begin="${status.index}" end="${status.index}">
@@ -66,7 +76,7 @@
 									</c:forEach>
 									</span></td>
 									<td class="name" align="center">
-									ºê¸±
+									ë¸Œë¦´
 									</td>
 									<td class="hit">${notice.hit }</td>
 									<td class="sdate">${notice.register_date }</td>
@@ -77,11 +87,10 @@
 					<c:forEach var="bbs" items="${LIST }" varStatus="status" >
 								<tr id="bbsBottomBorder">
 									<td class="snum">
-									<c:forEach var="rownum" items="${ROWNUMLIST}" begin="${status.index}" end="${status.index}">
-									${rownum }
-									</c:forEach>
+									${bbs.rn }
+<%-- 									<c:forEach var="rownum" items="${ROWNUMLIST}" begin="${status.index}" end="${status.index}">${rownum }</c:forEach> --%>
 									</td>
-									<td class="b"><a href="../bbs/bbsview.html?seqno=${bbs.seqno }">${bbs.title }</a>
+									<td class="b"><a href="../bbs/bbsview.html?seqno=${bbs.seqno}">${bbs.title }</a>
 									<span class="comment">
 									<c:forEach var="reAndrere" items="${REPANDRERE}" begin="${status.index}" end="${status.index}">
 									<font color="blue" size="1">(${reAndrere})</font>
@@ -101,45 +110,36 @@
 		</div>
 		<div class="bottom">
 			<div class="pagebox01">
-			<img src="../img/firstpage.gif" alt="Ã³À½ÆäÀÌÁö" /> 
-			<img src="../img/before.gif"alt="ÀÌÀü 10 ÆäÀÌÁö" />
+			<img src="../img/firstpage.gif" alt="ì²˜ìŒíŽ˜ì´ì§€" /> 
+			<img src="../img/before.gif"alt="ì´ì „ 10 íŽ˜ì´ì§€" />
 			<c:forEach var="page" begin="1" end="${PAGE_CNT}">
 			<img src="../img/split.gif" class="split" alt=""/> 
 			<a href="../bbs/bbs.html?bbstype=${BBSTYPE}&PAGENO=${page}" style="color:black;">${page }</a>
 			</c:forEach>
-			<a href="#"><img src="../img/behind.gif" alt="´ÙÀ½ 10 ÆäÀÌÁö" /></a>
-			<a href="#"><img src="../img/lastpage.gif" alt="¸¶Áö¸·ÆäÀÌÁö" /></a>
+			<a href="#"><img src="../img/behind.gif" alt="ë‹¤ìŒ 10 íŽ˜ì´ì§€" /></a>
+			<a href="#"><img src="../img/lastpage.gif" alt="ë§ˆì§€ë§‰íŽ˜ì´ì§€" /></a>
 		</div>
-	</div> <!--  °Ô½ÃÆÇ ÆäÀÌÂ¡ -->
+	</div> <!--  ê²Œì‹œíŒ íŽ˜ì´ì§• -->
 	<div class="searchform">
-		<form:form name="bbssearchf" action="/">
-			<input type="hidden" name="r" value="home" /> <input type="hidden"
-				name="c" value="" /> <input type="hidden" name="m" value="bbs" />
-			<input type="hidden" name="bid" value="" /> <input type="hidden"
-				name="cat" value="" /> <input type="hidden" name="sort" value="gid" />
-			<input type="hidden" name="orderby" value="asc" /> <input
-				type="hidden" name="recnum" value="20" /> <input type="hidden"
-				name="type" value="" /> <input type="hidden" name="iframe" value="" />
-			<input type="hidden" name="skin" value="" />
-			<div style="float:left; width:60%"> 
-			<select name="where">
-				<option value="subject|content">Á¦¸ñ+³»¿ë</option>
-				<option value="content">³»¿ë</option>
-				<option value="nic">´Ð³×ÀÓ</option>
-			</select> 
-			
-			<input type="text" name="keyword" class="input" style="height:25px;" />
-			<input type="submit" value=" °Ë»ö " class="btnblue" />
-			</div>
-			<div class="searchform_right" style="float:left;">
-			<a href="../bbs/bbs.html?bbstype=${BBSTYPE}"><input type="button" name="bbsList" value="¸ñ·ÏÀ¸·Î " /></a>
-			<a href="../write/bbs.html?bbstype=${BBSTYPE}"><input type="button" name="bbsList" value="±Û¾²±â " /></a>
-<!-- 			<input type="button" onclick="window.location.href='../write/freebbs.html';" value="±Û¾²±â" /> -->
-			</div>
-		</form:form>
+      <form name="bbssearchf" action="../bbs/bbs.html">
+         <input type="hidden" name="bbstype" id="bbstype" value="${BBSTYPE}" />
+         <div style="float:left; width:60%"> 
+         <select id="searchKey" name="searchKey">
+            <option value="schTotal">ì œëª©+ë‚´ìš©</option>
+            <option value="schContent">ë‚´ìš©</option>
+            <option value="schNickNm">ë‹‰ë„¤ìž„</option>
+         </select> 
+         
+         <input type="text" name="keyword" class="input" style="height:25px;" />
+         <input type="submit" value=" ê²€ìƒ‰ " class="btnblue" />
+         </div>
+         <div class="searchform_right" style="float:left;">
+         <a href="../bbs/bbs.html?bbstype=${BBSTYPE}"><input type="button" name="bbsList" value="ëª©ë¡ìœ¼ë¡œ " /></a>
+         <a href="../write/bbs.html?bbstype=${BBSTYPE}"><input type="button" name="bbsList" value="ê¸€ì“°ê¸° " /></a>
+         </div>
+      </form>
 	</div><!--  searchForm -->
-	</div> <!--  upperdiv °Ô½ÃÆÇ º»Ã¼ -->
-
+	</div> <!--  upperdiv ê²Œì‹œíŒ ë³¸ì²´ -->
 	<div class="clear" style="margin-bottom:80px;"></div>
 
 </body>

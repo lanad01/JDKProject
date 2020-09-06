@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
@@ -24,12 +24,12 @@ function rereShow(repno){
 }
 function myFunction2(repno,seqno) {
     swal({
-        title: "Á¤¸» »èÁ¦ÇÏ½Ã°Ú½À´Ï±î?",
-        text: "»èÁ¦µÈ ´ë´ñ±ÛÀº º¹±¸µÇÁö ¾Ê½À´Ï´Ù!",
+        title: "ì •ë§ ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?",
+        text: "ì‚­ì œëœ ëŒ€ëŒ“ê¸€ì€ ë³µêµ¬ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤!",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
-        confirmButtonText: "¿¹ »èÁ¦ÇÏ°Ú½À´Ï´Ù.",
+        confirmButtonText: "ì˜ˆ ì‚­ì œí•˜ê² ìŠµë‹ˆë‹¤.",
         closeOnConfirm: false,
         closeOnCancel: false
     }, function (isConfirm) {
@@ -42,17 +42,17 @@ function myFunction2(repno,seqno) {
     			url : "../reply/del.html",
     			success : function(data){
     				if(data==1) {
-    					swal("¼º°øÀûÀ¸·Î »èÁ¦µÇ¾ú½À´Ï´Ù!!", "");
+    					swal("ì„±ê³µì ìœ¼ë¡œ ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤!!", "");
     					location.reload();
     				}
-    				if(data==0) swal("","ÇØ´ç ´ñ±ÛÀÇ ÀÛ¼ºÀÚ°¡ ¾Æ´Õ´Ï´Ù!!", "error");
+    				if(data==0) swal("","í•´ë‹¹ ëŒ“ê¸€ì˜ ì‘ì„±ìê°€ ì•„ë‹™ë‹ˆë‹¤!!", "error");
     				if(data==2) location.href="../bbs/bbsview.html?loginwrite=1&seqno="+seqno;
     			},error : function(e){
-    				swal("","½ÇÆĞ!!", "error");
+    				swal("","ì‹¤íŒ¨!!", "error");
     			}
     		})
         } else {
-            swal("Cancelled", "´ñ±Û »èÁ¦°¡ Ãë¼ÒµÇ¾ú½À´Ï´Ù.", "error");
+            swal("Cancelled", "ëŒ“ê¸€ ì‚­ì œê°€ ì·¨ì†Œë˜ì—ˆìŠµë‹ˆë‹¤.", "error");
         }
     });
 };
@@ -68,10 +68,10 @@ function rpUpd(repno,seqno){
 		success : function(data){
 			if(data==1){
 			}
-			if(data==0) swal("","ÇØ´ç ´ñ±ÛÀÇ ÀÛ¼ºÀÚ°¡ ¾Æ´Õ´Ï´Ù!!", "error");
+			if(data==0) swal("","í•´ë‹¹ ëŒ“ê¸€ì˜ ì‘ì„±ìê°€ ì•„ë‹™ë‹ˆë‹¤!!", "error");
 			if(data==2) location.href="../bbs/bbsview.html?loginwrite=1&seqno="+seqno;
 		},error : function(e){
-			swal("","½ÇÆĞ!!", "error");
+			swal("","ì‹¤íŒ¨!!", "error");
 		}
 	})
 }
@@ -80,14 +80,14 @@ function rpUpd(repno,seqno){
 <div class="sbjbox" style="width:730px; margin-top:29px;">
 	<c:choose>
 		<c:when test="${NOCOM==0 }">
-			<h2 align="center" style="margin-top:15px;"> No comment by guest.<br/> ´ñ±ÛÀ» µî·ÏÇØÁÖ¼¼¿ä! </h2>
+			<h2 align="center" style="margin-top:15px;"> No comment by guest.<br/> ëŒ“ê¸€ì„ ë“±ë¡í•´ì£¼ì„¸ìš”! </h2>
 		</c:when>
 	</c:choose>
 	<c:forEach  var="rep" items="${REP}" varStatus="status"  >
 		<table class="commentTable">
 			<tr><td width="10%">
 				<c:forEach var="picture" items="${REPLIERPIC }"  begin="${status.index}" end="${status.index}">
-				<img alt="´ñ±ÛÀÛ¼ºÀÚ »çÁø" src="${pageContext.request.contextPath}/upload/${picture}"  
+				<img alt="ëŒ“ê¸€ì‘ì„±ì ì‚¬ì§„" src="${pageContext.request.contextPath}/upload/${picture}"  
 					width="60" height="60" onerror="this.src='../img/noprofile.gif' ">
 				</c:forEach>
 				</td>
@@ -101,10 +101,10 @@ function rpUpd(repno,seqno){
 				<span style=" margin-left:10px;">${rep.content } Rep Groupno = ${rep.repgroupno } Repno = ${rep.repno } User_no : ${rep.user_no }</span>
 				</td>
 				<td class="crud" style="width:20%; float:right;  position:absolute;">
-				<input type="button" onClick="rereShow(${rep.repno})" value="´ñ±Û">
-				<input type="button" onClick="rpUpd(${rep.repno},${rep.seqno})" value="¼öÁ¤">
-				<input type="button" onClick="myFunction2(${rep.repno},${rep.seqno})" value="»èÁ¦">
-				<input type="button" value="½Å°í">
+				<input type="button" onClick="rereShow(${rep.repno})" value="ëŒ“ê¸€">
+				<input type="button" onClick="rpUpd(${rep.repno},${rep.seqno})" value="ìˆ˜ì •">
+				<input type="button" onClick="myFunction2(${rep.repno},${rep.seqno})" value="ì‚­ì œ">
+				<input type="button" value="ì‹ ê³ ">
 				</td>				
 			</tr>
 		</table>	
@@ -115,20 +115,20 @@ function rpUpd(repno,seqno){
 			<input type="hidden" id="repnoSend2" value="${rep.repno }">
 			<input type="hidden" name="repno"  value="${rep.repno }">
 			<input type="hidden" name="seqno"  value="${rep.seqno }">
-			<input type="submit" value="´ñ±Û¼öÁ¤" style="float:right; margin-right:8px; font-size:1.2em;">
+			<input type="submit" value="ëŒ“ê¸€ìˆ˜ì •" style="float:right; margin-right:8px; font-size:1.2em;">
 			</font>	
 		</form>
 		</div>	
-		<!--  ´ë´ñ±Û div Æò¼Ò¿£ display none -->
+		<!--  ëŒ€ëŒ“ê¸€ div í‰ì†Œì—” display none -->
 		<div id="${rep.repno}" style="display:none; border-bottom:2px dotted silver;">
 		<form:form action="../reply/reply.html" method="post" modelAttribute="reply">
 		<form:hidden id="repnoSend" path="repno" value="${rep.repno}"/>
 		<form:hidden path="repgroupno" value="1"/>
 		<form:hidden path="seqno" value="${BBS.seqno }"/> 
 		<table>
-			<tr><td class="tarea"> repno:${rep.repno }ÀÇ ´ë´ñ±Û / Groupno = ${rep.repgroupno } Repno = ${rep.repno } User_no : ${rep.user_no }
+			<tr><td class="tarea"> repno:${rep.repno }ì˜ ëŒ€ëŒ“ê¸€ / Groupno = ${rep.repgroupno } Repno = ${rep.repno } User_no : ${rep.user_no }
 			 <form:textarea path="content" rows="3" cols="92"/></td>
-			<tr><td class="repbtn"><input type="submit" value="´ñ±Ûµî·Ï"></td>
+			<tr><td class="repbtn"><input type="submit" value="ëŒ“ê¸€ë“±ë¡"></td>
 		</table>
 		</form:form> 
 		</div>

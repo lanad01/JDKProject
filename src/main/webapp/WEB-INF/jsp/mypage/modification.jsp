@@ -1,13 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>JDK - È¸¿ø Á¤º¸ ¼öÁ¤</title>
+<meta charset="UTF-8">
+<title>JDK - íšŒì› ì •ë³´ ìˆ˜ì •</title>
 <link href='https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="../css/modification.css">
 <style type="text/css">
@@ -22,12 +22,12 @@ function quizDisplay(quiztext) {
 <body>
 <div style="padding:30px 0 0 15px;">
 <form:form action="../register/registerpost.html" modelAttribute="user" method="post" enctype="multipart/form-data">
-	<h2><font face='BMDOHYEON'>È¸¿ø°¡ÀÔ</font></h2>
+	<h2><font face='BMDOHYEON'>íšŒì›ê°€ìž…</font></h2>
 	<div class="msg">
-		<span>(*)</span> Ç¥½Ã°¡ ÀÖ´Â Ç×¸ñÀº ¹Ýµå½Ã ÀÔ·ÂÇØ¾ß ÇÕ´Ï´Ù.<br />
-		ÇãÀ§·Î ÀÛ¼ºµÈ Á¤º¸ÀÏ °æ¿ì ½ÂÀÎÀÌ º¸·ùµÇ°Å³ª ÀÓÀÇ·Î »èÁ¦Ã³¸®µÉ ¼ö ÀÖÀ¸´Ï ÁÖÀÇÇØ ÁÖ¼¼¿ä.
+		<span>(*)</span> í‘œì‹œê°€ ìžˆëŠ” í•­ëª©ì€ ë°˜ë“œì‹œ ìž…ë ¥í•´ì•¼ í•©ë‹ˆë‹¤.<br />
+		í—ˆìœ„ë¡œ ìž‘ì„±ëœ ì •ë³´ì¼ ê²½ìš° ìŠ¹ì¸ì´ ë³´ë¥˜ë˜ê±°ë‚˜ ìž„ì˜ë¡œ ì‚­ì œì²˜ë¦¬ë  ìˆ˜ ìžˆìœ¼ë‹ˆ ì£¼ì˜í•´ ì£¼ì„¸ìš”.
 	</div>
-<table class="joinTable" summary="È¸¿ø°¡ÀÔ ±âº»Á¤º¸¸¦ ÀÔ·Â¹Þ´Â Ç¥ÀÔ´Ï´Ù.">
+<table class="joinTable" summary="íšŒì›ê°€ìž… ê¸°ë³¸ì •ë³´ë¥¼ ìž…ë ¥ë°›ëŠ” í‘œìž…ë‹ˆë‹¤.">
 <colgroup> 
 <col width="100"> 
 <col> 
@@ -38,25 +38,25 @@ function quizDisplay(quiztext) {
 	<th scope="col"></th>
 </tr>
 </thead>
-<tbody> <!--  °¡ÀÔÆû ÀÛ¼º ½ÃÀÛ -->
+<tbody> <!--  ê°€ìž…í¼ ìž‘ì„± ì‹œìž‘ -->
 <tr>
-	<td class="key">ÀÌ¸§(½Ç¸í)<h5>*</h5></td>
+	<td class="key">ì´ë¦„(ì‹¤ëª…)<h5>*</h5></td>
 		<td><form:input type="text" path="name" maxlength="10" class="input" />
 		<font color="red" id="font" ><form:errors path="name"/></font>
-		<div>ÀÌ¸§Àº ¹Ýµå½Ã Àû¾îÁÖ¼Å¾ß ÇÕ´Ï´Ù.</div>
+		<div>ì´ë¦„ì€ ë°˜ë“œì‹œ ì ì–´ì£¼ì…”ì•¼ í•©ë‹ˆë‹¤.</div>
 		</td>
 	</tr>
 	<tr>
-		<td class="key">´Ð³×ÀÓ<h5>*</h5></td>
+		<td class="key">ë‹‰ë„¤ìž„<h5>*</h5></td>
 		<td><form:input type="text" path="nick" value="" maxlength="20" class="input" onblur=""/>
 		<font color="red" id="font" ><form:errors path="nick"/></font>
-	    <!--  onblur : ¸¶¿ì½º Ä¿¼­°¡ ºüÁ®³ª°¡´Â ¼ø°£ ÀÌº¥Æ® -->
+	    <!--  onblur : ë§ˆìš°ìŠ¤ ì»¤ì„œê°€ ë¹ ì ¸ë‚˜ê°€ëŠ” ìˆœê°„ ì´ë²¤íŠ¸ -->
 		<span class="hmsg" id="hLayernic"></span>
-		<div>´Ð³×ÀÓÀº ÀÚ½ÅÀ» Ç¥ÇöÇÒ ¼ö ÀÖ´Â ´Ü¾î·Î 20ÀÚ±îÁö ÀÚÀ¯·Ó°Ô »ç¿ëÇÒ ¼ö ÀÖ½À´Ï´Ù.</div>
+		<div>ë‹‰ë„¤ìž„ì€ ìžì‹ ì„ í‘œí˜„í•  ìˆ˜ ìžˆëŠ” ë‹¨ì–´ë¡œ 20ìžê¹Œì§€ ìžìœ ë¡­ê²Œ ì‚¬ìš©í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.</div>
 		</td>
 	</tr>
 	<tr>
-		<td class="key">»ý³â¿ùÀÏ</td>
+		<td class="key">ìƒë…„ì›”ì¼</td>
 		<td>
 		<form:select path="birth_date">
 		<c:forEach var="i" begin="0" end="${2016-1930}">
@@ -67,7 +67,7 @@ function quizDisplay(quiztext) {
 		</td>
 	</tr>
 <%-- 		<formselect name="birth_2"> --%>
-<!-- 		<option value="">¿ù -->
+<!-- 		<option value="">ì›” -->
 <!-- 			<option value="01">1 -->
 <!-- 			<option value="02">2 -->
 <!-- 			<option value="03">3 -->
@@ -82,7 +82,7 @@ function quizDisplay(quiztext) {
 <!-- 			<option value="12">12 -->
 <!-- 		</select> -->
 <!-- 		<select name="birth_3"> -->
-<!-- 		<option value="">ÀÏ -->
+<!-- 		<option value="">ì¼ -->
 <%-- 		<c:forEach var="i" begin="1" end="31"> --%>
 <%--   		  <c:set var="day" value="${i}" /> --%>
 <%--     		<option value="${day}">${day} --%>
@@ -91,95 +91,95 @@ function quizDisplay(quiztext) {
 <!-- 		</td> -->
 <!-- 	</tr> -->
 	<tr>
-		<td class="key">¼ºº°</td>
+		<td class="key">ì„±ë³„</td>
 		<td class="shift">
-			<form:radiobutton path="gender" value="M" checked="checked"/><font face='BMDOHYEON' size="0.9em">³²¼º</font>
-			<form:radiobutton path="gender" value="F" /><font face='BMDOHYEON' size="0.9em">¿©¼º</font>
+			<form:radiobutton path="gender" value="M" checked="checked"/><font face='BMDOHYEON' size="0.9em">ë‚¨ì„±</font>
+			<form:radiobutton path="gender" value="F" /><font face='BMDOHYEON' size="0.9em">ì—¬ì„±</font>
 		</td>
 	</tr>	
 	<tr>
-	<td class="key">¾ÆÀÌµð<h5>*</h5></td>
+	<td class="key">ì•„ì´ë””<h5>*</h5></td>
 		<td>
 			<form:input type="text" path="id" maxlength="12" class="input" onblur=""/>
 			<font color="red" id="font" ><form:errors path="id"/></font>
 			<span class="hmsg" id="hLayerid"></span>
-			<div>4~12ÀÚÀÇ ¿µ¹®(¼Ò¹®ÀÚ)°ú ¼ýÀÚ¸¸ »ç¿ëÇÒ ¼ö ÀÖ½À´Ï´Ù.</div>
+			<div>4~12ìžì˜ ì˜ë¬¸(ì†Œë¬¸ìž)ê³¼ ìˆ«ìžë§Œ ì‚¬ìš©í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.</div>
 		</td>
 	</tr>
 	<tr>
-		<td class="key">ºñ¹Ð¹øÈ£<h5>*</h5></td>
+		<td class="key">ë¹„ë°€ë²ˆí˜¸<h5>*</h5></td>
 		<td><form:password path="password" maxlength="20" class="input" />
 		<font color="red" id="font" ><form:errors path="password"/></font>
-			<div>4~12ÀÚÀÇ ¿µ¹®°ú ¼ýÀÚ¸¸ »ç¿ëÇÒ ¼ö ÀÖ½À´Ï´Ù.</div>
+			<div>4~12ìžì˜ ì˜ë¬¸ê³¼ ìˆ«ìžë§Œ ì‚¬ìš©í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.</div>
 		</td>
 	</tr>
 	<tr>
-		<td class="key">ºñ¹Ð¹øÈ£ È®ÀÎ<h5>*</h5></td>
+		<td class="key">ë¹„ë°€ë²ˆí˜¸ í™•ì¸<h5>*</h5></td>
 		<td>
 		<form:password  path="pwdCheck"  maxlength="20" class="input" />
 		<font color="red" id="font" ><form:errors path="pwdCheck"/></font>
-		<div>ºñ¹Ð¹øÈ£¸¦ ÇÑ¹ø ´õ ÀÔ·ÂÇÏ¼¼¿ä. ºñ¹Ð¹øÈ£´Â ÀØÁö ¾Êµµ·Ï ÁÖÀÇÇÏ½Ã±â ¹Ù¶ø´Ï´Ù.</div>
+		<div>ë¹„ë°€ë²ˆí˜¸ë¥¼ í•œë²ˆ ë” ìž…ë ¥í•˜ì„¸ìš”. ë¹„ë°€ë²ˆí˜¸ëŠ” ìžŠì§€ ì•Šë„ë¡ ì£¼ì˜í•˜ì‹œê¸° ë°”ëžë‹ˆë‹¤.</div>
 		</td>
 	</tr>
 	<tr>
-		<td class="key">ºñ¹øÃ£±â Áú¹®<h5>*</h5></td>
+		<td class="key">ë¹„ë²ˆì°¾ê¸° ì§ˆë¬¸<h5>*</h5></td>
 		<td>
 			<select class="pw_q1" onchange="quizDisplay(this.options[this.selectedIndex].text)">
-				<option value="">&nbsp;+ ¼±ÅÃÇÏ½Ê½Ã¿À.</option>
+				<option value="">&nbsp;+ ì„ íƒí•˜ì‹­ì‹œì˜¤.</option>
 				<option value="">-----------------------------------------------------------------------------</option>
-				<option value="³»°¡ ÁÁ¾ÆÇÏ´Â Ä³¸¯ÅÍ´Â?">¤ý³»°¡ ÁÁ¾ÆÇÏ´Â Ä³¸¯ÅÍ´Â?</option>
-				<option value="Å¸ÀÎÀÌ ¸ð¸£´Â ÀÚ½Å¸¸ÀÇ ½ÅÃ¼ºñ¹ÐÀÌ ÀÖ´Ù¸é?">¤ýÅ¸ÀÎÀÌ ¸ð¸£´Â ÀÚ½Å¸¸ÀÇ ½ÅÃ¼ºñ¹ÐÀÌ ÀÖ´Ù¸é?</option>
-				<option value="ÀÚ½ÅÀÇ ÀÎ»ý ÁÂ¿ì¸íÀº?">¤ýÀÚ½ÅÀÇ ÀÎ»ý ÁÂ¿ì¸íÀº?</option>
-				<option value="ÃÊµîÇÐ±³ ¶§ ±â¾ï¿¡ ³²´Â Â¦²á ÀÌ¸§Àº?">¤ýÃÊµîÇÐ±³ ¶§ ±â¾ï¿¡ ³²´Â Â¦²á ÀÌ¸§Àº?</option>
-				<option value="À¯³â½ÃÀý °¡Àå »ý°¢³ª´Â Ä£±¸ ÀÌ¸§Àº?">¤ýÀ¯³â½ÃÀý °¡Àå »ý°¢³ª´Â Ä£±¸ ÀÌ¸§Àº?</option>
-				<option value="°¡Àå ±â¾ï¿¡ ³²´Â ¼±»ý´Ô ¼ºÇÔÀº?">¤ý°¡Àå ±â¾ï¿¡ ³²´Â ¼±»ý´Ô ¼ºÇÔÀº?</option>
-				<option value="Ä£±¸µé¿¡°Ô °ø°³ÇÏÁö ¾ÊÀº ¾î¸± Àû º°¸íÀÌ ÀÖ´Ù¸é?">¤ýÄ£±¸µé¿¡°Ô °ø°³ÇÏÁö ¾ÊÀº ¾î¸± Àû º°¸íÀÌ ÀÖ´Ù¸é?</option>
-				<option value="´Ù½Ã ÅÂ¾î³ª¸é µÇ°í ½ÍÀº °ÍÀº?">¤ý´Ù½Ã ÅÂ¾î³ª¸é µÇ°í ½ÍÀº °ÍÀº?</option>
-				<option value="°¡Àå °¨¸í±í°Ô º» ¿µÈ­´Â?">¤ý°¡Àå °¨¸í±í°Ô º» ¿µÈ­´Â?</option>
-				<option value="ÀÐÀº Ã¥ Áß¿¡¼­ ÁÁ¾ÆÇÏ´Â ±¸ÀýÀÌ ÀÖ´Ù¸é?">¤ýÀÐÀº Ã¥ Áß¿¡¼­ ÁÁ¾ÆÇÏ´Â ±¸ÀýÀÌ ÀÖ´Ù¸é?</option>
-				<option value="±â¾ï¿¡ ³²´Â Ãß¾ïÀÇ Àå¼Ò´Â?">¤ý±â¾ï¿¡ ³²´Â Ãß¾ïÀÇ Àå¼Ò´Â?</option>
-				<option value="ÀÎ»ó ±í°Ô ÀÐÀº Ã¥ ÀÌ¸§Àº?">¤ýÀÎ»ó ±í°Ô ÀÐÀº Ã¥ ÀÌ¸§Àº?</option>
-				<option value="ÀÚ½ÅÀÇ º¸¹° Á¦1È£´Â?">¤ýÀÚ½ÅÀÇ º¸¹° Á¦1È£´Â?</option>
-				<option value="¹Þ¾Ò´ø ¼±¹° Áß ±â¾ï¿¡ ³²´Â µ¶Æ¯ÇÑ ¼±¹°Àº?">¤ý¹Þ¾Ò´ø ¼±¹° Áß ±â¾ï¿¡ ³²´Â µ¶Æ¯ÇÑ ¼±¹°Àº?</option>
-				<option value="ÀÚ½ÅÀÌ µÎ¹øÂ°·Î Á¸°æÇÏ´Â ÀÎ¹°Àº?">¤ýÀÚ½ÅÀÌ µÎ¹øÂ°·Î Á¸°æÇÏ´Â ÀÎ¹°Àº?</option>
-				<option value="¾Æ¹öÁöÀÇ ¼ºÇÔÀº?">¤ý¾Æ¹öÁöÀÇ ¼ºÇÔÀº?</option>
-				<option value="¾î¸Ó´ÏÀÇ ¼ºÇÔÀº?">¤ý¾î¸Ó´ÏÀÇ ¼ºÇÔÀº?</option>
+				<option value="ë‚´ê°€ ì¢‹ì•„í•˜ëŠ” ìºë¦­í„°ëŠ”?">ã†ë‚´ê°€ ì¢‹ì•„í•˜ëŠ” ìºë¦­í„°ëŠ”?</option>
+				<option value="íƒ€ì¸ì´ ëª¨ë¥´ëŠ” ìžì‹ ë§Œì˜ ì‹ ì²´ë¹„ë°€ì´ ìžˆë‹¤ë©´?">ã†íƒ€ì¸ì´ ëª¨ë¥´ëŠ” ìžì‹ ë§Œì˜ ì‹ ì²´ë¹„ë°€ì´ ìžˆë‹¤ë©´?</option>
+				<option value="ìžì‹ ì˜ ì¸ìƒ ì¢Œìš°ëª…ì€?">ã†ìžì‹ ì˜ ì¸ìƒ ì¢Œìš°ëª…ì€?</option>
+				<option value="ì´ˆë“±í•™êµ ë•Œ ê¸°ì–µì— ë‚¨ëŠ” ì§ê¿ ì´ë¦„ì€?">ã†ì´ˆë“±í•™êµ ë•Œ ê¸°ì–µì— ë‚¨ëŠ” ì§ê¿ ì´ë¦„ì€?</option>
+				<option value="ìœ ë…„ì‹œì ˆ ê°€ìž¥ ìƒê°ë‚˜ëŠ” ì¹œêµ¬ ì´ë¦„ì€?">ã†ìœ ë…„ì‹œì ˆ ê°€ìž¥ ìƒê°ë‚˜ëŠ” ì¹œêµ¬ ì´ë¦„ì€?</option>
+				<option value="ê°€ìž¥ ê¸°ì–µì— ë‚¨ëŠ” ì„ ìƒë‹˜ ì„±í•¨ì€?">ã†ê°€ìž¥ ê¸°ì–µì— ë‚¨ëŠ” ì„ ìƒë‹˜ ì„±í•¨ì€?</option>
+				<option value="ì¹œêµ¬ë“¤ì—ê²Œ ê³µê°œí•˜ì§€ ì•Šì€ ì–´ë¦´ ì  ë³„ëª…ì´ ìžˆë‹¤ë©´?">ã†ì¹œêµ¬ë“¤ì—ê²Œ ê³µê°œí•˜ì§€ ì•Šì€ ì–´ë¦´ ì  ë³„ëª…ì´ ìžˆë‹¤ë©´?</option>
+				<option value="ë‹¤ì‹œ íƒœì–´ë‚˜ë©´ ë˜ê³  ì‹¶ì€ ê²ƒì€?">ã†ë‹¤ì‹œ íƒœì–´ë‚˜ë©´ ë˜ê³  ì‹¶ì€ ê²ƒì€?</option>
+				<option value="ê°€ìž¥ ê°ëª…ê¹Šê²Œ ë³¸ ì˜í™”ëŠ”?">ã†ê°€ìž¥ ê°ëª…ê¹Šê²Œ ë³¸ ì˜í™”ëŠ”?</option>
+				<option value="ì½ì€ ì±… ì¤‘ì—ì„œ ì¢‹ì•„í•˜ëŠ” êµ¬ì ˆì´ ìžˆë‹¤ë©´?">ã†ì½ì€ ì±… ì¤‘ì—ì„œ ì¢‹ì•„í•˜ëŠ” êµ¬ì ˆì´ ìžˆë‹¤ë©´?</option>
+				<option value="ê¸°ì–µì— ë‚¨ëŠ” ì¶”ì–µì˜ ìž¥ì†ŒëŠ”?">ã†ê¸°ì–µì— ë‚¨ëŠ” ì¶”ì–µì˜ ìž¥ì†ŒëŠ”?</option>
+				<option value="ì¸ìƒ ê¹Šê²Œ ì½ì€ ì±… ì´ë¦„ì€?">ã†ì¸ìƒ ê¹Šê²Œ ì½ì€ ì±… ì´ë¦„ì€?</option>
+				<option value="ìžì‹ ì˜ ë³´ë¬¼ ì œ1í˜¸ëŠ”?">ã†ìžì‹ ì˜ ë³´ë¬¼ ì œ1í˜¸ëŠ”?</option>
+				<option value="ë°›ì•˜ë˜ ì„ ë¬¼ ì¤‘ ê¸°ì–µì— ë‚¨ëŠ” ë…íŠ¹í•œ ì„ ë¬¼ì€?">ã†ë°›ì•˜ë˜ ì„ ë¬¼ ì¤‘ ê¸°ì–µì— ë‚¨ëŠ” ë…íŠ¹í•œ ì„ ë¬¼ì€?</option>
+				<option value="ìžì‹ ì´ ë‘ë²ˆì§¸ë¡œ ì¡´ê²½í•˜ëŠ” ì¸ë¬¼ì€?">ã†ìžì‹ ì´ ë‘ë²ˆì§¸ë¡œ ì¡´ê²½í•˜ëŠ” ì¸ë¬¼ì€?</option>
+				<option value="ì•„ë²„ì§€ì˜ ì„±í•¨ì€?">ã†ì•„ë²„ì§€ì˜ ì„±í•¨ì€?</option>
+				<option value="ì–´ë¨¸ë‹ˆì˜ ì„±í•¨ì€?">ã†ì–´ë¨¸ë‹ˆì˜ ì„±í•¨ì€?</option>
 			</select><br/>
-		<div><form:input type="text" path="quiz" id="quiz" plackholder="Á÷Á¢ ÀÛ¼º"  /></div>
+		<div><form:input type="text" path="quiz" id="quiz" plackholder="ì§ì ‘ ìž‘ì„±"  /></div>
 		<font color="red" id="font" ><form:errors path="quiz"/></font>
 		</td>
 	</tr>
 	<tr>
-		<td class="key">ºñ¹øÃ£±â ´äº¯<h5>*</h5></td>
+		<td class="key">ë¹„ë²ˆì°¾ê¸° ë‹µë³€<h5>*</h5></td>
 		<td><form:input type="text"  path="answer" class="input" />
 		<font color="red" id="font" ><form:errors path="answer"/></font>
 		<div>
-		ºñ¹Ð¹øÈ£Ã£±â Áú¹®¿¡ ´ëÇÑ ´äº¯À» È¥ÀÚ¸¸ ¾Ë ¼ö ÀÖ´Â ´Ü¾î³ª ±âÈ£·Î ÀÔ·ÂÇØ ÁÖ¼¼¿ä.<br />
-		ºñ¹Ð¹øÈ£¸¦ Ã£À» ¶§ ÇÊ¿äÇÏ¹Ç·Î ¹Ýµå½Ã ±â¾ïÇØ ÁÖ¼¼¿ä.
+		ë¹„ë°€ë²ˆí˜¸ì°¾ê¸° ì§ˆë¬¸ì— ëŒ€í•œ ë‹µë³€ì„ í˜¼ìžë§Œ ì•Œ ìˆ˜ ìžˆëŠ” ë‹¨ì–´ë‚˜ ê¸°í˜¸ë¡œ ìž…ë ¥í•´ ì£¼ì„¸ìš”.<br />
+		ë¹„ë°€ë²ˆí˜¸ë¥¼ ì°¾ì„ ë•Œ í•„ìš”í•˜ë¯€ë¡œ ë°˜ë“œì‹œ ê¸°ì–µí•´ ì£¼ì„¸ìš”.
 		</div>
 		</td>
 	</tr>
 	<tr>
-		<td class="key">ÀÌ¸ÞÀÏ</td>
+		<td class="key">ì´ë©”ì¼</td>
 		<td><form:input type="text" path="email" size="35" class="input" />
 		<font color="red" id="font" ><form:errors path="email"/></font>
 		<span class="hmsg" id="hLayeremail"></span></td>
 	</tr>
 	<tr>
-		<td class="key">Áö¿ª</td>
+		<td class="key">ì§€ì—­</td>
 		<td><form:input path="area" size="15" class="input" />
 		
 		</td>
 	</tr>
 	<tr>
-		<td class="key">»çÁø</td>
+		<td class="key">ì‚¬ì§„</td>
 		<td><input type="file" name="picture"/>
 	</td>
 	</tr>
 	<tr>
 		<td></td>
 		<td><div class="submitbox">
-			<input type="submit" value="Á¤º¸¼öÁ¤" class="btnblue" />
+			<input type="submit" value="ì •ë³´ìˆ˜ì •" class="btnblue" />
 		</div></td>
 	</tbody>
 </table>

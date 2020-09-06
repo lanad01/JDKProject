@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 
 <link	href='https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff'	rel='stylesheet' type='text/css'>
@@ -32,40 +32,40 @@
 <body>
 	<div class="main">
 		<div class="header">
-			<h2><font face='BMDOHYEON'>¸¶ÀÌÆäÀÌÁö</font></h2>
+			<h2><font face='BMDOHYEON'>ë§ˆì´íŽ˜ì´ì§€</font></h2>
 		</div>
 		<div class="msg">
 			<div class="xr">
 				<ul>
-					<li><a onclick="morebox();">È¸¿øÁ¤º¸</a><img
+					<li><a onclick="morebox();">íšŒì›ì •ë³´</a><img
 						src="../img/dropClose.gif" onClick="moreboxClose()" height=10 width=10>
 						<div id="morebox" class="morebox">
 							<ul>
-								<li style="margin-top: 2px;"><a href="../myaccount/pagecontrol.html?page=2" id="1"	onmouseover="focus(this)">Á¤º¸¼öÁ¤</a></li>
-								<li><a href="" id="2" onmouseover="focus(this)" onClick="pwdChange()">ºñ¹øº¯°æ</a></li>
-								<li><a href="../myaccount/pagecontrol.html?page=4" id="3" onmouseover="focus(this)">È¸¿øÅ»Åð</a></li>
+								<li style="margin-top: 2px;"><a href="../myaccount/pagecontrol.html?page=2" id="1"	onmouseover="focus(this)">ì •ë³´ìˆ˜ì •</a></li>
+								<li><a href="" id="2" onmouseover="focus(this)" onClick="pwdChange()">ë¹„ë²ˆë³€ê²½</a></li>
+								<li><a href="../myaccount/pagecontrol.html?page=4" id="3" onmouseover="focus(this)">íšŒì›íƒˆí‡´</a></li>
 							</ul>
 						</div>
 					</li>
-					<li><a href="">°Ô½Ã¹°</a></li>
-					<li><a href="">´ñ±Û</a></li>
-					<li><a href="">ÇÑÁÙÀÇ°ß</a></li>
-					<li><a href="">Ä³¸¯ÅÍ</a></li>
-					<li><a href="">Æ÷ÀÎÆ®</a></li>
-					<li><a href="">Á¢¼Ó±â·Ï</a></li>
+					<li><a href="">ê²Œì‹œë¬¼</a></li>
+					<li><a href="">ëŒ“ê¸€</a></li>
+					<li><a href="">í•œì¤„ì˜ê²¬</a></li>
+					<li><a href="">ìºë¦­í„°</a></li>
+					<li><a href="">í¬ì¸íŠ¸</a></li>
+					<li><a href="">ì ‘ì†ê¸°ë¡</a></li>
 				</ul>
 			</div>
 			<br/>
 			<br/>
 			<div class="rcontent">
 				<div class="photo">
-					<img alt="³» »çÁø" src="${pageContext.request.contextPath}/upload/${USER.picture_url }"  
+					<img alt="ë‚´ ì‚¬ì§„" src="${pageContext.request.contextPath}/upload/${USER.picture_url }"  
 					width="100" height="70" onerror="this.src='../img/noprofile.gif' ">
 
 				</div>
 				<div class="Explain">
-					ÀÌ °÷Àº <strong>${USER.name }(${USER.nick })</strong>´ÔÀ» À§ÇÑ °ø°£ÀÔ´Ï´Ù. <br /> È¸¿ø´ÔÀÇ È°µ¿³»¿ªÀ» ½Ç½Ã°£À¸·Î È®ÀÎÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù.<br />
-					È¸¿øµî±Þ : ·¹º§11(11/25) Æ÷ÀÎÆ® : 1,362 °¡ÀÔÀÏ : ${USER.register_date }
+					ì´ ê³³ì€ <strong>${USER.name }(${USER.nick })</strong>ë‹˜ì„ ìœ„í•œ ê³µê°„ìž…ë‹ˆë‹¤. <br /> íšŒì›ë‹˜ì˜ í™œë™ë‚´ì—­ì„ ì‹¤ì‹œê°„ìœ¼ë¡œ í™•ì¸í•˜ì‹¤ ìˆ˜ ìžˆìŠµë‹ˆë‹¤.<br />
+					íšŒì›ë“±ê¸‰ : ë ˆë²¨11(11/25) í¬ì¸íŠ¸ : 1,362 ê°€ìž…ì¼ : ${USER.register_date }
 				</div>
 			</div><br/><br/><br/><br/>
 			
@@ -73,34 +73,34 @@
 				<c:when test="${MPBODY==1 }">
 					<div class="myAcitivity" style="border-top:3px solid black; border-bottom:3px solid black; " >
 					<table class="posttable" rules="all" style="border:2px dotted silver; margin-top:20px; margin-bottom:20px;">
-					<tr><td class="region"><h5>³»°¡ µî·ÏÇÑ °Ô½Ã¹°</h5>
+					<tr><td class="region"><h5>ë‚´ê°€ ë“±ë¡í•œ ê²Œì‹œë¬¼</h5>
 						<c:forEach var="myPost"  begin="0" end="10" varStatus="status">
-							<li style="list-style:none;"><p>¤ý${status.index }</p></li>
+							<li style="list-style:none;"><p>ã†${status.index }</p></li>
 						</c:forEach>
 						</td>
 					
-						<td class="region"><h5>³» °Ô½Ã¹°¿¡ ´Þ¸° ´ñ±Û</h5>
+						<td class="region"><h5>ë‚´ ê²Œì‹œë¬¼ì— ë‹¬ë¦° ëŒ“ê¸€</h5>
 						<c:forEach var="myPost"  begin="0" end="10" varStatus="status">
-							<li style="list-style:none;"><p>¤ý${status.index }</p></li>
+							<li style="list-style:none;"><p>ã†${status.index }</p></li>
 						</c:forEach>
 						</td>
 					</tr>
-					<tr><td class="region"><h5>³»°¡ µî·ÏÇÑ ´ñ±Û</h5>
+					<tr><td class="region"><h5>ë‚´ê°€ ë“±ë¡í•œ ëŒ“ê¸€</h5>
 						<c:forEach var="myPost"  begin="0" end="10" varStatus="status">
-							<li style="list-style:none;"><p>¤ý${status.index }</p></li>
+							<li style="list-style:none;"><p>ã†${status.index }</p></li>
 						</c:forEach>
 						</td>
 					
-						<td class="region"><h5>³» ´ñ±Û¿¡ ´Þ¸° ÇÑÁÙ ÀÇ°ß</h5>
+						<td class="region"><h5>ë‚´ ëŒ“ê¸€ì— ë‹¬ë¦° í•œì¤„ ì˜ê²¬</h5>
 						<c:forEach var="myPost"  begin="0" end="10" varStatus="status">
-							<li style="list-style:none;"><p>¤ý${status.index }</p></li>
+							<li style="list-style:none;"><p>ã†${status.index }</p></li>
 						</c:forEach>
 						</td>
 					</tr>
 				</table>
 				</div>
 				</c:when>
-				<c:when test="${MPBODY=='2'}"> <!--  Á¤º¸¼öÁ¤ ¹öÆ° Å¬¸¯  -->
+				<c:when test="${MPBODY=='2'}"> <!--  ì •ë³´ìˆ˜ì • ë²„íŠ¼ í´ë¦­  -->
 					<div style="border:none;">
 					<jsp:include page="/myaccount/modify.html" flush="false"/>
 					</div>
@@ -118,6 +118,6 @@
 			</c:choose>
 		</div>
 	</div>
-<!-- UiÁ¾·á  -->
+<!-- Uiì¢…ë£Œ  -->
 </body>
 </html>

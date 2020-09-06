@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>  
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
 .loginborder{ padding:10px 10px 10px 10px;}
@@ -23,9 +23,9 @@
 			<font color="red"><form:errors path="password"/></font><br/>
 		</td>
 		<td style="padding-left:30px;">
-			<input type="submit" style="font-family:'BMDOHYEON'; font-size:0.8em;"  value="·Î±×ÀÎ"/>
+			<input type="submit" style="font-family:'BMDOHYEON'; font-size:0.8em;"  value="ë¡œê·¸ì¸"/>
 			<input type="button" style="font-family:'BMDOHYEON'; font-size:0.8em;" 
-			value="È¸¿ø°¡ÀÔ" onClick="location.href='../register/register.html?BODY=register/register'">
+			value="íšŒì›ê°€ìž…" onClick="location.href='../register/register.html?BODY=register/register'">
 		</td>
 	</tr>
 	</table>

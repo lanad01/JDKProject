@@ -1,13 +1,14 @@
 package dao;
 
-import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import model.Bbs;
+import model.Search;
 @Repository
 public class BBSListDaoImpl implements BBSListDao {
 	@Autowired
@@ -62,5 +63,25 @@ public class BBSListDaoImpl implements BBSListDao {
 	public void like(Bbs bbs) {
 		// TODO Auto-generated method stub
 		session.update("bbs.like",bbs);
+	}
+	public Integer getSeqnoByRownum(Bbs bbs) {
+		// TODO Auto-generated method stub
+		System.out.println("dao Impl -1된 rownum : "+bbs.getRn());
+		return session.selectOne("bbs.getSeqnoByRownum",bbs);
+	}
+	public List<Bbs> searchBbs(Search sch) {
+		// TODO Auto-generated method stub
+		System.out.println("Impl searchKey : "+sch.getSearchkey());
+		if(sch.getSearchkey().contentEquals("schTotal")){
+			System.out.println("SCHTotal 분기");
+			return session.selectList("bbs.searchByTotal",sch);
+		}else if(sch.getSearchkey().contentEquals("schContent")) {
+			System.out.println("SCHContent 분기");
+			return session.selectList("bbs.searchByContent", sch);
+		}else if(sch.getSearchkey().contentEquals("schNickNm")) {
+			System.out.println("SCHbyNick 분기");
+			return session.selectList("bbs.searchByName",sch);
+		}
+		return null;
 	}
 }

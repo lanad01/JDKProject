@@ -7,4 +7,5 @@ public interface WriteDao { // 해줘야할 것 - Insert, seqno
 	public void insertBBS(Bbs bbs);
 	Integer getWriter(String id);
 	public void addHit(Integer seqno);
+	Integer getMaxRownum(String bbstype);
 }
