@@ -38,7 +38,18 @@ public class WriteDaoImpl implements WriteDao {
 		bbs.setPoint(0);
 		bbs.setSeqno(seqno);
 		bbs.setRegister_date(bbsDate); // 작성일 설정
-		session.insert("bbs.putBbs",bbs);
+		if(bbs.getUser_no()==1) {
+			bbs.setBbstype("NOTICE");
+		}
+		for(int i=61; i<90; i++) {
+			bbs.setContent("질문답변글"+i);
+			bbs.setTitle("글 제목"+i);
+			bbs.setSeqno(i);
+			bbs.setPoint(i);
+			bbs.setRn(i);
+			session.insert("bbs.putBbs",bbs);
+		}
+//		session.insert("bbs.putBbs",bbs);
 		
 	}
 	public void addHit(Integer seqno) {

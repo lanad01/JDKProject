@@ -88,8 +88,8 @@ $(function(){
 								<tr id="bbsBottomBorder">
 									<td class="snum">
 									<c:choose>
-										<c:when test="${BBSTYPE=='ganyum' }">${ ganyumListSize-status.index}</c:when>
-										<c:when test="${BBSTYPE=='whole' }">${wholeListSize-status.index }</c:when>
+										<c:when test="${BBSTYPE=='ganyum' }">${ganyumListSize-((PM.currentPage-1)*10)-status.index}</c:when>
+										<c:when test="${BBSTYPE=='whole' }">${(wholeListSize)-((PM.currentPage-1)*10)-status.index }</c:when>
 										<c:otherwise>
 										${bbs.rn }	
 										</c:otherwise>
@@ -114,7 +114,7 @@ $(function(){
 				</tbody>
 			</table>
 		</div>
-		<div class="bottom">
+		<div class="bottom" style="margin-right:50px;">
 			<div class="pagebox01">
 			<input type="hidden" id="current" value="${PM.currentPage }">
 			<c:if test="${PM.prev }" >
@@ -154,7 +154,9 @@ $(function(){
          </div>
          <div class="searchform_right" style="float:left;">
          <a href="../bbs/bbs.html?bbstype=${BBSTYPE}"><input type="button" name="bbsList" value="목록으로 " /></a>
+         <c:if test="${ (BBSTYPE=='freebbs') || BBSTYPE=='info' || BBSTYPE=='qna' || BBSTYPE=='exp'}">
          <a href="../write/bbs.html?bbstype=${BBSTYPE}"><input type="button" name="bbsList" value="글쓰기 " /></a>
+         </c:if>
          </div>
       </form>
 	</div><!--  searchForm -->

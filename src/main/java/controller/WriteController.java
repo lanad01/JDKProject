@@ -51,12 +51,16 @@ public class WriteController {
 		Integer user_no=writeDao.getWriter(id); //세션을 통해서 얻은 id를 DB에 보내서 등가조인
 		bbs.setUser_no(user_no); // 받은 유저넘버를 실질적으로 bbs객체에 삽입
 		//종합된 bbs를 최종적으로 insert, 작성일자는 Impl에서 처리
-		Integer maxRow=writeDao.getMaxRownum(bbsType);
-		if(maxRow==null) {
-			maxRow=0;
+		try {
+			Integer maxRow=writeDao.getMaxRownum(bbsType);
+			if(maxRow==null) {
+				maxRow=0;
+			}
+			bbs.setRn(maxRow+1);
+			System.out.println("MAx Ronwnum in wrtieController : "+maxRow);
+		}catch(Exception e) {
+			
 		}
-		System.out.println("MAx Ronwnum in wrtieController : "+maxRow);
-		bbs.setRn(maxRow+1);
 		writeDao.insertBBS(bbs);
 		return new ModelAndView("redirect:/bbs/bbsview.html?seqno="+bbs.getSeqno());
 	}

@@ -59,10 +59,14 @@ public class BBSController {
 			noticeRepAndrere.add(noticeRepNum+"+"+noticeRereNum);
 		}
 		mav.addObject("NOTICEREnRERE",noticeRepAndrere);
-		//페이징 작업
-		List<Bbs> AllList=new LinkedList<Bbs>();
-		if(PAGENO == null) PAGENO = 1;
-		int totalCnt = 0;	//전체 글의 갯수 검색
+		
+		//페이징에 쓰일 데이터 초기화
+		List<Bbs> AllList=new LinkedList<Bbs>(); // select 되는 모든 게시판을 담을 정보
+		List<Bbs> bbsList=new LinkedList<Bbs>(); // 각 페이지마다 담을 게시판 리스트 // displayPerPage : 10
+		if(PAGENO == null) PAGENO = 1; //PageNo가 Null이면 1로 Default
+		int totalCnt = 0;	//전체 글의 갯수를 넣을 int
+		
+		//여기서부턴 Select 될 게시판 / 반드시 정의해야 할 데이터 - AllList, totalCnt
 		if(bbstype.contentEquals("freebbs") || bbstype.contentEquals("info") || bbstype.contentEquals("qna") || bbstype.contentEquals("exp")) {
 			System.out.println("개념글이나 전체글이 아닌 게시판");
 			totalCnt=bbsListDao.getPageCnt(bbstype);
@@ -82,27 +86,8 @@ public class BBSController {
 				mav.addObject("wholeListSize",AllList.size());
 			}
 		}
-		List<Bbs> bbsList=new LinkedList<Bbs>();
-		for(int i=((PAGENO-1)*10); i< ((PAGENO-1)*10)+10; i++) {
-			// PAGENO * 5 + 1 부터  PAGENO *5 +5
-			try {
-			bbsList.add(AllList.get(i));
-			}catch(IndexOutOfBoundsException e) {
-			}
-		}
-		//작성자와 대댓글 숫자 작성
-		List<String> writerList=new ArrayList<String>();
-		List<String> repAndrere=new ArrayList<String>();
-		for( int t = 0; t < bbsList.size(); t++){ 
-			String writer=bbsListDao.getWriter(bbsList.get(t).getUser_no()); //게시글 리스트들의 user_no들만큼 반복하며 writer집어넣기
-			writerList.add(writer);
-			mav.addObject("WRITER",writer); //저짝에서 새로운 forEach로 받는다
-			// 게시글의 댓글과 대댓글 수를 구하는 로직
-			Integer repNum=repDao.getRepList(bbsList.get(t).getSeqno()).size();
-			Integer rereNum=repDao.getRereNum(bbsList.get(t).getSeqno());
-			repAndrere.add(repNum+"+"+rereNum);
-		}
-		// 검색작업
+		
+		// 검색작업을 통한 SelectList AllList에 넣는다
 		List<Bbs> searchedBbs=new ArrayList<Bbs>();
 		String searchKey = request.getParameter("searchKey");
 		String keyword = request.getParameter("keyword");
@@ -111,7 +96,7 @@ public class BBSController {
 		Search sch=new Search();
 		sch.setKeyword(keyword);
 		sch.setSearchkey(searchKey);
-		System.out.println("BBSTYPE before search : "+bbstype);
+		// 일반 게시판을 통한 검색 AllList Select
 		if(bbstype.contentEquals("freebbs") || bbstype.contentEquals("info") || bbstype.contentEquals("qna") || bbstype.contentEquals("exp")) {
 			System.out.println("자유게시판 정보 질답 경험담 게시판 검색 분기");
 			sch.setBbstype(bbstype);
@@ -119,7 +104,8 @@ public class BBSController {
 				searchedBbs = bbsListDao.searchBbs(sch);
 				for (int i = 0; i < searchedBbs.size(); i++) {
 					System.out.println(i + "번째 검색 글의 title : " + searchedBbs.get(i).getTitle());
-					bbsList=searchedBbs;
+					AllList=searchedBbs;
+					totalCnt=AllList.size();
 				}
 				if(searchedBbs.size()==0) {
 					mav.addObject("SEARCHEDBBS","0");
@@ -127,6 +113,7 @@ public class BBSController {
 			} catch(NullPointerException e) {
 				System.out.println("검색 Null");
 			}
+		//개념 및 전체글을 통한 AllList
 		}else if(bbstype.contentEquals("ganyum") || bbstype.contentEquals("whole")){
 			System.out.println("개념글 전체글 검색 분기");
 			sch.setBbstype("wholeAndGanyum"); //전체글이나 개념글에서 수행된 검색은 bbsType을 wholeAndGanyum으로 한다
@@ -135,24 +122,43 @@ public class BBSController {
 				for (int i = 0; i < searchedBbs.size(); i++) {
 					System.out.println(i + "번째 검색 글의 title : " + searchedBbs.get(i).getTitle());
 				}
-				bbsList=searchedBbs;
+				AllList=searchedBbs;
+				totalCnt=AllList.size();
 			}catch(Exception e) {
 				System.out.println("전체글 검색");
 			}
 		}
 		
-		// 페이징
-		System.out.println("게시판 타입 : "+bbstype+"   총 게시글 수 :" + totalCnt);
-		System.out.println("현재 페이지 : "+PAGENO);
+		
+		// 페이징 수행 필요한 정보 - 각 Select 게시판목록(AllList)의 totalBbsCnt, PageNo, bbstype
+		System.out.println("현재 페이지 : "+PAGENO+"게시판 타입 : "+bbstype+"   총 게시글 수 :" + totalCnt);
 		PageMaker pm=new PageMaker();
 		pm.setCurrentPage(PAGENO);
 		pm.setTotalBbsCnt(totalCnt);
 		pm.calcData();
 		
-		
+		// 각 페이지별로 AllList 값 10개씩 넣기
+		for(int i=((PAGENO-1)*10); i< ((PAGENO-1)*10)+10; i++) {
+			try {
+			bbsList.add(AllList.get(i));
+			}catch(IndexOutOfBoundsException e) {
+			}
+		}
+		//작성자와 대댓글 숫자 작성
+		List<String> writerList = new ArrayList<String>();
+		List<String> repAndrere = new ArrayList<String>();
+		for (int t = 0; t < bbsList.size(); t++) {
+			String writer = bbsListDao.getWriter(bbsList.get(t).getUser_no()); // 게시글 리스트들의 user_no들만큼 반복하며 writer집어넣기
+			writerList.add(writer);
+			mav.addObject("WRITER", writer); // 저짝에서 새로운 forEach로 받는다
+			// 게시글의 댓글과 대댓글 수를 구하는 로직
+			Integer repNum = repDao.getRepList(bbsList.get(t).getSeqno()).size();
+			Integer rereNum = repDao.getRereNum(bbsList.get(t).getSeqno());
+
+			repAndrere.add(repNum + "+" + rereNum);
+		}
 		//토탈 글 숫자 찾기
 		mav.addObject("totalPost",totalCnt);
-		//페이징 관련
 		mav.addObject("REPANDRERE",repAndrere);
 		mav.addObject("WRITERLIST",writerList);
 		mav.addObject("LIST",bbsList);
