@@ -95,8 +95,11 @@ public class PageMaker {
 		this.setStartPage(startPage);
 		
 		
-		tempEndPage=(int)(Math.ceil(totalBbsCnt/10)+1); // 147/10= 15
-		
+		tempEndPage=(int)(Math.ceil(totalBbsCnt/10))+1; // 147/10= 15
+		if(totalBbsCnt%10==0) {
+			System.out.println((int)(Math.ceil(totalBbsCnt/10)));
+			tempEndPage--;
+		}
 		this.setTempEndPage(tempEndPage);
 		if(endPage > tempEndPage) {
 			endPage=tempEndPage; // 138개의 글이라 14개의 페이지가 나와야하는데 20개가 나오면 안되잖아

@@ -267,7 +267,7 @@ function fnLoginBtn(){
     <div class="row">
       <div class="col-lg-3" style="margin-top:25px;" >
         <div style="border:1px solid; padding:0px;  background-color:#dcdcdc">
-        	<font face='BMDOHYEON'>&nbsp; 회원로그인</font> 
+        	<font face='BMDOHYEON'>&nbsp; 회원로그인    ${sessionScope.loginUser }</font> 
         </div>
         <div  style="border:1px solid; padding:10px 0 15px 20px;">
         	<table>

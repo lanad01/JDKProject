@@ -89,7 +89,8 @@ $(function(){
 									<td class="snum">
 									<c:choose>
 										<c:when test="${BBSTYPE=='ganyum' }">${ganyumListSize-((PM.currentPage-1)*10)-status.index}</c:when>
-										<c:when test="${BBSTYPE=='whole' }">${(wholeListSize)-((PM.currentPage-1)*10)-status.index }</c:when>
+										<c:when test="${BBSTYPE=='whole' }">${wholeListSize-((PM.currentPage-1)*10)-status.index }</c:when>
+										<c:when test="${SCH.search }">${SearchedBbsSize-((PM.currentPage-1)*10)-status.index  }</c:when>
 										<c:otherwise>
 										${bbs.rn }	
 										</c:otherwise>
@@ -122,18 +123,35 @@ $(function(){
 			<a href="../bbs/bbs.html?bbstype=${BBSTYPE}&PAGENO=${PM.startPage-1}">
 			<img src="../img/before.gif"alt="이전 10 페이지" /></a> 
 			</c:if>
+		<!--                   페이징 반복                                          -->			
 			<c:forEach  begin="${PM.startPage }" end="${PM.endPage}" var="idx" >
 			<img src="../img/split.gif" class="split" alt=""/> 
-			<c:if test="${PM.currentPage==idx }">
-			<a href="../bbs/bbs.html?bbstype=${BBSTYPE}&PAGENO=${idx}"  style="color:black;"><font color="blue" size="5px">${idx}</font></a>
+			<!--  bbs/bbs.html?bbstype=whole&search=yes&searchKey=schTotal&keyword=5 -->
+			<c:choose>
+				<c:when test="${SCH.search}">
+					<c:if test="${PM.currentPage==idx }"> <!--  이건 현재 페이지 강조표현 -->
+					<a href="../bbs/bbs.html?bbstype=${BBSTYPE}&PAGENO=${idx}&searchKey=${SCH.searchkey}&keyword=${SCH.keyword}&search=yes"  
+					style="color:black;"><font color="blue" size="5px">${idx}</font></a>
+					</c:if>
+					<c:if test="${PM.currentPage!=idx }">
+					<a href="../bbs/bbs.html?bbstype=${BBSTYPE}&PAGENO=${idx}&searchKey=${SCH.searchkey}&keyword=${SCH.keyword}&search=yes"  style="color:black;">${idx}</a>
+					</c:if>
+				</c:when>
+				<c:otherwise>
+				<c:if test="${PM.currentPage==idx }"> <!--  이건 현재 페이지 강조표현 -->
+				<a href="../bbs/bbs.html?bbstype=${BBSTYPE}&PAGENO=${idx}"  style="color:black;"><font color="blue" size="5px">${idx}</font></a>
+				</c:if>
+				<c:if test="${PM.currentPage!=idx }">
+				<a href="../bbs/bbs.html?bbstype=${BBSTYPE}&PAGENO=${idx}"  style="color:black;">${idx}</a>
 			</c:if>
-			<c:if test="${PM.currentPage!=idx }">
-			<a href="../bbs/bbs.html?bbstype=${BBSTYPE}&PAGENO=${idx}"  style="color:black;">${idx}</a>
-			</c:if>
+				</c:otherwise>
+			</c:choose>
+			
 			</c:forEach>
+		<!--                   페이징 반복                                          -->		
 			<c:if test="${PM.next }" >
 			<a href="../bbs/bbs.html?bbstype=${BBSTYPE}&PAGENO=${PM.endPage+1 }"><img src="../img/behind.gif" alt="다음 10 페이지" /></a>
-			<a href="../bbs/bbs.html?bbstype=${BBSTYPE}&PAGENO=${PM.totalPage}"><img src="../img/lastpage.gif" alt="마지막페이지" /></a>
+			<a href="../bbs/bbs.html?bbstype=${BBSTYPE}&PAGENO=${PM.tempEndPage}"><img src="../img/lastpage.gif" alt="마지막페이지" /></a>
 			</c:if>
 			
 		</div>
@@ -142,11 +160,12 @@ $(function(){
 		<div class="searchform">
   	    <form name="bbssearchf" action="../bbs/bbs.html">
          <input type="hidden" name="bbstype" id="bbstype" value="${BBSTYPE}" />
+         <input type="hidden" name="search" value="yes">
          <div style="float:left; width:60%"> 
          <select id="searchKey" name="searchKey">
             <option value="schTotal">제목+내용</option>
             <option value="schContent">내용</option>
-            <option value="schNickNm">닉네임</option>
+            <option value="schNickNm">이름</option>
          </select> 
          
          <input type="text" name="keyword" class="input" style="height:25px;" />

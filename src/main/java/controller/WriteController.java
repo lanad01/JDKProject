@@ -46,6 +46,7 @@ public class WriteController {
 		} // 컨트롤러에서 insert해야 하는 부분 : / bbsType, user_no / form form 으로 알아서 insert된 부분 : title content 
 		System.out.println("bbsType :"+bbs.getBbstype());
 		String bbsType=request.getParameter("bbstype"); //bbsType을 form으로 받아오고
+		
 		bbs.setBbstype(bbsType);
 		String id=(String) session.getAttribute("loginUser");
 		Integer user_no=writeDao.getWriter(id); //세션을 통해서 얻은 id를 DB에 보내서 등가조인

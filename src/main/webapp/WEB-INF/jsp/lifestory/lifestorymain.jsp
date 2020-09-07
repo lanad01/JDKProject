@@ -39,13 +39,13 @@ font-weight: normal; font-style: normal;
 
 </style>
 <body>
+<br/>
 	<div class="upperdiv">
-		<img alt="" src="img/total.jpg" width=50 height=20>
 		<table class="upper">
 			<tr style="width:400px;"> <%@ include file="/WEB-INF/jsp/gridBBS/ad.jsp" %></tr>
 			<tr>
 				<td><img alt="" src="../img/total.jpg">&nbsp;&nbsp; 
-				<font face='BMDOHYEON'>JDK에서 일본 개발자 생활기를 연재하실 분들을 모집합니다. </font></td>
+				<font face='BMDOHYEON'>JDK에서 일본 개발자 생활기를 연재하실 분들을 모집합니다.<a href="../bbs/bbsview.html?seqno=3">[ 자세히 ]</a> </font></td>
 				
 			</tr>
 		</table>

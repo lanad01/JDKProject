@@ -36,10 +36,10 @@ public class BBSController {
 	@Autowired
 	UserDao userDao;
 	@RequestMapping(value="/bbs/bbs.html") // 자유게시판 목록 여기서 받은 게시판 LIST 목록을 ADD해야한다.
-	public ModelAndView freeBBS(HttpServletRequest request,String bbstype,Integer PAGENO) {
+	public ModelAndView freeBBS(HttpServletRequest request,String bbstype,Integer PAGENO,String search) {
 		System.out.println("bbs/bbs.html 수신");
 		ModelAndView mav=new ModelAndView("menu_header");
-		if(bbstype==null) bbstype="freebbs"; //bbstype이 널값일 경우에 디폴트는 자게
+		if(bbstype==null) bbstype="whole"; //bbstype이 널값일 경우에 디폴트는 자게
 		//게시판에서 비로그인 상태로 글쓰기를 눌렀을 경우.
 		String loginWrite=request.getParameter("writelogin");
 		try {
@@ -75,61 +75,71 @@ public class BBSController {
 			System.out.println("개념글");
 			AllList=bbsListDao.getGanyum();	
 			totalCnt=AllList.size();
-			for(int i=0; i<AllList.size(); i++) {
-				mav.addObject("ganyumListSize",AllList.size());
-			}
+			mav.addObject("ganyumListSize",AllList.size());
+
 		}else if(bbstype.contentEquals("whole")) {
 			System.out.println("전체글");
 			AllList=bbsListDao.getWhole();
 			totalCnt=AllList.size();
-			for(int i=0; i<AllList.size(); i++) {
-				mav.addObject("wholeListSize",AllList.size());
-			}
+			mav.addObject("wholeListSize",AllList.size());
 		}
 		
 		// 검색작업을 통한 SelectList AllList에 넣는다
-		List<Bbs> searchedBbs=new ArrayList<Bbs>();
-		String searchKey = request.getParameter("searchKey");
-		String keyword = request.getParameter("keyword");
-		if(searchKey==null) searchKey="";
-		if(keyword==null) keyword="";
-		Search sch=new Search();
-		sch.setKeyword(keyword);
-		sch.setSearchkey(searchKey);
-		// 일반 게시판을 통한 검색 AllList Select
-		if(bbstype.contentEquals("freebbs") || bbstype.contentEquals("info") || bbstype.contentEquals("qna") || bbstype.contentEquals("exp")) {
-			System.out.println("자유게시판 정보 질답 경험담 게시판 검색 분기");
-			sch.setBbstype(bbstype);
-			try {
-				searchedBbs = bbsListDao.searchBbs(sch);
-				for (int i = 0; i < searchedBbs.size(); i++) {
-					System.out.println(i + "번째 검색 글의 title : " + searchedBbs.get(i).getTitle());
-					AllList=searchedBbs;
-					totalCnt=AllList.size();
+		try {
+			System.out.println("search 여부 : "+search);
+			if(search.contentEquals("yes")) { //검색을 통한 bbs/bbs.html 호출
+				System.out.println("search 프로세스 시작");
+				List<Bbs> searchedBbs=new ArrayList<Bbs>();
+				String searchKey = request.getParameter("searchKey");
+				String keyword = request.getParameter("keyword");
+				if(searchKey==null) searchKey="";
+				if(keyword==null) keyword="";
+				Search sch=new Search();
+				sch.setKeyword(keyword);
+				sch.setSearchkey(searchKey);
+				sch.setBbstype(bbstype);
+				sch.setSearch(true);
+				mav.addObject("SCH",sch);
+				// bbslist jsp에서 페이징 클릭시 바람직한 페이징으로 가게 하기 위함
+				if(bbstype.contentEquals("freebbs") || bbstype.contentEquals("info") || bbstype.contentEquals("qna") || bbstype.contentEquals("exp")) {
+					System.out.println("자유게시판 정보 질답 경험담 게시판 검색 분기");
+					sch.setBbstype(bbstype);
+					try {
+						searchedBbs = bbsListDao.searchBbs(sch);
+						for (int i = 0; i < searchedBbs.size(); i++) {
+							System.out.println(i + "번째 검색 글의 title : " + searchedBbs.get(i).getTitle());
+						}
+						AllList=searchedBbs;
+						totalCnt=AllList.size();
+						mav.addObject("SearchedBbsSize",totalCnt);
+						if(searchedBbs.size()==0) {
+							mav.addObject("SEARCHEDBBS","0");
+						}
+					} catch(NullPointerException e) {
+						System.out.println("검색 Null");
+					}
+				//개념 및 전체글을 통한 AllList
+				}else if(bbstype.contentEquals("ganyum") || bbstype.contentEquals("whole")){
+					System.out.println("개념글 전체글 검색 분기");
+					sch.setBbstype("wholeAndGanyum"); //전체글이나 개념글에서 수행된 검색은 bbsType을 wholeAndGanyum으로 한다
+					try { 
+						searchedBbs=bbsListDao.searchBbs(sch); // bbstype이 wholeAndGanyum이며 searchKey와 keyword는 위에서 Inject되었다.
+						for (int i = 0; i < searchedBbs.size(); i++) {
+							System.out.println(i + "번째 검색 글의 title : " + searchedBbs.get(i).getTitle());
+						}
+						AllList=searchedBbs;
+						totalCnt=AllList.size();
+						mav.addObject("SearchedBbsSize",totalCnt);
+					}catch(Exception e) {
+						System.out.println("전체글 검색");
+					}
 				}
-				if(searchedBbs.size()==0) {
-					mav.addObject("SEARCHEDBBS","0");
-				}
-			} catch(NullPointerException e) {
-				System.out.println("검색 Null");
 			}
-		//개념 및 전체글을 통한 AllList
-		}else if(bbstype.contentEquals("ganyum") || bbstype.contentEquals("whole")){
-			System.out.println("개념글 전체글 검색 분기");
-			sch.setBbstype("wholeAndGanyum"); //전체글이나 개념글에서 수행된 검색은 bbsType을 wholeAndGanyum으로 한다
-			try { 
-				searchedBbs=bbsListDao.searchBbs(sch); // bbstype이 wholeAndGanyum이며 searchKey와 keyword는 위에서 Inject되었다.
-				for (int i = 0; i < searchedBbs.size(); i++) {
-					System.out.println(i + "번째 검색 글의 title : " + searchedBbs.get(i).getTitle());
-				}
-				AllList=searchedBbs;
-				totalCnt=AllList.size();
-			}catch(Exception e) {
-				System.out.println("전체글 검색");
-			}
+		}catch(Exception e) {
+			System.out.println("Search를 통한 bbs/bbs.html 호출이 아님");
 		}
 		
-		
+		// 일반 게시판을 통한 검색 AllList Select
 		// 페이징 수행 필요한 정보 - 각 Select 게시판목록(AllList)의 totalBbsCnt, PageNo, bbstype
 		System.out.println("현재 페이지 : "+PAGENO+"게시판 타입 : "+bbstype+"   총 게시글 수 :" + totalCnt);
 		PageMaker pm=new PageMaker();
@@ -154,10 +164,10 @@ public class BBSController {
 			// 게시글의 댓글과 대댓글 수를 구하는 로직
 			Integer repNum = repDao.getRepList(bbsList.get(t).getSeqno()).size();
 			Integer rereNum = repDao.getRereNum(bbsList.get(t).getSeqno());
-
 			repAndrere.add(repNum + "+" + rereNum);
 		}
 		//토탈 글 숫자 찾기
+		
 		mav.addObject("totalPost",totalCnt);
 		mav.addObject("REPANDRERE",repAndrere);
 		mav.addObject("WRITERLIST",writerList);

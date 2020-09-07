@@ -90,12 +90,14 @@
 	where bbstype=#{ bbstype} and
 	title like '%' || #{keyword} || '%' or
 	content like '%' || #{keyword} || '%'
+	order by seqno desc
 </select>
 <select id="searchByContent" resultType="model.Bbs" parameterType="model.Search">
 	select * 
 	from bbs_info
 	where bbstype=#{ bbstype} and
 	content like '%' || #{keyword} || '%'
+	order by seqno desc
 </select>
 <select id="searchByName" resultType="model.Bbs" parameterType="model.Search">
 	select b.* from(
@@ -103,7 +105,7 @@
 	where name like '%' || #{keyword} || '%') u left join bbs_info b
 	on u.user_no=b.user_no
 	where b.bbstype=#{bbstype}
-	order by b.rn
+	order by b.rn, b.seqno desc
 </select>
 <select id="schAtWholeAndGanyumByTotal" resultType="model.Bbs" parameterType="model.Search">
 	select * 
@@ -123,18 +125,18 @@
 	select user_no from user_info 
 	where name like '%' || #{keyword} || '%') u left join bbs_info b
 	on u.user_no=b.user_no
-	seqno desc
+	order by seqno desc
 </select>
 <select id="getGanyum" resultType="model.Bbs">
 	select * from bbs_info
 	where point >= 5
-	order by seqno
+	order by seqno desc
 </select>
 
 <select id="getWhole" resultType="model.Bbs">
 	select * from bbs_info 
 	where user_no!=1 
-	order by seqno
+	order by seqno desc
 </select>
 </mapper>
 

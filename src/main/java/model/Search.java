@@ -4,6 +4,7 @@ public class Search {
 	private String bbstype;
 	private String keyword;
 	private String searchkey;
+	private boolean search=false;
 	public String getSearchkey() {
 		return searchkey;
 	}
@@ -22,4 +23,11 @@ public class Search {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
+	public boolean isSearch() {
+		return search;
+	}
+	public void setSearch(boolean search) {
+		this.search = search;
+	}
+	
 }

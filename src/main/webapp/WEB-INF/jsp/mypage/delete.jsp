@@ -16,11 +16,11 @@
 		format('woff');
 	font-weight: normal;
 	font-style: normal;
+	font-color: black;
 }
 
 .msg {
 	font-family: 'BMDOHYEON';
-	font-color: red;
 	padding: 15px 0 0 0;
 	width: 700px;
 }
@@ -61,7 +61,7 @@ table td{padding-left:20px;}
 			<table>
 				<tr>
 					<td class="pwd">비밀번호</td>
-					<td><input type="password" name="prepwd" id="inputpwd" style="color:black;">
+					<td><input type="password" name="prepwd" id="inputpwd" >
 						<a onClick="pwdCheck()"	style="background: #dcdcdc; border: 1px solid black;"><font	size="1.5em">일치 확인</font></a>
 						<div id="error"	style="color: red; margin-top: 5px; font-size: 0.8em;"></div>
 					</td>
