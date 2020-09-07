@@ -21,4 +21,6 @@ public interface BBSListDao { //DB에서 가져오기
 	void like(Bbs bbs);
 	Integer getSeqnoByRownum(Bbs bbs);
 	List<Bbs> searchBbs(Search sch);
+	List<Bbs> getGanyum();
+	List<Bbs> getWhole();
 }

@@ -72,16 +72,36 @@ public class BBSListDaoImpl implements BBSListDao {
 	public List<Bbs> searchBbs(Search sch) {
 		// TODO Auto-generated method stub
 		System.out.println("Impl searchKey : "+sch.getSearchkey());
-		if(sch.getSearchkey().contentEquals("schTotal")){
+		System.out.println("bbsType in Impl : " +sch.getBbstype());
+		System.out.println("Impl keyword"+sch.getKeyword());
+		if(!sch.getBbstype().contentEquals("wholeAndGanyum") && sch.getSearchkey().contentEquals("schTotal")){
 			System.out.println("SCHTotal 분기");
 			return session.selectList("bbs.searchByTotal",sch);
-		}else if(sch.getSearchkey().contentEquals("schContent")) {
+		}else if(!sch.getBbstype().contentEquals("wholeAndGanyum") && sch.getSearchkey().contentEquals("schContent")) {
 			System.out.println("SCHContent 분기");
 			return session.selectList("bbs.searchByContent", sch);
-		}else if(sch.getSearchkey().contentEquals("schNickNm")) {
+		}else if(!sch.getBbstype().contentEquals("wholeAndGanyum") && sch.getSearchkey().contentEquals("schNickNm")) {
 			System.out.println("SCHbyNick 분기");
 			return session.selectList("bbs.searchByName",sch);
+		// 개념글 및 전체글 검색 분기 ---------------------------------------------------------
+		}else if(sch.getBbstype().contentEquals("wholeAndGanyum") && sch.getSearchkey().contentEquals("schTotal") ) {
+			System.out.println("개념 및 전체글 검색 + SCHTotal분기");
+			return session.selectList("bbs.schAtWholeAndGanyumByTotal",sch);
+		}else if(sch.getBbstype().contentEquals("wholeAndGanyum") && sch.getSearchkey().contentEquals("schContent") ) {
+			System.out.println("개념 및 전체글 검색 + SCHContent분기");
+			return session.selectList("bbs.schAtWholeAndGanyumByContent",sch);
+		}else if(sch.getBbstype().contentEquals("wholeAndGanyum") && sch.getSearchkey().contentEquals("schNickNm") ) {
+			System.out.println("개념 및 전체글 검색 + SCHContent분기");
+			return session.selectList("bbs.schAtWholeAndGanyumByNick",sch);
 		}
 		return null;
+	}
+	public List<Bbs> getGanyum() {
+		// TODO Auto-generated method stub
+		return session.selectList("bbs.getGanyum");
+	}
+	public List<Bbs> getWhole() {
+		// TODO Auto-generated method stub
+		return session.selectList("bbs.getWhole");
 	}
 }

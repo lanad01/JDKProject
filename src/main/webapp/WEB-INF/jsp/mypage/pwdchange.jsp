@@ -17,7 +17,6 @@
 	font-weight: normal;
 	font-style: normal;
 }
-
 .msg {
 	font-size: 0.9em;
 	font-family: 'BMDOHYEON';
@@ -28,18 +27,14 @@
 .pwd{ border-bottom:2px solid #dcdcdc;}
 </style>
 <script src="../resources/vendor/jquery/jquery.min.js"></script>
-<script>
-function close2(frm){
-	document.getElementById("main").style.display = "none";
-	self.close();
-	window.opener.location.reload();
+<script type="text/javascript">
+function close3(){
 	var result = confirm("정말로 변경하시겠습니까?");
-	if(result == false) {
-		alert('비밀번호 변경이 취소 되었습니다.');
-		return false;
-	}else{
-	return true;
+	if(result == false)	return false;
+	else {
+		return true;	
 	}
+	
 }
 function pwdCheck(){
 	var prepwd=document.getElementById("prepwd").value; 
@@ -68,13 +63,12 @@ function pwdCheck3(){
 		document.getElementById("error3").innerHTML="비밀번호가 일치합니다.";
 	}
 }
-
 </script>
 </head>
 <body>
 	<div id="main" style="display:block;">
 		<div class="msg">
-			<form:form action="../myaccount/pwdchange.html" onSubmit="return close2(this);" method="post" modelAttribute="user" name="fm">
+			<form:form action="../myaccount/pwdchange.html" onSubmit="return close3();" method="post" modelAttribute="user" name="fm">
 				<form:hidden path="user_no" id="user_no"/>
 				<form:hidden path="password" id="userpwd"/>
 				<form:hidden path="id" id="id"/>

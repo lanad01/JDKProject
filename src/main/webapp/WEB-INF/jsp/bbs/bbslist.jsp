@@ -26,7 +26,7 @@ $(function(){
 <body>
 	<input type="hidden" id="search" value="${SEARCHEDBBS }">
 	<div class="upperdiv">
-		<img alt="" src="img/total.jpg" width=50 height=20>
+		<br/>
 		<table class="upper">
 			<tr style="width:400px;"> <%@ include file="/WEB-INF/jsp/gridBBS/ad.jsp" %></tr>
 			<tr>
@@ -87,8 +87,14 @@ $(function(){
 					<c:forEach var="bbs" items="${LIST }" varStatus="status" >
 								<tr id="bbsBottomBorder">
 									<td class="snum">
-									${bbs.rn }
-<%-- 									<c:forEach var="rownum" items="${ROWNUMLIST}" begin="${status.index}" end="${status.index}">${rownum }</c:forEach> --%>
+									<c:choose>
+										<c:when test="${BBSTYPE=='ganyum' }">${ ganyumListSize-status.index}</c:when>
+										<c:when test="${BBSTYPE=='whole' }">${wholeListSize-status.index }</c:when>
+										<c:otherwise>
+										${bbs.rn }	
+										</c:otherwise>
+									</c:choose>
+									
 									</td>
 									<td class="b"><a href="../bbs/bbsview.html?seqno=${bbs.seqno}">${bbs.title }</a>
 									<span class="comment">
@@ -110,18 +116,31 @@ $(function(){
 		</div>
 		<div class="bottom">
 			<div class="pagebox01">
-			<img src="../img/firstpage.gif" alt="처음페이지" /> 
-			<img src="../img/before.gif"alt="이전 10 페이지" />
-			<c:forEach var="page" begin="1" end="${PAGE_CNT}">
+			<input type="hidden" id="current" value="${PM.currentPage }">
+			<c:if test="${PM.prev }" >
+			<a href="../bbs/bbs.html?bbstype=${BBSTYPE}&PAGENO=1"><img src="../img/firstpage.gif" alt="처음페이지" /></a>
+			<a href="../bbs/bbs.html?bbstype=${BBSTYPE}&PAGENO=${PM.startPage-1}">
+			<img src="../img/before.gif"alt="이전 10 페이지" /></a> 
+			</c:if>
+			<c:forEach  begin="${PM.startPage }" end="${PM.endPage}" var="idx" >
 			<img src="../img/split.gif" class="split" alt=""/> 
-			<a href="../bbs/bbs.html?bbstype=${BBSTYPE}&PAGENO=${page}" style="color:black;">${page }</a>
+			<c:if test="${PM.currentPage==idx }">
+			<a href="../bbs/bbs.html?bbstype=${BBSTYPE}&PAGENO=${idx}"  style="color:black;"><font color="blue" size="5px">${idx}</font></a>
+			</c:if>
+			<c:if test="${PM.currentPage!=idx }">
+			<a href="../bbs/bbs.html?bbstype=${BBSTYPE}&PAGENO=${idx}"  style="color:black;">${idx}</a>
+			</c:if>
 			</c:forEach>
-			<a href="#"><img src="../img/behind.gif" alt="다음 10 페이지" /></a>
-			<a href="#"><img src="../img/lastpage.gif" alt="마지막페이지" /></a>
+			<c:if test="${PM.next }" >
+			<a href="../bbs/bbs.html?bbstype=${BBSTYPE}&PAGENO=${PM.endPage+1 }"><img src="../img/behind.gif" alt="다음 10 페이지" /></a>
+			<a href="../bbs/bbs.html?bbstype=${BBSTYPE}&PAGENO=${PM.totalPage}"><img src="../img/lastpage.gif" alt="마지막페이지" /></a>
+			</c:if>
+			
 		</div>
-	</div> <!--  게시판 페이징 -->
-	<div class="searchform">
-      <form name="bbssearchf" action="../bbs/bbs.html">
+		</div> <!--  게시판 페이징 -->
+		
+		<div class="searchform">
+  	    <form name="bbssearchf" action="../bbs/bbs.html">
          <input type="hidden" name="bbstype" id="bbstype" value="${BBSTYPE}" />
          <div style="float:left; width:60%"> 
          <select id="searchKey" name="searchKey">

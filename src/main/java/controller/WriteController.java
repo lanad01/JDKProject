@@ -58,9 +58,6 @@ public class WriteController {
 		System.out.println("MAx Ronwnum in wrtieController : "+maxRow);
 		bbs.setRn(maxRow+1);
 		writeDao.insertBBS(bbs);
-		
-	
-		
 		return new ModelAndView("redirect:/bbs/bbsview.html?seqno="+bbs.getSeqno());
 	}
 }

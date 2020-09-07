@@ -39,6 +39,7 @@ public class WriteDaoImpl implements WriteDao {
 		bbs.setSeqno(seqno);
 		bbs.setRegister_date(bbsDate); // 작성일 설정
 		session.insert("bbs.putBbs",bbs);
+		
 	}
 	public void addHit(Integer seqno) {
 		session.update("bbs.addHit",seqno);

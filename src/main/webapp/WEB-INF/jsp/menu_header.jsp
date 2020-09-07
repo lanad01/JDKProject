@@ -233,9 +233,9 @@ function fnLoginBtn(){
   <div id="topmenu">
 	<div class="wrap">
 		<ul style="list-style:none;">
-				<li><a href=""><span>전체글보기</span></a>	</li>
+				<li><a href="../bbs/bbs.html?bbstype=whole"><span>전체글보기</span></a>	</li>
 		<li class="vline"></li>
-				<li><a href=""><span>개념글</span></a></li>
+				<li><a href="../bbs/bbs.html?bbstype=ganyum"><span>개념글</span></a></li>
 		<li class="vline"></li>
 				<li><a href="../bbs/bbs.html?bbstype=freebbs" target=""><span>자유게시판</span></a>	</li>
 		<li class="vline"></li>
