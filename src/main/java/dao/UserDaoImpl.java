@@ -36,6 +36,7 @@ public class UserDaoImpl implements UserDao {
 		if(userNo==null) userNo=0; 
 		userNo=userNo+1;
 		user.setUser_no(userNo);
+		user.setUser_point(0);
 		session.insert("user.putUser",user);
 	}
 	public User findByUserId(String id) {

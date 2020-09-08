@@ -1,17 +1,21 @@
 package controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import dao.BBSListDao;
 import dao.RepDao;
 import dao.UserDao;
+import model.Bbs;
+import model.Reply;
 import model.User;
 
 @Controller
@@ -34,6 +38,17 @@ public class MyAccountController {
 		} //로그인 상태라면 정보를 가져온다
 		User user=userDao.findByUserId(id);
 		Integer user_no=user.getUser_no();
+		//게시글 리스트 받아오기
+		List<Bbs> myBbsList=new ArrayList<Bbs>();
+		myBbsList=bbsListDao.getMyBbs(user_no);
+		for(int i=0; i<myBbsList.size(); i++) {
+			System.out.println(i+"번째 글 MyBBSList : "+ myBbsList.get(i).getTitle());
+		}
+		//내 게시물에 달린 댓글들 가져오기
+		List<Reply> reListOnMyBbs=new ArrayList<Reply>();
+		List<Integer> myBbsSeqno=new ArrayList<Integer>();
+//		reListOnMyBbs=repDao.getReListOnMyBbs(); // 필요한 것 seqno List 
+		mav.addObject("MYBBS",myBbsList);
 		mav.addObject("MPBODY",1); //마이페이지 디폴트페이지
 		mav.addObject("USER",user);
 		return mav;

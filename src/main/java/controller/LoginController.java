@@ -40,7 +40,9 @@ public class LoginController {
 		mav.addObject("PAGENO",1);
 		mav.addObject("BODY", body);
 		mav.addObject("Loginmodal", "toLogin");
+		
 		return mav;
+		
 	}
 
 	@RequestMapping(value = "/login/logout.html")

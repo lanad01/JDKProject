@@ -49,8 +49,8 @@
 						</tr>
 						<tr>
 							<td></td>
-							<td>&nbsp;&nbsp;<font color="red" id="font"><form:errors
-										path="title" /></font></td>
+							<td>&nbsp;&nbsp;<font color="red" id="font">
+							<form:errors path="title" /></font></td>
 						<tr>
 							<td><input class="info" type="text" value="작성자명" disabled="true"></td>
 							<td><input type="text" value="${sessionScope.loginUser }" disabled="true"></td>
@@ -97,6 +97,7 @@
 					<!-- 		<label class="contentlabel contact" style="width:400px; min-height:0px; float:left;	text-align:center;"></label> -->
 					<%-- 		<form:textarea style="width:100%; height:450px;" path="content" name="smartEditor" id="smartEditor" rows="150" cols="300"/>  --%>
 					<form:textarea id="textarea" path="content" rows="170" cols="40" style="width:690px; height:400px;" />
+					
 				</div>
 				<div class="submitbox">
 					<input type="submit" value="수정하기" class="btnblue" /> <input

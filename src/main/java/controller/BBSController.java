@@ -90,6 +90,7 @@ public class BBSController {
 			if(bbstype.contains("main")) {
 				bbstype="whole";
 			}
+			
 			if(search.contentEquals("yes")) { //검색을 통한 bbs/bbs.html 호출
 				System.out.println("search 프로세스 시작");
 				List<Bbs> searchedBbs=new ArrayList<Bbs>();

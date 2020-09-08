@@ -23,4 +23,5 @@ public interface BBSListDao { //DB에서 가져오기
 	List<Bbs> searchBbs(Search sch);
 	List<Bbs> getGanyum();
 	List<Bbs> getWhole();
+	List<Bbs> getMyBbs(Integer user_no);
 }

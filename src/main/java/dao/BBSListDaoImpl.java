@@ -104,4 +104,8 @@ public class BBSListDaoImpl implements BBSListDao {
 		// TODO Auto-generated method stub
 		return session.selectList("bbs.getWhole");
 	}
+	public List<Bbs> getMyBbs(Integer user_no) {
+		// TODO Auto-generated method stub
+		return session.selectList("bbs.getMyBbs",user_no);
+	}
 }

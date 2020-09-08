@@ -65,7 +65,7 @@
 				</div>
 				<div class="Explain">
 					이 곳은 <strong>${USER.name }(${USER.nick })</strong>님을 위한 공간입니다. <br /> 회원님의 활동내역을 실시간으로 확인하실 수 있습니다.<br />
-					회원등급 : 레벨11(11/25) 포인트 : 1,362 가입일 : ${USER.register_date }
+					회원등급 : 레벨11(11/25) 포인트 : ${USER.user_point} 가입일 : ${USER.register_date }
 				</div>
 			</div><br/><br/><br/><br/>
 			
@@ -74,8 +74,8 @@
 					<div class="myAcitivity" style="border-top:3px solid black; border-bottom:3px solid black; " >
 					<table class="posttable" rules="all" style="border:2px dotted silver; margin-top:20px; margin-bottom:20px;">
 					<tr><td class="region"><h5>내가 등록한 게시물</h5>
-						<c:forEach var="myPost"  begin="0" end="10" varStatus="status">
-							<li style="list-style:none;"><p>ㆍ${status.index }</p></li>
+						<c:forEach var="myPost" items="${MYBBS}" varStatus="status">
+							<li style="list-style:none;"><p>ㆍ${status.index+1} : ${myPost.title } </p></li>
 						</c:forEach>
 						</td>
 					

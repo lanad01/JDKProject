@@ -191,7 +191,7 @@ function fnLoginBtn(){
         <ul class="navbar-nav ml-auto">
         <!--  비로그인 상태일 시 indexController에서 보낸다 세션 정보는 -->
         <c:choose>
-         <c:when test="${sessionScope.loginUser == null}">
+         <c:when test="${sessionScope.loginUser == null}"> <!--  비로그인 ㅑ  -->
          <li class="nav-item">
             <a class="nav-link" href="../login/login.html" onclick="">Sign In
               <span class="sr-only">(current)</span>

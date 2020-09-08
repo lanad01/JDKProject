@@ -97,6 +97,7 @@ public class ReplyController {
 			rep.setRepno(repno); // 대댓글이니까 속하는 곳은 부모댓글인 repno
 			System.out.println("reply/reply 대댓글 repno :"+repno);
 //			rep.setRepgroupno(repgroupno); 여기서 다시 repgroupno가 하나씩 더해지는거야
+			System.out.println(repgroupno);
 			rep.setContent(rep.getContent());
 			rep.setUser_no(user_no);
 			rep.setSeqno(seqno); //속한 게시글은 댓글과 함께 가두 좋다

@@ -132,11 +132,16 @@
 	where point >= 5
 	order by seqno desc
 </select>
-
 <select id="getWhole" resultType="model.Bbs">
 	select * from bbs_info 
 	where user_no!=1 
 	order by seqno desc
+</select>
+<select id="getMyBbs" resultType="model.Bbs" parameterType="Integer">
+	select * from (select rownum rown,b.* from bbs_info b
+	where user_no=2)
+	where rown<![CDATA[<]]>11
+	order by seqno
 </select>
 </mapper>
 
