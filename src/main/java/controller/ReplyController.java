@@ -34,16 +34,17 @@ public class ReplyController {
 		//우선 repno가 같은 모든 대댓글을 출력
 		List<Reply> rereList=repDao.getRereList(repno); //rep를 통해서 대댓글리스트 생성
 		List<String> rereplierPic=new ArrayList<String>();
+		List<String> rereplierName=new ArrayList<String>();
 		//대댓글 작성자 아이디를 얻기 위한 로직 
 		for( int t = 0; t < rereList.size(); t++){ //대댓글리스트를 통해서 얻어오기
 			String rereplier=repDao.getReplier(rereList.get(t).getUser_no());
 			String pictureUrl=repDao.getPicture(rereList.get(t).getUser_no());
 			rereplierPic.add(pictureUrl);
-			mav.addObject("REREPLIER",rereplier);
+			rereplierName.add(rereplier);
 		}
+		mav.addObject("REREPLIER",rereplierName);
 		mav.addObject("RERELIST",rereList);
 		mav.addObject("REREPIC",rereplierPic);
-			
 		return mav;
 	}
 	

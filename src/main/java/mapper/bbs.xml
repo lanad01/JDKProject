@@ -44,21 +44,24 @@
 	select rownum, seqno, title, user_no, register_date, bbstype, content, hit, point from bbs_info where user_no=#{user_no}
 </select>
 <select id="getTop10Hit" resultType="model.Bbs">
-	select title, seqno from
-	(select a.*, rownum rown from bbs_info a
-	where TO_DATE(REGISTER_DATE,'YYYY/MM/DD HH24:MI')
-	BETWEEN SYSDATE-4 AND SYSDATE)
-	where rown <![CDATA[<]]> 11
+	select * from(
+	select b.*, rownum from bbs_info b
 	order by hit desc
+	)where rownum <![CDATA[<]]> 11 and 
+	TO_DATE(REGISTER_DATE,'YYYY/MM/DD HH24:MI')
+	BETWEEN SYSDATE-2 AND SYSDATE
 </select>
 <select id="getTop10Rep" resultType="model.Bbs">
-	select title, seqno, c from (
-	select b.*, rownum rown, (select count(*) from reply_info where seqno=b.seqno) c
-	from bbs_info b
-	where TO_DATE(b.REGISTER_DATE,'YYYY/MM/DD HH24:MI')
-	BETWEEN SYSDATE-4 AND SYSDATE)
-	where rown <![CDATA[<]]> 11
-	order by c desc
+	select * from 
+    (select b.*, rownum, (select count(repno) from reply_info where b.seqno=seqno) c
+    from bbs_info b
+    where (select count(repno) from reply_info where b.seqno=seqno)>0 
+    and TO_DATE(REGISTER_DATE,'YYYY/MM/DD HH24:MI')
+        BETWEEN SYSDATE-4 AND SYSDATE
+    )
+    where rownum<![CDATA[<]]>10
+    order by c desc, seqno desc
+ 
 </select>
 <delete id="deleteBbs" parameterType="Integer">
 	delete from bbs_info where seqno=#{seqno}
@@ -143,6 +146,8 @@
 	where rown<![CDATA[<]]>11
 	order by seqno
 </select>
+
+
 </mapper>
 
 

@@ -20,4 +20,7 @@ public interface RepDao {
 	void updateRere(Reply rereply);
 	void deleteRere(Reply rep);
 	String getRereplierByRere(Reply rep);
+	List<Reply> getReListOnMyBbs(Integer user_no);
+	List<Reply> getMyRep(Integer user_no);
+	List<Reply> getRereOnMyRep(Integer user_no);
 }

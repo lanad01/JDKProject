@@ -49,6 +49,33 @@
 	select id from user_info
 	where (select user_no from reply_info where repno=#{repno} and repgroupno=#{repgroupno})=user_no
 </select>
+<select id="getReListOnMyBbs" resultType="model.Reply" parameterType="Integer">
+	select *
+	from (select rownum rown, r.*
+	from reply_info r
+	where seqno in 
+	(select seqno from bbs_info where user_no=#{user_no} ) 
+	)
+	where rown<![CDATA[<]]> 11
+	and repgroupno=0
+	order by repno
+</select>
+<select id="getMyRep" resultType="model.Reply" parameterType="Integer">
+	select * 
+	from (select rownum rown, r.* from reply_info r
+	where r.user_no=#{user_no} ) 
+	where repgroupno=0 and rown<![CDATA[<]]> 11 
+	order by repno
+</select>
+<select id="getRereOnMyRep" resultType="model.Reply" parameterType="Integer">
+	select * from(
+    select rownum rown, r.* from reply_info r
+    where repno in 
+        (select repno from reply_info where user_no=#{user_no} )
+    )
+    where repgroupno!=0 and user_no!=#{user_no}
+    order by repno desc
+</select>
 </mapper>
 
 

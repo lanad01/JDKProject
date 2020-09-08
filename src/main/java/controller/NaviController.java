@@ -23,6 +23,7 @@ public class NaviController {
 	@RequestMapping(value = "/navi/hit.html", method = RequestMethod.POST, produces ="application/json; charset=UTF-8")
 	public List<Bbs> naviBBSList(HttpSession session,HttpServletRequest request) throws Exception {
 		String input=request.getParameter("input");
+		
 		if(input==null) {
 			input="hit";
 		}
@@ -33,9 +34,10 @@ public class NaviController {
 			}
 			return list;
 		}else if(input.equals("rep")) {
-			System.out.println("dddddd");
+			System.out.println("리플갯수분기");
 			list=bbsListDao.getTop10ByRep();
 			for(int i=0; i<list.size(); i++) {
+				System.out.println(list.get(i).getTitle());
 			}
 			return list;
 		}

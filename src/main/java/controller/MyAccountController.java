@@ -38,16 +38,22 @@ public class MyAccountController {
 		} //로그인 상태라면 정보를 가져온다
 		User user=userDao.findByUserId(id);
 		Integer user_no=user.getUser_no();
+		
 		//게시글 리스트 받아오기
-		List<Bbs> myBbsList=new ArrayList<Bbs>();
-		myBbsList=bbsListDao.getMyBbs(user_no);
-		for(int i=0; i<myBbsList.size(); i++) {
-			System.out.println(i+"번째 글 MyBBSList : "+ myBbsList.get(i).getTitle());
-		}
+		List<Bbs> myBbsList=bbsListDao.getMyBbs(user_no);
+		
 		//내 게시물에 달린 댓글들 가져오기
-		List<Reply> reListOnMyBbs=new ArrayList<Reply>();
-		List<Integer> myBbsSeqno=new ArrayList<Integer>();
-//		reListOnMyBbs=repDao.getReListOnMyBbs(); // 필요한 것 seqno List 
+		List<Reply> reListOnMyBbs=repDao.getReListOnMyBbs(user_no); // 필요한 것 seqno List 
+		
+		// 내가 등록한 댓글
+		List<Reply> myReple=repDao.getMyRep(user_no);
+		
+		// 내 댓글에 달린 한줄의견
+		List<Reply> RereOnMyRep=repDao.getRereOnMyRep(user_no);
+		
+		mav.addObject("RERELIST",RereOnMyRep);
+		mav.addObject("MYREP",myReple);
+		mav.addObject("RELIST",reListOnMyBbs);
 		mav.addObject("MYBBS",myBbsList);
 		mav.addObject("MPBODY",1); //마이페이지 디폴트페이지
 		mav.addObject("USER",user);

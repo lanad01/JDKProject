@@ -78,6 +78,18 @@ public class RepDaoImpl implements RepDao {
 		// TODO Auto-generated method stub
 		return session.selectOne("rep.getRereplierByRere",rep);
 	}
+	public List<Reply> getReListOnMyBbs(Integer user_no) {
+		// TODO Auto-generated method stub
+		return session.selectList("rep.getReListOnMyBbs",user_no);
+	}
+	public List<Reply> getMyRep(Integer user_no) {
+		// TODO Auto-generated method stub
+		return session.selectList("rep.getMyRep",user_no);
+	}
+	public List<Reply> getRereOnMyRep(Integer user_no) {
+		// TODO Auto-generated method stub
+		return session.selectList("rep.getRereOnMyRep",user_no);
+	}
 	
 
 }
