@@ -184,6 +184,10 @@ function fnLoginBtn(){
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive" style="margin-right:40px;">
+        <form id="searchFromHeader" action="../bbs/bbs.html" method="post">
+       	 	<input type="hidden" name="search" value="yes">
+        	<input type="hidden" name="bbstype" id="bbstype" value="main" />
+         	<input type="hidden" name="searchKey" id="bbstype" value="schTotal" />
         <ul class="navbar-nav ml-auto">
         <!--  비로그인 상태일 시 indexController에서 보낸다 세션 정보는 -->
         <c:choose>
@@ -196,7 +200,7 @@ function fnLoginBtn(){
           </c:when>
          <c:otherwise> <!--  로그인 정보가 있을 경우 -->
          <li class="nav-item">
-         	<h2 style="font-family:'BMDOHYEON'; font-size:1.8em; color:#dcdcdc;">${sessionScope.loginUser }님 환영합니다 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2>
+         	<h2 style="font-family:'BMDOHYEON'; font-size:1.8em; color:#dcdcdc; margin-left:30px;">${sessionScope.loginUser }님 환영합니다 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2>
           </li>
          <li class="nav-item">
             <a class="nav-link" href="../login/logout.html" onclick="">Sign Out
@@ -208,22 +212,23 @@ function fnLoginBtn(){
          <!--  비로그인 상태 종료 -->
         <c:choose>
         	<c:when test="${sessionScope.loginUser == null}">
-          <li class="nav-item">
+          	<li class="nav-item">
             <a class="nav-link" href="../register/register.html">Register</a>
-          </li>
+         	</li>
           	</c:when>
-          	<c:otherwise>
-          	
-          	</c:otherwise>
         </c:choose>
-          <li class="nav-item">
+        	
+         	<li class="nav-item">
             <a class="nav-link" href="../myaccount/mypage.html">Account</a>
-          </li>
-          <li class="nav-item">
-          	<input type="text" name="keyword" placeholder="통합검색" class="keyword" style="width:130px;" ></li> 
-          <li class="nav-item">
-          	<input type="button" name="keyword" class="searchButton" value="검색" style="width:60px; margin-left:10px; margin-top:7px;" ></li> 
+          	</li>
+         	<li class="nav-item" style="margin-left:10px;">
+          	<input type="text" name="keyword" placeholder="통합검색" value="" size="22" ></li> 
+         	<li class="nav-item">
+          	<input type="submit" class="searchButton" value="검색" style="width:60px; margin-left:10px; margin-top:0px;" >
+          	
+            </li>   	
         </ul>
+        </form>
       </div>
     </div>
   </nav>

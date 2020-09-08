@@ -87,11 +87,16 @@ public class BBSController {
 		// 검색작업을 통한 SelectList AllList에 넣는다
 		try {
 			System.out.println("search 여부 : "+search);
+			if(bbstype.contains("main")) {
+				bbstype="whole";
+			}
 			if(search.contentEquals("yes")) { //검색을 통한 bbs/bbs.html 호출
 				System.out.println("search 프로세스 시작");
 				List<Bbs> searchedBbs=new ArrayList<Bbs>();
 				String searchKey = request.getParameter("searchKey");
+				System.out.println(searchKey);
 				String keyword = request.getParameter("keyword");
+				System.out.println(keyword);
 				if(searchKey==null) searchKey="";
 				if(keyword==null) keyword="";
 				Search sch=new Search();

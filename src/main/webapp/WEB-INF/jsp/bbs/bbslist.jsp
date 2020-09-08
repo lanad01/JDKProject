@@ -88,9 +88,10 @@ $(function(){
 								<tr id="bbsBottomBorder">
 									<td class="snum">
 									<c:choose>
-										<c:when test="${BBSTYPE=='ganyum' }">${ganyumListSize-((PM.currentPage-1)*10)-status.index}</c:when>
-										<c:when test="${BBSTYPE=='whole' }">${wholeListSize-((PM.currentPage-1)*10)-status.index }</c:when>
-										<c:when test="${SCH.search }">${SearchedBbsSize-((PM.currentPage-1)*10)-status.index  }</c:when>
+										
+										<c:when test="${BBSTYPE=='ganyum'&& SCH.search==null }"> ${ganyumListSize-((PM.currentPage-1)*10)-status.index}</c:when>
+										<c:when test="${BBSTYPE=='whole' && SCH.search==null }"> ${wholeListSize-((PM.currentPage-1)*10)-status.index }</c:when>
+										<c:when test="${BBSTYPE=='whole' && SCH.search==true}"> ${SearchedBbsSize-((PM.currentPage-1)*10)-status.index  }</c:when>
 										<c:otherwise>
 										${bbs.rn }	
 										</c:otherwise>

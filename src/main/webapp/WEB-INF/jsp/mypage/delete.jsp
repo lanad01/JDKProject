@@ -24,6 +24,17 @@
 	padding: 15px 0 0 0;
 	width: 700px;
 }
+#inputpwd{
+  position: relative;
+  font-size: 16px;
+  z-index: 2;
+  border: 2px solid black;
+  background: transparent;
+  width: 200px;
+  text-indent: 6px;
+  letter-spacing: 12.6px;
+  font-family: Courier;
+}
 table td{padding-left:20px;}
 </style>
 <script src="../resources/vendor/jquery/jquery.min.js"></script>

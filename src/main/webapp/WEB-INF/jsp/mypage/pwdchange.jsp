@@ -26,15 +26,19 @@
 }
 .pwd{ border-bottom:2px solid #dcdcdc;}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
 <script src="../resources/vendor/jquery/jquery.min.js"></script>
 <script type="text/javascript">
 function close3(){
 	var result = confirm("정말로 변경하시겠습니까?");
+	alert(result); // true출력
 	if(result == false)	return false;
 	else {
-		return true;	
+		location.href="../myaccount/pwdchange.html"
+		self.close();
+// 		return true;
 	}
-	
 }
 function pwdCheck(){
 	var prepwd=document.getElementById("prepwd").value; 
@@ -68,7 +72,7 @@ function pwdCheck3(){
 <body>
 	<div id="main" style="display:block;">
 		<div class="msg">
-			<form:form action="../myaccount/pwdchange.html" onSubmit="return close3();" method="post" modelAttribute="user" name="fm">
+			<form:form action="../myaccount/pwdchange.html"  method="post" modelAttribute="user" name="fm">
 				<form:hidden path="user_no" id="user_no"/>
 				<form:hidden path="password" id="userpwd"/>
 				<form:hidden path="id" id="id"/>
@@ -86,7 +90,7 @@ function pwdCheck3(){
 							<div id="error3" style="color:red; margin-top:5px; font-size:0.8em;"></div>
 						<tr><td>&nbsp;</td></tr>
 						<tr><td></td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<input type="submit" value="비밀번호 변경"></td>
+						<input type="button" onClick="close3()" value="비밀번호 변경"></td>
 						</tr>
 					</table>
 				</div>
