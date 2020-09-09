@@ -82,6 +82,13 @@ public class BBSController {
 			AllList=bbsListDao.getWhole();
 			totalCnt=AllList.size();
 			mav.addObject("wholeListSize",AllList.size());
+		}else if(bbstype.contentEquals("life")) {
+			System.out.println("생활기 게시판 분기");
+			String user=request.getParameter("user");
+			Integer life_no=Integer.parseInt(user); 
+			AllList=bbsListDao.getLifeStory(life_no);
+			totalCnt=AllList.size();
+			
 		}
 		
 		// 검색작업을 통한 SelectList AllList에 넣는다

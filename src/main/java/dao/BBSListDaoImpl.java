@@ -108,4 +108,8 @@ public class BBSListDaoImpl implements BBSListDao {
 		// TODO Auto-generated method stub
 		return session.selectList("bbs.getMyBbs",user_no);
 	}
+	public List<Bbs> getLifeStory(Integer life_no) {
+		// TODO Auto-generated method stub
+		return session.selectList("bbs.getLife",life_no);
+	}
 }

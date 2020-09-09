@@ -146,6 +146,9 @@
 	where rown<![CDATA[<]]>11
 	order by seqno
 </select>
+<select id="getLife" resultType="model.Bbs" parameterType="Integer">
+	select * from bbs_info where user_no=#{life_no}
+</select>
 
 
 </mapper>

@@ -254,7 +254,7 @@ function fnLoginBtn(){
   				<ul id="main-menu">
   	  				<li><font face='BMDOHYEON'><a href="../lifestory/lifestorymain.html?BODY=lifestory/lifestorymain">생활기</a></font>
      					<ul id="sub-menu">
-       						<li><font face='BMDOHYEON' size="1.3" ><a href="#" aria-label="subemnu"><span>▶&nbsp;별달고 꺼드럭거리 싶어서 쓰는 생활기</span></a></font></li>
+       						<li><font face='BMDOHYEON' size="1.3" ><a href="../bbs/bbs.html?bbstype=life&user=1" aria-label="subemnu"><span>▶&nbsp;별달고 꺼드럭거리 싶어서 쓰는 생활기</span></a></font></li>
        						<li><font face='BMDOHYEON' size="1.3" ><a href="#" aria-label="subemnu">▶&nbsp;에스컬레이터 생활기</a></font></li>			
        						<li><font face='BMDOHYEON' size="1.3" ><a href="#" aria-label="subemnu">▶&nbsp;보이쉬재패니즈</a></font></li>
       					</ul>

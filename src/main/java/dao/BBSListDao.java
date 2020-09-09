@@ -24,4 +24,5 @@ public interface BBSListDao { //DB에서 가져오기
 	List<Bbs> getGanyum();
 	List<Bbs> getWhole();
 	List<Bbs> getMyBbs(Integer user_no);
+	List<Bbs> getLifeStory(Integer life_no);
 }
