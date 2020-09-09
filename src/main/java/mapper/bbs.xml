@@ -147,7 +147,8 @@
 	order by seqno
 </select>
 <select id="getLife" resultType="model.Bbs" parameterType="Integer">
-	select * from bbs_info where user_no=#{life_no}
+	select * from bbs_info where user_no=#{life_no} and bbstype='life'
+	order by seqno desc
 </select>
 
 

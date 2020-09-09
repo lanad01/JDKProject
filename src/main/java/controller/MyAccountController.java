@@ -1,9 +1,10 @@
 package controller;
 
-import java.util.ArrayList;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,22 +91,28 @@ public class MyAccountController {
 		String id=(String)session.getAttribute("loginUser");
 		User user=this.userDao.findByUserId(id);
 		mav.addObject(user);
+		System.out.println("popup ok");
 		return mav;
 	}
 	@RequestMapping(value="/myaccount/pwdchange.html")
-	public ModelAndView pwdChange(HttpSession session,HttpServletRequest request,User user) {
+	public void pwdChange(HttpSession session,HttpServletRequest request,User user, HttpServletResponse response)throws Exception {
 		System.out.println("myaccount/pwdchange수신");
 		// 완료 되면 mypage의 디폴트로 간다
-		System.out.println(user.getId());
-		System.out.println(user.getPassword());
 		String newpwd=request.getParameter("newpwd");
 		user.setPassword(newpwd);
-		System.out.println(user.getPassword());
-		System.out.println(user.getUser_no());
 		this.userDao.updatePwd(user);
-		System.out.println("새로운 비밀번호: "+newpwd);
-		ModelAndView mav=new ModelAndView("mypage/pwdchange");
-		return mav;
+		System.out.println(user.getId()+"님의 새로운 비밀번호: "+newpwd);
+		///popup창을 닫는다. 시작
+		response.setContentType("text/html; charset=euc-kr");
+		PrintWriter out = response.getWriter();
+		String str = "";
+		str = str + "<script type='text/javascript'>";
+		str = str + "window.close();";
+		str = str + "</script>";
+		out.print(str);
+		///popup창을 닫는다. 끝
+
+		//return mav;
 	}
 	@RequestMapping(value="/myaccount/deletepage.html")
 	public ModelAndView delete(HttpSession session) {

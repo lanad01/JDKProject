@@ -25,7 +25,7 @@
 		document.getElementById("morebox").style.display = "none";
 	}
 	function pwdChange(){
-		window.open("../myaccount/pwdchangepop.html","_blank",'scrollbars=no, width=450,height=250,status=no,resizable=no,left=400,top=300').focus();
+		window.open("../myaccount/pwdchangepop.html","_blank",'scrollbars=no, width=450,height=350,status=no,resizable=no,left=400,top=300').focus();
 
 	}
 </script>
@@ -42,7 +42,9 @@
 						<div id="morebox" class="morebox">
 							<ul>
 								<li style="margin-top: 2px;"><a href="../myaccount/pagecontrol.html?page=2" id="1"	onmouseover="focus(this)">정보수정</a></li>
-								<li><a href="" id="2" onmouseover="focus(this)" onClick="pwdChange()">비번변경</a></li>
+								<li><a href="" id="2" onmouseover="focus(this)" 
+								onClick="pwdChange()">비번변경</a></li>
+<!-- 								<li><a href="" id="2" onmouseover="focus(this)" onClick="pwdChange()">비번변경</a></li> -->
 								<li><a href="../myaccount/pagecontrol.html?page=4" id="3" onmouseover="focus(this)">회원탈퇴</a></li>
 							</ul>
 						</div>

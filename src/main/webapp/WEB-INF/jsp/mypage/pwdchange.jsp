@@ -33,16 +33,15 @@
 function close3(){
 	var result = confirm("정말로 변경하시겠습니까?");
 	alert(result); // true출력
-	if(result == true){
-
-		swal("성공적으로 변경되었습니다.", "");
-		return true;
-	}	
-	else {
+	if(result == false){
 		swal("비밀번호 변경이 취소되었습니다", "");
 		return false;
-// 		return true;
-	}
+	}	
+// 	else {
+// 		swal("비밀번호 변경이 취소되었습니다", "");
+// 		return false;
+// // 		return true;
+// 	}
 }
 function pwdCheck(){
 	var prepwd=document.getElementById("prepwd").value; 
@@ -101,6 +100,6 @@ function pwdCheck3(){
 			</form:form>
 		</div>
 	</div>
-	
+	<a onClick="self.close()">닫기</a>
 </body>
 </html>

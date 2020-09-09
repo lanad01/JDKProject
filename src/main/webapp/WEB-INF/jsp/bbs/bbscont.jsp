@@ -138,7 +138,14 @@ function myFunction3(seqno) { // 삭제
 		<span class="sp_btn00" ><a href="../bbs/nextpost.html?seqno=${BBS.seqno}&bbstype=${BBS.bbstype}"" onclick=>다음글</a></span>
 	<div class="bottomside">
 	<font face="BMDOHYEON" size="1.0em" color="blue">
+		<c:choose>
+		<c:when test="${BBS.bbstype=='freebbs' || BBS.bbstype=='info' || BBS.bbstype=='qna' || BBS.bbstype=='exp' }">
 		<span class="sp_btn00"><input type="button" onclick="location.href='../write/bbs.html?bbstype=${BBS.bbstype}'" value="글쓰기"></span>
+		</c:when>
+		<c:when test="${ BBS.bbstype=='life' || BBS.bbstype=='ganyum' || BBS.bbstype=='whole'} ">
+		</c:when>
+		</c:choose>
+		
 		<span class="sp_btn00"><input type="button" onclick="myFunction3(${BBS.seqno})" value="삭제"></span>
 		<span class="sp_btn00"><input type="button" onclick="myFunction4(${BBS.seqno})" value="수정"></span>
 		<span class="sp_btn00"><input type="button" onclick="location.href='../bbs/bbs.html?bbstype=${BBS.bbstype}'" value="목록으로"></span>

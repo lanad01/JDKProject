@@ -187,15 +187,20 @@ public class ReplyController {
 		for(int i=0; i<list.size(); i++) {
 			if(list.get(i).getRepgroupno()==groupnoInt) { //대댓글리스트들 하나하나 돌리면서 만약 얻어온 groupNo와 일치하는 것이 있다면
 				rereply=list.get(i);
+				System.out.println("대댓글의 유저넘버 : "+rereply.getUser_no());
 			}else {
 				System.out.println("repgroupno불일치 --"+i+"번째 대댓글의 그룹No : "+list.get(i).getRepgroupno()+"이며, 게시글에서 넘어온 GroupNo :" + groupnoInt);
 			}
 		}
-		String rereId=repDao.getReplierByRepno(rereply.getRepno());
-		System.out.println("대댓글작성자이름 : "+rereId);
+		String rereId=repDao.getRereplierByRere(rereply);
+		System.out.println(rereId);
+		
 		if(!id.contentEquals(rereId)){ //검색된 대댓글의 작성자id와 세션정보가 불일치?
+			System.out.println("대댓글작성자이름 : "+rereId+" Current Id:" +id);
+			
 			return result;
 		}else if (id.contentEquals(rereId)) { // 분기 3- 일치하는 경우
+			System.out.println("대댓글작성자이름 : "+rereId+" Current Id:" +id);
 			System.out.println("일치분기");
 			
 			result = 1;

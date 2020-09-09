@@ -30,6 +30,7 @@ public class RegisterController {
 	public ModelAndView entryUser(@Valid User user, BindingResult bindingResult, HttpSession session,
 			HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView("menu_header");
+		
 		System.out.println("Registerpost수신");
 		if (bindingResult.hasErrors()) { // 오류로 인한 로그인 실패
 			System.out.println("bindingErrors");

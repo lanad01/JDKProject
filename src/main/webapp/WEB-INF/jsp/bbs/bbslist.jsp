@@ -7,6 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
 <link href='https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff'	rel='stylesheet' type='text/css'>
 </head>
 <link rel="stylesheet" href="../css/freebbs.css">
@@ -16,14 +19,18 @@ $(function(){
 	var noSearch=document.getElementById("search").value;
 	if(noSearch=='0'){
 		alert('검색조건에 맞는 게시글이 없습니다');
-	}else if(noSearch==null){
-		
+	}else if(noSearch==null){}	
+	
+	var nqu=document.getElementById("nqu").value;
+	if(nqu=='true'){ // 자격없는 아이디가 생활기 게시판 글쓰기를 누른다
+		swal("","생활기 게시판 작성 자격이 없습니다!!", "error");
 	}
 })
 </script>
 <style type="text/css">
 </style>
 <body>
+	<input type="hidden" id="nqu" value="${NQU}">
 	<input type="hidden" id="search" value="${SEARCHEDBBS }">
 	<div class="upperdiv">
 		<br/>
@@ -176,6 +183,9 @@ $(function(){
          <a href="../bbs/bbs.html?bbstype=${BBSTYPE}"><input type="button" name="bbsList" value="목록으로 " /></a>
          <c:if test="${ (BBSTYPE=='freebbs') || BBSTYPE=='info' || BBSTYPE=='qna' || BBSTYPE=='exp'}">
          <a href="../write/bbs.html?bbstype=${BBSTYPE}"><input type="button" name="bbsList" value="글쓰기 " /></a>
+         </c:if>
+         <c:if test="${BBSTYPE=='life' }">
+         <a href="../write/bbs.html?bbstype=${BBSTYPE}&life_no=${LIFENO}"><input type="button" name="bbsList" value="글쓰기 " /></a>
          </c:if>
          </div>
       </form>

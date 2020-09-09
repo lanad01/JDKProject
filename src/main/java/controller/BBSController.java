@@ -24,6 +24,7 @@ import model.Bbs;
 import model.PageMaker;
 import model.Reply;
 import model.Search;
+import model.User;
 
 @Controller
 public class BBSController {
@@ -36,7 +37,7 @@ public class BBSController {
 	@Autowired
 	UserDao userDao;
 	@RequestMapping(value="/bbs/bbs.html") // 자유게시판 목록 여기서 받은 게시판 LIST 목록을 ADD해야한다.
-	public ModelAndView freeBBS(HttpServletRequest request,String bbstype,Integer PAGENO,String search) {
+	public ModelAndView freeBBS(HttpSession session,HttpServletRequest request,String bbstype,Integer PAGENO,String search) {
 		System.out.println("bbs/bbs.html 수신");
 		ModelAndView mav=new ModelAndView("menu_header");
 		if(bbstype==null) bbstype="whole"; //bbstype이 널값일 경우에 디폴트는 자게
@@ -82,11 +83,26 @@ public class BBSController {
 			AllList=bbsListDao.getWhole();
 			totalCnt=AllList.size();
 			mav.addObject("wholeListSize",AllList.size());
-		}else if(bbstype.contentEquals("life")) {
+		}else if(bbstype.contentEquals("life")) { // 생활기 게시판 네비게이션에서 검색
 			System.out.println("생활기 게시판 분기");
-			String user=request.getParameter("user");
-			Integer life_no=Integer.parseInt(user); 
+			String NQualified=request.getParameter("nqu");
+			System.out.println("nqu 값 :"+NQualified);
+			if(NQualified==null) {
+				System.out.println("nqu null분기 :"+NQualified);
+				NQualified="";
+			}else if(NQualified.contentEquals("1")) {
+				System.out.println("nqu true 분기");
+				mav.addObject("NQU",true);
+			}
+			String life=request.getParameter("life_no");
+			System.out.println("life 값: " +life); //5
+			if(life==null) life="0";
+			Integer life_no=Integer.parseInt(life);
 			AllList=bbsListDao.getLifeStory(life_no);
+			for(int i=0; i<AllList.size(); i++) {
+				System.out.println(life_no+"번 생활기 게시판 기록자의 "+i+"번 째 생활기 게시판");
+			}
+			mav.addObject("LIFENO",life);
 			totalCnt=AllList.size();
 			
 		}
@@ -179,7 +195,6 @@ public class BBSController {
 			Integer rereNum = repDao.getRereNum(bbsList.get(t).getSeqno());
 			repAndrere.add(repNum + "+" + rereNum);
 		}
-		//토탈 글 숫자 찾기
 		
 		mav.addObject("totalPost",totalCnt);
 		mav.addObject("REPANDRERE",repAndrere);

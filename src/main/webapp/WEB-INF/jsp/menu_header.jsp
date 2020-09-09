@@ -254,7 +254,7 @@ function fnLoginBtn(){
   				<ul id="main-menu">
   	  				<li><font face='BMDOHYEON'><a href="../lifestory/lifestorymain.html?BODY=lifestory/lifestorymain">생활기</a></font>
      					<ul id="sub-menu">
-       						<li><font face='BMDOHYEON' size="1.3" ><a href="../bbs/bbs.html?bbstype=life&user=1" aria-label="subemnu"><span>▶&nbsp;별달고 꺼드럭거리 싶어서 쓰는 생활기</span></a></font></li>
+       						<li><font face='BMDOHYEON' size="1.3" ><a href="../bbs/bbs.html?bbstype=life&life_no=5" aria-label="subemnu"><span>▶&nbsp;별달고 꺼드럭거리 싶어서 쓰는 생활기</span></a></font></li>
        						<li><font face='BMDOHYEON' size="1.3" ><a href="#" aria-label="subemnu">▶&nbsp;에스컬레이터 생활기</a></font></li>			
        						<li><font face='BMDOHYEON' size="1.3" ><a href="#" aria-label="subemnu">▶&nbsp;보이쉬재패니즈</a></font></li>
       					</ul>
@@ -282,9 +282,9 @@ function fnLoginBtn(){
           		</tr>
           	</table>
           	<table class="hit" style=" font-family:'BMDOHYEON'; font-size:0.8em; color:black; margin-top:7px; ">
-         		<tr><td>&#9312; &nbsp;</td><td><a href="" id="li1"><span id="pa1"></span></a></td></tr>
-         		<tr><td>&#9313; &nbsp;</td><td><a href="" id="li2"><span id="pa2"></span></a></td></tr>
-         		<tr><td>&#9314; &nbsp;</td><td><a href="" id="li3"><span id="pa3"></span></a></td></tr>
+         		<tr><td><font color="red" >&#9312;</font> &nbsp;</td><td><a href="" id="li1"><span id="pa1"></span></a></td></tr>
+         		<tr><td><font color="red" >&#9313;</font> &nbsp;</td><td><a href="" id="li2"><span id="pa2"></span></a></td></tr>
+         		<tr><td><font color="red" >&#9314;</font> &nbsp;</td><td><a href="" id="li3"><span id="pa3"></span></a></td></tr>
          		<tr><td>&#9315; &nbsp;</td><td><a href="" id="li4"><span id="pa4"></span></a></td></tr>
          		<tr><td>&#9316; &nbsp;</td><td><a href="" id="li5"><span id="pa5"></span></a></td></tr>
 				<tr><td>&#9317; &nbsp;</td><td><a href="" id="li6"><span id="pa6"></span></a></td></tr>
@@ -297,7 +297,7 @@ function fnLoginBtn(){
       </div>
       <div id="changejsp">
 		<!--  메인 콘텐츠창 include형식으로 합시다  -->
-		<jsp:include page="/WEB-INF/jsp/${BODY}.jsp" flush="false"/>
+		<jsp:include page="/WEB-INF/jsp/${BODY}.jsp" />
 		</div>
      </div>
 	
@@ -360,5 +360,9 @@ function fnLoginBtn(){
       </div>
     </div>
     </form>
+    <div contentEditable="true">Type here. You can insert images too
+ 	 <img src="http://t2.gstatic.com/images?q=tbn:ANd9GcQCze-mfukcuvzKk7Ilj2zQ0CS6PbOkq7ZhRInnNd1Yz3TQzU4e&t=1" />
+	</div>
+	<h1 id="header">ddd</h1>
 </body>
 </html>
