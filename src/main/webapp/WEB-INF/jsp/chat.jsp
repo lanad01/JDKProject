@@ -16,9 +16,9 @@
 </head>
 <body>
 ${ID }
-	<form id="frm" action="../chat/chat.html" method="post">
+${USER.picture_url }
 	<input type="hidden" id="client" value="${ID }">
-	</form>
+	<input type="text" id="pic" value="">
 	<div id="main-container">
 		
 		<div id="chat-container">
@@ -30,6 +30,8 @@ ${ID }
 		</div>
 	</div>
 </body>
+
+<script src="../resources/vendor/jquery/jquery.min.js"></script>
 <script type="text/javascript">
 	
 
@@ -54,15 +56,28 @@ ${ID }
 	function onMessage(e){ // 상대방 메시지
 		var chatMsg = event.data;
 		var sender=chatMsg.split(":"); //aldne 수신성공
-		
+		$.ajax({
+   	 		async: true,
+   			type : 'POST',
+   			data : { "sender": sender[0] } ,
+  			dataType : "text",
+			url : "../chat/chatid.html",
+		    success : function(data){
+		    	document.getElementById("pic").value=data;
+// 		    	alert("ajax 분기 "+chatMsg);
+		   	},error : function(e){z
+		   		alert('실패');
+		  		}
+		  })
+		var pic=document.getElementById("pic").value;
 		var date = new Date();
 		var dateInfo = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 		if(chatMsg.substring(0,6) == 'server'){
 			var $chat = $("<div class='chat notice'>" + chatMsg + "</div>");
 			$('#chat-container').append($chat);
 		}else{ // 상대방 메시지
-			var $chat = $("<img alt='상대' src='${pageContext.request.contextPath}/upload/${USER.picture_url } width='100' height='70'>"+
-					"<div class='chat-box'><div class='chat'>" + chatMsg + "</div><div class='chat-info chat-box'>"+ dateInfo +"</div></div>");
+			var $chat = $("<div class='chat-box'><img alt='상대' src='${pageContext.request.contextPath}/upload/123.png' width='60' height='40' style='margin-top:5px;'>"+
+					"<div class='chat'>" + chatMsg + "</div><div class='chat-info chat-box'>"+ dateInfo +"</div></div>");
 			$('#chat-container').append($chat);
 		}
 		
@@ -89,7 +104,7 @@ ${ID }
 		var date = new Date();
 		var dateInfo = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 		var $chat = $("<div class='my-chat-box'><div class='chat my-chat'>" +chatMsg3 +"</div>"+
-				"<img alt='내 사진' src='${pageContext.request.contextPath}/upload/${USER.picture_url }' width='60' height='50'>"
+				"<img alt='내 사진' src='${pageContext.request.contextPath}/upload/${USER.picture_url }' style='margin-top:5px;' width='60' height='50'>"
 				+"<div class='chat-info'>"+ dateInfo +"</div></div>");
 		$('#chat-container').append($chat);
 		webSocket.send(chatMsg);
