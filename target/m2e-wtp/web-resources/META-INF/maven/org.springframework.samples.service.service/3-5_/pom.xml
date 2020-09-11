@@ -17,7 +17,7 @@
 	<properties>
 
 		<!-- Generic properties -->
-		<java.version>1.6</java.version>
+		<java.version>1.8</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
@@ -28,7 +28,7 @@
 
 
 		<!-- Spring -->
-		<spring-framework.version>3.2.3.RELEASE</spring-framework.version>
+		<spring-framework.version>4.3.4.RELEASE</spring-framework.version>
 
 		<!-- Hibernate / JPA -->
 		<hibernate.version>4.2.1.Final</hibernate.version>
@@ -71,7 +71,7 @@
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>
-			<version>${jsp.version}</version>
+			<version>2.2</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -212,12 +212,12 @@
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>1.9.13</version>
 		</dependency>
-		<!--  웹소켓 및 Json관련  -->
+		<!-- 웹소켓 및 Json관련 -->
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-websocket</artifactId>
-			<version>5.1.4.RELEASE</version>
-		</dependency>
+        	<groupId>org.springframework</groupId>
+        	<artifactId>spring-websocket</artifactId>
+        	<version>4.2.4.RELEASE</version>
+        </dependency>
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>

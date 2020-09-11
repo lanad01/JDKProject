@@ -114,7 +114,11 @@ height:40%;
 </style>
 
 <script src="../resources/vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
 <script>
+
+
 $(function(){
 // 	message('notice','Hello World!');
 	hitBbs('hit');
@@ -363,6 +367,8 @@ function fnLoginBtn(){
     <div contentEditable="true">Type here. You can insert images too
  	 <img src="http://t2.gstatic.com/images?q=tbn:ANd9GcQCze-mfukcuvzKk7Ilj2zQ0CS6PbOkq7ZhRInnNd1Yz3TQzU4e&t=1" />
 	</div>
-	<h1 id="header">ddd</h1>
+	<a href="../chat/chat2.html">chat2</a>
+	<input type="button" onClick="window.open('../chat/chat.html','_blank','scrollbars=no, width=450,height=350,status=no,resizable=no,left=400,top=300')" value="채팅">
+	
 </body>
 </html>

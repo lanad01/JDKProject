@@ -1,8 +1,5 @@
 package model;
 
-import java.sql.Timestamp;
-import java.util.Date;
-
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class Bbs { // 포인트는 테이블 따로 둡시다
