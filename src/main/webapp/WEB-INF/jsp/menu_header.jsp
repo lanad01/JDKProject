@@ -184,7 +184,8 @@ function fnLoginBtn(){
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
       <a class="navbar-brand" href="../bbs/bbs.html">JDK</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" 
+      	aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive" style="margin-right:40px;">
@@ -204,7 +205,8 @@ function fnLoginBtn(){
           </c:when>
          <c:otherwise> <!--  로그인 정보가 있을 경우 -->
          <li class="nav-item">
-         	<h2 style="font-family:'BMDOHYEON'; font-size:1.8em; color:#dcdcdc; margin-left:30px;">${sessionScope.loginUser }님 환영합니다 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2>
+         	<h2 style="font-family:'BMDOHYEON'; font-size:1.8em; color:#dcdcdc; margin-left:30px;">${sessionScope.loginUser }님 환영합니다 
+         	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2>
           </li>
          <li class="nav-item">
             <a class="nav-link" href="../login/logout.html" onclick="">Sign Out
@@ -258,7 +260,8 @@ function fnLoginBtn(){
   				<ul id="main-menu">
   	  				<li><font face='BMDOHYEON'><a href="../lifestory/lifestorymain.html?BODY=lifestory/lifestorymain">생활기</a></font>
      					<ul id="sub-menu">
-       						<li><font face='BMDOHYEON' size="1.3" ><a href="../bbs/bbs.html?bbstype=life&life_no=5" aria-label="subemnu"><span>▶&nbsp;별달고 꺼드럭거리 싶어서 쓰는 생활기</span></a></font></li>
+       						<li><font face='BMDOHYEON' size="1.3" ><a href="../bbs/bbs.html?bbstype=life&life_no=5" aria-label="subemnu">
+       							<span>▶&nbsp;별달고 꺼드럭거리 싶어서 쓰는 생활기</span></a></font></li>
        						<li><font face='BMDOHYEON' size="1.3" ><a href="#" aria-label="subemnu">▶&nbsp;에스컬레이터 생활기</a></font></li>			
        						<li><font face='BMDOHYEON' size="1.3" ><a href="#" aria-label="subemnu">▶&nbsp;보이쉬재패니즈</a></font></li>
       					</ul>
@@ -276,6 +279,8 @@ function fnLoginBtn(){
     <div class="row">
       <div class="col-lg-3" style="margin-top:25px;" >
         <div style="border:1px solid; padding:0px;  background-color:#dcdcdc">
+        	<input type="button" 
+        	onClick="window.open('../chat/chat.html','_blank','scrollbars=no, width=750,height=750,status=no,resizable=no,left=400,top=300')" value="채팅">
         	<font face='BMDOHYEON'>&nbsp; 회원로그인    ${sessionScope.loginUser }</font> 
         </div>
         <div  style="border:1px solid; padding:10px 0 15px 20px;">
@@ -368,7 +373,7 @@ function fnLoginBtn(){
  	 <img src="http://t2.gstatic.com/images?q=tbn:ANd9GcQCze-mfukcuvzKk7Ilj2zQ0CS6PbOkq7ZhRInnNd1Yz3TQzU4e&t=1" />
 	</div>
 	<a href="../chat/chat2.html">chat2</a>
-	<input type="button" onClick="window.open('../chat/chat.html','_blank','scrollbars=no, width=450,height=350,status=no,resizable=no,left=400,top=300')" value="채팅">
+	
 	
 </body>
 </html>

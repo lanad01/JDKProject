@@ -1,82 +1,87 @@
 package websocket;
-
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpSession;
 import javax.websocket.OnClose;
+import javax.websocket.OnError;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import dao.UserDao;
 import model.User;
 
-
-
+// WebSocket 호스트 설정
 @ServerEndpoint("/broadsocket")
-public class BroadSocket extends HttpServlet {
-	private static Map<Session,User> users = Collections.synchronizedMap(new HashMap<Session, User>());
+public class BroadSocket {
+	@Autowired
+	UserDao userDao;
 	
+// 접속 된 클라이언트 WebSocket session 관리 리스트
+	private static List<Session> sessionUsers = Collections.synchronizedList(new ArrayList<>());
+// 메시지에서 유저 명을 취득하기 위한 정규식 표현
+	private static Pattern pattern = Pattern.compile("^\\{\\{.*?\\}\\}");
 	
-	@OnMessage
-	public void onMsg(String message, Session session) throws IOException{
-		String userName = users.get(session).getName();
-		System.out.println(userName + " : " + message);
-		
-		synchronized (users) {
-			Iterator<Session> it = users.keySet().iterator();
-			while(it.hasNext()){
-				Session currentSession = it.next();
-				if(!currentSession.equals(session)){
-					currentSession.getBasicRemote().sendText(userName + " : " + message);
-				}
-			}
-		}
-		
-	}
-	
+// WebSocket으로 브라우저가 접속하면 요청되는 함수
 	@OnOpen
-	public void onOpen(Session session,HttpSession userSess){
-		String userName = "user";
-		int rand_num = (int)(Math.random()*1000);
-		User user=(User) userSess.getAttribute("loginUser");
-		String clientId= (String) userSess.getAttribute("loginUser");
-		System.out.println(session);
-		
-		System.out.println(session + " connect");
-		
-		users.put(session, user);
-		sendNotice(clientId + "님이 입장하셨습니다. 현재 사용자 " + users.size() + "명");
+	public void handleOpen(Session userSession) {
+// 클라이언트가 접속하면 WebSocket세션을 리스트에 저장한다.
+		sessionUsers.add(userSession);
+		System.out.println("userSession List : "+userSession.getId() );
+// 콘솔에 접속 로그를 출력한다.
+		System.out.println("client is now connected...");
 	}
-	
-	
-	public void sendNotice(String message){
-		String userName = "server";
-		System.out.println(userName + " : " + message);
-		
-		synchronized (users) {
-			Iterator<Session> it = users.keySet().iterator();
-			while(it.hasNext()){
-				Session currentSession = it.next();
-				try {
-					currentSession.getBasicRemote().sendText(userName + " : " + message);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
+
+// WebSocket으로 메시지가 오면 요청되는 함수
+	@OnMessage
+	public void handleMessage(String message, Session userSession) throws IOException {
+// 메시지 내용을 콘솔에 출력한다.
+		String[] array=message.split("split");
+		message=array[1];
+// 초기 유저 명
+		String name = array[0];
+// 메시지로 유저 명을 추출한다.
+		Matcher matcher = pattern.matcher(message);
+// 메시지 예: {{유저명}}메시지
+		if (matcher.find()) {
+			name = matcher.group();
 		}
+		System.out.println(name);
+// 클로져를 위해 변수의 상수화
+		final String msg = message.replaceAll(pattern.pattern(), "");
+		System.out.println(" 메시지  : " + msg);
+		final String username = name.replaceFirst("^\\{\\{", "").replaceFirst("\\}\\}$", "");
+		System.out.println("유저 네임 :  " +username);
+// session관리 리스트에서 Session을 취득한다.
+		sessionUsers.forEach(session -> {
+// 리스트에 있는 세션과 메시지를 보낸 세션이 같으면 메시지 송신할 필요없다.
+			if (session == userSession) {
+				return;
+			}
+			try {
+// 리스트에 있는 모든 세션(메시지 보낸 유저 제외)에 메시지를 보낸다. (형식: 유저명 => 메시지)
+				session.getBasicRemote().sendText(username+": " + msg); // 이게 실제로 상대방 메시지로 보이는 부분
+			} catch (IOException e) {
+// 에러가 발생하면 콘솔에 표시한다.
+				e.printStackTrace();
+			}
+		});
 	}
 
+// WebSocket과 브라우저가 접속이 끊기면 요청되는 함수
 	@OnClose
-	public void onClose(Session session) {
-		String userName = users.get(session).getName();
-		users.remove(session);
-		sendNotice(userName + "님이 퇴장하셨습니다. 현재 사용자 " + users.size() + "명");
+	public void handleClose(Session userSession) {
+// session 리스트로 접속 끊은 세션을 제거한다.
+		sessionUsers.remove(userSession);
+// 콘솔에 접속 끊김 로그를 출력한다.
+		System.out.println("client is now disconnected...");
 	}
-
+	
 }

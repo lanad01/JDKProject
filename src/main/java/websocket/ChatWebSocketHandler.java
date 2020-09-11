@@ -1,72 +1,88 @@
-
 package websocket;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.websocket.OnClose;
+import javax.websocket.OnError;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
-import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
-// WebSocket 호스트 설정
-@ServerEndpoint("/broadsocket2")
-public class ChatWebSocketHandler {
-// 접속 된 클라이언트 WebSocket session 관리 리스트
-	private static List<Session> sessionUsers = Collections.synchronizedList(new ArrayList<>());
-// 메시지에서 유저 명을 취득하기 위한 정규식 표현
-	private static Pattern pattern = Pattern.compile("^\\{\\{.*?\\}\\}");
+import org.springframework.web.socket.CloseStatus;
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
+import org.springframework.web.socket.handler.TextWebSocketHandler;
+@ServerEndpoint("/chat-ws")
+public class ChatWebSocketHandler extends TextWebSocketHandler {
 
-// WebSocket으로 브라우저가 접속하면 요청되는 함수
-	@OnOpen
-	public void handleOpen(Session userSession) {
-// 클라이언트가 접속하면 WebSocket세션을 리스트에 저장한다.
-		sessionUsers.add(userSession);
-// 콘솔에 접속 로그를 출력한다.
-		System.out.println("client is now connected...");
-	}
+	private Map<String, WebSocketSession> users = new HashMap<String, WebSocketSession>();
+	
+	public void afterConnectionEstablished(WebSocketSession session) {
+		try {
+			
+			System.out.println("연결됨");
+			// session에서 id를 가져와서 로그에 남긴다(없어도 되는 과정)
+			log(session.getId() + " 연결 됨");
 
-// WebSocket으로 메시지가 오면 요청되는 함수
-	@OnMessage
-	public void handleMessage(String message, Session userSession) throws IOException {
-// 메시지 내용을 콘솔에 출력한다.
-		System.out.println(message);
-// 초기 유저 명
-		String name = "anonymous";
-// 메시지로 유저 명을 추출한다.
-		Matcher matcher = pattern.matcher(message);
-// 메시지 예: {{유저명}}메시지
-		if (matcher.find()) {
-			name = matcher.group();
+			// 위에서 선언한 users라는 map에 user를 담는 과정(필수)
+			// map에 담는 이유는 메세지를 일괄적으로 뿌려주기 위해서이다
+			users.put(session.getId(), session);
+		} catch (Exception e) {
+			System.out.println("연결오류");
 		}
-// 클로져를 위해 변수의 상수화
-		final String msg = message.replaceAll(pattern.pattern(), "");
-		final String username = name.replaceFirst("^\\{\\{", "").replaceFirst("\\}\\}$", "");
-// session관리 리스트에서 Session을 취득한다.
-		sessionUsers.forEach(session -> {
-// 리스트에 있는 세션과 메시지를 보낸 세션이 같으면 메시지 송신할 필요없다.
-			if (session == userSession) {
-				return;
+
+	}
+	
+	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) {
+		try {
+			System.out.println("연결 종료됨");
+			log(session.getId() + " 연결 종료됨");
+
+			// map에서 세션에서 연결 종료된 유저를 없애는 이유는
+			// 더 이상 메세지를 보낼 필요가 없기 때문에 목록에서 지우는 것이다
+			users.remove(session.getId());
+		} catch (Exception e) {
+			System.out.println("연결종료");
+		}
+
+	}
+	
+	public void handleTextMessage(WebSocketSession session, TextMessage message) {
+		try {
+			System.out.println("메시지 수신");
+			log(session.getId() + "로부터 메시지 수신: " + message.getPayload());
+
+			// 클라이언트로부터 메세지를 받으면 동작하는 handleTextMessage 함수!
+			// 수신한 하나의 메세지를 users 맵에 있는 모든 유저(세션)들에게
+			// 맵을 반복으로 돌면서 일일이 보내주게 되도록 처리
+			for (WebSocketSession s : users.values()) { // <-- .values() 로 session들만 가져옴
+
+				// 여기서 모든 세션들에게 보내지게 된다
+				// 1회전당 현재 회전에 잡힌 session에게 메세지 보낸다
+				s.sendMessage(message);
+
+				// 로그에 남기기 위한 것으로 큰 의미가 없음
+				log(s.getId() + "에 메시지 발송: " + message.getPayload());
 			}
-			try {
-// 리스트에 있는 모든 세션(메시지 보낸 유저 제외)에 메시지를 보낸다. (형식: 유저명 => 메시지)
-				session.getBasicRemote().sendText(username + " => " + msg);
-			} catch (IOException e) {
-// 에러가 발생하면 콘솔에 표시한다.
-				e.printStackTrace();
-			}
-		});
+		} catch (Exception e) {
+			System.out.println("연결종료");
+		}
+
+	}
+	
+	public void handleTransportError(WebSocketSession session, Throwable exception) {
+		try {
+			log(session.getId() + " 익셉션 발생: " + exception.getMessage());
+		} catch (Exception e) {
+			System.out.println("익셉션");
+		}
+
 	}
 
-// WebSocket과 브라우저가 접속이 끊기면 요청되는 함수
-	@OnClose
-	public void handleClose(Session userSession) {
-// session 리스트로 접속 끊은 세션을 제거한다.
-		sessionUsers.remove(userSession);
-// 콘솔에 접속 끊김 로그를 출력한다.
-		System.out.println("client is now disconnected...");
+	private void log(String logmsg) {
+		System.out.println(new Date() + " : " + logmsg);
 	}
+
 }

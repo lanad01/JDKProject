@@ -6,108 +6,23 @@
 <head>
 <meta charset="UTF-8">
 <title>DevEric Chatting</title>
+<link rel="stylesheet" href="../css/chat.css">
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
 
 <style type="text/css">
-	*{
-		font-family: 나눔고딕;
-	}
-	#messageWindow{
-		background: black;
-		color: greenyellow;
-	}
-	#inputMessage{
-		width:500px;
-		height:20px
-	}
-	#btn-submit{
-		background: white;
-		background: #F7E600;
-		width:60px;
-		height:30px;
-		color:#607080;
-		border:none;
-	}
-	
-	#main-container{
-		width:600px;
-		height:680px;
-		border:1px solid black;
-		margin:10px;
-		display: inline-block;
-		
-	}
-	#chat-container{
-		vertical-align: bottom;
-		border: 1px solid black;
-		margin:10px;
-		min-height: 600px;
-		max-height: 600px;
-		overflow: scroll;
-		overflow-x:hidden;
-		background: #9bbbd4;
-	}
-	
-	.chat{
-		font-size: 20px;
-		color:black;
-		margin: 5px;
-		min-height: 20px;
-		padding: 5px;
-		min-width: 50px;
-		text-align: left;
-        height:auto;
-        word-break : break-all;
-        background: #ffffff;
-        width:auto;
-        display:inline-block;
-        border-radius: 10px 10px 10px 10px;
-	}
-	
-	.notice{
-		color:#607080;
-		font-weight: bold;
-		border : none;
-		text-align: center;
-		background-color: #9bbbd4;
-		display: block;
-	}
 
-	.my-chat{
-		text-align: right;
-		background: #F7E600;
-		border-radius: 10px 10px 10px 10px;
-	}
-	
-	#bottom-container{
-		margin:10px;
-	}
-	
-	.chat-info{
-		color:#556677;
-		font-size: 10px;
-		text-align: right;
-		padding: 5px;
-		padding-top: 0px;
-
-	}
-	
-	.chat-box{
-		text-align:left;
-	}
-	.my-chat-box{
-		text-align: right;
-	}
-	
-	
-	
 </style>
 </head>
 <body>
+${ID }
+	<form id="frm" action="../chat/chat.html" method="post">
+	<input type="hidden" id="client" value="${ID }">
+	</form>
 	<div id="main-container">
+		
 		<div id="chat-container">
-			
+		
 		</div>
 		<div id="bottom-container">
 			<input id="inputMessage" type="text">
@@ -119,7 +34,7 @@
 	
 
 	var textarea = document.getElementById("messageWindow");
-	var webSocket = new WebSocket('ws://localhost:8080/3-5_/broadsocket');
+	var webSocket = new WebSocket("ws://localhost:8080/3-5_/broadsocket");
 	
 	// 로컬에서 테스트할 때 사용하는 URL입니다.
 // 	var webSocket = new WebSocket('ws://localhost/DevEricServers/webChatServer');
@@ -136,15 +51,18 @@
 	};
 	
 	
-	function onMessage(e){
+	function onMessage(e){ // 상대방 메시지
 		var chatMsg = event.data;
+		var sender=chatMsg.split(":"); //aldne 수신성공
+		
 		var date = new Date();
 		var dateInfo = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 		if(chatMsg.substring(0,6) == 'server'){
 			var $chat = $("<div class='chat notice'>" + chatMsg + "</div>");
 			$('#chat-container').append($chat);
-		}else{
-			var $chat = $("<div class='chat-box'><div class='chat'>" + chatMsg + "</div><div class='chat-info chat-box'>"+ dateInfo +"</div></div>");
+		}else{ // 상대방 메시지
+			var $chat = $("<img alt='상대' src='${pageContext.request.contextPath}/upload/${USER.picture_url } width='100' height='70'>"+
+					"<div class='chat-box'><div class='chat'>" + chatMsg + "</div><div class='chat-info chat-box'>"+ dateInfo +"</div></div>");
 			$('#chat-container').append($chat);
 		}
 		
@@ -160,16 +78,22 @@
 		alert(e.data);
 	}
 	
-	function send(){
-		var chatMsg = inputMessage.value;
+	function send(){ // 내 메시지
+		var id=document.getElementById("client").value;
+		var chatMsg = id+"split"+inputMessage.value;
+		var chatMsg2=chatMsg.replace("split","");
+		var chatMsg3=chatMsg2.replace(id,"");
 		if(chatMsg == ''){
 			return;
 		}
 		var date = new Date();
 		var dateInfo = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-		var $chat = $("<div class='my-chat-box'><div class='chat my-chat'>" + chatMsg + "</div><div class='chat-info'>"+ dateInfo +"</div></div>");
+		var $chat = $("<div class='my-chat-box'><div class='chat my-chat'>" +chatMsg3 +"</div>"+
+				"<img alt='내 사진' src='${pageContext.request.contextPath}/upload/${USER.picture_url }' width='60' height='50'>"
+				+"<div class='chat-info'>"+ dateInfo +"</div></div>");
 		$('#chat-container').append($chat);
 		webSocket.send(chatMsg);
+		 // 설마이걸로 보내나 이럼 쉬워지지
 		inputMessage.value = "";
 		$('#chat-container').scrollTop($('#chat-container')[0].scrollHeight+20);
 	}
@@ -178,6 +102,7 @@
 
 <script type="text/javascript">
 	$(function(){
+		
 		$('#inputMessage').keydown(function(key){
 			if(key.keyCode == 13){
 				$('#inputMessage').focus();

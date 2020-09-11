@@ -49,7 +49,7 @@
 	order by hit desc
 	)where rownum <![CDATA[<]]> 11 and 
 	TO_DATE(REGISTER_DATE,'YYYY/MM/DD HH24:MI')
-	BETWEEN SYSDATE-2 AND SYSDATE
+	BETWEEN SYSDATE-10 AND SYSDATE
 </select>
 <select id="getTop10Rep" resultType="model.Bbs">
 	select * from 
@@ -57,7 +57,7 @@
     from bbs_info b
     where (select count(repno) from reply_info where b.seqno=seqno)>0 
     and TO_DATE(REGISTER_DATE,'YYYY/MM/DD HH24:MI')
-        BETWEEN SYSDATE-4 AND SYSDATE
+        BETWEEN SYSDATE-10 AND SYSDATE
     )
     where rownum<![CDATA[<]]>10
     order by c desc, seqno desc

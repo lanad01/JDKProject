@@ -1,6 +1,7 @@
 package controller;
 
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,7 @@ public class LoginController {
 		if (userDao.findByIdAndPwd(user) != null) { // 로그인 한 아이디 비번이 DB에 있다
 			model.addAttribute("login", userDao.findByIdAndPwd(user));
 			session.setAttribute("loginUser", user.getId());// 유저 아디로 세션생성
+			
 			result = 1;
 		}
 		return result;
