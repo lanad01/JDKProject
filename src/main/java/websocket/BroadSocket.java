@@ -2,12 +2,15 @@ package websocket;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.servlet.http.HttpSession;
+import javax.websocket.EndpointConfig;
 import javax.websocket.OnClose;
-import javax.websocket.OnError;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
@@ -16,13 +19,15 @@ import javax.websocket.server.ServerEndpoint;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import dao.UserDao;
-import model.User;
 
 // WebSocket 호스트 설정
-@ServerEndpoint("/broadsocket")
+
+@ServerEndpoint(value = "/broadsocket", 
+				configurator = HttpSessionConfigurator.class)
 public class BroadSocket {
 	@Autowired
 	UserDao userDao;
+	private Map<Session, EndpointConfig> configs = Collections.synchronizedMap(new HashMap<>());
 	
 // 접속 된 클라이언트 WebSocket session 관리 리스트
 	private static List<Session> sessionUsers = Collections.synchronizedList(new ArrayList<>());
@@ -31,14 +36,31 @@ public class BroadSocket {
 	
 // WebSocket으로 브라우저가 접속하면 요청되는 함수
 	@OnOpen
-	public void handleOpen(Session userSession) {
+	public void handleOpen(Session userSession, EndpointConfig config) throws Exception {
 // 클라이언트가 접속하면 WebSocket세션을 리스트에 저장한다.
 		sessionUsers.add(userSession);
-		System.out.println("userSession List : "+userSession.getId() );
+		if (!configs.containsKey(userSession)) {
+			// userSession 클래스는 connection이 될 때마다 인스턴스 생성되는 값이기 때문에 키로서 사용할 수 있다.
+			configs.put(userSession, config);
+		}
+		HttpSession session1 = (HttpSession) config.getUserProperties().get(HttpSessionConfigurator.Session);
+		String id=(String)session1.getAttribute("loginUser");
+		System.out.println("id : "+id);
+		sessionUsers.forEach(session -> {
+			if (session == userSession) {
+				// 리스트에 있는 세션과 메시지를 보낸 세션이 같으면 메시지 송신할 필요없다.
+				return;
+			}
+			try {
+				session.getBasicRemote().sendText((id+"님이 입장하셨습니다")); // 이게 실제로 상대방 메시지로 보이는 부분
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+		System.out.println("userSession List : "+id );
 // 콘솔에 접속 로그를 출력한다.
 		System.out.println("client is now connected...");
 	}
-
 // WebSocket으로 메시지가 오면 요청되는 함수
 	@OnMessage
 	public void handleMessage(String message, Session userSession) throws IOException {
@@ -58,16 +80,17 @@ public class BroadSocket {
 		final String msg = message.replaceAll(pattern.pattern(), "");
 		System.out.println(" 메시지  : " + msg);
 		final String username = name.replaceFirst("^\\{\\{", "").replaceFirst("\\}\\}$", "");
-		System.out.println("유저 네임 :  " +username);
+		
 // session관리 리스트에서 Session을 취득한다.
 		sessionUsers.forEach(session -> {
-// 리스트에 있는 세션과 메시지를 보낸 세션이 같으면 메시지 송신할 필요없다.
 			if (session == userSession) {
+				// 리스트에 있는 세션과 메시지를 보낸 세션이 같으면 메시지 송신할 필요없다.
 				return;
 			}
 			try {
 // 리스트에 있는 모든 세션(메시지 보낸 유저 제외)에 메시지를 보낸다. (형식: 유저명 => 메시지)
 				session.getBasicRemote().sendText(username+": " + msg); // 이게 실제로 상대방 메시지로 보이는 부분
+				
 			} catch (IOException e) {
 // 에러가 발생하면 콘솔에 표시한다.
 				e.printStackTrace();

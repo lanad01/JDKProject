@@ -76,8 +76,9 @@ ${USER.picture_url }
 			var $chat = $("<div class='chat notice'>" + chatMsg + "</div>");
 			$('#chat-container').append($chat);
 		}else{ // 상대방 메시지
-			var $chat = $("<div class='chat-box'><img alt='상대' src='${pageContext.request.contextPath}/upload/123.png' width='60' height='40' style='margin-top:5px;'>"+
-					"<div class='chat'>" + chatMsg + "</div><div class='chat-info chat-box'>"+ dateInfo +"</div></div>");
+			var $chat = $("<div class='chat-box'><img alt='상대' src='${pageContext.request.contextPath}/upload/"
+					+pic +"' width='60' height='40' style='margin-top:5px;'>"+
+					"<div class='chat'>" + chatMsg + "</div><div class='chat-info chat-box' style='margin-top:-10px;'>"+ dateInfo +"</div></div>");
 			$('#chat-container').append($chat);
 		}
 		
@@ -104,8 +105,8 @@ ${USER.picture_url }
 		var date = new Date();
 		var dateInfo = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 		var $chat = $("<div class='my-chat-box'><div class='chat my-chat'>" +chatMsg3 +"</div>"+
-				"<img alt='내 사진' src='${pageContext.request.contextPath}/upload/${USER.picture_url }' style='margin-top:5px;' width='60' height='50'>"
-				+"<div class='chat-info'>"+ dateInfo +"</div></div>");
+				"<img alt='내 사진' src='${pageContext.request.contextPath}/upload/${USER.picture_url}' style='margin-top:5px;' width='60' height='50' >"
+				+"<div class='chat-info' style='margin-top:-10px;'>"+ dateInfo +"</div></div>");
 		$('#chat-container').append($chat);
 		webSocket.send(chatMsg);
 		 // 설마이걸로 보내나 이럼 쉬워지지
